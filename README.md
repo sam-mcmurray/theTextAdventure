@@ -1,6 +1,8 @@
 # theTextAdventure
 
-	We were asked to design and implement an application as a project, so we chose to create a text 
+##	The Adventure you will never forget!
+	
+   We were asked to design and implement an application as a project, so we chose to create a text 
 adventure game which is written in java programming language.  The user is tasked with escaping from a 
 labyrinth by finding keys and collecting items.  While the goal is to escape, points are earned by
 collecting “treasures” throughout the game that will increase their score.. The user has two choices
