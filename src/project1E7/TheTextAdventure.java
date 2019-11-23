@@ -16,5 +16,5 @@ public class TheTextAdventure {
     private void printHeroes() {
 
     }
-    
+
 }
