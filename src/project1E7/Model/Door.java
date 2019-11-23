@@ -1,18 +1,18 @@
-package project1E7;
+package project1E7.Model;
 
 public class Door {
-    private boolean unlocked;
+    private boolean lock;
     private String nameOfKey;
     private String description;
 
-    public Door(boolean unlocked, String nameOfKey, String description) {
-        this.unlocked = unlocked;
+    public Door(boolean lock, String nameOfKey, String description) {
+        this.lock = lock;
         this.nameOfKey = nameOfKey;
         this.description = description;
     }
 
     public boolean isUnlocked() {
-        return unlocked;
+        return lock;
     }
 
     public String getNameOfKey() {

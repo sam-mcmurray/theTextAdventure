@@ -1,14 +1,13 @@
-package project1E7;
+package project1E7.Model;
 
 import java.util.ArrayList;
 
-public class Hero extends Character{
+public class Hero extends Character {
     private int endurance;
-    private Key [] keyRing;
+    private Key[] keyRing;
     private ArrayList<Item> backPack;
     private int lives;
     private int currentTreasure;
-
     public Hero(int health, int strength, int speed, String description, String name, int endurance) {
         super(health, strength, speed, description, name);
         this.endurance = endurance;

@@ -1,4 +1,4 @@
-package project1E7;
+package project1E7.Model;
 
 public class Item {
     private String name;
