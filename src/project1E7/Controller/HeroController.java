@@ -1,18 +1,27 @@
 package project1E7.Controller;
 
-import project1E7.Model.Character;
-import project1E7.Model.Coffee;
+
 import project1E7.Model.Hero;
-import project1E7.Model.Item;
-import project1E7.*;
+import project1E7.View.HeroView;
+
+import java.util.Random;
 
 public class HeroController{
+    Hero model;
+    HeroView view;
 
+    public HeroController(Hero model, HeroView view) {
+        this.model = model;
+        this.view = view;
+    }
 
-    public void drinkCoffee() {
+    public boolean Attack(MonsterController monster) {
+        int damageDone;
 
-
+        Random rand = new Random();
+        return true;
 
     }
+
 
 }
