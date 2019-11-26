@@ -1,20 +1,30 @@
 package project1E7;
 
+import project1E7.Controller.HeroController;
+import project1E7.Model.Character;
+import project1E7.Model.Coffee;
+import project1E7.Model.Hero;
+import project1E7.Model.Item;
+import project1E7.View.HeroView;
+
 public class TheTextAdventure {
+    Hero warrior = new Hero(100, 80, 30, "The Warrior...", "Warrior", 40);
+    Hero mage = new Hero(100, 60, 40, "The Mage...", "Mage", 50);
+    Hero thief = new Hero(100, 40, 60, "The Thief...", "Thief", 60);
     public static void main(String[] args) {
     TheTextAdventure myApp = new TheTextAdventure();
-    }
-    private void createWorld() {
+    myApp.printStats();
+
 
     }
-    private void createHeroes() {
+    public void printStats() {
+        HeroView heroViewWarrior = new HeroView(warrior);
+        heroViewWarrior.printStats();
 
+        HeroView heroViewMage = new HeroView(mage);
+        heroViewMage.printStats();
+
+        HeroView heroViewThief = new HeroView(thief);
+        heroViewThief.printStats();
     }
-    private void printStartMenu() {
-
-    }
-    private void printHeroes() {
-
-    }
-
 }
