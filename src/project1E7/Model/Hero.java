@@ -53,7 +53,7 @@ public class Hero extends Character {
     }
 
     public void drinkCoffee() {
-        setSpeed(getSpeed());
+        setSpeed(getSpeed()+3);
        // + Coffee
     }
     public void useHeart() {
