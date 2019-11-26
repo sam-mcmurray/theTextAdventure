@@ -52,20 +52,6 @@ public class Hero extends Character {
         this.currentTreasure = currentTreasure;
     }
 
-    public void drinkCoffee() {
-        setSpeed(getSpeed());
-       // + Coffee
-    }
-    public void useHeart() {
-        setLives(getLives() + 1);
-    }
 
-    public void useHealthPotion() {
-        if (getHealth() <= 7) {
-            setHealth(getHealth() + 3);
-        } else {
-            setHealth(10);
-        }
-    }
 
 }

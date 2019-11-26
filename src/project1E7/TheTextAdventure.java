@@ -38,4 +38,14 @@ public class TheTextAdventure {
         System.out.println();
     }
 
+    public void encounterMenu() {
+        System.out.printf("%nYou have encountered a monster!%n" +
+                "What is your next move?%n" +
+                "To run away enter 'flee'%n" +
+                "To fight enter 'fight' %n" +
+                "To use one of your item enter 'item'%n");
+
+        String temp = input.nextLine();
+
+    }
 }
