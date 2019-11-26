@@ -21,17 +21,17 @@ public class HeroView {
         tableDescrip[1] = "Speed: ";
         tableDescrip[2] = "Strength: ";
         tableDescrip[3] = "Endurance: ";
+
         System.out.println("Name: " + model.getName());
         System.out.println("Character Description: " + model.getDescription());
 
-        for (int i = stats.length - 1; i > 0; i--) {
-            if (stats[i] != 0) {
+        for (int i = 0; i < stats.length; i++) {
                 System.out.print(tableDescrip[i]);
                 for (int j = 0; j < stats[i]; j++) {
                     System.out.print("*");
                 }
                 System.out.format("%n");
-            }
+
         }
     }
 }

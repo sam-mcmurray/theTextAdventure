@@ -12,17 +12,18 @@ public class TheTextAdventure {
     Hero mage = new Hero(100, 60, 40, "The Mage...", "Mage", 50);
     Hero thief = new Hero(100, 40, 60, "The Thief...", "Thief", 60);
     public static void main(String[] args) {
-    TheTextAdventure myApp = new TheTextAdventure();
-    myApp.printStats();
-
+        TheTextAdventure myApp = new TheTextAdventure();
+        myApp.printStats();
 
     }
+    
     public void printStats() {
         HeroView heroViewWarrior = new HeroView(warrior);
         heroViewWarrior.printStats();
 
         HeroView heroViewMage = new HeroView(mage);
         heroViewMage.printStats();
+
 
         HeroView heroViewThief = new HeroView(thief);
         heroViewThief.printStats();
