@@ -2,6 +2,7 @@ package project1E7.Controller;
 
 
 import project1E7.Model.Hero;
+import project1E7.Model.Room;
 import project1E7.View.HeroView;
 
 import java.util.Random;
@@ -20,6 +21,9 @@ public class HeroController{
 
         Random rand = new Random();
         return true;
+
+    }
+    public void encounter(Room room) {
 
     }
 
