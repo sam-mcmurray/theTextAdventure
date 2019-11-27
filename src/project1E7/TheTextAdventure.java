@@ -35,7 +35,59 @@ public class TheTextAdventure {
     }
 
     public void selectHero() {
-        System.out.println();
+
+        boolean selected = true;
+        while (selected) {
+
+            System.out.println("Select Character :" +
+                    " \n 1.Warrior : \n 2.Mage : \n 3.Thief");
+
+            for (int i = 0; i < characters.size(); i++) {
+                if (characters.get(i) instanceof Hero) {
+                    System.out.println(characters.get(i));
+                }
+            }
+
+            int userInput = input.nextInt();
+            switch (userInput) {
+                case 1:
+                    System.out.println("Do you want to select this hero ?" + "Yes/No");
+                    input.nextLine();
+                    String choice = input.next();
+                    if (choice.equalsIgnoreCase("yes")) {
+                        System.out.println(characters.get(0));
+                        System.out.println("Warrior has been selected");
+                        selected = false;
+                    } else if (choice.equalsIgnoreCase("no")) {
+                        System.out.println("Select another hero");
+                        setCharacters();
+                    } else System.out.println("Select a valid option");
+                    break;
+                case 2:
+                    System.out.println(characters.get(1));
+                    System.out.println("Do you want select this hero ?" + "Yes/No");
+                    input.nextLine();
+                    choice = input.next();
+                    if (choice.equalsIgnoreCase("yes")) {
+                        System.out.println("Mage has been selected");
+                        selected = false;
+                    } else setCharacters();
+                    break;
+                case 3:
+                    System.out.println(characters.get(2));
+                    System.out.println("Do you want select this hero ?" + "Yes/No");
+                    input.nextLine();
+                    choice = input.next();
+                    if (choice.equalsIgnoreCase("yes")) {
+                        System.out.println("Thief has been selected");
+                        selected = false;
+                        break;
+                    } else selectHero();
+                    break;
+            }
+        }
+
+
     }
 
     public void encounterMenu() {
