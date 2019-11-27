@@ -90,6 +90,23 @@ public class TheTextAdventure {
 
     }
 
+    public void startMenu(){
+        System.out.println("1.Start game\n2.Load game\n3.View High Scores \n4.Quit");
+        int userInput = input.nextInt();
+        switch (userInput) {
+            case 1:
+                selectHero();
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            default:
+        }
+    }
+
     public void encounterMenu() {
         System.out.printf("%nYou have encountered a monster!%n" +
                 "What is your next move?%n" +
