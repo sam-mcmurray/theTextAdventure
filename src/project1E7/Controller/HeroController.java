@@ -41,7 +41,6 @@ public class HeroController{
     public boolean fleeRoom(MonsterController monster){
         return false;
 
-        return true;
 
     }
     public void takeDamage(int incDamage) {

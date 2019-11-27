@@ -65,4 +65,9 @@ public class Hero extends Character {
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
+
+    @Override
+    public String toString() {
+        return "Hero " + name;
+    }
 }

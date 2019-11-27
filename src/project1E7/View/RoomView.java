@@ -8,4 +8,5 @@ public class RoomView {
     public RoomView(Room model) {
         this.model = model;
     }
+
 }

@@ -29,5 +29,5 @@ public class Room {
         this.found = found;
     }
 
-    public boolean getFound() {return getFound;}
+    public boolean getFound() {return found;}
 }

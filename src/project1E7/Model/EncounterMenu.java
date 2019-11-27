@@ -3,7 +3,7 @@ package project1E7.Model;
 import java.security.*;
 import java.util.*;
 
-public class EncounterMenu {
+/*public class EncounterMenu {
 
 
     private void encounterMenu() {
@@ -70,4 +70,4 @@ public class EncounterMenu {
 
     }
 }
-
+*/

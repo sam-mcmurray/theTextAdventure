@@ -1,11 +1,11 @@
 package project1E7.Model;
 
 public class Character {
-    private int health;
-    private int strength;
-    private int speed;
-    private String description;
-    private String name;
+    protected int health;
+    protected int strength;
+    protected int speed;
+    protected String description;
+    protected String name;
 
     public Character(int health, int strength, int speed, String description, String name) {
         this.health = health;

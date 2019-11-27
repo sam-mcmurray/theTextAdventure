@@ -1,28 +1,23 @@
 package project1E7;
 
-import project1E7.Controller.HeroController;
-import project1E7.Model.Character;
-import project1E7.Model.Coffee;
 import project1E7.Model.Hero;
-import project1E7.Model.Item;
 import project1E7.View.HeroView;
 
 import java.util.Scanner;
 
 public class TheTextAdventure {
     Scanner input = new Scanner(System.in);
-    ArrayList <Character> character = new Character <>();
-    Hero warrior = new Hero(100, 80, 30, "The Warrior...", "Warrior", 40);
-    Hero mage = new Hero(100, 60, 40, "The Mage...", "Mage", 50);
-    Hero thief = new Hero(100, 40, 60, "The Thief...", "Thief", 60);
+    public Hero warrior = new Hero(100, 80, 30, "The Warrior...", "Warrior", 40);
+    public Hero mage = new Hero(100, 60, 40, "The Mage...", "Mage", 50);
+    public Hero thief = new Hero(100, 40, 60, "The Thief...", "Thief", 60);
 
     public static void main(String[] args) {
         TheTextAdventure myApp = new TheTextAdventure();
-        myApp.printStats();
+        myApp.selectHero();
 
     }
 
-    public void printStats() {
+    public Hero selectHero() {
         HeroView heroViewWarrior = new HeroView(warrior);
         heroViewWarrior.printStats();
 
@@ -32,70 +27,51 @@ public class TheTextAdventure {
 
         HeroView heroViewThief = new HeroView(thief);
         heroViewThief.printStats();
-    }
 
-    public void selectHero() {
 
         boolean selected = true;
-        while (selected) {
+        while (selected == true) {
 
             System.out.println("Select Character :" +
                     " \n 1.Warrior : \n 2.Mage : \n 3.Thief");
 
-            for (int i = 0; i < character.size(); i++) {
-                if (character.get(i) instanceof Hero) {
-                    System.out.println(character.get(i));
-                }
-            }
-
+            System.out.println("Please enter your choice");
             int userInput = input.nextInt();
             switch (userInput) {
                 case 1:
-                    System.out.println("Do you want to select this hero ?" + "Yes/No");
-                    input.nextLine();
-                    String choice = input.next();
-                    if (choice.equalsIgnoreCase("yes")) {
-                        System.out.println(character.get(userInput-1));
-                        System.out.println("Warrior has been selected");
-                        selected = false;
-                    } else if (choice.equalsIgnoreCase("no")) {
-                        System.out.println("Select another hero");
-                        setCharacters();
-                    } else System.out.println("Select a valid option");
+                    selected = heroViewWarrior.selectHero(warrior);
+                    if (selected == false) {
+                        return warrior;
+                    } else
+                        selected = true;
                     break;
                 case 2:
-                    System.out.println(character.get(userInput-1));
-                    System.out.println("Do you want select this hero ?" + "Yes/No");
-                    input.nextLine();
-                    choice = input.next();
-                    if (choice.equalsIgnoreCase("yes")) {
-                        System.out.println("Mage has been selected");
-                        selected = false;
-                    } else setCharacters();
+                    selected = heroViewWarrior.selectHero(mage);
+                    if (selected == false) {
+                        return mage;
+                    } else
+                        selected = true;
                     break;
                 case 3:
-                    System.out.println(character.get(userInput-1));
-                    System.out.println("Do you want select this hero ?" + "Yes/No");
-                    input.nextLine();
-                    choice = input.next();
-                    if (choice.equalsIgnoreCase("yes")) {
-                        System.out.println("Thief has been selected");
-                        selected = false;
-                        break;
-                    } else selectHero();
+                    selected = heroViewWarrior.selectHero(thief);
+                    if (selected == false) {
+                        return thief;
+                    } else
+                        selected = true;
+                    break;
+                default:
+                    System.out.println("Please enter a valid option...");
                     break;
             }
         }
-
-
+        return null;
     }
 
-    public void startMenu(){
+    public void startMenu() {
         System.out.println("1.Start game\n2.Load game\n3.View High Scores \n4.Quit");
         int userInput = input.nextInt();
         switch (userInput) {
             case 1:
-                selectHero();
                 break;
             case 2:
                 break;
@@ -117,7 +93,8 @@ public class TheTextAdventure {
         String temp = input.nextLine();
 
     }
-    public void moveHero(){
+}
+ /*  public void moveHero(){
         String userInput;
         for (int i = 0; i < rooms.length; ) {
             for (int j = 0; j < rooms[i].length; ) {
@@ -140,4 +117,4 @@ public class TheTextAdventure {
             }
         }
     }
-}
+}*/
