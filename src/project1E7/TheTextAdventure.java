@@ -13,8 +13,9 @@ public class TheTextAdventure {
 
     public static void main(String[] args) {
         TheTextAdventure myApp = new TheTextAdventure();
-        myApp.selectHero();
 
+        HeroView hero = new HeroView(myApp.selectHero());
+        hero.printStats();
     }
 
     public Hero selectHero() {
