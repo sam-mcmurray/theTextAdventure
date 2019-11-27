@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class TheTextAdventure {
     Scanner input = new Scanner(System.in);
-
+    ArrayList <Character> character = new Character <>();
     Hero warrior = new Hero(100, 80, 30, "The Warrior...", "Warrior", 40);
     Hero mage = new Hero(100, 60, 40, "The Mage...", "Mage", 50);
     Hero thief = new Hero(100, 40, 60, "The Thief...", "Thief", 60);
@@ -42,9 +42,9 @@ public class TheTextAdventure {
             System.out.println("Select Character :" +
                     " \n 1.Warrior : \n 2.Mage : \n 3.Thief");
 
-            for (int i = 0; i < characters.size(); i++) {
-                if (characters.get(i) instanceof Hero) {
-                    System.out.println(characters.get(i));
+            for (int i = 0; i < character.size(); i++) {
+                if (character.get(i) instanceof Hero) {
+                    System.out.println(character.get(i));
                 }
             }
 
@@ -55,7 +55,7 @@ public class TheTextAdventure {
                     input.nextLine();
                     String choice = input.next();
                     if (choice.equalsIgnoreCase("yes")) {
-                        System.out.println(characters.get(0));
+                        System.out.println(character.get(userInput-1));
                         System.out.println("Warrior has been selected");
                         selected = false;
                     } else if (choice.equalsIgnoreCase("no")) {
@@ -64,7 +64,7 @@ public class TheTextAdventure {
                     } else System.out.println("Select a valid option");
                     break;
                 case 2:
-                    System.out.println(characters.get(1));
+                    System.out.println(character.get(userInput-1));
                     System.out.println("Do you want select this hero ?" + "Yes/No");
                     input.nextLine();
                     choice = input.next();
@@ -74,7 +74,7 @@ public class TheTextAdventure {
                     } else setCharacters();
                     break;
                 case 3:
-                    System.out.println(characters.get(2));
+                    System.out.println(character.get(userInput-1));
                     System.out.println("Do you want select this hero ?" + "Yes/No");
                     input.nextLine();
                     choice = input.next();
