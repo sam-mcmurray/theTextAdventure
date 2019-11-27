@@ -35,7 +35,76 @@ public class TheTextAdventure {
     }
 
     public void selectHero() {
-        System.out.println();
+
+        boolean selected = true;
+        while (selected) {
+
+            System.out.println("Select Character :" +
+                    " \n 1.Warrior : \n 2.Mage : \n 3.Thief");
+
+            for (int i = 0; i < characters.size(); i++) {
+                if (characters.get(i) instanceof Hero) {
+                    System.out.println(characters.get(i));
+                }
+            }
+
+            int userInput = input.nextInt();
+            switch (userInput) {
+                case 1:
+                    System.out.println("Do you want to select this hero ?" + "Yes/No");
+                    input.nextLine();
+                    String choice = input.next();
+                    if (choice.equalsIgnoreCase("yes")) {
+                        System.out.println(characters.get(0));
+                        System.out.println("Warrior has been selected");
+                        selected = false;
+                    } else if (choice.equalsIgnoreCase("no")) {
+                        System.out.println("Select another hero");
+                        setCharacters();
+                    } else System.out.println("Select a valid option");
+                    break;
+                case 2:
+                    System.out.println(characters.get(1));
+                    System.out.println("Do you want select this hero ?" + "Yes/No");
+                    input.nextLine();
+                    choice = input.next();
+                    if (choice.equalsIgnoreCase("yes")) {
+                        System.out.println("Mage has been selected");
+                        selected = false;
+                    } else setCharacters();
+                    break;
+                case 3:
+                    System.out.println(characters.get(2));
+                    System.out.println("Do you want select this hero ?" + "Yes/No");
+                    input.nextLine();
+                    choice = input.next();
+                    if (choice.equalsIgnoreCase("yes")) {
+                        System.out.println("Thief has been selected");
+                        selected = false;
+                        break;
+                    } else selectHero();
+                    break;
+            }
+        }
+
+
+    }
+
+    public void startMenu(){
+        System.out.println("1.Start game\n2.Load game\n3.View High Scores \n4.Quit");
+        int userInput = input.nextInt();
+        switch (userInput) {
+            case 1:
+                selectHero();
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            default:
+        }
     }
 
     public void encounterMenu() {
@@ -47,5 +116,28 @@ public class TheTextAdventure {
 
         String temp = input.nextLine();
 
+    }
+    public void moveHero(){
+        String userInput;
+        for (int i = 0; i < rooms.length; ) {
+            for (int j = 0; j < rooms[i].length; ) {
+                System.out.println("Choose your direction ");
+                userInput = input.nextLine();
+                input.nextLine();
+                if (userInput.equalsIgnoreCase("l")) {
+                    j++;
+                    System.out.println(rooms[i][j]);
+                } else if (userInput.equalsIgnoreCase("r")) {
+                    j--;
+                    System.out.println(rooms[i][j]);
+                } else if (userInput.equalsIgnoreCase("s")) {
+                    i++;
+                    System.out.println(rooms[i][j]);
+                } else if (userInput.equalsIgnoreCase("w")) {
+                    i--;
+                    System.out.println(rooms[i][j]);
+                }
+            }
+        }
     }
 }
