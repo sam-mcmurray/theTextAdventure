@@ -16,15 +16,39 @@ public class HeroController{
         this.view = view;
     }
 
-    public boolean Attack(MonsterController monster) {
+    public boolean attack(MonsterController monster) {
         int damageDone;
 
+        if (model.getEndurance() < 10) {
+            return false;
+        }
+
         Random rand = new Random();
+
+        int chanceToHit = rand.nextInt(100);
+        if (chanceToHit < 50) {
+            return false;
+        }
+        model.setEndurance(model.getEndurance() - 10);
+
+        damageDone = model.getStrength();
+
+        monster.takeDamage(damageDone);
+
         return true;
 
     }
-    public void encounter(Room room) {
+    public boolean fleeRoom(MonsterController monster){
+        return false;
 
+        return true;
+
+    }
+    public void takeDamage(int incDamage) {
+        if (incDamage > model.getHealth()) {
+            model.setAlive(false);
+        }
+        model.setHealth(model.getHealth() - incDamage);
     }
 
 

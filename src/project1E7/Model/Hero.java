@@ -8,11 +8,13 @@ public class Hero extends Character {
     private ArrayList<Item> backPack;
     private int lives;
     private int currentTreasure;
+    private boolean alive;
     public Hero(int health, int strength, int speed, String description, String name, int endurance) {
         super(health, strength, speed, description, name);
         this.endurance = endurance;
         lives = 5;
         currentTreasure = 0;
+        alive = true;
 
     }
 
@@ -52,6 +54,15 @@ public class Hero extends Character {
         this.currentTreasure = currentTreasure;
     }
 
+    public void setEndurance(int endurance) {
+        this.endurance = endurance;
+    }
 
+    public boolean isAlive() {
+        return alive;
+    }
 
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
 }
