@@ -2,7 +2,7 @@ package project1E7.View;
 
 import project1E7.Model.Hero;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class HeroView {
     Hero model;
@@ -33,7 +33,7 @@ public class HeroView {
             for (int j = 0; j < stats[i]; j++) {
                 System.out.print("*");
             }
-            System.out.format("%n");
+            System.out.printf("%n");
 
         }
     }

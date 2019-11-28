@@ -17,7 +17,6 @@ public class HeroController{
     }
 
     public boolean attack(MonsterController monster) {
-        int damageDone;
 
         if (model.getEndurance() < 10) {
             return false;
@@ -25,15 +24,14 @@ public class HeroController{
 
         Random rand = new Random();
 
-        int chanceToHit = rand.nextInt(100);
-        if (chanceToHit < 50) {
+        int chanceToHit = rand.nextInt(101);
+        if (chanceToHit <= 50) {
             return false;
         }
+
         model.setEndurance(model.getEndurance() - 10);
 
-        damageDone = model.getStrength();
-
-        monster.takeDamage(damageDone);
+        monster.takeDamage(model.getStrength());
 
         return true;
 
