@@ -10,12 +10,15 @@ public class MonsterController {
     public MonsterController(Monster model) {
         this.model = model;
     }
+
     public void takeDamage(int incDamage) {
         if (incDamage > model.getHealth()) {
             model.setAlive(false);
         }
+        else
         model.setHealth(model.getHealth() - incDamage);
     }
+
     public boolean attack(HeroController hero) {
         int damageDone;
         Random rand = new Random();

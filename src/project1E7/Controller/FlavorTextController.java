@@ -1,4 +1,4 @@
-package src.project1E7.Controller;
+package project1E7.Controller;
 
 public class FlavorTextController {
 

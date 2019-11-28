@@ -3,15 +3,18 @@ package project1E7;
 import project1E7.Model.Hero;
 import project1E7.View.HeroView;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class TheTextAdventure {
     Scanner input = new Scanner(System.in);
-    public Hero warrior = new Hero(100, 80, 30, "The Warrior...", "Warrior", 40);
-    public Hero mage = new Hero(100, 60, 40, "The Mage...", "Mage", 50);
-    public Hero thief = new Hero(100, 40, 60, "The Thief...", "Thief", 60);
+    String userName;
+
+    public static Hero warrior = new Hero(100, 80, 30, "The Warrior...", "Warrior", 40);
+    public static Hero mage = new Hero(100, 60, 40, "The Mage...", "Mage", 50);
+    public static Hero thief = new Hero(100, 40, 60, "The Thief...", "Thief", 60);
 
     public static void main(String[] args) {
+
         TheTextAdventure myApp = new TheTextAdventure();
         HeroView hero = new HeroView(myApp.selectHero());
         hero.printStats();
@@ -82,6 +85,11 @@ public class TheTextAdventure {
                 break;
             default:
         }
+    }
+
+    public void setUserName() {
+
+        this.userName = userName;
     }
 
     public void encounterMenu() {
