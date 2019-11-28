@@ -15,13 +15,9 @@ public class MonsterController {
 
         if (incDamage > model.getHealth()) {
             model.setAlive(false);
-<<<<<<< HEAD
         } else
-=======
-        }
-        else
->>>>>>> 92c276769ddf990ec781b25cd0a1be6a1b59108c
         model.setHealth(model.getHealth() - incDamage);
+        
     }
 
     public boolean attack(HeroController hero) {
