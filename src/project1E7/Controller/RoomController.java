@@ -1,7 +1,7 @@
-package project1E7.Controller;
+package src.project1E7.Controller;
 
-import project1E7.Model.Room;
-import project1E7.View.RoomView;
+import src.project1E7.Model.Room;
+import src.project1E7.View.RoomView;
 
 public class RoomController {
     Room model;

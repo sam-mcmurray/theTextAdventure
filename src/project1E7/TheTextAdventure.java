@@ -1,17 +1,18 @@
-package project1E7;
+package src.project1E7;
 
-import project1E7.Controller.HeroController;
-import project1E7.Model.Character;
-import project1E7.Model.Coffee;
-import project1E7.Model.Hero;
-import project1E7.Model.Item;
-import project1E7.View.HeroView;
+import src.project1E7.Controller.HeroController;
+import src.project1E7.Model.Character;
+import src.project1E7.Model.Coffee;
+import src.project1E7.Model.Hero;
+import src.project1E7.Model.Item;
+import src.project1E7.View.HeroView;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TheTextAdventure {
     Scanner input = new Scanner(System.in);
-    ArrayList <Character> character = new Character <>();
+    ArrayList<Character> character = new Character <>();
     Hero warrior = new Hero(100, 80, 30, "The Warrior...", "Warrior", 40);
     Hero mage = new Hero(100, 60, 40, "The Mage...", "Mage", 50);
     Hero thief = new Hero(100, 40, 60, "The Thief...", "Thief", 60);

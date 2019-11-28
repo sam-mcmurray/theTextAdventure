@@ -1,4 +1,4 @@
-package project1E7.Model;
+package src.project1E7.Model;
 
 public class Room {
     private String description;
@@ -29,5 +29,5 @@ public class Room {
         this.found = found;
     }
 
-    public boolean getFound() {return getFound;}
+    public boolean getFound() {return found;}
 }

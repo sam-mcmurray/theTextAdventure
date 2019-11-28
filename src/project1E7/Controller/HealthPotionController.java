@@ -1,7 +1,7 @@
-package project1E7.Controller;
+package src.project1E7.Controller;
 
-import project1E7.Model.HealthPotion;
-import project1E7.View.HealthPotionView;
+import src.project1E7.Model.HealthPotion;
+import src.project1E7.View.HealthPotionView;
 
 public class HealthPotionController {
     HealthPotion model;

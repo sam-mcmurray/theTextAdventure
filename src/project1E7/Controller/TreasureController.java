@@ -1,4 +1,4 @@
-package project1E7.Controller;
+package src.project1E7.Controller;
 
 import project1E7.Model.Treasure;
 import project1E7.View.TreasureView;

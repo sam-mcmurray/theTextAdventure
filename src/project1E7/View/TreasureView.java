@@ -1,6 +1,6 @@
-package project1E7.View;
+package src.project1E7.View;
 
-import project1E7.Model.Treasure;
+import src.project1E7.Model.Treasure;
 
 public class TreasureView {
     Treasure model;

@@ -1,6 +1,6 @@
-package project1E7.View;
+package src.project1E7.View;
 
-import project1E7.Model.Heart;
+import src.project1E7.Model.Heart;
 
 public class HeartView {
     Heart model;

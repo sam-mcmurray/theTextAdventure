@@ -1,6 +1,6 @@
-package project1E7.View;
+package src.project1E7.View;
 
-import project1E7.Model.Hero;
+import src.project1E7.Model.Hero;
 
 public class HeroView {
     Hero model;

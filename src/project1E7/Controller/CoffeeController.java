@@ -1,7 +1,7 @@
-package project1E7.Controller;
+package src.project1E7.Controller;
 
-import project1E7.Model.Coffee;
-import project1E7.View.CoffeeView;
+import src.project1E7.Model.Coffee;
+import src.project1E7.View.CoffeeView;
 
 public class CoffeeController {
     Coffee model;
