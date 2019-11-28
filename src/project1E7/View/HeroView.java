@@ -40,7 +40,7 @@ public class HeroView {
 
     public boolean selectHero(Hero hero) {
 
-        System.out.println("Do you want to select this hero ?" + "Yes/No");
+        System.out.println("Do you want to select this hero? " + "Yes/No");
         String choice = input.next();
         if (choice.equalsIgnoreCase("yes")) {
             System.out.println(hero + " has been selected");

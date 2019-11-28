@@ -7,7 +7,7 @@ import project1E7.View.HeroView;
 
 import java.util.Random;
 
-public class HeroController{
+public class HeroController {
     Hero model;
     HeroView view;
 
@@ -36,17 +36,42 @@ public class HeroController{
         return true;
 
     }
-    public boolean fleeRoom(MonsterController monster){
+
+    public boolean fleeRoom(MonsterController monster) {
         return false;
 
 
     }
+
     public void takeDamage(int incDamage) {
         if (incDamage > model.getHealth()) {
             model.setAlive(false);
         }
         model.setHealth(model.getHealth() - incDamage);
     }
-
-
 }
+
+     /*  public void moveHero(){
+        String userInput;
+        for (int i = 0; i < rooms.length; ) {
+            for (int j = 0; j < rooms[i].length; ) {
+                System.out.println("Choose your direction ");
+                userInput = input.nextLine();
+                input.nextLine();
+                if (userInput.equalsIgnoreCase("l")) {
+                    j++;
+                    System.out.println(rooms[i][j]);
+                } else if (userInput.equalsIgnoreCase("r")) {
+                    j--;
+                    System.out.println(rooms[i][j]);
+                } else if (userInput.equalsIgnoreCase("s")) {
+                    i++;
+                    System.out.println(rooms[i][j]);
+                } else if (userInput.equalsIgnoreCase("w")) {
+                    i--;
+                    System.out.println(rooms[i][j]);
+                }
+            }
+        }
+    }
+ */

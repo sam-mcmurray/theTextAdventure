@@ -16,8 +16,18 @@ public class TheTextAdventure {
     public static void main(String[] args) {
 
         TheTextAdventure myApp = new TheTextAdventure();
-        HeroView hero = new HeroView(myApp.selectHero());
-        hero.printStats();
+        int choice = myApp.startMenu();
+        if (choice == 1) {
+            HeroView hero = new HeroView(myApp.selectHero());
+            hero.printStats();
+        } else if (choice == 2) {
+            System.out.println("Load Game");
+        } else if (choice == 3) {
+            System.out.println("View HighScore");
+        } else if (choice == 4) {
+            System.exit(0);
+        }
+
 
     }
 
@@ -71,20 +81,47 @@ public class TheTextAdventure {
         return null;
     }
 
-    public void startMenu() {
-        System.out.println("1.Start game\n2.Load game\n3.View High Scores \n4.Quit");
+    public int startMenu() {
+        System.out.println("1.Start Game\n2.Load Game\n3.View High Scores \n4.Quit");
         int userInput = input.nextInt();
-        switch (userInput) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            default:
-        }
+        do {
+
+             String correct;
+            switch (userInput) {
+                case 1:
+                    System.out.println("You have selected Start Game is this correct? yes/no");
+                    correct = input.nextLine();
+                    if (correct.equalsIgnoreCase("yes")) {
+                        System.out.println("The game is Starting");
+                    } else userInput = 0;
+                    break;
+                case 2:
+                    System.out.println("You have selected to Load a saved Game is this correct? yes/no");
+                    correct = input.nextLine();
+                    if (correct.equalsIgnoreCase("yes")) {
+                        System.out.println("The game is Starting");
+                    } else userInput = 0;
+                    break;
+                case 3:
+                    System.out.println("You have selected to View HighScore is this correct? yes/no");
+                    correct = input.nextLine();
+                    if (correct.equalsIgnoreCase("yes")) {
+                        System.out.println("High Score");
+                    } else userInput = 0;
+                    break;
+                case 4:
+                    System.out.println("You have selected Quit is this correct? yes/no");
+                    correct = input.nextLine();
+                    if (correct.equalsIgnoreCase("yes")) {
+                        System.out.println("Quiting Game");
+                    } else userInput = 0;
+                    break;
+                default:
+                    System.out.println("Please enter a proper value. ");
+                    break;
+            }
+        } while (userInput > 4 && userInput < 1);
+        return userInput;
     }
 
     public void setUserName() {
@@ -103,27 +140,3 @@ public class TheTextAdventure {
 
     }
 }
- /*  public void moveHero(){
-        String userInput;
-        for (int i = 0; i < rooms.length; ) {
-            for (int j = 0; j < rooms[i].length; ) {
-                System.out.println("Choose your direction ");
-                userInput = input.nextLine();
-                input.nextLine();
-                if (userInput.equalsIgnoreCase("l")) {
-                    j++;
-                    System.out.println(rooms[i][j]);
-                } else if (userInput.equalsIgnoreCase("r")) {
-                    j--;
-                    System.out.println(rooms[i][j]);
-                } else if (userInput.equalsIgnoreCase("s")) {
-                    i++;
-                    System.out.println(rooms[i][j]);
-                } else if (userInput.equalsIgnoreCase("w")) {
-                    i--;
-                    System.out.println(rooms[i][j]);
-                }
-            }
-        }
-    }
-}*/
