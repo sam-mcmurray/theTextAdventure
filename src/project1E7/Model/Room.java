@@ -3,13 +3,13 @@ package project1E7.Model;
 public class Room {
     private String description;
     private Item item;
-    private Monster monster;
+    private boolean monster;
     private boolean found;
 
-    public Room(String description, Item item, Monster monster, boolean found) {
+    public Room(String description, Item item, boolean monster, boolean found) {
         this.description = description;
         this.item = item;
-        this.monster = monster;
+        this.monster = true;
         this.found = found;
     }
 
@@ -21,8 +21,24 @@ public class Room {
         return item;
     }
 
-    public Monster getMonster() {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public boolean isMonster() {
         return monster;
+    }
+
+    public void setMonster(boolean monster) {
+        this.monster = monster;
+    }
+
+    public boolean isFound() {
+        return found;
     }
 
     public void setFound(boolean found) {
