@@ -1,4 +1,4 @@
-package src.project1E7.Controller;
+package project1E7.Controller;
 
 import src.project1E7.Model.FlavorText;
 

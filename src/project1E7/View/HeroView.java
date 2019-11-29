@@ -1,9 +1,18 @@
 package src.project1E7.View;
 
+<<<<<<< HEAD
 import src.project1E7.Model.Hero;
+=======
+import project1E7.Controller.HeroController;
+import project1E7.Model.Hero;
+import project1E7.Model.Room;
+
+import java.util.*;
+>>>>>>> 43eb596d375b5da72f855b2146faf9a919e5464a
 
 public class HeroView {
     Hero model;
+    Scanner input = new Scanner(System.in);
 
     public HeroView(Hero model) {
         this.model = model;
@@ -26,12 +35,23 @@ public class HeroView {
         System.out.println("Character Description: " + model.getDescription());
 
         for (int i = 0; i < stats.length; i++) {
-                System.out.print(tableDescrip[i]);
-                for (int j = 0; j < stats[i]; j++) {
-                    System.out.print("*");
-                }
-                System.out.format("%n");
+            System.out.print(tableDescrip[i]);
+            for (int j = 0; j < stats[i]; j++) {
+                System.out.print("*");
+            }
+            System.out.printf("%n");
 
         }
+    }
+
+    public boolean selectHero(Hero hero) {
+
+        System.out.println("Do you want to select the" + hero + " to be your hero? " + "Yes/No");
+        String choice = input.next();
+        if (choice.equalsIgnoreCase("yes")) {
+            System.out.println(hero + " has been selected");
+            return false;
+        }
+        return true;
     }
 }
