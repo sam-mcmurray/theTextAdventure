@@ -1,5 +1,6 @@
 package project1E7;
 
+import project1E7.Controller.HeroController;
 import project1E7.Model.Hero;
 import project1E7.View.HeroView;
 
@@ -18,8 +19,11 @@ public class TheTextAdventure {
         TheTextAdventure myApp = new TheTextAdventure();
         int choice = myApp.startMenu();
         if (choice == 1) {
-            HeroView hero = new HeroView(myApp.selectHero());
-            hero.printStats();
+            Hero theHero = (myApp.selectHero());
+            HeroView heroView = new HeroView(theHero);
+            heroView.printStats();
+            HeroController heroController = new HeroController(theHero, heroView);
+            
         } else if (choice == 2) {
             System.out.println("Load Game");
         } else if (choice == 3) {
@@ -120,7 +124,7 @@ public class TheTextAdventure {
                     System.out.println("Please enter a proper value. ");
                     break;
             }
-        } while (userInput > 4 && userInput < 1);
+        } while (userInput >= 5 && userInput <= 0);
         return userInput;
     }
 

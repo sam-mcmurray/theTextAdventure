@@ -6,6 +6,7 @@ import project1E7.Model.Room;
 import project1E7.View.HeroView;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class HeroController {
     Hero model;
@@ -49,29 +50,28 @@ public class HeroController {
         }
         model.setHealth(model.getHealth() - incDamage);
     }
-}
 
-     /*  public void moveHero(){
-        String userInput;
-        for (int i = 0; i < rooms.length; ) {
-            for (int j = 0; j < rooms[i].length; ) {
+
+    public Room[][] moveHero(Room[][] room ) {
+        Scanner input = new Scanner(System.in);
+        String direction;
                 System.out.println("Choose your direction ");
-                userInput = input.nextLine();
+                direction = input.nextLine();
                 input.nextLine();
-                if (userInput.equalsIgnoreCase("l")) {
-                    j++;
-                    System.out.println(rooms[i][j]);
-                } else if (userInput.equalsIgnoreCase("r")) {
-                    j--;
-                    System.out.println(rooms[i][j]);
-                } else if (userInput.equalsIgnoreCase("s")) {
-                    i++;
-                    System.out.println(rooms[i][j]);
-                } else if (userInput.equalsIgnoreCase("w")) {
-                    i--;
-                    System.out.println(rooms[i][j]);
+                if (direction.equalsIgnoreCase("l")) {
+                    System.out.println(room[+ 0][+1]);
+                    return room;
+                } else if (direction.equalsIgnoreCase("r")) {
+                    System.out.println(room[ + 0][-1]);
+                    return room;
+                } else if (direction.equalsIgnoreCase("s")) {
+                    System.out.println(room[+1][+0]);
+                    return room;
+                } else if (direction.equalsIgnoreCase("w")) {
+                    System.out.println(room[-1][0]);
+                    return room;
                 }
-            }
-        }
+
+        return null;
     }
- */
+}

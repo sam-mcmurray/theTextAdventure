@@ -1,6 +1,8 @@
 package project1E7.View;
 
+import project1E7.Controller.HeroController;
 import project1E7.Model.Hero;
+import project1E7.Model.Room;
 
 import java.util.*;
 
@@ -40,7 +42,7 @@ public class HeroView {
 
     public boolean selectHero(Hero hero) {
 
-        System.out.println("Do you want to select this hero? " + "Yes/No");
+        System.out.println("Do you want to select the" + hero + " to be your hero? " + "Yes/No");
         String choice = input.next();
         if (choice.equalsIgnoreCase("yes")) {
             System.out.println(hero + " has been selected");
