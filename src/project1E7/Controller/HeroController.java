@@ -78,7 +78,7 @@ public class HeroController {
                 run = false;
                 return room;
             }
-        }  while (run == true);      
+        }  while (run == true);
         return null;
     }
     public boolean attackFirst(Hero hero, Monster monster) {

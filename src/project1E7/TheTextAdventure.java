@@ -40,7 +40,9 @@ public class TheTextAdventure {
                 MonsterController monsterController = new MonsterController(monster, monsterView);
                 if (roomController.roomHasMonster() == true) {
                    if (heroController.attackFirst(theHero, monster) == true) {
-                        heroController.attack(monsterController);
+                       if (heroController.attack(monsterController) == true) {
+
+                       }
                    }
                 }
             }
