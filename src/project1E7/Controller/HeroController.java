@@ -2,6 +2,7 @@ package project1E7.Controller;
 
 
 import project1E7.Model.Hero;
+import project1E7.Model.Monster;
 import project1E7.Model.Room;
 import project1E7.View.HeroView;
 
@@ -73,5 +74,11 @@ public class HeroController {
                 }
 
         return null;
+    }
+    public boolean attackFirst(Hero hero, Monster monster) {
+        if (hero.getSpeed() < monster.getSpeed()) {
+            return false;
+        } else
+            return true;
     }
 }

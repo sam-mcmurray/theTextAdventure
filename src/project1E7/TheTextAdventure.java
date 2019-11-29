@@ -1,11 +1,14 @@
 package project1E7;
 
 import project1E7.Controller.HeroController;
+import project1E7.Controller.MonsterController;
 import project1E7.Controller.RoomController;
 import project1E7.Model.Hero;
 import project1E7.Model.Monster;
 import project1E7.Model.Room;
 import project1E7.View.HeroView;
+import project1E7.View.MonsterVIew;
+import project1E7.View.MonsterView;
 import project1E7.View.RoomView;
 
 import java.util.*;
@@ -30,12 +33,16 @@ public class TheTextAdventure {
             myApp.story();
             HeroController heroController = new HeroController(theHero, heroView);
             for (int i = 0;; i++) {
-                Room currentRoom = room[][];
+                Room currentRoom = room[0][0];
                 RoomView roomView = new RoomView(currentRoom);
                 RoomController roomController = new RoomController(currentRoom, roomView);
+                Monster monster = roomController.getMonster(currentRoom);
+                MonsterView monsterView = new MonsterView(monster);
+                MonsterController monsterController = new MonsterController(monster, monsterView);
+                if (roomController.roomHasMonster() == true) {
+                   if (heroController.attackFirst(theHero, roomController.) == true) {
 
-                if (currentRoom.isMonster() == true) {
-
+                   }
                 }
             }
 

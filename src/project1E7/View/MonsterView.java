@@ -2,10 +2,10 @@ package project1E7.View;
 
 import project1E7.Model.Monster;
 
-public class MonsterVIew {
+public class MonsterView {
     Monster model;
 
-    public MonsterVIew(Monster model) {
+    public MonsterView(Monster model) {
         this.model = model;
     }
 
