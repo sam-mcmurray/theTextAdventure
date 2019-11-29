@@ -12,7 +12,7 @@ import project1E7.View.RoomView;
 
 import java.util.*;
 
-public class TheTextAdventure {
+public class theTextAdventure {
     Scanner input = new Scanner(System.in);
     String userName;
 
@@ -22,7 +22,7 @@ public class TheTextAdventure {
 
     public static void main(String[] args) {
 
-        TheTextAdventure myApp = new TheTextAdventure();
+        theTextAdventure myApp = new theTextAdventure();
         int choice = myApp.startMenu();
         if (choice == 1) {
             Room [][] room = new Room[10][10];
