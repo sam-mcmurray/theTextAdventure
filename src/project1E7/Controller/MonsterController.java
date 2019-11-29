@@ -1,6 +1,6 @@
 package src.project1E7.Controller;
 
-import src.project1E7.Model.Monster;
+import project1E7.Model.Monster;
 
 import java.util.Random;
 

@@ -1,7 +1,7 @@
-package src.project1E7.Controller;
+package project1E7.Controller;
 
-import src.project1E7.Model.Door;
-import src.project1E7.View.DoorView;
+import project1E7.Model.Door;
+import project1E7.View.DoorView;
 
 public class DoorController {
     Door model;

@@ -1,7 +1,7 @@
-package src.project1E7.Controller;
+package project1E7.Controller;
 
-import src.project1E7.Model.Key;
-import src.project1E7.View.KeyView;
+import project1E7.Model.Key;
+import project1E7.View.KeyView;
 
 public class KeyController {
     Key model;

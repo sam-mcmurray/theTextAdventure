@@ -1,6 +1,6 @@
-package src.project1E7.View;
+package project1E7.View;
 
-import src.project1E7.Model.Door;
+import project1E7.Model.Door;
 
 public class DoorView {
     Door model;

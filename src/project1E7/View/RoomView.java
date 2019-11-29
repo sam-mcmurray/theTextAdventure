@@ -1,6 +1,6 @@
-package src.project1E7.View;
+package project1E7.View;
 
-import src.project1E7.Model.Room;
+import project1E7.Model.Room;
 
 public class RoomView {
     Room model;

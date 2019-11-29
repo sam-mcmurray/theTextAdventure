@@ -1,7 +1,7 @@
-package src.project1E7.Controller;
+package project1E7.Controller;
 
-import src.project1E7.Model.Heart;
-import src.project1E7.View.HeartView;
+import project1E7.Model.Heart;
+import project1E7.View.HeartView;
 
 public class HeartController {
     Heart model;

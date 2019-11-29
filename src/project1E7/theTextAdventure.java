@@ -1,41 +1,24 @@
-package src.project1E7;
+package project1E7;
 
-<<<<<<< HEAD
-import src.project1E7.Controller.HeroController;
-import src.project1E7.Model.Character;
-import src.project1E7.Model.Coffee;
-import src.project1E7.Model.Hero;
-import src.project1E7.Model.Item;
-import src.project1E7.View.HeroView;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-public class TheTextAdventure {
-    Scanner input = new Scanner(System.in);
-    ArrayList<Character> character = new Character <>();
-    Hero warrior = new Hero(100, 80, 30, "The Warrior...", "Warrior", 40);
-    Hero mage = new Hero(100, 60, 40, "The Mage...", "Mage", 50);
-    Hero thief = new Hero(100, 40, 60, "The Thief...", "Thief", 60);
-=======
 import project1E7.Controller.HeroController;
 import project1E7.Model.Hero;
 import project1E7.View.HeroView;
 
 import java.util.*;
 
-public class TheTextAdventure {
+public class theTextAdventure {
     Scanner input = new Scanner(System.in);
     String userName;
 
     public static Hero warrior = new Hero(100, 80, 30, "The Warrior...", "Warrior", 40);
     public static Hero mage = new Hero(100, 60, 40, "The Mage...", "Mage", 50);
     public static Hero thief = new Hero(100, 40, 60, "The Thief...", "Thief", 60);
->>>>>>> 43eb596d375b5da72f855b2146faf9a919e5464a
+
 
     public static void main(String[] args) {
 
-        TheTextAdventure myApp = new TheTextAdventure();
+        theTextAdventure myApp = new theTextAdventure();
         int choice = myApp.startMenu();
         if (choice == 1) {
             Hero theHero = (myApp.selectHero());

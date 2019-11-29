@@ -1,6 +1,6 @@
 package project1E7.Controller;
 
-import src.project1E7.Model.FlavorText;
+import project1E7.Model.FlavorText;
 
 public class FlavorTextController {
 

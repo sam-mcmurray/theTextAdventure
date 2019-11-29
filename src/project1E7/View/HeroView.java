@@ -1,14 +1,12 @@
-package src.project1E7.View;
+package project1E7.View;
 
-<<<<<<< HEAD
-import src.project1E7.Model.Hero;
-=======
+
 import project1E7.Controller.HeroController;
 import project1E7.Model.Hero;
 import project1E7.Model.Room;
 
 import java.util.*;
->>>>>>> 43eb596d375b5da72f855b2146faf9a919e5464a
+
 
 public class HeroView {
     Hero model;
