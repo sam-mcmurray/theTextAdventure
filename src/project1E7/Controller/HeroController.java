@@ -56,23 +56,29 @@ public class HeroController {
     public Room[][] moveHero(Room[][] room ) {
         Scanner input = new Scanner(System.in);
         String direction;
-                System.out.println("Choose your direction ");
-                direction = input.nextLine();
-                input.nextLine();
-                if (direction.equalsIgnoreCase("l")) {
-                    System.out.println(room[+ 0][+1]);
-                    return room;
-                } else if (direction.equalsIgnoreCase("r")) {
-                    System.out.println(room[ + 0][-1]);
-                    return room;
-                } else if (direction.equalsIgnoreCase("s")) {
-                    System.out.println(room[+1][+0]);
-                    return room;
-                } else if (direction.equalsIgnoreCase("w")) {
-                    System.out.println(room[-1][0]);
-                    return room;
-                }
-
+        boolean run = true;
+        do {
+            System.out.println("Choose your direction ");
+            direction = input.nextLine();
+            input.nextLine();
+            if (direction.equalsIgnoreCase("l")) {
+                System.out.println(room[+0][+1]);
+                run = false;
+                return room;
+            } else if (direction.equalsIgnoreCase("r")) {
+                System.out.println(room[+0][-1]);
+                run = false;
+                return room;
+            } else if (direction.equalsIgnoreCase("s")) {
+                System.out.println(room[+1][+0]);
+                run = false;
+                return room;
+            } else if (direction.equalsIgnoreCase("w")) {
+                System.out.println(room[-1][0]);
+                run = false;
+                return room;
+            }
+        }  while (run == true);      
         return null;
     }
     public boolean attackFirst(Hero hero, Monster monster) {

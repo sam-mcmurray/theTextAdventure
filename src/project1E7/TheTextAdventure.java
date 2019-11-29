@@ -7,7 +7,6 @@ import project1E7.Model.Hero;
 import project1E7.Model.Monster;
 import project1E7.Model.Room;
 import project1E7.View.HeroView;
-import project1E7.View.MonsterVIew;
 import project1E7.View.MonsterView;
 import project1E7.View.RoomView;
 
@@ -40,8 +39,8 @@ public class TheTextAdventure {
                 MonsterView monsterView = new MonsterView(monster);
                 MonsterController monsterController = new MonsterController(monster, monsterView);
                 if (roomController.roomHasMonster() == true) {
-                   if (heroController.attackFirst(theHero, roomController.) == true) {
-
+                   if (heroController.attackFirst(theHero, monster) == true) {
+                        heroController.attack(monsterController);
                    }
                 }
             }
