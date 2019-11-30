@@ -26,6 +26,7 @@ public class theTextAdventure {
         Scanner input = new Scanner(System.in);
         theTextAdventure myApp = new theTextAdventure();
         int choice = myApp.startMenu();
+        
         Room [][] room = new Room[10][10];
 
 
