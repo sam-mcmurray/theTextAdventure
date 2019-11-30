@@ -1,21 +1,22 @@
 package project1E7.Controller;
 
 
-import project1E7.Model.Hero;
-import project1E7.Model.Item;
-import project1E7.Model.Monster;
-import project1E7.Model.Room;
+import project1E7.Model.*;
 import project1E7.View.HeroView;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import static java.lang.System.out;
+
 
 public class HeroController {
     Hero model;
     HeroView view;
+    private Coffee coffee;
+    private HealthPotion healthPotion;
+    private Heart heart;
+    private Treasure treasure;
 
     public HeroController(Hero model, HeroView view) {
         this.model = model;
@@ -55,23 +56,23 @@ public class HeroController {
         String direction;
         boolean run = true;
         do {
-            out.println("Choose your direction ");
+            System.out.println("Choose your direction ");
             direction = input.nextLine();
             input.nextLine();
             if (direction.equalsIgnoreCase("l")) {
-                out.println(room[+0][+1]);
+                System.out.println(room[+0][+1]);
                 run = false;
                 return room;
             } else if (direction.equalsIgnoreCase("r")) {
-                out.println(room[+0][-1]);
+                System.out.println(room[+0][-1]);
                 run = false;
                 return room;
             } else if (direction.equalsIgnoreCase("s")) {
-                out.println(room[+1][+0]);
+                System.out.println(room[+1][+0]);
                 run = false;
                 return room;
             } else if (direction.equalsIgnoreCase("w")) {
-                out.println(room[-1][0]);
+                System.out.println(room[-1][0]);
                 run = false;
                 return room;
             }
@@ -93,5 +94,17 @@ public class HeroController {
         } else
             return true;
     }
-
+    public void useItemExternal(Item item) {
+        if (item == coffee) {
+            model.setSpeed(coffee.getSpeed() + model.getSpeed());
+        } else if (item == heart) {
+            model.setLives(heart.getExtraLife() + model.getLives());
+        } else if (item == healthPotion) {
+            if (model.getHealth() <= 40) {
+                model.setHealth(healthPotion.getAddHealth() + model.getHealth());
+            } else model.setHealth(100);
+        } else if (item == treasure) {
+            model.setCurrentTreasure(treasure.getAmount() + model.getCurrentTreasure());
+        }
+    }
 }

@@ -5,10 +5,7 @@ import project1E7.Controller.HeroController;
 import project1E7.Controller.ItemController;
 import project1E7.Controller.MonsterController;
 import project1E7.Controller.RoomController;
-import project1E7.Model.Hero;
-import project1E7.Model.Item;
-import project1E7.Model.Monster;
-import project1E7.Model.Room;
+import project1E7.Model.*;
 import project1E7.View.HeroView;
 import project1E7.View.ItemView;
 import project1E7.View.MonsterView;
@@ -26,11 +23,14 @@ public class theTextAdventure {
 
 
     public static void main(String[] args) {
-
+        Scanner input = new Scanner(System.in);
         theTextAdventure myApp = new theTextAdventure();
         int choice = myApp.startMenu();
+        Room [][] room = new Room[10][10];
+
+
         if (choice == 1) {
-            Room [][] room = new Room[10][10];
+
             Hero theHero = (myApp.selectHero());
             HeroView heroView = new HeroView(theHero);
             heroView.printStats();
@@ -45,6 +45,7 @@ public class theTextAdventure {
                 MonsterView monsterView = new MonsterView(monster);
                 MonsterController monsterController = new MonsterController(monster, monsterView);
 
+                boolean fleeRun2 = true;
                 if (roomController.roomHasMonster() == true) {
 
                     boolean run = true;
@@ -55,7 +56,7 @@ public class theTextAdventure {
 
                        do {
                            monsterView.encounterMenu();
-
+                           encounterChoice = input.nextInt();
                            switch (encounterChoice) {
 
                                case 1:
@@ -68,7 +69,7 @@ public class theTextAdventure {
                                    monsterView.printStatus(monster);
 
                                    if (monsterController.attack(heroController) == true) {
-                                       System.out.println("flvaor text hit");
+                                       System.out.println("flavor text hit");
                                        heroView.printStatus(theHero);
 
                                    } else
@@ -79,6 +80,7 @@ public class theTextAdventure {
                                     if (heroController.flee(theHero) == true){
                                         currentRoom = previousRoom;
                                         run = false;
+                                        fleeRun2 = false;
                                     } else
                                         run = true;
                                     break;
@@ -98,11 +100,12 @@ public class theTextAdventure {
                                System.out.println("flavor text hit");
                                heroView.printStatus(theHero);
                                monsterView.encounterMenu();
+                               encounterChoice = input.nextInt();
                            } else
                                System.out.println("flavor text miss");
                            heroView.printStatus(theHero);
                            monsterView.encounterMenu();
-
+                           encounterChoice = input.nextInt();
                            switch (encounterChoice) {
 
                                case 1:
@@ -120,6 +123,7 @@ public class theTextAdventure {
                                    if (heroController.flee(theHero) == true) {
                                        currentRoom = previousRoom;
                                        run = false;
+                                       fleeRun2 = false;
                                    } else
                                        run = true;
                                    break;
@@ -131,23 +135,43 @@ public class theTextAdventure {
                            }
                        } while (run == true);
 
-                } if (roomView.roomHasItem(currentRoom) == true) {
-                    Item item = roomController.getItem(currentRoom);
-                    ItemView itemView = new ItemView(item);
-                    ItemController itemController = new ItemController(item, itemView);
-                    itemView.viewItem(item);
-                    
-
-                } else if (roomView.roomHasItem(currentRoom) == false){
-                    Item item = roomController.getItem(currentRoom);
-                    ItemView itemView = new ItemView(item);
-                    ItemController itemController = new ItemController(item, itemView);
-                    item = itemController.setRandomItem();
-                    if (item != null) {
+                }
+                int chooseItem = 0;
+                while (theHero.isAlive() == true && fleeRun2 == true) {
+                    if (roomView.roomHasItem(currentRoom) == true) {
+                        Item item = roomController.getItem(currentRoom);
+                        ItemView itemView = new ItemView(item);
+                        ItemController itemController = new ItemController(item, itemView);
+                        fleeRun2 = false;
                         itemView.viewItem(item);
+
+
+
+
+                    } else if (roomView.roomHasItem(currentRoom) == false) {
+                        Item item = roomController.getItem(currentRoom);
+                        ItemView itemView = new ItemView(item);
+                        ItemController itemController = new ItemController(item, itemView);
+                        item = itemController.setRandomItem();
+                        fleeRun2 = false;
+                        if (item != null) {
+                            do {
+                                itemView.viewItem(item);
+                                System.out.println("Would you like to use " + item + "or save in your satchel?" +
+                                        "\n 1)Use " + item + "\n 2) Save " + item + " in satchel");
+                                switch (chooseItem) {
+                                    case 1:
+                                        heroController.useItemExternal(item);
+                                        break;
+                                    case 2:
+                                        break;
+                                    default:
+                                        System.out.println("Please enter a proper value.");
+                                }
+                            } while (chooseItem >= 3 || chooseItem <= 0);
+                        }
                     }
                 }
-
             }
 
         } else if (choice == 2) {
@@ -217,7 +241,7 @@ public class theTextAdventure {
         System.out.println("1.Start Game\n2.Load Game\n3.View High Scores \n4.Quit");
         int userInput = input.nextInt();
         do {
-
+            input.nextLine();
              String correct;
             switch (userInput) {
                 case 1:
@@ -225,27 +249,31 @@ public class theTextAdventure {
                     correct = input.nextLine();
                     if (correct.equalsIgnoreCase("yes")) {
                         System.out.println("The game is Starting");
+                        return userInput;
                     } else userInput = 0;
                     break;
                 case 2:
                     System.out.println("You have selected to Load a saved Game is this correct? yes/no");
                     correct = input.nextLine();
-                    if (correct.equalsIgnoreCase("yes")) {
+                    if (correct.equals("yes")) {
                         System.out.println("The game is Starting");
+                        return userInput;
                     } else userInput = 0;
                     break;
                 case 3:
                     System.out.println("You have selected to View HighScore is this correct? yes/no");
                     correct = input.nextLine();
-                    if (correct.equalsIgnoreCase("yes")) {
+                    if (correct.equals("yes")) {
                         System.out.println("High Score");
+                        return userInput;
                     } else userInput = 0;
                     break;
                 case 4:
                     System.out.println("You have selected Quit is this correct? yes/no");
                     correct = input.nextLine();
-                    if (correct.equalsIgnoreCase("yes")) {
+                    if (correct.equals("yes")) {
                         System.out.println("Quiting Game");
+                        return userInput;
                     } else userInput = 0;
                     break;
                 default:
