@@ -33,7 +33,7 @@ public class theTextAdventure {
             heroView.printStats();
             myApp.story();
             HeroController heroController = new HeroController(theHero, heroView);
-            for (int i = 0;; i++) {
+            for (int i = 0;; i++) { //this will become a do while when the leaving room is chosen while(currentRoom != leavingRoom)
                 Room currentRoom = room[0][0];
                 Room previousRoom = room[0][0];
                 RoomView roomView = new RoomView(currentRoom);
@@ -48,10 +48,13 @@ public class theTextAdventure {
                     int encounterChoice = 0;
                     System.out.println("Flavor text monster present");
 
-                   if (heroController.attackFirst(theHero, monster) == true) {
+                   if (heroController.attackFirst(monsterController) == true) {
 
                        do {
+                           monsterView.encounterMenu();
+                           
                            switch (encounterChoice) {
+
                                case 1:
                                    if (heroController.attack(monsterController) == true) {
                                        System.out.println("Flavor text hit");
@@ -78,7 +81,9 @@ public class theTextAdventure {
                                     break;
                                case 3:
                                     heroView.inventory(theHero);
-
+                                    break;
+                               default:
+                                   System.out.println("Please enter a proper value.");
                            }
                        } while (run == true) ;
 
@@ -89,22 +94,42 @@ public class theTextAdventure {
                            if (monsterController.attack(heroController) == true) {
                                System.out.println("flvaor text hit");
                                heroView.printStatus(theHero);
-
+                               monsterView.encounterMenu();
                            } else
                                System.out.println("flavor text miss");
                            heroView.printStatus(theHero);
+                           monsterView.encounterMenu();
+                           switch (encounterChoice) {
 
-                           if (heroController.attack(monsterController) == true) {
-                               System.out.println("Flavor text hit");
-                               monsterView.printStatus(monster);
 
-                           } else
-                               System.out.println("flavor text miss");
-                           monsterView.printStatus(monster);
+                               case 1:
 
+                                   if (heroController.attack(monsterController) == true) {
+                                       System.out.println("Flavor text hit");
+                                       monsterView.printStatus(monster);
+
+
+                                   } else
+                                       System.out.println("flavor text miss");
+                                   monsterView.printStatus(monster);
+                                   break;
+                               case 2:
+                                   if (heroController.flee(theHero) == true) {
+                                       currentRoom = previousRoom;
+                                       run = false;
+                                   } else
+                                       run = true;
+                                   break;
+                               case 3:
+                                   heroView.inventory(theHero);
+                                   break;
+                               default:
+                                   System.out.println("Please enter a proper value.");
+                           }
                        } while (run == true);
 
                 } else
+                    System.out.println();
             }
 
         } else if (choice == 2) {
@@ -218,16 +243,6 @@ public class theTextAdventure {
         this.userName = userName;
     }
 
-    public void encounterMenu() {
-        System.out.printf("%nYou have encountered a monster!%n" +
-                "What is your next move?%n" +
-                "To run away enter 'flee'%n" +
-                "To fight enter 'fight' %n" +
-                "To use one of your item enter 'item'%n");
-
-        String temp = input.nextLine();
-
-    }
     public void story() {
         System.out.println("flavor text story or call from another method ");
     }

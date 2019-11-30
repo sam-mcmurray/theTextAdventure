@@ -43,19 +43,12 @@ public class HeroController {
 
     }
 
-    public boolean fleeRoom(MonsterController monster) {
-        return false;
-
-
-    }
-
     public void takeDamage(int incDamage) {
         if (incDamage > model.getHealth()) {
             model.setAlive(false);
         }
         model.setHealth(model.getHealth() - incDamage);
     }
-
 
     public Room[][] moveHero(Room[][] room ) {
         Scanner input = new Scanner(System.in);
@@ -85,8 +78,8 @@ public class HeroController {
         }  while (run == true);
         return null;
     }
-    public boolean attackFirst(Hero hero, Monster monster) {
-        if (hero.getSpeed() < monster.getSpeed()) {
+    public boolean attackFirst(MonsterController monster) {
+        if (model.getSpeed() < monster.model.getSpeed()) {
             return false;
         } else
             return true;
@@ -94,7 +87,7 @@ public class HeroController {
     public boolean flee(Hero hero) {
         Random rand = new Random();
 
-        int chanceToFlee = rand.nextInt(101);
+        int chanceToFlee = rand.nextInt(100);
         if (chanceToFlee <= 50) {
             return false;
         } else
