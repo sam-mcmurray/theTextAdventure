@@ -2,12 +2,15 @@ package project1E7;
 
 
 import project1E7.Controller.HeroController;
+import project1E7.Controller.ItemController;
 import project1E7.Controller.MonsterController;
 import project1E7.Controller.RoomController;
 import project1E7.Model.Hero;
+import project1E7.Model.Item;
 import project1E7.Model.Monster;
 import project1E7.Model.Room;
 import project1E7.View.HeroView;
+import project1E7.View.ItemView;
 import project1E7.View.MonsterView;
 import project1E7.View.RoomView;
 
@@ -52,7 +55,7 @@ public class theTextAdventure {
 
                        do {
                            monsterView.encounterMenu();
-                           
+
                            switch (encounterChoice) {
 
                                case 1:
@@ -92,15 +95,15 @@ public class theTextAdventure {
                        do {
 
                            if (monsterController.attack(heroController) == true) {
-                               System.out.println("flvaor text hit");
+                               System.out.println("flavor text hit");
                                heroView.printStatus(theHero);
                                monsterView.encounterMenu();
                            } else
                                System.out.println("flavor text miss");
                            heroView.printStatus(theHero);
                            monsterView.encounterMenu();
-                           switch (encounterChoice) {
 
+                           switch (encounterChoice) {
 
                                case 1:
 
@@ -128,8 +131,23 @@ public class theTextAdventure {
                            }
                        } while (run == true);
 
-                } else
-                    System.out.println();
+                } if (roomView.roomHasItem(currentRoom) == true) {
+                    Item item = roomController.getItem(currentRoom);
+                    ItemView itemView = new ItemView(item);
+                    ItemController itemController = new ItemController(item, itemView);
+                    itemView.viewItem(item);
+                    
+
+                } else if (roomView.roomHasItem(currentRoom) == false){
+                    Item item = roomController.getItem(currentRoom);
+                    ItemView itemView = new ItemView(item);
+                    ItemController itemController = new ItemController(item, itemView);
+                    item = itemController.setRandomItem();
+                    if (item != null) {
+                        itemView.viewItem(item);
+                    }
+                }
+
             }
 
         } else if (choice == 2) {

@@ -1,5 +1,6 @@
 package project1E7.Controller;
 
+import project1E7.Model.Item;
 import project1E7.Model.Monster;
 import project1E7.Model.Room;
 import project1E7.View.RoomView;
@@ -33,5 +34,9 @@ public class RoomController {
         Monster monster = model.getMonster();
         return monster;
 
+    }
+    public Item getItem(Room room) {
+        Item item = model.getItem();
+        return item;
     }
 }
