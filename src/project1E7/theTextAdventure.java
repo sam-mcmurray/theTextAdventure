@@ -2,8 +2,14 @@ package project1E7;
 
 
 import project1E7.Controller.HeroController;
+import project1E7.Controller.MonsterController;
+import project1E7.Controller.RoomController;
 import project1E7.Model.Hero;
+import project1E7.Model.Monster;
+import project1E7.Model.Room;
 import project1E7.View.HeroView;
+import project1E7.View.MonsterView;
+import project1E7.View.RoomView;
 
 import java.util.*;
 
@@ -11,9 +17,9 @@ public class theTextAdventure {
     Scanner input = new Scanner(System.in);
     String userName;
 
-    public static Hero warrior = new Hero(100, 80, 30, "The Warrior...", "Warrior", 40);
-    public static Hero mage = new Hero(100, 60, 40, "The Mage...", "Mage", 50);
-    public static Hero thief = new Hero(100, 40, 60, "The Thief...", "Thief", 60);
+    public  Hero warrior = new Hero(100, 80, 30, "The Warrior...", "Warrior", 40);
+    public  Hero mage = new Hero(100, 60, 40, "The Mage...", "Mage", 50);
+    public  Hero thief = new Hero(100, 40, 60, "The Thief...", "Thief", 60);
 
 
     public static void main(String[] args) {
@@ -21,19 +27,95 @@ public class theTextAdventure {
         theTextAdventure myApp = new theTextAdventure();
         int choice = myApp.startMenu();
         if (choice == 1) {
+            Room [][] room = new Room[10][10];
             Hero theHero = (myApp.selectHero());
             HeroView heroView = new HeroView(theHero);
             heroView.printStats();
+            myApp.story();
             HeroController heroController = new HeroController(theHero, heroView);
-            
+            for (int i = 0;; i++) {
+                Room currentRoom = room[0][0];
+                Room previousRoom = room[0][0];
+                RoomView roomView = new RoomView(currentRoom);
+                RoomController roomController = new RoomController(currentRoom, roomView);
+                Monster monster = roomController.getMonster(currentRoom);
+                MonsterView monsterView = new MonsterView(monster);
+                MonsterController monsterController = new MonsterController(monster, monsterView);
+
+                if (roomController.roomHasMonster() == true) {
+
+                    boolean run = true;
+                    int encounterChoice = 0;
+                    System.out.println("Flavor text monster present");
+
+                   if (heroController.attackFirst(theHero, monster) == true) {
+
+                       do {
+                           switch (encounterChoice) {
+                               case 1:
+                                   if (heroController.attack(monsterController) == true) {
+                                       System.out.println("Flavor text hit");
+                                       monsterView.printStatus(monster);
+
+                                   } else
+                                       System.out.println("flavor text miss");
+                                   monsterView.printStatus(monster);
+
+                                   if (monsterController.attack(heroController) == true) {
+                                       System.out.println("flvaor text hit");
+                                       heroView.printStatus(theHero);
+
+                                   } else
+                                       System.out.println("flavor text miss");
+                                   heroView.printStatus(theHero);
+                                   break;
+                               case 2:
+                                    if (heroController.flee(theHero) == true){
+                                        currentRoom = previousRoom;
+                                        run = false;
+                                    } else
+                                        run = true;
+                                    break;
+                               case 3:
+                                    heroView.inventory(theHero);
+
+                           }
+                       } while (run == true) ;
+
+                   } else
+
+                       do {
+
+                           if (monsterController.attack(heroController) == true) {
+                               System.out.println("flvaor text hit");
+                               heroView.printStatus(theHero);
+
+                           } else
+                               System.out.println("flavor text miss");
+                           heroView.printStatus(theHero);
+
+                           if (heroController.attack(monsterController) == true) {
+                               System.out.println("Flavor text hit");
+                               monsterView.printStatus(monster);
+
+                           } else
+                               System.out.println("flavor text miss");
+                           monsterView.printStatus(monster);
+
+                       } while (run == true);
+
+                } else
+            }
+
         } else if (choice == 2) {
             System.out.println("Load Game");
+
         } else if (choice == 3) {
             System.out.println("View HighScore");
+
         } else if (choice == 4) {
             System.exit(0);
         }
-
 
     }
 
@@ -57,6 +139,7 @@ public class theTextAdventure {
 
             System.out.println("Please enter your choice");
             int userInput = input.nextInt();
+            input.nextLine();
             switch (userInput) {
                 case 1:
                     selected = heroViewWarrior.selectHero(warrior);
@@ -144,5 +227,8 @@ public class theTextAdventure {
 
         String temp = input.nextLine();
 
+    }
+    public void story() {
+        System.out.println("flavor text story or call from another method ");
     }
 }
