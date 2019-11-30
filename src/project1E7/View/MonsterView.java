@@ -9,7 +9,7 @@ public class MonsterView {
         this.model = model;
     }
 
-    public void PrintStatus(Monster monster) {
+    public void printStatus(Monster monster) {
         System.out.println("Enemy Type: " + model.getDescription());
         if (model.isAlive() == true) {
             System.out.println("Health: " + model.getHealth());

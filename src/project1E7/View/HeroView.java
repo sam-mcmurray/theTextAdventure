@@ -2,6 +2,8 @@ package project1E7.View;
 
 import project1E7.Controller.HeroController;
 import project1E7.Model.Hero;
+import project1E7.Model.Item;
+import project1E7.Model.Monster;
 import project1E7.Model.Room;
 
 import java.util.*;
@@ -49,5 +51,22 @@ public class HeroView {
             return false;
         }
         return true;
+    }
+    public void printStatus(Hero hero) {
+        if (model.isAlive() == true) {
+            System.out.println("Health: " + model.getHealth());
+            System.out.println("Endurance: " + model.getEndurance());
+        }
+        else {
+            System.out.println("You have been defeated...");
+        }
+    }
+    public void inventory(Hero hero) {
+        ArrayList <Item> items = hero.getBackPack();
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println("[" + (i + 1) + "]" + items.get(i));
+        }
+
     }
 }

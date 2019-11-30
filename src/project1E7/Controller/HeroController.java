@@ -2,12 +2,16 @@ package project1E7.Controller;
 
 
 import project1E7.Model.Hero;
+import project1E7.Model.Item;
 import project1E7.Model.Monster;
 import project1E7.Model.Room;
 import project1E7.View.HeroView;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+
+import static java.lang.System.out;
 
 public class HeroController {
     Hero model;
@@ -58,23 +62,23 @@ public class HeroController {
         String direction;
         boolean run = true;
         do {
-            System.out.println("Choose your direction ");
+            out.println("Choose your direction ");
             direction = input.nextLine();
             input.nextLine();
             if (direction.equalsIgnoreCase("l")) {
-                System.out.println(room[+0][+1]);
+                out.println(room[+0][+1]);
                 run = false;
                 return room;
             } else if (direction.equalsIgnoreCase("r")) {
-                System.out.println(room[+0][-1]);
+                out.println(room[+0][-1]);
                 run = false;
                 return room;
             } else if (direction.equalsIgnoreCase("s")) {
-                System.out.println(room[+1][+0]);
+                out.println(room[+1][+0]);
                 run = false;
                 return room;
             } else if (direction.equalsIgnoreCase("w")) {
-                System.out.println(room[-1][0]);
+                out.println(room[-1][0]);
                 run = false;
                 return room;
             }
@@ -87,4 +91,14 @@ public class HeroController {
         } else
             return true;
     }
+    public boolean flee(Hero hero) {
+        Random rand = new Random();
+
+        int chanceToFlee = rand.nextInt(101);
+        if (chanceToFlee <= 50) {
+            return false;
+        } else
+            return true;
+    }
+
 }
