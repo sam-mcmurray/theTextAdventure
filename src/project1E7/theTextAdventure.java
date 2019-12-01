@@ -26,7 +26,7 @@ public class theTextAdventure {
         Scanner input = new Scanner(System.in);
         theTextAdventure myApp = new theTextAdventure();
         int choice = myApp.startMenu();
-        
+
         Room [][] room = new Room[10][10];
 
 
@@ -42,13 +42,13 @@ public class theTextAdventure {
                 Room previousRoom = room[0][0];
                 RoomView roomView = new RoomView(currentRoom);
                 RoomController roomController = new RoomController(currentRoom, roomView);
-                Monster monster = roomController.getMonster(currentRoom);
-                MonsterView monsterView = new MonsterView(monster);
-                MonsterController monsterController = new MonsterController(monster, monsterView);
+
 
                 boolean fleeRun2 = true;
                 if (roomController.roomHasMonster() == true) {
-
+                    Monster monster = roomController.getMonster(currentRoom);
+                    MonsterView monsterView = new MonsterView(monster);
+                    MonsterController monsterController = new MonsterController(monster, monsterView);
                     boolean run = true;
                     int encounterChoice = 0;
                     System.out.println("Flavor text monster present");
@@ -86,7 +86,7 @@ public class theTextAdventure {
                                         run = true;
                                     break;
                                case 3:
-                                    heroView.inventory(theHero);
+                                    heroView.inventory(theHero.getBackPack());
                                     break;
                                default:
                                    System.out.println("Please enter a proper value.");
@@ -129,7 +129,7 @@ public class theTextAdventure {
                                        run = true;
                                    break;
                                case 3:
-                                   heroView.inventory(theHero);
+                                   heroView.inventory(theHero.getBackPack());
                                    break;
                                default:
                                    System.out.println("Please enter a proper value.");
@@ -144,18 +144,30 @@ public class theTextAdventure {
                         ItemView itemView = new ItemView(item);
                         ItemController itemController = new ItemController(item, itemView);
                         fleeRun2 = false;
-                        itemView.viewItem(item);
 
-
+                        do {
+                            itemView.viewItem(item);
+                            System.out.println("Would you like to use " + item + "or save in your satchel?" +
+                                    "\n 1)Use " + item + "\n 2) Save " + item + " in satchel");
+                            switch (chooseItem) {
+                                case 1:
+                                    heroController.useItemExternal(item);
+                                    break;
+                                case 2:
+                                    break;
+                                default:
+                                    System.out.println("Please enter a proper value.");
+                            }
+                        } while (chooseItem >= 3 || chooseItem <= 0);
 
 
                     } else if (roomView.roomHasItem(currentRoom) == false) {
-                        Item item = roomController.getItem(currentRoom);
-                        ItemView itemView = new ItemView(item);
-                        ItemController itemController = new ItemController(item, itemView);
-                        item = itemController.setRandomItem();
+
+                        Item item = roomController.setRandomItem();
                         fleeRun2 = false;
                         if (item != null) {
+                            ItemView itemView = new ItemView(item);
+                            ItemController itemController = new ItemController(item, itemView);
                             do {
                                 itemView.viewItem(item);
                                 System.out.println("Would you like to use " + item + "or save in your satchel?" +

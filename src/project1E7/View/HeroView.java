@@ -63,8 +63,8 @@ public class HeroView {
             System.out.println("You have been defeated...");
         }
     }
-    public void inventory(Hero hero) {
-        ArrayList <Item> items = hero.getBackPack();
+    public void inventory(ArrayList<Item> items) {
+         items = model.getBackPack();
 
         for (int i = 0; i < 5; i++) {
             System.out.println("[" + (i + 1) + "]" + items.get(i));
