@@ -24,7 +24,7 @@ public class RoomController {
         int chanceForMonster = rand.nextInt(100);
 
         if (model.isMonster() == false) {
-            if (chanceForMonster > 50) {
+            if (chanceForMonster >= 50) {
                 return false;
             } else
                 model.setMonster(true);
