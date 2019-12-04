@@ -1,14 +1,17 @@
-package src.project1E7.Controller;
+package project1E7.Controller;
 
-import src.project1E7.Model.Monster;
+import project1E7.Model.Monster;
+import project1E7.View.MonsterView;
 
 import java.util.Random;
 
 public class MonsterController {
     Monster model;
+    MonsterView view;
 
-    public MonsterController(Monster model) {
+    public MonsterController(Monster model, MonsterView view) {
         this.model = model;
+        this.view = view;
     }
 
     public void takeDamage(int incDamage) {

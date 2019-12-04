@@ -1,4 +1,4 @@
-package src.project1E7.Model;
+package project1E7.Model;
 
 public class Monster extends Character {
     private Item item;

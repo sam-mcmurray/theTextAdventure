@@ -1,6 +1,9 @@
-package src.project1E7.View.;
+package project1E7.View;
+
+import project1E7.Model.Hero;
 
 public class FlavorTextView {
+
 
     private String introFlavorText;
 
@@ -50,7 +53,7 @@ public class FlavorTextView {
         introFlavorText = "Your head aches as you awake from your fall.  You look up to see where you fell from and try to remember exactly what happened. rappelling down the ruins " +
                 "was going well until you felt your rope go slack. Exploring decrepit ruins of ancient civilizations is dangerous work but it certainly pays well if you can find " +
                 "some treasure. Looking at the scattering of your adventuring items beside you, you start start to gather your things; a backpack capable of holding an assortment of " +
-                "items, a keychain for keeping any keys you find handy, and of course the most important tool in your arsenal: your " + hero.getWeapon + ". As start to gather what is " +
+                "items, a keychain for keeping any keys you find handy, and of course the most important tool in your arsenal: your /*.getWeapon*/ . As start to gather what is " +
                 "left of your rope, you look at the end of it and realize it didn't snap, rather, it was a clean cut. You are not alone! Something wants to keep you here and you won't be " +
                 "able to climb back the way you came. ahead of you are three doors. One to your North, East, and West. It looks like you'll have to find another way out. It sounds as if " +
                 "there is movement in the other rooms but it's impossible to tell which. It's time to make a choice. Which direction should you go?";
@@ -65,8 +68,8 @@ public class FlavorTextView {
     }
 
     public String getWeapon () {
-        if (hero.getDescription)
-        return ;
+        //if (Hero.getDescription)
+        return weapon;
     }
 
     public String getRoomFlavorText1() {
