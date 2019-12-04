@@ -1,17 +1,16 @@
-package project1E7.View;
+package src.project1E7.View;
 
-
+<<<<<<< HEAD
+import src.project1E7.Model.Hero;
+=======
 import project1E7.Controller.HeroController;
 import project1E7.Model.Hero;
-import project1E7.Model.Item;
-import project1E7.Model.Monster;
 import project1E7.Model.Room;
 
 import java.util.*;
-
+>>>>>>> 43eb596d375b5da72f855b2146faf9a919e5464a
 
 public class HeroView {
-
     Hero model;
     Scanner input = new Scanner(System.in);
 
@@ -35,18 +34,17 @@ public class HeroView {
         System.out.println("Name: " + model.getName());
         System.out.println("Character Description: " + model.getDescription());
 
-/*        for (int i = 0; i < stats.length; i++) {
+        for (int i = 0; i < stats.length; i++) {
             System.out.print(tableDescrip[i]);
             for (int j = 0; j < stats[i]; j++) {
                 System.out.print("*");
             }
             System.out.printf("%n");
 
-        }*/
+        }
     }
 
     public boolean selectHero(Hero hero) {
-
 
         System.out.println("Do you want to select the" + hero + " to be your hero? " + "Yes/No");
         String choice = input.next();
@@ -55,25 +53,5 @@ public class HeroView {
             return false;
         }
         return true;
-    }
-    public void printStatus(Hero hero) {
-        if (model.isAlive() == true) {
-            System.out.println("Health: " + model.getHealth());
-            System.out.println("Endurance: " + model.getEndurance());
-        }
-        else {
-            System.out.println("You have been defeated...");
-        }
-    }
-    public void inventory(ArrayList<Item> items) {
-         items = model.getBackPack();
-
-        for (int i = 0; i < 5; i++) {
-            System.out.println("[" + (i + 1) + "]" + items.get(i));
-        }
-
-    }
-    public void printClassDescription () {
-        
     }
 }
