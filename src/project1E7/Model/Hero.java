@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Hero extends Character {
     private int endurance;
-    private Key[] keyRing;
+    private ArrayList<Key> keyRing;
     private ArrayList<Item> backPack;
     private int lives;
     private int currentTreasure;
@@ -18,11 +18,11 @@ public class Hero extends Character {
 
     }
 
-    public Key[] getKeyRing() {
+    public ArrayList<Key> getKeyRing() {
         return keyRing;
     }
 
-    public void setKeyRing(Key[] keyRing) {
+    public void setKeyRing(ArrayList<Key> keyRing) {
         this.keyRing = keyRing;
     }
 

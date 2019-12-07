@@ -18,6 +18,7 @@ public class HeroController {
     private Heart heart;
     private Treasure treasure;
 
+
     public HeroController(Hero model, HeroView view) {
         this.model = model;
         this.view = view;
@@ -106,5 +107,11 @@ public class HeroController {
         } else if (item == treasure) {
             model.setCurrentTreasure(treasure.getAmount() + model.getCurrentTreasure());
         }
+    }
+    public void addTreasure(Item item) {
+        model.setCurrentTreasure(treasure.getAmount() + model.getCurrentTreasure());
+    }
+    public void addKey(Item item) {
+
     }
 }
