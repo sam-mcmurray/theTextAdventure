@@ -169,13 +169,14 @@ public class theTextAdventure {
                         if (item != null) {
                             ItemView itemView = new ItemView(item);
                             ItemController itemController = new ItemController(item, itemView);
-                            if (item != myApp.treasure || item != myApp.key) {
+
                                 do {
                                     itemView.chooseWhatToDoWithItem(item);
                                     chooseItem = input.nextInt();
                                     switch (chooseItem) {
                                         case 1:
                                             heroController.useItemExternal(item);
+                                            run = false;
                                             break;
                                         case 2:
                                             break;
@@ -183,16 +184,16 @@ public class theTextAdventure {
                                             System.out.println("Please enter a proper value.");
                                     }
 
-                                } while (chooseItem >= 3 || chooseItem <= 0);
-                            } else if (item == myApp.treasure) {
-                                heroController.addTreasure(item);
-                                heroView.currentTreasure();
+                                } while ((chooseItem >= 3 || chooseItem <= 0) && run == true);
+                                run = false;
                             }
+                        run = false;
                         }
-                    }
                     currentRoom = heroController.moveHero(myApp.room,currentRoom);
-                }
-            } while (theHero.isAlive() == true);
+                    run = false;
+                    }
+
+            } while (theHero.isAlive() == true || theHero.getLives() > 0);
 
         } else if (choice == 2) {
             System.out.println("Load Game");

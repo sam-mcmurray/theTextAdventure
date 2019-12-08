@@ -64,21 +64,25 @@ public class HeroController {
                         input.nextLine();
                         if (direction.equalsIgnoreCase("a")) {
                             room[i][j] = room[i][j + 1];
+                            System.out.println(room[i][j]);
                             currentRoom = room[i][j];
                             run = false;
                             return currentRoom;
                         } else if (direction.equalsIgnoreCase("d")) {
                             room[i][j] = room[i][j - 1];
+                            System.out.println(room[i][j]);
                             currentRoom = room[i][j];
                             run = false;
                             return currentRoom;
                         } else if (direction.equalsIgnoreCase("s")) {
                             room[i][j] = room[i + 1][j];
+                            System.out.println(room[i][j]);
                             currentRoom = room[i][j];
                             run = false;
                             return currentRoom;
                         } else if (direction.equalsIgnoreCase("w")) {
                             room[i][j] = room[i - 1][j];
+                            System.out.println(room[i][j]);
                             currentRoom = room[i][j];
                             run = false;
                             return currentRoom;
