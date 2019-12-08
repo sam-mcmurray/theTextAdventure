@@ -32,13 +32,12 @@ public class HeroController {
 
         Random rand = new Random();
 
-        int chanceToHit = rand.nextInt(101);
-        if (chanceToHit <= 50) {
+        int chanceToHit = rand.nextInt(2);
+        if (chanceToHit == 0) {
             return false;
         }
 
         model.setEndurance(model.getEndurance() - 10);
-
         monster.takeDamage(model.getStrength());
 
         return true;
@@ -111,7 +110,7 @@ public class HeroController {
     public void addTreasure(Item item) {
         model.setCurrentTreasure(treasure.getAmount() + model.getCurrentTreasure());
     }
-    public void addKey(Item item) {
+    public void addKey(Key key) {
 
     }
 }

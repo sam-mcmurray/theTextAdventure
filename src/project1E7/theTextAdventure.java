@@ -35,7 +35,7 @@ public class theTextAdventure {
             heroView.heroStory();
             Room currentRoom = myApp.room[8][5];
 
-            do { //this will become a do while when the leaving room is chosen while(currentRoom != leavingRoom)
+            do {
                 boolean fleeRun2 = true;
                 Room roomModel = currentRoom;
                 RoomView roomView = new RoomView(roomModel);
@@ -259,13 +259,15 @@ public class theTextAdventure {
     }
 
     public int startMenu() {
-        System.out.println("1)Start Game");
-        System.out.println("2)Load Game");
-        System.out.println("3)View High Score");
-        System.out.println("4)Quit");
+
 
         int userInput = input.nextInt();
         do {
+            System.out.println("1)Start Game");
+            System.out.println("2)Load Game");
+            System.out.println("3)View High Score");
+            System.out.println("4)Quit");
+
             input.nextLine();
             String correct;
             switch (userInput) {

@@ -16,7 +16,7 @@ public class MonsterController {
 
     public void takeDamage(int incDamage) {
 
-        if (incDamage > model.getHealth()) {
+        if (incDamage >= model.getHealth()) {
             model.setAlive(false);
         } else
         model.setHealth(model.getHealth() - incDamage);
