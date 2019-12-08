@@ -32,9 +32,17 @@ public class theTextAdventure {
     public Heart heart = new Heart("Heart");
     public HealthPotion healthPotion = new HealthPotion("Health portion");
     public Random rand = new Random();
-    public Monster monster1 = new Monster(50, 40, 15, "Monster 1", "The Monster", treasure, true, 3);
-    public Monster monster2 = new Monster(40, 30, 10, "Monster 2", "The Monster", coffee, true, 2);
-    public Monster monster3 = new Monster(30, 20, 8, "Monster 3", "The Monster", healthPotion, true, 1);
+    public Key woodenKey = new Key("Wooden key");
+    public Key stoneKey = new Key("Stone key");
+    public Key silverKey = new Key("Silver key");
+    public Key goldenKey = new Key("Golden key");
+    public Monster boss = new Monster(50, 40, 15, "The boss", "The Boss", treasure, true, 4);
+    public Monster owlBear = new Monster(40, 30, 6, "The owl bear", "The Owl Bear", healthPotion, true, 3);
+    public Monster skeleton = new Monster(30, 20, 8, "The owl bear", "The Owl Bear", healthPotion, true, 2);
+    public Monster bat = new Monster(20, 10, 10, "The Bat", "The Bat", coffee, true, 1);
+    public Door woodenDoor = new Door(true, "wooden Key", "The door is ancient and maybe won't open ");
+    public Door stoneDoor = new Door(true, "stone key", "you need need to be careful when you use the key inside this door ,might be broken easily");
+    public Door goldenDoor = new Door(true, "golden key", "The golden door takes you out ! you are almost free");
 
 
     public static void main(String[] args) {
@@ -213,7 +221,7 @@ public class theTextAdventure {
                         "There are no current users, would you like to create a new user? (yes/no)");
                 String answer = input.nextLine();
                 if (answer.equalsIgnoreCase("yes")) {
-                    if(!myApp.createUser()){
+                    if (!myApp.createUser()) {
 
                         myApp.startMenu();
                     }
@@ -332,18 +340,23 @@ public class theTextAdventure {
 
         Room wall = new Room("wall", null, false, false, null, false);
         Room start = new Room("Start", null, false, false, null, false);
-        Room room1 = new Room("Room description", null, false, true, null, true);
-        Room room2 = new Room("Room description", treasure, true, true, monster1, true);
-        Room room3 = new Room("Room description", coffee, true, true, monster2, true);
-        Room room4 = new Room("Room description", healthPotion, true, true, monster3, true);
-        Room room5 = new Room("Room description", heart, false, true, null, true);
-        Room room6 = new Room("Room description", null, false, true, null, true);
-        Room room7 = new Room("Room description", null, false, true, null, true);
-        Room room8 = new Room("Room description", healthPotion, false, true, null, true);
-        Room room9 = new Room("Room description", null, false, true, null, true);
-        Room[] roomsNotEmpty = {room1, room2, room3, room4, room5, room6, room7, room8, room9};
+        Room exit = new Room("The Exit", null, false, true, null, false);
+        Room bossRoom = new Room("Boss room", goldenKey, true, true, boss, true);
+        Room batRoom = new Room("bat room", woodenKey, true, true, bat, true);
+        Room owlBrearRoom = new Room("owl bear room", silverKey, true, true, owlBear, true);
+        Room skeletonRoom = new Room("Skeleton room", stoneKey, true, true, skeleton, true);
+        Room room1 = new Room("Room description", healthPotion, false, true, null, true);
+        Room room2 = new Room("Room description", heart, false, true, null, true);
+        Room room3 = new Room("Room description", treasure, false, true, null, true);
+        Room room4 = new Room("Room description", coffee, false, true, null, true);
+        Room room5 = new Room("Room description", healthPotion, false, true, null, true);
+        Room[] roomsNotEmpty = {room1, room2, room3, room4, room5};
+        //Boss warning
 
         // wall
+        room[8][5] = start;
+        room[0][4] = exit;
+        room[1][3] = bossRoom;
         room[0][0] = wall;
         room[0][1] = wall;
         room[0][2] = wall;
@@ -375,9 +388,11 @@ public class theTextAdventure {
         room[4][6] = wall;
         room[4][9] = wall;
         room[5][0] = wall;
+        room[5][8] = skeletonRoom;
         room[5][9] = wall;
         room[6][0] = wall;
         room[6][2] = wall;
+        room[6][3] = owlBrearRoom;
         room[6][4] = wall;
         room[6][5] = wall;
         room[6][7] = wall;
@@ -390,6 +405,7 @@ public class theTextAdventure {
         room[7][9] = wall;
         room[8][0] = wall;
         room[8][1] = wall;
+        room[8][8] = batRoom;
         room[8][9] = wall;
         room[9][0] = wall;
         room[9][1] = wall;
@@ -401,7 +417,6 @@ public class theTextAdventure {
         room[9][7] = wall;
         room[9][8] = wall;
         room[9][9] = wall;
-        room[8][5] = start;
         // random generate
        /* for (int row = 0; row < rooms.length; row++) {
             for (int col = 0; col < rooms[row].length; col++) {
@@ -420,7 +435,7 @@ public class theTextAdventure {
                 int x = rand.nextInt(10);
                 int y = rand.nextInt(10);
                 int z = rand.nextInt(9);
-                if (room[x][y] != wall & room[x][y] != start) {
+                if (room[x][y] != wall & room[x][y] != start & ! room[x][y].isHasMonster()) {
                     room[x][y] = roomsNotEmpty[z];
                 }
 
@@ -441,111 +456,116 @@ public class theTextAdventure {
         for (int i = 0; i < room.length; i++) {
             for (int j = 0; j < room[i].length; j++) {
                 if (room[i][j] == wall) {
-                    System.out.print("---------");
+                    System.out.print("wall");
                 } else if (room[i][j] == null) {
                     System.out.print("* Empty *");
                 } else if (room[i][j] == start) {
                     System.out.print("StartPoint");
-                } else System.out.print("Chance" + " * ");
+                } else if (room[i][j] == exit) {
+                    System.out.printf("Exit");
+                } else if (room[i][j].isHasMonster()) {
+                    System.out.print("Monster" + " * ");
+                }
+                    else System.out.printf("Chance");
+                }
             }
             System.out.println();
         }
-    }
 
-    public boolean printUsers(ArrayList<User> users) {
+        public boolean printUsers (ArrayList < User > users) {
 
-        if (users.size() == 0) {
-
-            System.out.printf("%n" +
-                    "There are no existing users%n" +
-                    "Returning to the start menu%n");
-
-            for (double a = 0; a < 10000000000000000000000000.0; )
-                a++;
-
-            return false;
-        } else
-            for (int i = 0; i < users.size(); i++) {
-
-                System.out.printf("%nUsername: %s%n" +
-                        "Highscore: %d%n", users.get(i).getUserName(), users.get(i).getHighScore());
-            }
-        return true;
-    }
-
-    public boolean createUser() {
-
-        System.out.println("You have selected to Create a New User is this correct? yes/no");
-        String answer = input.nextLine();
-        if (answer.equalsIgnoreCase("yes")) {
-
-            System.out.printf("Enter your new username:");
-            String temp = input.nextLine();
-            Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-            Matcher m = p.matcher(temp);
-            boolean b = m.find();
-
-            while (!isUpperCase(temp.charAt(0)) || temp.length() > 12 || b) {
-
-                if (!isUpperCase(temp.charAt(0))) {
-                    System.out.printf("%n" +
-                            "Invalid username! The username must have the first letter as a capital letter");
-                }
-
-                if (temp.length() > 12) {
-                    System.out.printf("%n" +
-                            "Invalid username! Your username must contain a maximum of 12 characters");
-                }
-
-                if (b) {
-                    System.out.printf("%n" +
-                            "Invalid username! Your username cannot contain a special character");
-                }
+            if (users.size() == 0) {
 
                 System.out.printf("%n" +
-                        "Please enter a valid user name, to quit enter 'no'%n");
+                        "There are no existing users%n" +
+                        "Returning to the start menu%n");
 
-                temp = input.nextLine();
+                for (double a = 0; a < 10000000000000000000000000.0; )
+                    a++;
 
-                if (answer.equalsIgnoreCase("no")) {
+                return false;
+            } else
+                for (int i = 0; i < users.size(); i++) {
 
-                    return false;
+                    System.out.printf("%nUsername: %s%n" +
+                            "Highscore: %d%n", users.get(i).getUserName(), users.get(i).getHighScore());
                 }
-            }
-
-            User user = new User(temp, 0);
-            users.add(user);
             return true;
+        }
 
-        } else if (answer.equalsIgnoreCase("no")) {
-            System.out.println("Returning to start menu");
+        public boolean createUser () {
+
+            System.out.println("You have selected to Create a New User is this correct? yes/no");
+            String answer = input.nextLine();
+            if (answer.equalsIgnoreCase("yes")) {
+
+                System.out.printf("Enter your new username:");
+                String temp = input.nextLine();
+                Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+                Matcher m = p.matcher(temp);
+                boolean b = m.find();
+
+                while (!isUpperCase(temp.charAt(0)) || temp.length() > 12 || b) {
+
+                    if (!isUpperCase(temp.charAt(0))) {
+                        System.out.printf("%n" +
+                                "Invalid username! The username must have the first letter as a capital letter");
+                    }
+
+                    if (temp.length() > 12) {
+                        System.out.printf("%n" +
+                                "Invalid username! Your username must contain a maximum of 12 characters");
+                    }
+
+                    if (b) {
+                        System.out.printf("%n" +
+                                "Invalid username! Your username cannot contain a special character");
+                    }
+
+                    System.out.printf("%n" +
+                            "Please enter a valid user name, to quit enter 'no'%n");
+
+                    temp = input.nextLine();
+
+                    if (answer.equalsIgnoreCase("no")) {
+
+                        return false;
+                    }
+                }
+
+                User user = new User(temp, 0);
+                users.add(user);
+                return true;
+
+            } else if (answer.equalsIgnoreCase("no")) {
+                System.out.println("Returning to start menu");
+                return false;
+            } else System.out.println("Invalid answer!");
             return false;
-        } else System.out.println("Invalid answer!");
-        return false;
 
-    }
+        }
 
-    public boolean save() {
+        public boolean save () {
 
-        System.out.printf("You have selected to Save Game. Is this correct Yes/No");
+            System.out.printf("You have selected to Save Game. Is this correct Yes/No");
 
-        String correct = input.nextLine();
-        if (correct.equalsIgnoreCase("yes")) {
-            System.out.println("Saving game, please do not turn off the system");
+            String correct = input.nextLine();
+            if (correct.equalsIgnoreCase("yes")) {
+                System.out.println("Saving game, please do not turn off the system");
 
-            try {
+                try {
 
-                String saveFile = input.nextLine();
-                String verify, putData;
-                File file = new File(saveFile);
-                file.createNewFile();
-                FileWriter writer = new FileWriter(file);
-                BufferedWriter bWriter = new BufferedWriter(writer);
-                bWriter.write((Integer.toString(users.get(users.size()).getHighScore())) + users.get(users.size()).getUserName());
-                bWriter.flush();
-                bWriter.close();
-                FileReader reader = new FileReader(file);
-                BufferedReader bReader = new BufferedReader(reader);
+                    String saveFile = input.nextLine();
+                    String verify, putData;
+                    File file = new File(saveFile);
+                    file.createNewFile();
+                    FileWriter writer = new FileWriter(file);
+                    BufferedWriter bWriter = new BufferedWriter(writer);
+                    bWriter.write((Integer.toString(users.get(users.size()).getHighScore())) + users.get(users.size()).getUserName());
+                    bWriter.flush();
+                    bWriter.close();
+                    FileReader reader = new FileReader(file);
+                    BufferedReader bReader = new BufferedReader(reader);
 
                     /*while ((verify = bReader.readLine()) != null) {
                         if (verify != null) {
@@ -555,20 +575,20 @@ public class theTextAdventure {
                     }
                     use this to edit an existing file for the highscore
                      */
-                bReader.close();
+                    bReader.close();
 
 
-            } catch (IOException e) {
-                e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            } else if (correct.equalsIgnoreCase("no")) {
+                System.out.println("Saving aborted");
+                return false;
             }
-
-        } else if (correct.equalsIgnoreCase("no")) {
-            System.out.println("Saving aborted");
-            return false;
+            return true;
         }
-        return true;
+
+
     }
-
-
-}
 
