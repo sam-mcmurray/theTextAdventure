@@ -371,7 +371,7 @@ public class theTextAdventure {
             Key stoneKey = new Key("Stone key");
             Key silverKey = new Key("Silver key");
             Key goldenKey = new Key("Golden key");
-            Monster boss = new Monster(50, 40, 15, "The boss", "The Boss", treasure, true, 4);
+            Monster theBoss = new Monster(50, 40, 15, "The boss", "The Boss", treasure, true, 4);
             Monster owlBear = new Monster(40, 30, 6, "The owl bear", "The Owl Bear", healthPotion, true, 3);
             Monster skeleton = new Monster(30, 20, 8, "The owl bear", "The Owl Bear", healthPotion, true, 2);
             Monster bat = new Monster(20, 10, 10, "The Bat", "The Bat", coffee, true, 1);
