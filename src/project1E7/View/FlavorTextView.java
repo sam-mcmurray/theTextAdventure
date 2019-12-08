@@ -3,8 +3,7 @@ package project1E7.View;
 import project1E7.Model.Hero;
 
 public class FlavorTextView {
-
-
+//this all should be where they make sense monster flavor text in monster view
     private String introFlavorText;
 
     private String helpText;

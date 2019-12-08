@@ -12,11 +12,6 @@ public class RoomView {
         this.model = model;
     }
 
-    public boolean roomHasItem(Room room) {
-        if (model.isHasItem() == true) {
-            return true;
-        } else
-            return false;
-    }
+
 
 }

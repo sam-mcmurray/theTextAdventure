@@ -8,38 +8,38 @@ import java.util.Random;
 public class RoomController {
     Room model;
     RoomView view;
-    private Treasure treasure;
-    private Coffee coffee;
-    private HealthPotion healthPotion;
-    private Heart heart;
+
+
 
     public RoomController(Room model, RoomView view) {
         this.model = model;
         this.view = view;
     }
 
+
     public boolean roomHasMonster() {
-        Random rand = new Random();
-
-        int chanceForMonster = rand.nextInt(100);
-
-        if (model.isMonster() == false) {
-            if (chanceForMonster >= 50) {
-                return false;
-            } else
-                model.setMonster(true);
-                return true;
-        }
-        return true ;
-    }
-    public Monster getMonster(Room room) {
-        Monster monster = model.getMonster();
-        return monster;
+        if (model.isHasMonster() == true) {
+            return true;
+        } else
+            return false;
 
     }
-    public Item getItem(Room room) {
+    public Monster getMonster() {
+        return model.getMonster();
+
+
+    }
+    public boolean roomHasItem() {
+        if (model.isHasItem() == true) {
+            return true;
+        } else
+            return false;
+    }
+
+    public Item getItem() {
         Item item = model.getItem();
         return item;
+
     }
     public Item setRandomItem() {
         Random rand = new Random();
@@ -50,6 +50,7 @@ public class RoomController {
 
         if (possibleItem <=50) {
             if(itemType <=74){
+                Treasure treasure = new Treasure("Gold Chest",1000);
                 if(treasureAmount <= 49) {
                     treasure.setAmount(1000);
                     return treasure;
@@ -68,13 +69,17 @@ public class RoomController {
                 }
 
             } else if (itemType >= 75 && itemType <= 84) {
+                Coffee coffee = new Coffee("Coffee");
                 return coffee;
             } else if (itemType >= 85 && itemType <= 94) {
+                HealthPotion healthPotion = new HealthPotion("Health potion");
                 return healthPotion;
             } else if (itemType >= 95) {
+                Heart heart = new Heart("Heart");
                 return heart;
             }
         }
         return null;
     }
+
 }

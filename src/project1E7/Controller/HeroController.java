@@ -18,6 +18,7 @@ public class HeroController {
     private Heart heart;
     private Treasure treasure;
 
+
     public HeroController(Hero model, HeroView view) {
         this.model = model;
         this.view = view;
@@ -31,13 +32,12 @@ public class HeroController {
 
         Random rand = new Random();
 
-        int chanceToHit = rand.nextInt(101);
-        if (chanceToHit <= 50) {
+        int chanceToHit = rand.nextInt(2);
+        if (chanceToHit == 0) {
             return false;
         }
 
         model.setEndurance(model.getEndurance() - 10);
-
         monster.takeDamage(model.getStrength());
 
         return true;
@@ -106,5 +106,11 @@ public class HeroController {
         } else if (item == treasure) {
             model.setCurrentTreasure(treasure.getAmount() + model.getCurrentTreasure());
         }
+    }
+    public void addTreasure(Item item) {
+        model.setCurrentTreasure(treasure.getAmount() + model.getCurrentTreasure());
+    }
+    public void addKey(Key key) {
+
     }
 }
