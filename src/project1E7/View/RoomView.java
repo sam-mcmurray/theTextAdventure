@@ -12,6 +12,9 @@ public class RoomView {
         this.model = model;
     }
 
+    public void flavorTextRoom(){
+        System.out.println("flavor text room");
+    }
 
 
 }

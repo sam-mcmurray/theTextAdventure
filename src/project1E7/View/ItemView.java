@@ -29,4 +29,8 @@ public class ItemView {
        }
        return null;
     }
+    public void chooseWhatToDoWithItem(Item item){
+        System.out.println("Would you like to use " + item.getName() + " or save in your satchel?" +
+                "\n 1)Use " + item.getName() + "\n 2)Save " + item.getName() + " in satchel");
+    }
 }

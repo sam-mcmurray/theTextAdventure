@@ -51,32 +51,42 @@ public class HeroController {
         model.setHealth(model.getHealth() - incDamage);
     }
 
-    public Room[][] moveHero(Room[][] room ) {
+    public Room moveHero(Room[][] room, Room currentRoom ) {
         Scanner input = new Scanner(System.in);
         String direction;
         boolean run = true;
-        do {
-            System.out.println("Choose your direction ");
-            direction = input.nextLine();
-            input.nextLine();
-            if (direction.equalsIgnoreCase("l")) {
-                System.out.println(room[+0][+1]);
-                run = false;
-                return room;
-            } else if (direction.equalsIgnoreCase("r")) {
-                System.out.println(room[+0][-1]);
-                run = false;
-                return room;
-            } else if (direction.equalsIgnoreCase("s")) {
-                System.out.println(room[+1][+0]);
-                run = false;
-                return room;
-            } else if (direction.equalsIgnoreCase("w")) {
-                System.out.println(room[-1][0]);
-                run = false;
-                return room;
+        for (int i = 0; i < room.length; i++) {
+            for (int j = 0; j <room.length ; j++) {
+                if (currentRoom == room[i][j]) {
+                    do {
+                        System.out.println("Choose your direction ");
+                        direction = input.nextLine();
+                        input.nextLine();
+                        if (direction.equalsIgnoreCase("a")) {
+                            room[i][j] = room[i][j + 1];
+                            currentRoom = room[i][j];
+                            run = false;
+                            return currentRoom;
+                        } else if (direction.equalsIgnoreCase("d")) {
+                            room[i][j] = room[i][j - 1];
+                            currentRoom = room[i][j];
+                            run = false;
+                            return currentRoom;
+                        } else if (direction.equalsIgnoreCase("s")) {
+                            room[i][j] = room[i + 1][j];
+                            currentRoom = room[i][j];
+                            run = false;
+                            return currentRoom;
+                        } else if (direction.equalsIgnoreCase("w")) {
+                            room[i][j] = room[i - 1][j];
+                            currentRoom = room[i][j];
+                            run = false;
+                            return currentRoom;
+                        }
+                    }  while (run == true);
+                }
             }
-        }  while (run == true);
+        }
         return null;
     }
     public boolean attackFirst(MonsterController monster) {

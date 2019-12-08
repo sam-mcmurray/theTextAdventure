@@ -3,6 +3,7 @@ package project1E7.View;
 
 import project1E7.Model.Hero;
 import project1E7.Model.Item;
+import project1E7.Model.Monster;
 
 import java.util.*;
 
@@ -87,5 +88,11 @@ public class HeroView {
                     "able to climb back the way you came. ahead of you are three doors. One to your North, East, and West. It looks like you'll have to find another way out. It sounds as if\n" +
                     "there is movement in the other rooms but it's impossible to tell which. It's time to make a choice. Which direction should you go?");
 
+        }
+        public void hitMonsterFlavorText(Monster monster) {
+            System.out.println("flavor text hit monster");
+        }
+        public void missMonsterFlavorText(Monster monster) {
+            System.out.println("Flavor text missed monster");
         }
     }

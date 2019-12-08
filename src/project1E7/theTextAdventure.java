@@ -31,7 +31,8 @@ public class theTextAdventure {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         theTextAdventure myApp = new theTextAdventure();
-        int choice = myApp.startMenu();
+        int choice;
+        choice = myApp.startMenu();
 
         if (choice == 1) {
             Random rand = new Random();
@@ -42,21 +43,20 @@ public class theTextAdventure {
             heroView.printStats();
             heroView.heroStory();
             Room currentRoom = myApp.room[8][5];
-
             do {
-                boolean fleeRun2 = true;
+                boolean run = true;
                 Room roomModel = currentRoom;
                 RoomView roomView = new RoomView(roomModel);
                 RoomController roomController = new RoomController(roomModel, roomView);
-
+                roomView.flavorTextRoom();
                 if (roomController.roomHasMonster()) {
                     Monster monsterModel = roomController.getMonster();
                     MonsterView monsterView = new MonsterView(monsterModel);
                     MonsterController monsterController = new MonsterController(monsterModel, monsterView);
 
-                    boolean run = true;
+
                     int encounterChoice = 0;
-                    System.out.println("Flavor text monster present");
+                    monsterView.flavorTextMonster();
 
                     if (heroController.attackFirst(monsterController) == true) {
 
@@ -68,23 +68,22 @@ public class theTextAdventure {
                                 case 1:
                                     if (monsterModel.isAlive() == true && theHero.isAlive() == true) {
                                         if (heroController.attack(monsterController) == true) {
-                                            System.out.println("Flavor text hit");
+                                            heroView.hitMonsterFlavorText(monsterModel);
                                             monsterView.printStatus(monsterModel);
                                         } else
-                                            System.out.println("flavor text miss");
+                                            heroView.missMonsterFlavorText(monsterModel);
                                         monsterView.printStatus(monsterModel);
                                     } else if (monsterController.attack(heroController) == true) {
-                                        System.out.println("flavor text hit");
+                                        monsterView.monsterHitFlavorText(theHero);
                                         heroView.printStatus(theHero);
 
                                     } else
-                                        System.out.println("flavor text miss");
-                                    heroView.printStatus(theHero);
+                                        monsterView.monsterMissFlavorText(theHero);
+                                        heroView.printStatus(theHero);
                                     break;
                                 case 2:
                                     if (heroController.flee(theHero) == true) {
                                         run = false;
-                                        fleeRun2 = false;
                                     } else
                                         run = true;
                                     break;
@@ -101,12 +100,12 @@ public class theTextAdventure {
                         do {
 
                             if (monsterController.attack(heroController) == true) {
-                                System.out.println("flavor text hit");
+                                monsterView.monsterHitFlavorText(theHero);
                                 heroView.printStatus(theHero);
                                 monsterView.encounterMenu();
                                 encounterChoice = input.nextInt();
                             } else
-                                System.out.println("flavor text miss");
+                                monsterView.monsterMissFlavorText(theHero);
                             heroView.printStatus(theHero);
                             monsterView.encounterMenu();
                             encounterChoice = input.nextInt();
@@ -115,19 +114,18 @@ public class theTextAdventure {
                                 case 1:
 
                                     if (heroController.attack(monsterController) == true) {
-                                        System.out.println("Flavor text hit");
+                                        heroView.hitMonsterFlavorText(monsterModel);
                                         monsterView.printStatus(monsterModel);
 
 
                                     } else
-                                        System.out.println("flavor text miss");
+                                        heroView.missMonsterFlavorText(monsterModel);
                                     monsterView.printStatus(monsterModel);
                                     break;
                                 case 2:
                                     if (heroController.flee(theHero) == true) {
 
                                         run = false;
-                                        fleeRun2 = false;
                                     } else
                                         run = true;
                                     break;
@@ -141,18 +139,17 @@ public class theTextAdventure {
 
                 }
                 int chooseItem = 0;
-                while (theHero.isAlive() == true && fleeRun2 == true) {
+                while (theHero.isAlive() == true && run == true) {
                     if (roomController.roomHasItem() == true) {
                         Item item = roomController.getItem();
                         ItemView itemView = new ItemView(item);
                         ItemController itemController = new ItemController(item, itemView);
-                        fleeRun2 = false;
+
 
                         do {
                             itemView.viewItem(item);
                             if (itemController.checkUseItem(item) == true) {
-                                System.out.println("Would you like to use " + item + "or save in your satchel?" +
-                                        "\n 1)Use " + item + "\n 2) Save " + item + " in satchel");
+                                itemView.chooseWhatToDoWithItem(item);
                                 switch (chooseItem) {
                                     case 1:
                                         heroController.useItemExternal(item);
@@ -169,14 +166,12 @@ public class theTextAdventure {
                     } else if (roomController.roomHasItem() == false) {
 
                         Item item = roomController.setRandomItem();
-                        fleeRun2 = false;
                         if (item != null) {
                             ItemView itemView = new ItemView(item);
                             ItemController itemController = new ItemController(item, itemView);
                             if (item != myApp.treasure || item != myApp.key) {
                                 do {
-                                    System.out.println("Would you like to use " + item.getName() + "or save in your satchel?" +
-                                            "\n 1)Use " + item.getName() + "\n 2)Save " + item.getName() + " in satchel");
+                                    itemView.chooseWhatToDoWithItem(item);
                                     chooseItem = input.nextInt();
                                     switch (chooseItem) {
                                         case 1:
@@ -195,6 +190,7 @@ public class theTextAdventure {
                             }
                         }
                     }
+                    currentRoom = heroController.moveHero(myApp.room,currentRoom);
                 }
             } while (theHero.isAlive() == true);
 
@@ -279,14 +275,14 @@ public class theTextAdventure {
 
     public int startMenu() {
 
+        int userInput;
 
-        int userInput = input.nextInt();
         do {
             System.out.println("1)Start Game");
             System.out.println("2)Load Game");
             System.out.println("3)View High Score");
             System.out.println("4)Quit");
-
+            userInput = input.nextInt();
             input.nextLine();
             String correct;
             switch (userInput) {
@@ -394,7 +390,7 @@ public class theTextAdventure {
                         RoomController roomController = new RoomController(roomModel, roomView);
 
                     } else if (i == 1 && j == 3) {
-                        Room roomModel = new Room("Room Description", treasure, true, false, boss, true);
+                        Room roomModel = new Room("Room Description", treasure, true, false, theBoss, true);
                         room[i][j] = roomModel;
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);

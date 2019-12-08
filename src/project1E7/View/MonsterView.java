@@ -1,5 +1,6 @@
 package project1E7.View;
 
+import project1E7.Model.Hero;
 import project1E7.Model.Monster;
 
 public class MonsterView {
@@ -25,4 +26,14 @@ public class MonsterView {
                 "To flee enter '2' %n" +
                 "To use one of your item enter '3'%n");
     }
+    public void flavorTextMonster(){
+        System.out.println("flavor text monster present");
+    }
+    public void monsterHitFlavorText(Hero theHero) {
+        System.out.println("monster hit flavor text");
+    }
+    public void monsterMissFlavorText(Hero theHero) {
+        System.out.println("Monster miss flavor text");
+    }
+
 }
