@@ -61,25 +61,27 @@ public class theTextAdventure {
                     if (heroController.attackFirst(monsterController) == true) {
 
                         do {
-                            monsterView.encounterMenu();
-                            encounterChoice = input.nextInt();
+                            encounterChoice = monsterView.encounterMenu();
+
                             switch (encounterChoice) {
 
                                 case 1:
-                                    if (monsterModel.isAlive() == true && theHero.isAlive() == true) {
-                                        if (heroController.attack(monsterController) == true) {
+                                    if (heroController.attack(monsterController) == true){
                                             heroView.hitMonsterFlavorText(monsterModel);
                                             monsterView.printStatus(monsterModel);
-                                        } else
-                                            heroView.missMonsterFlavorText(monsterModel);
-                                        monsterView.printStatus(monsterModel);
-                                    } else if (monsterController.attack(heroController) == true) {
-                                        monsterView.monsterHitFlavorText(theHero);
-                                        heroView.printStatus(theHero);
 
-                                    } else
-                                        monsterView.monsterMissFlavorText(theHero);
-                                        heroView.printStatus(theHero);
+                                    } else {
+                                        heroView.missMonsterFlavorText(monsterModel);
+                                        monsterView.printStatus(monsterModel);
+                                    }
+                                    if (monsterController.attack(heroController) == true && monsterModel.isAlive() == true) {
+                                                monsterView.monsterHitFlavorText(theHero);
+                                                heroView.printStatus(theHero);
+
+                                            } else
+                                                monsterView.monsterMissFlavorText(theHero);
+                                            heroView.printStatus(theHero);
+
                                     break;
                                 case 2:
                                     if (heroController.flee(theHero) == true) {
@@ -99,16 +101,16 @@ public class theTextAdventure {
 
                         do {
 
-                            if (monsterController.attack(heroController) == true) {
+                            if (monsterController.attack(heroController) == true && monsterModel.isAlive() == true) {
                                 monsterView.monsterHitFlavorText(theHero);
                                 heroView.printStatus(theHero);
-                                monsterView.encounterMenu();
-                                encounterChoice = input.nextInt();
+                                encounterChoice = monsterView.encounterMenu();
+
                             } else
                                 monsterView.monsterMissFlavorText(theHero);
                             heroView.printStatus(theHero);
-                            monsterView.encounterMenu();
-                            encounterChoice = input.nextInt();
+                            encounterChoice = monsterView.encounterMenu();
+
                             switch (encounterChoice) {
 
                                 case 1:

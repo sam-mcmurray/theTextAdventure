@@ -3,7 +3,10 @@ package project1E7.View;
 import project1E7.Model.Hero;
 import project1E7.Model.Monster;
 
+import java.util.Scanner;
+
 public class MonsterView {
+    Scanner input = new Scanner(System.in);
     Monster model;
 
     public MonsterView(Monster model) {
@@ -19,12 +22,14 @@ public class MonsterView {
             System.out.println("The " + monster + "has been defeated at your hands...");
         }
     }
-    public void encounterMenu() {
-        System.out.printf("%nYou have encountered a %s !%n", model.getDescription()  +
-                "What is your next move?%n" +
-                "To fight enter '1'%n" +
-                "To flee enter '2' %n" +
-                "To use one of your item enter '3'%n");
+    public int encounterMenu() {
+        System.out.printf("You have encountered a %s ! ", model.getDescription());
+        System.out.println("What is your next move?" );
+        System.out.println("1)Fight ");
+        System.out.println("2)Flee");
+        System.out.println("3)Use Item");
+        int choice = input.nextInt();
+        return choice;
     }
     public void flavorTextMonster(){
         System.out.println("flavor text monster present");
