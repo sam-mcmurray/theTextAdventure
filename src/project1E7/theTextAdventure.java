@@ -152,6 +152,7 @@ public class theTextAdventure {
                             itemView.viewItem(item);
                             if (itemController.checkUseItem(item) == true) {
                                 itemView.chooseWhatToDoWithItem(item);
+                                chooseItem = input.nextInt();
                                 switch (chooseItem) {
                                     case 1:
                                         heroController.useItemExternal(item);
