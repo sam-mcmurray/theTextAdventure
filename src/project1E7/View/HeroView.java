@@ -48,10 +48,23 @@ public class HeroView {
 
         System.out.println("Do you want to select the" + hero + " to be your hero? " + "Yes/No");
         String choice = input.next();
-        if (choice.equalsIgnoreCase("yes")) {
-            System.out.println(hero + " has been selected");
-            return false;
-        }
+        boolean valid=true;
+
+        //while (!valid) {
+            //try {
+                if (choice.equalsIgnoreCase("yes")) {
+                    System.out.println(hero + " has been selected");
+                    return false;
+                }
+            /*} catch (InputMismatchException e) {
+
+                System.out.printf("%n" +
+                        "Invalid answer%n");
+                valid=false;
+            }
+
+             */
+        //}
         return true;
     }
 

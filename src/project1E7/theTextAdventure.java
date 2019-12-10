@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 import static java.lang.Character.isUpperCase;
 
 public class theTextAdventure {
+
     Scanner input = new Scanner(System.in);
     String userName;
     static ArrayList<User> users;
@@ -66,21 +67,21 @@ public class theTextAdventure {
                             switch (encounterChoice) {
 
                                 case 1:
-                                    if (heroController.attack(monsterController) == true){
-                                            heroView.hitMonsterFlavorText(monsterModel);
-                                            monsterView.printStatus(monsterModel);
+                                    if (heroController.attack(monsterController) == true) {
+                                        heroView.hitMonsterFlavorText(monsterModel);
+                                        monsterView.printStatus(monsterModel);
 
                                     } else {
                                         heroView.missMonsterFlavorText(monsterModel);
                                         monsterView.printStatus(monsterModel);
                                     }
                                     if (monsterController.attack(heroController) == true && monsterModel.isAlive() == true) {
-                                                monsterView.monsterHitFlavorText(theHero);
-                                                heroView.printStatus(theHero);
+                                        monsterView.monsterHitFlavorText(theHero);
+                                        heroView.printStatus(theHero);
 
-                                            } else
-                                                monsterView.monsterMissFlavorText(theHero);
-                                            heroView.printStatus(theHero);
+                                    } else
+                                        monsterView.monsterMissFlavorText(theHero);
+                                    heroView.printStatus(theHero);
 
                                     break;
                                 case 2:
@@ -173,30 +174,31 @@ public class theTextAdventure {
                             ItemView itemView = new ItemView(item);
                             ItemController itemController = new ItemController(item, itemView);
 
-                                do {
-                                    itemView.chooseWhatToDoWithItem(item);
-                                    chooseItem = input.nextInt();
-                                    switch (chooseItem) {
-                                        case 1:
-                                            heroController.useItemExternal(item);
-                                            run = false;
-                                            break;
-                                        case 2:
-                                            break;
-                                        default:
-                                            System.out.println("Please enter a proper value.");
-                                    }
+                            do {
+                                itemView.chooseWhatToDoWithItem(item);
+                                chooseItem = input.nextInt();
+                                switch (chooseItem) {
+                                    case 1:
+                                        heroController.useItemExternal(item);
+                                        run = false;
+                                        break;
+                                    case 2:
+                                        break;
+                                    default:
+                                        System.out.println("Please enter a proper value.");
+                                }
 
-                                } while ((chooseItem >= 3 || chooseItem <= 0) && run == true);
-                                run = false;
-                            }
-                        run = false;
+                            } while ((chooseItem >= 3 || chooseItem <= 0) && run == true);
+                            run = false;
                         }
-                    currentRoom = heroController.moveHero(myApp.room,currentRoom);
-                    run = false;
+                        run = false;
                     }
+                    currentRoom = heroController.moveHero(myApp.room, currentRoom);
+                    run = false;
+                }
 
             } while (theHero.isAlive() == true || theHero.getLives() > 0);
+
 
         } else if (choice == 2) {
             System.out.println("Load Game");
@@ -237,97 +239,115 @@ public class theTextAdventure {
 
 
         boolean selected = true;
-        while (selected == true) {
+        while (selected) {
 
-            System.out.println("Select the hero: ");
-            System.out.println("1)Warrior");
-            System.out.println("2)Mage ");
-            System.out.println("3)Thief ");
+            try {
 
-            System.out.println("Please enter your choice");
-            int userInput = input.nextInt();
-            input.nextLine();
-            switch (userInput) {
-                case 1:
-                    selected = heroViewWarrior.selectHero(warrior);
-                    if (selected == false) {
-                        return warrior;
-                    } else
-                        selected = true;
-                    break;
-                case 2:
-                    selected = heroViewWarrior.selectHero(mage);
-                    if (selected == false) {
-                        return mage;
-                    } else
-                        selected = true;
-                    break;
-                case 3:
-                    selected = heroViewWarrior.selectHero(thief);
-                    if (selected == false) {
-                        return thief;
-                    } else
-                        selected = true;
-                    break;
-                default:
-                    System.out.println("Please enter a valid option...");
-                    break;
+                System.out.println("Select the hero: ");
+                System.out.println("1)Warrior");
+                System.out.println("2)Mage ");
+                System.out.println("3)Thief ");
+
+                System.out.println("Please enter your choice");
+
+                int userInput = input.nextInt();
+
+                switch (userInput) {
+                    case 1:
+                        selected = heroViewWarrior.selectHero(warrior);
+                        if (selected == false) {
+                            return warrior;
+                        } else
+                            selected = true;
+                        break;
+                    case 2:
+                        selected = heroViewWarrior.selectHero(mage);
+                        if (selected == false) {
+                            return mage;
+                        } else
+                            selected = true;
+                        break;
+                    case 3:
+                        selected = heroViewWarrior.selectHero(thief);
+                        if (selected == false) {
+                            return thief;
+                        } else
+                            selected = true;
+                        break;
+                    default:
+                        System.out.println("Please enter a valid option...");
+                        break;
+                }
             }
+            catch(InputMismatchException e){
+
+                    System.out.printf("%n" +
+                            "Invalid answer%n");
+
+                    selected = true;
+                }
+            }
+            return null;
         }
-        return null;
-    }
 
-    public int startMenu() {
+        public int startMenu () {
 
-        int userInput;
+            int userInput = 0;
 
-        do {
-            System.out.println("1)Start Game");
-            System.out.println("2)Load Game");
-            System.out.println("3)View High Score");
-            System.out.println("4)Quit");
-            userInput = input.nextInt();
-            input.nextLine();
-            String correct;
-            switch (userInput) {
-                case 1:
-                    System.out.println("You have selected Start Game is this correct? yes/no");
-                    correct = input.nextLine();
-                    if (correct.equalsIgnoreCase("yes")) {
-                        System.out.println("The game is Starting");
-                        return userInput;
-                    } else userInput = 0;
-                    break;
-                case 2:
-                    System.out.println("You have selected to Load a saved Game is this correct? yes/no");
-                    correct = input.nextLine();
-                    if (correct.equals("yes")) {
-                        System.out.println("The game is Starting");
-                        return userInput;
-                    } else userInput = 0;
-                    break;
-                case 3:
-                    System.out.println("You have selected to View HighScore is this correct? yes/no");
-                    correct = input.nextLine();
-                    if (correct.equals("yes")) {
-                        return userInput;
-                    } else userInput = 0;
-                    break;
-                case 4:
-                    System.out.println("You have selected Quit is this correct? yes/no");
-                    correct = input.nextLine();
-                    if (correct.equals("yes")) {
-                        System.out.println("Quiting Game");
-                        return userInput;
-                    } else userInput = 0;
-                    break;
-                default:
-                    System.out.println("Please enter a proper value. ");
-                    break;
-            }
-        } while (userInput >= 5 && userInput <= 0);
-        return userInput;
-    }
+            do {
+                System.out.println("1)Start Game");
+                System.out.println("2)Load Game");
+                System.out.println("3)View High Score");
+                System.out.println("4)Quit");
+                userInput = input.nextInt();
+                input.nextLine();
+                String correct;
+                switch (userInput) {
+                    case 1:
+                        System.out.println("You have selected Start Game is this correct? yes/no");
+                        correct = input.nextLine();
+                        if (correct.equalsIgnoreCase("yes")) {
+                            System.out.println("The game is Starting");
+                            return userInput;
+                        } else userInput = 0;
+                        break;
+                    case 2:
+                        System.out.println("You have selected to Load a saved Game is this correct? yes/no");
+                        correct = input.nextLine();
+                        if (correct.equals("yes")) {
+                            System.out.println("The game is Starting");
+                            return userInput;
+                        } else userInput = 0;
+                        break;
+                    case 3:
+                        System.out.println("You have selected to View HighScore is this correct? yes/no");
+                        correct = input.nextLine();
+                        if (correct.equals("yes")) {
+                            return userInput;
+                        } else userInput = 0;
+                        break;
+                    case 4:
+                        System.out.println("You have selected Quit is this correct? yes/no");
+                        correct = input.nextLine();
+                        if (correct.equals("yes")) {
+                            System.out.println("Quiting Game");
+                            return userInput;
+                        } else userInput = 0;
+                        break;
+                    default:
+                        System.out.println("Please enter a proper value. ");
+                        break;
+                }
+
+                if (userInput >= 5 || userInput <= 0) {
+
+                    System.out.println("Invalid answer");
+                }
+            } while (userInput >= 5 || userInput <= 0);
+
+
+            return userInput;
+        }
 
         public void setUserName () {
 
@@ -335,7 +355,6 @@ public class theTextAdventure {
         }
 
         public void createWorld () {
-
 
 
             // random generate
@@ -486,7 +505,8 @@ public class theTextAdventure {
             }
 
         }
-//
+
+        //
 //
 //                if (rooms[i][j] != null) {
 //                    System.out.print("Full" + "*");
@@ -617,7 +637,7 @@ public class theTextAdventure {
                             bWriter.write(putData);
                         }
                     }
-                   // use this to edit an existing file for the highscore
+                    // use this to edit an existing file for the highscore
 
                     bReader.close();
 
@@ -633,4 +653,4 @@ public class theTextAdventure {
             return true;
         }
 
-}
+    }
