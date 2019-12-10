@@ -16,7 +16,7 @@ public class ItemController {
         this.view = view;
     }
     public boolean checkUseItem(Item item) {
-     if (item == treasure || item == key) {
+     if (item instanceof Treasure || item instanceof Key) {
          return false;
      }
      return true;

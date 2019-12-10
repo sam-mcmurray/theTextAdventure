@@ -99,6 +99,7 @@ public class HeroController {
         } else
             return true;
     }
+
     public boolean flee(Hero hero) {
         Random rand = new Random();
 
