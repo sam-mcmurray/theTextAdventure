@@ -35,6 +35,13 @@ public class theTextAdventure {
         int choice;
         choice = myApp.startMenu();
 
+
+        while (choice==0) {
+
+            System.out.println("Inproper value entered");
+            choice = myApp.startMenu();
+        }
+
         if (choice == 1) {
             Random rand = new Random();
             myApp.createWorld();
@@ -220,6 +227,7 @@ public class theTextAdventure {
                 System.exit(0);
             }
 
+
         }
     }
 
@@ -236,9 +244,10 @@ public class theTextAdventure {
         HeroView heroViewThief = new HeroView(thief);
         heroViewThief.printStats();
 
-
         boolean selected = true;
         while (selected) {
+
+            int tempCount = 0;
 
             try {
 
@@ -249,7 +258,15 @@ public class theTextAdventure {
 
                 System.out.println("Please enter your choice");
 
-                int userInput = input.nextInt();
+                int userInput = 0;
+
+                if (tempCount == 0) {
+
+                    userInput = input.nextInt();
+                } else {
+                    input.nextLine();
+                    userInput = input.nextInt();
+                }
 
                 switch (userInput) {
                     case 1:
@@ -281,8 +298,6 @@ public class theTextAdventure {
 
                 System.out.printf("%n" +
                         "Invalid answer%n");
-
-                selected = true;
             }
         }
         return null;
@@ -291,18 +306,44 @@ public class theTextAdventure {
     public int startMenu() {
 
         int userInput = 0;
+        int tempCount = 0;
+        boolean chosen = false;
 
         do {
-            System.out.println("1)Start Game");
-            System.out.println("2)Load Game");
-            System.out.println("3)View High Score");
-            System.out.println("4)Quit");
-            userInput = input.nextInt();
-            input.nextLine();
+
+            boolean chosen1 = false;
+            while (!chosen1) {
+                try {
+                    System.out.println("1)Start Game");
+                    System.out.println("2)Load Game");
+                    System.out.println("3)View High Score");
+                    System.out.println("4)Quit");
+
+                    if (tempCount == 0) {
+
+                        userInput = input.nextInt();
+                    } else {
+                        input.nextLine();
+                        userInput = input.nextInt();
+                    }
+
+                    chosen1 = true;
+
+                } catch (InputMismatchException e) {
+
+                    System.out.println("Invalid answer!");
+                    tempCount++;
+
+                    chosen1 = false;
+                }
+            }
+
             String correct;
             switch (userInput) {
+
                 case 1:
                     System.out.println("You have selected Start Game is this correct? yes/no");
+                    input.nextLine();
                     correct = input.nextLine();
                     if (correct.equalsIgnoreCase("yes")) {
                         System.out.println("The game is Starting");
@@ -337,12 +378,16 @@ public class theTextAdventure {
                     break;
             }
 
-            if (userInput >= 5 || userInput <= 0) {
+            chosen = true;
+
+            if ((userInput > 5) || (userInput < 0)) {
 
                 System.out.println("Invalid answer");
-            }
-        } while (userInput >= 5 || userInput <= 0);
 
+                chosen = false;
+            }
+
+        } while (!chosen);
 
         return userInput;
     }
@@ -513,7 +558,7 @@ public class theTextAdventure {
         }
     }
 
-        //
+    //
 //
 //                if (rooms[i][j] != null) {
 //                    System.out.print("Full" + "*");
@@ -542,122 +587,122 @@ public class theTextAdventure {
             System.out.println();
         }
 */
-        public boolean printUsers (ArrayList < User > users) {
+    public boolean printUsers(ArrayList<User> users) {
 
-            if (users.size() == 0) {
+        if (users.size() == 0) {
+
+            System.out.printf("%n" +
+                    "There are no existing users%n" +
+                    "Returning to the start menu%n");
+
+            for (double a = 0; a < 10000000000000000000000000.0; )
+                a++;
+
+            return false;
+        } else
+            for (int i = 0; i < users.size(); i++) {
+
+                System.out.printf("%nUsername: %s%n" +
+                        "Highscore: %d%n", users.get(i).getUserName(), users.get(i).getHighScore());
+            }
+        return true;
+    }
+
+    public boolean createUser() {
+
+        System.out.println("You have selected to Create a New User is this correct? yes/no");
+        String answer = input.nextLine();
+        if (answer.equalsIgnoreCase("yes")) {
+
+            System.out.printf("Enter your new username:");
+            String temp = input.nextLine();
+            Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+            Matcher m = p.matcher(temp);
+            boolean b = m.find();
+
+            while (!isUpperCase(temp.charAt(0)) || temp.length() > 12 || b) {
+
+                if (!isUpperCase(temp.charAt(0))) {
+                    System.out.printf("%n" +
+                            "Invalid username! The username must have the first letter as a capital letter");
+                }
+
+                if (temp.length() > 12) {
+                    System.out.printf("%n" +
+                            "Invalid username! Your username must contain a maximum of 12 characters");
+                }
+
+                if (b) {
+                    System.out.printf("%n" +
+                            "Invalid username! Your username cannot contain a special character");
+                }
 
                 System.out.printf("%n" +
-                        "There are no existing users%n" +
-                        "Returning to the start menu%n");
+                        "Please enter a valid user name, to quit enter 'no'%n");
 
-                for (double a = 0; a < 10000000000000000000000000.0; )
-                    a++;
+                temp = input.nextLine();
 
-                return false;
-            } else
-                for (int i = 0; i < users.size(); i++) {
+                if (answer.equalsIgnoreCase("no")) {
 
-                    System.out.printf("%nUsername: %s%n" +
-                            "Highscore: %d%n", users.get(i).getUserName(), users.get(i).getHighScore());
+                    return false;
                 }
-            return true;
-        }
-
-        public boolean createUser () {
-
-            System.out.println("You have selected to Create a New User is this correct? yes/no");
-            String answer = input.nextLine();
-            if (answer.equalsIgnoreCase("yes")) {
-
-                System.out.printf("Enter your new username:");
-                String temp = input.nextLine();
-                Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-                Matcher m = p.matcher(temp);
-                boolean b = m.find();
-
-                while (!isUpperCase(temp.charAt(0)) || temp.length() > 12 || b) {
-
-                    if (!isUpperCase(temp.charAt(0))) {
-                        System.out.printf("%n" +
-                                "Invalid username! The username must have the first letter as a capital letter");
-                    }
-
-                    if (temp.length() > 12) {
-                        System.out.printf("%n" +
-                                "Invalid username! Your username must contain a maximum of 12 characters");
-                    }
-
-                    if (b) {
-                        System.out.printf("%n" +
-                                "Invalid username! Your username cannot contain a special character");
-                    }
-
-                    System.out.printf("%n" +
-                            "Please enter a valid user name, to quit enter 'no'%n");
-
-                    temp = input.nextLine();
-
-                    if (answer.equalsIgnoreCase("no")) {
-
-                        return false;
-                    }
-                }
-
-                User user = new User(temp, 0);
-                users.add(user);
-                return true;
-
-            } else if (answer.equalsIgnoreCase("no")) {
-                System.out.println("Returning to start menu");
-                return false;
-            } else System.out.println("Invalid answer!");
-            return false;
-
-        }
-
-
-        public boolean save () {
-
-            System.out.printf("You have selected to Save Game. Is this correct Yes/No");
-
-            String correct = input.nextLine();
-            if (correct.equalsIgnoreCase("yes")) {
-                System.out.println("Saving game, please do not turn off the system");
-
-                try {
-
-                    String saveFile = input.nextLine();
-                    String verify, putData;
-                    File file = new File(saveFile);
-                    file.createNewFile();
-                    FileWriter writer = new FileWriter(file);
-                    BufferedWriter bWriter = new BufferedWriter(writer);
-                    bWriter.write((Integer.toString(users.get(users.size()).getHighScore())) + users.get(users.size()).getUserName());
-                    bWriter.flush();
-                    bWriter.close();
-                    FileReader reader = new FileReader(file);
-                    BufferedReader bReader = new BufferedReader(reader);
-
-                    while ((verify = bReader.readLine()) != null) {
-                        if (verify != null) {
-                            putData = verify.replaceAll("here", "there");
-                            bWriter.write(putData);
-                        }
-                    }
-                    // use this to edit an existing file for the highscore
-
-                    bReader.close();
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            } else if (correct.equalsIgnoreCase("no")) {
-                System.out.println("Saving aborted");
-                return false;
             }
+
+            User user = new User(temp, 0);
+            users.add(user);
             return true;
-        }
+
+        } else if (answer.equalsIgnoreCase("no")) {
+            System.out.println("Returning to start menu");
+            return false;
+        } else System.out.println("Invalid answer!");
+        return false;
 
     }
+
+
+    public boolean save() {
+
+        System.out.printf("You have selected to Save Game. Is this correct Yes/No");
+
+        String correct = input.nextLine();
+        if (correct.equalsIgnoreCase("yes")) {
+            System.out.println("Saving game, please do not turn off the system");
+
+            try {
+
+                String saveFile = input.nextLine();
+                String verify, putData;
+                File file = new File(saveFile);
+                file.createNewFile();
+                FileWriter writer = new FileWriter(file);
+                BufferedWriter bWriter = new BufferedWriter(writer);
+                bWriter.write((Integer.toString(users.get(users.size()).getHighScore())) + users.get(users.size()).getUserName());
+                bWriter.flush();
+                bWriter.close();
+                FileReader reader = new FileReader(file);
+                BufferedReader bReader = new BufferedReader(reader);
+
+                while ((verify = bReader.readLine()) != null) {
+                    if (verify != null) {
+                        putData = verify.replaceAll("here", "there");
+                        bWriter.write(putData);
+                    }
+                }
+                // use this to edit an existing file for the highscore
+
+                bReader.close();
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else if (correct.equalsIgnoreCase("no")) {
+            System.out.println("Saving aborted");
+            return false;
+        }
+        return true;
+    }
+
+}

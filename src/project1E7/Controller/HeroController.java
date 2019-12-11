@@ -52,6 +52,7 @@ public class HeroController {
     }
 
     public Room moveHero(Room[][] room, Room currentRoom ) {
+
         Scanner input = new Scanner(System.in);
         String direction;
         boolean run = true;
@@ -61,7 +62,6 @@ public class HeroController {
                     do {
                         System.out.println("Choose your direction ");
                         direction = input.nextLine();
-                        input.nextLine();
                         if (direction.equalsIgnoreCase("a")) {
                             room[i][j] = room[i][j + 1];
                             System.out.println(room[i][j]);
