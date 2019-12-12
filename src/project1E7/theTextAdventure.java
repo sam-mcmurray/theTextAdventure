@@ -57,6 +57,7 @@ public class theTextAdventure {
                 RoomView roomView = new RoomView(roomModel);
                 RoomController roomController = new RoomController(roomModel, roomView);
                 roomView.flavorTextRoom();
+                
                 if (roomController.roomHasMonster()) {
                     Monster monsterModel = roomController.getMonster();
                     MonsterView monsterView = new MonsterView(monsterModel);
