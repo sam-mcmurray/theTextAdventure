@@ -30,19 +30,21 @@ public class theTextAdventure {
 
 
     public static void main(String[] args) {
+
         Scanner input = new Scanner(System.in);
         theTextAdventure myApp = new theTextAdventure();
         int choice;
         choice = myApp.startMenu();
 
-
-        while (choice==0) {
+        while (choice == 0) {
 
             System.out.println("Inproper value entered");
             choice = myApp.startMenu();
         }
 
         if (choice == 1) {
+
+
             Random rand = new Random();
             myApp.createWorld();
             Hero theHero = (myApp.selectHero());
@@ -57,7 +59,7 @@ public class theTextAdventure {
                 RoomView roomView = new RoomView(roomModel);
                 RoomController roomController = new RoomController(roomModel, roomView);
                 roomView.flavorTextRoom();
-                
+
                 if (roomController.roomHasMonster()) {
                     Monster monsterModel = roomController.getMonster();
                     MonsterView monsterView = new MonsterView(monsterModel);
@@ -182,19 +184,32 @@ public class theTextAdventure {
                             ItemController itemController = new ItemController(item, itemView);
 
                             do {
+                                boolean selected = false;
                                 itemView.chooseWhatToDoWithItem(item);
-                                chooseItem = input.nextInt();
-                                switch (chooseItem) {
-                                    case 1:
-                                        heroController.useItemExternal(item);
-                                        run = false;
-                                        break;
-                                    case 2:
-                                        break;
-                                    default:
-                                        System.out.println("Please enter a proper value.");
-                                }
 
+                                while (!selected) {
+                                    try {
+                                        chooseItem = input.nextInt();
+                                        switch (chooseItem) {
+                                            case 1:
+                                                heroController.useItemExternal(item);
+                                                run = false;
+                                                break;
+                                            case 2:
+                                                break;
+
+                                            default:
+                                                System.out.println("Please enter a proper value.");
+
+                                        }
+                                        selected = true;
+
+                                    } catch (InputMismatchException e) {
+
+                                        System.out.println("Invalid choice!");
+                                        selected = false;
+                                    }
+                                }
                             } while ((chooseItem >= 3 || chooseItem <= 0) && run == true);
                             run = false;
                         }
@@ -214,22 +229,37 @@ public class theTextAdventure {
 
             if (!myApp.printUsers(users)) {
 
-                System.out.printf("%n" +
-                        "There are no current users, would you like to create a new user? (yes/no)");
-                String answer = input.nextLine();
-                if (answer.equalsIgnoreCase("yes")) {
-                    if (!myApp.createUser()) {
+                boolean decision = false;
 
-                        myApp.startMenu();
+                while (!decision) {
+                    System.out.printf("%n" +
+                            "There are no current users, would you like to create a new user? (Yes/No)");
+
+                    String answer = input.nextLine();
+                    if (answer == "Yes") {
+                        if (!myApp.createUser()) {
+
+                          choice=0;
+                          decision=true;
+                        }
+                    } else if (answer == "No"){
+
+                        choice=0;
+                        decision=true;
                     }
-                }
+                    else{
 
-            } else if (choice == 4) {
-                System.exit(0);
+                        System.out.println("Invalid answer!");
+                        decision=false;
+                    }
+
+                }
             }
 
-
+        } else if (choice == 4) {
+            System.exit(0);
         }
+
     }
 
     public Hero selectHero() {
