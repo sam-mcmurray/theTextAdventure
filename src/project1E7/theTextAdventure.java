@@ -278,86 +278,85 @@ public class theTextAdventure {
                         System.out.println("Please enter a valid option...");
                         break;
                 }
+            } catch (InputMismatchException e) {
+
+                System.out.printf("%n" +
+                        "Invalid answer%n");
+
+                selected = true;
             }
-            catch(InputMismatchException e){
+        }
+        return null;
+    }
 
-                    System.out.printf("%n" +
-                            "Invalid answer%n");
+    public int startMenu() {
 
-                    selected = true;
-                }
+        int userInput = 0;
+
+        do {
+            System.out.println("1)Start Game");
+            System.out.println("2)Load Game");
+            System.out.println("3)View High Score");
+            System.out.println("4)Quit");
+            userInput = input.nextInt();
+            input.nextLine();
+            String correct;
+            switch (userInput) {
+                case 1:
+                    System.out.println("You have selected Start Game is this correct? yes/no");
+                    correct = input.nextLine();
+                    if (correct.equalsIgnoreCase("yes")) {
+                        System.out.println("The game is Starting");
+                        return userInput;
+                    } else userInput = 0;
+                    break;
+                case 2:
+                    System.out.println("You have selected to Load a saved Game is this correct? yes/no");
+                    correct = input.nextLine();
+                    if (correct.equals("yes")) {
+                        System.out.println("The game is Starting");
+                        return userInput;
+                    } else userInput = 0;
+                    break;
+                case 3:
+                    System.out.println("You have selected to View HighScore is this correct? yes/no");
+                    correct = input.nextLine();
+                    if (correct.equals("yes")) {
+                        return userInput;
+                    } else userInput = 0;
+                    break;
+                case 4:
+                    System.out.println("You have selected Quit is this correct? yes/no");
+                    correct = input.nextLine();
+                    if (correct.equals("yes")) {
+                        System.out.println("Quiting Game");
+                        return userInput;
+                    } else userInput = 0;
+                    break;
+                default:
+                    System.out.println("Please enter a proper value. ");
+                    break;
             }
-            return null;
-        }
 
-        public int startMenu () {
+            if (userInput >= 5 || userInput <= 0) {
 
-            int userInput = 0;
-
-            do {
-                System.out.println("1)Start Game");
-                System.out.println("2)Load Game");
-                System.out.println("3)View High Score");
-                System.out.println("4)Quit");
-                userInput = input.nextInt();
-                input.nextLine();
-                String correct;
-                switch (userInput) {
-                    case 1:
-                        System.out.println("You have selected Start Game is this correct? yes/no");
-                        correct = input.nextLine();
-                        if (correct.equalsIgnoreCase("yes")) {
-                            System.out.println("The game is Starting");
-                            return userInput;
-                        } else userInput = 0;
-                        break;
-                    case 2:
-                        System.out.println("You have selected to Load a saved Game is this correct? yes/no");
-                        correct = input.nextLine();
-                        if (correct.equals("yes")) {
-                            System.out.println("The game is Starting");
-                            return userInput;
-                        } else userInput = 0;
-                        break;
-                    case 3:
-                        System.out.println("You have selected to View HighScore is this correct? yes/no");
-                        correct = input.nextLine();
-                        if (correct.equals("yes")) {
-                            return userInput;
-                        } else userInput = 0;
-                        break;
-                    case 4:
-                        System.out.println("You have selected Quit is this correct? yes/no");
-                        correct = input.nextLine();
-                        if (correct.equals("yes")) {
-                            System.out.println("Quiting Game");
-                            return userInput;
-                        } else userInput = 0;
-                        break;
-                    default:
-                        System.out.println("Please enter a proper value. ");
-                        break;
-                }
-
-                if (userInput >= 5 || userInput <= 0) {
-
-                    System.out.println("Invalid answer");
-                }
-            } while (userInput >= 5 || userInput <= 0);
+                System.out.println("Invalid answer");
+            }
+        } while (userInput >= 5 || userInput <= 0);
 
 
-            return userInput;
-        }
+        return userInput;
+    }
 
-        public void setUserName () {
+    public void setUserName() {
 
-            this.userName = userName;
-        }
+        this.userName = userName;
+    }
 
-        public void createWorld () {
+    public void createWorld() {
 
 
-            // random generate
+        // random generate
        /* for (int row = 0; row < rooms.length; row++) {
             for (int col = 0; col < rooms[row].length; col++) {
 
@@ -369,142 +368,151 @@ public class theTextAdventure {
         }*/
 
 
-            Coffee coffee = new Coffee("Coffee");
-            Treasure treasure = new Treasure("Gold Box", 10);
-            Heart heart = new Heart("Heart");
-            HealthPotion healthPotion = new HealthPotion("Health portion");
-            Key goldKey = new Key("Golden key");
-            Monster monster1 = new Monster(50, 40, 15, "Monster 1", "The Monster", treasure, true, 3);
-            MonsterView monsterView = new MonsterView(monster1);
-            MonsterController monsterController = new MonsterController(monster1, monsterView);
-            Monster monster2 = new Monster(40, 30, 10, "Monster 2", "The Monster", coffee, true, 2);
-            MonsterView monster2View = new MonsterView(monster2);
-            MonsterController monster2Controller = new MonsterController(monster2, monster2View);
-            Monster monster3 = new Monster(30, 20, 8, "Monster 3", "The Monster", healthPotion, true, 1);
-            MonsterView monster3View = new MonsterView(monster3);
-            MonsterController monster3Controller = new MonsterController(monster3, monster3View);
-            Monster boss = new Monster(100, 40, 60, "the boss...", "The Boss ", goldKey, true, 40);
-            MonsterView monsterViewBoss = new MonsterView(boss);
-            MonsterController monsterControllerBoss = new MonsterController(boss, monsterViewBoss);
-            Key woodenKey = new Key("Wooden key");
-            Key stoneKey = new Key("Stone key");
-            Key silverKey = new Key("Silver key");
-            Key goldenKey = new Key("Golden key");
-            Monster theBoss = new Monster(50, 40, 15, "The boss", "The Boss", treasure, true, 4);
-            Monster owlBear = new Monster(40, 30, 6, "The owl bear", "The Owl Bear", healthPotion, true, 3);
-            Monster skeleton = new Monster(30, 20, 8, "The owl bear", "The Owl Bear", healthPotion, true, 2);
-            Monster bat = new Monster(20, 10, 10, "The Bat", "The Bat", coffee, true, 1);
-            Door woodenDoor = new Door(true, "wooden Key", "The door is ancient and maybe won't open ");
-            Door stoneDoor = new Door(true, "stone key", "you need need to be careful when you use the key inside this door ,might be broken easily");
-            Door goldenDoor = new Door(true, "golden key", "The golden door takes you out ! you are almost free");
+        Coffee coffee = new Coffee("Coffee");
+        Treasure treasure = new Treasure("Gold Box", 10);
+        Heart heart = new Heart("Heart");
+        HealthPotion healthPotion = new HealthPotion("Health portion");
+        Key goldKey = new Key("Golden key");
+        Monster monster1 = new Monster(50, 40, 15, "Monster 1", "The Monster", treasure, true, 3);
+        MonsterView monsterView = new MonsterView(monster1);
+        MonsterController monsterController = new MonsterController(monster1, monsterView);
+        Monster monster2 = new Monster(40, 30, 10, "Monster 2", "The Monster", coffee, true, 2);
+        MonsterView monster2View = new MonsterView(monster2);
+        MonsterController monster2Controller = new MonsterController(monster2, monster2View);
+        Monster monster3 = new Monster(30, 20, 8, "Monster 3", "The Monster", healthPotion, true, 1);
+        MonsterView monster3View = new MonsterView(monster3);
+        MonsterController monster3Controller = new MonsterController(monster3, monster3View);
+        Monster boss = new Monster(100, 40, 60, "the boss...", "The Boss ", goldKey, true, 40);
+        MonsterView monsterViewBoss = new MonsterView(boss);
+        MonsterController monsterControllerBoss = new MonsterController(boss, monsterViewBoss);
+        Key woodenKey = new Key("Wooden key");
+        Key stoneKey = new Key("Stone key");
+        Key silverKey = new Key("Silver key");
+        Key goldenKey = new Key("Golden key");
+        Monster theBoss = new Monster(50, 40, 15, "The boss", "The Boss", treasure, true, 4);
+        Monster owlBear = new Monster(40, 30, 6, "The owl bear", "The Owl Bear", healthPotion, true, 3);
+        Monster skeleton = new Monster(30, 20, 8, "The owl bear", "The Owl Bear", healthPotion, true, 2);
+        Monster bat = new Monster(20, 10, 10, "The Bat", "The Bat", coffee, true, 1);
+        Door woodenDoor = new Door(true, "wooden Key", "The door is ancient and maybe won't open ");
+        Door stoneDoor = new Door(true, "stone key", "you need need to be careful when you use the key inside this door ,might be broken easily");
+        Door goldenDoor = new Door(true, "golden key", "The golden door takes you out ! you are almost free");
 
-            for (int i = 0; i < room.length; i++) {
-                for (int j = 0; j < room[i].length; j++) {
+        for (int i = 0; i < room.length; i++) {
+            for (int j = 0; j < room[i].length; j++) {
 
-                    if (i == 8 && j == 5) {
-                        Room roomModel = new Room("Room description", true);
-                        room[i][j] = roomModel;
+                if (i == 8 && j == 5) {
+                    Room roomModel = new Room("Room description", true);
+                    room[i][j] = roomModel;
+                    RoomView roomView = new RoomView(roomModel);
+                    RoomController roomController = new RoomController(roomModel, roomView);
+                } else if (i == 0 && j == 3) {
+                    Room roomModel = new Room("Room description", false);
+                    room[i][j] = roomModel;
+                    RoomView roomView = new RoomView(roomModel);
+                    RoomController roomController = new RoomController(roomModel, roomView);
+
+                } else if (i == 1 && j == 3) {
+                    Room roomModel = new Room("Room Description", treasure, true, false, theBoss, true);
+                    room[i][j] = roomModel;
+                    RoomView roomView = new RoomView(roomModel);
+                    RoomController roomController = new RoomController(roomModel, roomView);
+
+                } else if ((i == 1 && j == 1) || (i == 3 && j == 6)) {
+                    Room roomModel = new Room("Room Description", false, heart, true);
+                    RoomView roomView = new RoomView(roomModel);
+                    RoomController roomController = new RoomController(roomModel, roomView);
+                    room[i][j] = roomModel;
+
+                } else if (i == 5 && j == 8) {
+                    Room roomModel = new Room("Room description", healthPotion, true, false, monster1, true);
+                    RoomView roomView = new RoomView(roomModel);
+                    RoomController roomController = new RoomController(roomModel, roomView);
+                    room[i][j] = roomModel;
+
+                } else if (i == 6 && j == 3) {
+                    Room roomModel = new Room("Room description", coffee, true, false, monster2, true);
+                    RoomView roomView = new RoomView(roomModel);
+                    RoomController roomController = new RoomController(roomModel, roomView);
+                    room[i][j] = roomModel;
+
+                } else if (i == 7 && j == 8) {
+                    Room roomModel = new Room("Room Description", false, treasure, true);
+                    RoomView roomView = new RoomView(roomModel);
+                    RoomController roomController = new RoomController(roomModel, roomView);
+                    room[i][j] = roomModel;
+                } else if (i == 0 || j == 0 || i == 9 || j == 9 || i == 4) {
+                    Room roomModel = new Room("Room description", false);
+                    RoomView roomView = new RoomView(roomModel);
+                    RoomController roomController = new RoomController(roomModel, roomView);
+                    room[i][j] = roomModel;
+
+                } else if (i == 6 || j == 7 || (i == 2 && j == 3) || i == 3) {
+                    Room roomModel = new Room("Room description", false);
+                    RoomView roomView = new RoomView(roomModel);
+                    RoomController roomController = new RoomController(roomModel, roomView);
+                    room[i][j] = roomModel;
+
+                } else if (i == 8 || i == 7) {
+                    int chanceForMonster = rand.nextInt(2);
+
+                    if (chanceForMonster == 0) {
+                        Room roomModel = new Room("Room description", treasure, true, false, monster1, true);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
-                    } else if (i == 0 && j == 3) {
-                        Room roomModel = new Room("Room description", false);
                         room[i][j] = roomModel;
-                        RoomView roomView = new RoomView(roomModel);
-                        RoomController roomController = new RoomController(roomModel, roomView);
 
-                    } else if (i == 1 && j == 3) {
-                        Room roomModel = new Room("Room Description", treasure, true, false, theBoss, true);
-                        room[i][j] = roomModel;
-                        RoomView roomView = new RoomView(roomModel);
-                        RoomController roomController = new RoomController(roomModel, roomView);
-
-                    } else if ((i == 1 && j == 1) || (i == 3 && j == 6)) {
-                        Room roomModel = new Room("Room Description", false, heart, true);
+                    } else {
+                        Room roomModel = new Room("Room Descrition", false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
+                    }
+                } else if (i == 5) {
+                    int chanceForMonster = rand.nextInt(2);
 
-                    } else if (i == 5 && j == 8) {
-                        Room roomModel = new Room("Room description", healthPotion, true, false, monster1, true);
+                    if (chanceForMonster == 0) {
+                        Room roomModel = new Room("Room description", treasure, true, false, monster2, true);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
-                    } else if (i == 6 && j == 3) {
-                        Room roomModel = new Room("Room description", coffee, true, false, monster2, true);
+                    } else {
+                        Room roomModel = new Room("Room Descrition", false);
+                        RoomView roomView = new RoomView(roomModel);
+                        RoomController roomController = new RoomController(roomModel, roomView);
+                        room[i][j] = roomModel;
+                    }
+                } else if (i == 1 || i == 2) {
+                    int chanceForMonster = rand.nextInt(2);
+
+                    if (chanceForMonster == 0) {
+                        Room roomModel = new Room("Room description", treasure, true, false, monster3, true);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
-                    } else if (i == 7 && j == 8) {
-                        Room roomModel = new Room("Room Description", false, treasure, true);
-                        RoomView roomView = new RoomView(roomModel);
-                        RoomController roomController = new RoomController(roomModel, roomView);
-                        room[i][j] = roomModel;
-                    } else if (i == 0 || j == 0 || i == 9 || j == 9 || i == 4) {
-                        Room roomModel = new Room("Room description", false);
+                    } else {
+                        Room roomModel = new Room("Room Descrition", false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
-                    } else if (i == 6 || j == 7 || (i == 2 && j == 3) || i == 3) {
-                        Room roomModel = new Room("Room description", false);
-                        RoomView roomView = new RoomView(roomModel);
-                        RoomController roomController = new RoomController(roomModel, roomView);
-                        room[i][j] = roomModel;
-
-                    } else if (i == 8 || i == 7) {
-                        int chanceForMonster = rand.nextInt(2);
-
-                        if (chanceForMonster == 0) {
-                            Room roomModel = new Room("Room description", treasure, true, false, monster1, true);
-                            RoomView roomView = new RoomView(roomModel);
-                            RoomController roomController = new RoomController(roomModel, roomView);
-                            room[i][j] = roomModel;
-
-                        } else {
-                            Room roomModel = new Room("Room Descrition", false);
-                            RoomView roomView = new RoomView(roomModel);
-                            RoomController roomController = new RoomController(roomModel, roomView);
-                            room[i][j] = roomModel;
-                        }
-                    } else if (i == 5) {
-                        int chanceForMonster = rand.nextInt(2);
-
-                        if (chanceForMonster == 0) {
-                            Room roomModel = new Room("Room description", treasure, true, false, monster2, true);
-                            RoomView roomView = new RoomView(roomModel);
-                            RoomController roomController = new RoomController(roomModel, roomView);
-                            room[i][j] = roomModel;
-
-                        } else {
-                            Room roomModel = new Room("Room Descrition", false);
-                            RoomView roomView = new RoomView(roomModel);
-                            RoomController roomController = new RoomController(roomModel, roomView);
-                            room[i][j] = roomModel;
-                        }
-                    } else if (i == 1 || i == 2) {
-                        int chanceForMonster = rand.nextInt(2);
-
-                        if (chanceForMonster == 0) {
-                            Room roomModel = new Room("Room description", treasure, true, false, monster3, true);
-                            RoomView roomView = new RoomView(roomModel);
-                            RoomController roomController = new RoomController(roomModel, roomView);
-                            room[i][j] = roomModel;
-
-                        } else {
-                            Room roomModel = new Room("Room Descrition", false);
-                            RoomView roomView = new RoomView(roomModel);
-                            RoomController roomController = new RoomController(roomModel, roomView);
-                            room[i][j] = roomModel;
-
-                        }
                     }
                 }
-
             }
 
         }
+        for (int i = 0; i < room.length; i++) {
+            for (int j = 0; j < room[i].length; j++) {
+                if (room[i][j].getFound()) {
+                    System.out.println("Empty");
+                } else if (room[i][j].isHasMonster()) {
+                    System.out.println("Monster");
+                }
+            }
+
+        }
+    }
 
         //
 //

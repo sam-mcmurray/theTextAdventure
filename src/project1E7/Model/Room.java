@@ -7,6 +7,8 @@ public class Room {
     private boolean hasItem = false;
     private boolean hasMonster;
     private Monster monster;
+    private Door door;
+    private boolean islocked;
 
     public Room(String description, boolean found) {
         this.description = description;
