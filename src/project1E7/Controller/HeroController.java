@@ -45,7 +45,7 @@ public class HeroController {
     }
 
     public void takeDamage(int incDamage) {
-        if (incDamage > model.getHealth()) {
+        if (incDamage >= model.getHealth()) {
             model.setAlive(false);
         }
         model.setHealth(model.getHealth() - incDamage);
@@ -55,43 +55,63 @@ public class HeroController {
         Scanner input = new Scanner(System.in);
         String direction;
         boolean run = true;
+        while (run == true) {
         for (int i = 0; i < room.length; i++) {
             for (int j = 0; j <room.length ; j++) {
                 if (currentRoom == room[i][j]) {
-                    do {
-                        System.out.println("Choose your direction ");
+                    System.out.println("Choose your direction ");
                         direction = input.nextLine();
-                        input.nextLine();
                         if (direction.equalsIgnoreCase("a")) {
-                            room[i][j] = room[i][j + 1];
-                            System.out.println(room[i][j]);
-                            currentRoom = room[i][j];
-                            run = false;
-                            return currentRoom;
+                            j = j - 1;
+                            if (room[i][j].getDescription().equals("wall")) {
+                                System.out.println("You can not go that way there is no door.");
+                                run = true;
+                                room[i][j] = currentRoom;
+                            } else {
+                                currentRoom = room[i][j];
+                                run = false;
+                                return currentRoom;
+                            }
                         } else if (direction.equalsIgnoreCase("d")) {
-                            room[i][j] = room[i][j - 1];
-                            System.out.println(room[i][j]);
-                            currentRoom = room[i][j];
-                            run = false;
-                            return currentRoom;
+                            j = j + 1;
+                            if (room[i][j].getDescription().equals("wall")) {
+                                System.out.println("You can not go that way there is no door.");
+                                run = true;
+                                room[i][j] = currentRoom;
+                            } else {
+                                currentRoom = room[i][j];
+                                run = false;
+                                return currentRoom;
+                            }
                         } else if (direction.equalsIgnoreCase("s")) {
-                            room[i][j] = room[i + 1][j];
-                            System.out.println(room[i][j]);
-                            currentRoom = room[i][j];
-                            run = false;
-                            return currentRoom;
+                            i = i + 1;
+                            if (room[i][j].getDescription().equals("wall")) {
+                                System.out.println("You can not go that way there is no door.");
+                                run = true;
+                                room[i][j] = currentRoom;
+                            } else {
+                                currentRoom = room[i][j];
+                                run = false;
+                                return currentRoom;
+                            }
                         } else if (direction.equalsIgnoreCase("w")) {
-                            room[i][j] = room[i - 1][j];
-                            System.out.println(room[i][j]);
-                            currentRoom = room[i][j];
-                            run = false;
-                            return currentRoom;
+                            i = i - 1;
+                            if (room[i][j].getDescription().equals("wall")) {
+                                System.out.println("You can not go that way there is no door.");
+                                run = true;
+                                room[i][j] = currentRoom;
+                            } else {
+                                currentRoom = room[i][j];
+                                run = false;
+                                return currentRoom;
+                            }
                         }
-                    }  while (run == true);
+                    } else
+                        run = true;
                 }
             }
         }
-        return null;
+        return currentRoom;
     }
     public boolean attackFirst(MonsterController monster) {
         if (model.getSpeed() < monster.model.getSpeed()) {
@@ -122,10 +142,13 @@ public class HeroController {
             model.setCurrentTreasure(treasure.getAmount() + model.getCurrentTreasure());
         }
     }
-    public void addTreasure(Item item) {
-        model.setCurrentTreasure(treasure.getAmount() + model.getCurrentTreasure());
+    public void addTreasure(int treasure) {
+        System.out.println("That chest contained " + treasure + " gold pieces");
+        model.setCurrentTreasure(view.getCurrentTreasure() + treasure);
+        System.out.println("Your new total " + model.getCurrentTreasure() + " of gold pieces");
     }
     public void addKey(Key key) {
 
     }
+
 }
