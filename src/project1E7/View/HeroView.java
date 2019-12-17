@@ -48,14 +48,14 @@ public class HeroView {
 
         System.out.println("Do you want to select the" + hero + " to be your hero? " + "Yes/No");
         String choice = input.next();
-        boolean valid=true;
+        boolean valid = true;
 
         //while (!valid) {
-            //try {
-                if (choice.equalsIgnoreCase("yes")) {
-                    System.out.println(hero + " has been selected");
-                    return false;
-                }
+        //try {
+        if (choice.equalsIgnoreCase("yes")) {
+            System.out.println(hero + " has been selected");
+            return false;
+        }
             /*} catch (InputMismatchException e) {
 
                 System.out.printf("%n" +
@@ -65,6 +65,12 @@ public class HeroView {
 
              */
         //}
+
+        else if (choice.equalsIgnoreCase("no")) {
+
+            return true;
+        }
+
         return true;
     }
 
@@ -89,23 +95,27 @@ public class HeroView {
     public void printClassDescription() {
 
     }
-        public void currentTreasure(){
-            System.out.println("Treasure total: " + model.getCurrentTreasure());
-        }
-        public void heroStory() {
-            System.out.println("Your head aches as you awake from your fall.  You look up to see where you fell from and try to remember exactly what happened. rappelling down the ruins\n" +
-                    "was going well until you felt your rope go slack. Exploring decrepit ruins of ancient civilizations is dangerous work but it certainly pays well if you can find\n" +
-                    "some treasure. Looking at the scattering of your adventuring items beside you, you start start to gather your things; a backpack capable of holding an assortment \n" +
-                    "items, a keychain for keeping any keys you find handy, and of course the most important tool in your arsenal: your " +/* + hero.getWeapon*/". As start to gather what is\n" +
-                    "left of your rope, you look at the end of it and realize it didn't snap, rather, it was a clean cut. You are not alone! Something wants to keep you here and you won't be\n" +
-                    "able to climb back the way you came. ahead of you are three doors. One to your North, East, and West. It looks like you'll have to find another way out. It sounds as if\n" +
-                    "there is movement in the other rooms but it's impossible to tell which. It's time to make a choice. Which direction should you go?");
 
-        }
-        public void hitMonsterFlavorText(Monster monster) {
-            System.out.println("flavor text hit monster");
-        }
-        public void missMonsterFlavorText(Monster monster) {
-            System.out.println("Flavor text missed monster");
-        }
+    public void currentTreasure() {
+        System.out.println("Treasure total: " + model.getCurrentTreasure());
     }
+
+    public void heroStory() {
+        System.out.println("Your head aches as you awake from your fall.  You look up to see where you fell from and try to remember exactly what happened. rappelling down the ruins\n" +
+                "was going well until you felt your rope go slack. Exploring decrepit ruins of ancient civilizations is dangerous work but it certainly pays well if you can find\n" +
+                "some treasure. Looking at the scattering of your adventuring items beside you, you start start to gather your things; a backpack capable of holding an assortment \n" +
+                "items, a keychain for keeping any keys you find handy, and of course the most important tool in your arsenal: your " +/* + hero.getWeapon*/". As start to gather what is\n" +
+                "left of your rope, you look at the end of it and realize it didn't snap, rather, it was a clean cut. You are not alone! Something wants to keep you here and you won't be\n" +
+                "able to climb back the way you came. ahead of you are three doors. One to your North, East, and West. It looks like you'll have to find another way out. It sounds as if\n" +
+                "there is movement in the other rooms but it's impossible to tell which. It's time to make a choice. Which direction should you go?");
+
+    }
+
+    public void hitMonsterFlavorText(Monster monster) {
+        System.out.println("flavor text hit monster");
+    }
+
+    public void missMonsterFlavorText(Monster monster) {
+        System.out.println("Flavor text missed monster");
+    }
+}

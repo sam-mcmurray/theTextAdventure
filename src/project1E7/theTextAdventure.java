@@ -27,18 +27,27 @@ public class theTextAdventure {
     public Treasure treasure;
     public Key key;
     public Random rand = new Random();
+    public String controls[] = new String[4];
 
 
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
         theTextAdventure myApp = new theTextAdventure();
+        Controls control = new Controls("w", "s", "d", "a");
+
+        myApp.controls[0] = control.getMoveUp();
+        myApp.controls[1] = control.getMoveDown();
+        myApp.controls[2] = control.getMoveRight();
+        myApp.controls[3] = control.getMoveLeft();
+
+
         int choice;
         choice = myApp.startMenu();
 
         while (choice == 0) {
 
-            System.out.println("Inproper value entered");
+            System.out.println("Improper value entered");
             choice = myApp.startMenu();
         }
 
@@ -215,10 +224,169 @@ public class theTextAdventure {
                         }
                         run = false;
                     }
-                    currentRoom = heroController.moveHero(myApp.room, currentRoom);
-                    run = false;
-                }
 
+                    System.out.println("Choose your direction or enter 'm' to open the submenu");
+
+                    String direction = input.nextLine();
+
+                    if (direction.equalsIgnoreCase("m")) {
+
+                        int temp = myApp.subMenu();
+
+                        switch (temp) {
+
+                            case 0:
+
+                                System.out.println("Exited menu");
+
+                                break;
+
+                            case 1:
+
+                                System.out.println("The following are the commands in place:");
+
+                                System.out.printf("Moving up: %s %n" +
+                                        "Moving down: %s %n" +
+                                        "Moving right: %s %n" +
+                                        "Moving left: %s %n", control.getMoveUp(), control.getMoveDown(), control.getMoveRight(), control.getMoveLeft());
+
+                                break;
+
+                            case 2:
+
+                                boolean chosen = false;
+
+                                while (!chosen) {
+
+                                    try {
+
+                                        System.out.printf("Which one of the controls would you like to change: ");
+
+                                        System.out.printf("1- Moving up: %s %n" +
+                                                "2- Moving down: %s %n" +
+                                                "3- Moving right: %s %n" +
+                                                "4- Moving left: %s %n", control.getMoveUp(), control.getMoveDown(), control.getMoveRight(), control.getMoveLeft());
+
+                                        int choice1 = input.nextInt();
+                                        boolean decided = false;
+
+                                        while (!decided) {
+                                            switch (choice1) {
+
+                                                case 1:
+
+                                                    System.out.print("Enter the new command for moving up: ");
+                                                    String temp1 = input.nextLine();
+                                                    while (temp1.length() > 1) {
+
+                                                        System.out.printf("%n" +
+                                                                "You can only use one character as a command%n");
+                                                        temp1 = input.nextLine();
+                                                    }
+
+                                                    control.setMoveUp(temp1);
+
+                                                    decided=true;
+
+                                                    break;
+
+                                                case 2:
+
+                                                    System.out.print("Enter the new command for moving down: ");
+                                                    temp1 = input.nextLine();
+                                                    while (temp1.length() > 1) {
+
+                                                        System.out.printf("%n" +
+                                                                "You can only use one character as a command%n");
+                                                        temp1 = input.nextLine();
+                                                    }
+
+                                                    control.setMoveDown(temp1);
+
+                                                    decided=true;
+
+                                                    break;
+
+                                                case 3:
+
+                                                    System.out.print("Enter the new command for moving right: ");
+                                                    temp1 = input.nextLine();
+                                                    while (temp1.length() > 1) {
+
+                                                        System.out.printf("%n" +
+                                                                "You can only use one character as a command%n");
+                                                        temp1 = input.nextLine();
+                                                    }
+
+                                                    control.setMoveRight(temp1);
+
+                                                    decided=true;
+
+                                                    break;
+
+
+                                                case 4:
+
+                                                    System.out.print("Enter the new command for moving left: ");
+                                                    temp1 = input.nextLine();
+                                                    while (temp1.length() > 1) {
+
+                                                        System.out.printf("%n" +
+                                                                "You can only use one character as a command%n");
+                                                        temp1 = input.nextLine();
+                                                    }
+
+                                                    control.setMoveLeft(temp1);
+
+                                                    decided=true;
+
+                                                    break;
+
+                                                default:
+                                                    System.out.printf("%n" +
+                                                            "Invalid option%n");
+                                                    decided = false;
+                                            }
+                                        }
+
+                                        chosen = true;
+
+                                    } catch (InputMismatchException a) {
+
+                                        System.out.println("Invalid choice");
+
+                                        chosen = false;
+                                    }
+                                }
+
+
+                                break;
+
+                            case 3:
+
+                                break;
+
+                            case 4:
+
+                                break;
+
+                            case 5:
+
+                                break;
+
+                            case 6:
+
+                                break;
+
+                            case 7:
+
+                                break;
+                        }
+                    } else {
+
+                        heroController.moveHero(myApp.room, currentRoom);
+                    }
+                }
             } while (theHero.isAlive() == true || theHero.getLives() > 0);
 
 
@@ -239,18 +407,17 @@ public class theTextAdventure {
                     if (answer == "Yes") {
                         if (!myApp.createUser()) {
 
-                          choice=0;
-                          decision=true;
+                            choice = 0;
+                            decision = true;
                         }
-                    } else if (answer == "No"){
+                    } else if (answer == "No") {
 
-                        choice=0;
-                        decision=true;
-                    }
-                    else{
+                        choice = 0;
+                        decision = true;
+                    } else {
 
                         System.out.println("Invalid answer!");
-                        decision=false;
+                        decision = false;
                     }
 
                 }
@@ -423,10 +590,60 @@ public class theTextAdventure {
         return userInput;
     }
 
-    public void setUserName() {
 
-        this.userName = userName;
+    public int subMenu() {
+
+        int choice = 0;
+        boolean chosen = false;
+
+        do {
+
+            boolean chosen1 = false;
+            int tempCount = 0;
+
+            while (!chosen1) {
+
+                try {
+                    System.out.println("Choose one of the following options. To exit this menu enter 0");
+                    System.out.printf("1- View controls %n" +
+                            "2- Change controls %n" +
+                            "3- View instructions %n" +
+                            "4- View map %n" +
+                            "5- Save game %n" +
+                            "6- Load game %n" +
+                            "7- Quit game %n ");
+
+                    choice = input.nextInt();
+
+                    if (tempCount == 0) {
+
+                        choice = input.nextInt();
+                    } else {
+                        input.nextLine();
+                        choice = input.nextInt();
+                    }
+
+                    chosen1 = true;
+                } catch (InputMismatchException e) {
+
+                    System.out.println("Invalid choice");
+                    chosen1 = false;
+                    ++tempCount;
+                }
+
+                if (choice > 7 || choice < 0) {
+
+                    System.out.println("Choose an available option");
+
+                    chosen = false;
+                }
+            }
+        }
+        while (!chosen);
+
+        return choice;
     }
+
 
     public void createWorld() {
 
