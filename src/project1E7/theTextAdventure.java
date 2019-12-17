@@ -223,6 +223,7 @@ public class theTextAdventure {
                 }
 
                 }
+                roomController.setFound(currentRoom);
                 roomView.roomDoors(myApp.room, currentRoom);
                 currentRoom = heroController.moveHero(myApp.room, currentRoom);
                 run = false;

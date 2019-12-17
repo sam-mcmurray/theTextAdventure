@@ -82,6 +82,8 @@ public class RoomController {
         return null;
     }
 
-
+    public void setFound(Room currentRoom) {
+        currentRoom.setFound(true);
+    }
 
 }
