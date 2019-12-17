@@ -468,7 +468,7 @@ public class theTextAdventure {
         HeroView heroViewMage = new HeroView(mage);
         heroViewMage.printStats();
 
-        Hero thief = new Hero(100, 40, 60, "The Thief...", "Thief", 60);
+        Hero thief = new Hero(1, 40, 60, "The Thief...", "Thief", 60);
         HeroView heroViewThief = new HeroView(thief);
         heroViewThief.printStats();
 
