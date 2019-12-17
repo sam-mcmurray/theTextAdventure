@@ -9,4 +9,7 @@ public class KeyView {
         this.model = model;
     }
 
+    public void foundKey() {
+        System.out.println("You found " + model.getName());
+    }
 }

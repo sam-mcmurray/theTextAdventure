@@ -147,8 +147,11 @@ public class HeroController {
         model.setCurrentTreasure(view.getCurrentTreasure() + treasure);
         System.out.println("Your new total " + model.getCurrentTreasure() + " of gold pieces");
     }
-    public void addKey(Key key) {
 
+    public ArrayList<Key> addKey(ArrayList<Key> keyRing, Key key) {
+
+        keyRing.add(0, key);
+        return keyRing;
     }
 
 }

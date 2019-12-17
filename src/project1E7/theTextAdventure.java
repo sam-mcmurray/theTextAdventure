@@ -18,10 +18,8 @@ public class theTextAdventure {
     String userName;
     static ArrayList<User> users;
     Room[][] room = new Room[10][10];
-    public Treasure treasure;
-    public Key key;
     public Random rand = new Random();
-
+    ArrayList<Key> keyRing = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -44,6 +42,7 @@ public class theTextAdventure {
                 RoomView roomView = new RoomView(roomModel);
                 RoomController roomController = new RoomController(roomModel, roomView);
                 roomView.flavorTextRoom();
+                theHero.setKeyRing(myApp.keyRing);
                 if (roomModel.getFound() == false) {
                 if (roomController.roomHasMonster()) {
                     Monster monsterModel = roomController.getMonster();
@@ -164,7 +163,12 @@ public class theTextAdventure {
                                 break;
                             } else if (itemController.checkIfKey(item)) {
                                 Key key = (Key) item;
+                                KeyView keyView = new KeyView(key);
+                                KeyController keyController = new KeyController(key, keyView);
+                                keyView.foundKey();
+                                myApp.keyRing = heroController.addKey(myApp.keyRing, key);
                                 run = false;
+                                break;
                             } else
                                 itemView.chooseWhatToDoWithItem(item);
                                 chooseItem = input.nextInt();
@@ -176,6 +180,7 @@ public class theTextAdventure {
                                         break;
                                     default:
                                         System.out.println("Please enter a proper value.");
+                                        break;
                                 }
 
                         } while (chooseItem >= 3 || chooseItem <= 0);
@@ -196,9 +201,6 @@ public class theTextAdventure {
                                     heroController.addTreasure(treasure.getAmount());
                                     run = false;
                                     break;
-                                } else if (itemController.checkIfKey(item)) {
-                                    Key key = (Key) item;
-                                    run = false;
                                 } else
                                 itemView.chooseWhatToDoWithItem(item);
                                 chooseItem = input.nextInt();
