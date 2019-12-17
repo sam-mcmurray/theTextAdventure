@@ -12,7 +12,7 @@ public class Hero extends Character {
     private String characterClass;
     private String weapon;
 
-    public Hero(int health, int strength, int speed, String description, String name, int endurance) {
+    public Hero(int health, int strength, int speed, String description, String name, int endurance,String characterClass) {
         super(health, strength, speed, description, name);
         this.endurance = endurance;
         lives = 5;

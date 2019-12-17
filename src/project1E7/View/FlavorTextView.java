@@ -67,7 +67,6 @@ public class FlavorTextView {
     }
 
     public String getWeapon () {
-        //if (Hero.getDescription)
         return weapon;
     }
 

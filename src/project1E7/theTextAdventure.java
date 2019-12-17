@@ -50,6 +50,7 @@ public class theTextAdventure {
             Random rand = new Random();
             myApp.createWorld();
             Hero theHero = (myApp.selectHero());
+            myApp.namer(theHero);
             HeroView heroView = new HeroView(theHero);
             HeroController heroController = new HeroController(theHero, heroView);
             heroView.printStats();
@@ -460,15 +461,15 @@ public class theTextAdventure {
     }
 
     public Hero selectHero() {
-        Hero warrior = new Hero(100, 80, 30, "The Warrior...", "Warrior", 40);
+        Hero warrior = new Hero(100, 70, 30, "The Warrior...", "Warrior", 40,"Warrior");
         HeroView heroViewWarrior = new HeroView(warrior);
         heroViewWarrior.printStats();
 
-        Hero mage = new Hero(100, 60, 40, "The Mage...", "Mage", 50);
+        Hero mage = new Hero(60, 60, 40, "The Mage...", "Mage", 50,"Warrior");
         HeroView heroViewMage = new HeroView(mage);
         heroViewMage.printStats();
 
-        Hero thief = new Hero(1, 40, 60, "The Thief...", "Thief", 60);
+        Hero thief = new Hero(80, 60, 80, "The Thief...", "Thief", 60,"Warrior");
         HeroView heroViewThief = new HeroView(thief);
         heroViewThief.printStats();
 
@@ -530,7 +531,28 @@ public class theTextAdventure {
         }
         return null;
     }
+    public void namer(Hero theHero) {
+        String choice = "";
+        do {
+            System.out.println("Would you like to change your characters name? (yes/no)");
+            choice = input.nextLine();
+            if (choice.equals("yes")) {
+                System.out.println("Enter name: ");
+                String tempName = input.nextLine();
+                System.out.println("Your name is currently " + tempName + ", would you like to keep this name? (yes/no)");
+                choice = input.nextLine();
+                if (choice.equals("yes")) {
+                    theHero.setName(tempName);
+                    choice = "yes";
+                } else if (choice.equals("no")) {
+                    System.out.println("Redirecting to name choice menu");
+                } else {
+                    System.out.println("Invalid Response");
+                }
+            }
 
+        } while (!choice.equals("yes"));
+    }
     public int startMenu() {
 
         int userInput = 0;
@@ -542,10 +564,11 @@ public class theTextAdventure {
             boolean chosen1 = false;
             while (!chosen1) {
                 try {
-                    System.out.println("1)Start Game");
-                    System.out.println("2)Load Game");
-                    System.out.println("3)View High Score");
-                    System.out.println("4)Quit");
+                    System.out.println("1) Start Game");
+                    System.out.println("2) Load Game");
+                    System.out.println("3) View High Score");
+                    System.out.println("4) Access submenu");
+                    System.out.println("5) Quit");
 
                     if (tempCount == 0) {
 
@@ -594,18 +617,18 @@ public class theTextAdventure {
                     } else userInput = 0;
                     break;
                 case 4:
-                    System.out.println("You have selected Quit is this correct? yes/no");
-                    correct = input.nextLine();
-                    if (correct.equals("yes")) {
-                        System.out.println("Quiting Game");
-                        return userInput;
-                    } else userInput = 0;
-                    break;
-                case 5:
                     System.out.println("You have selected Submenu is this correct? yes/no");
                     correct = input.nextLine();
                     if (correct.equals("yes")) {
                         System.out.println("Opening submenu");
+                        return userInput;
+                    } else userInput = 0;
+                    break;
+                case 5:
+                    System.out.println("You have selected Quit is this correct? yes/no");
+                    correct = input.nextLine();
+                    if (correct.equals("yes")) {
+                        System.out.println("Quiting Game");
                         return userInput;
                     } else userInput = 0;
                     break;
