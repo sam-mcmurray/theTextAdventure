@@ -1,7 +1,7 @@
 package project1E7.Model;
 
 public class Treasure extends Item {
-    private int amount;
+    private Integer amount;
 
     public Treasure(String name,int amount) {
         super(name);

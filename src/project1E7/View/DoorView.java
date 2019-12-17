@@ -8,4 +8,6 @@ public class DoorView {
     public DoorView(Door model) {
         this.model = model;
     }
+
+
 }

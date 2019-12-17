@@ -92,6 +92,10 @@ public class HeroView {
 
     }
 
+    public int getCurrentTreasure() {
+        System.out.println(model.getCurrentTreasure() + " gold pieces");
+        return model.getCurrentTreasure();
+    }
     public void printClassDescription() {
 
     }

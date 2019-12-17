@@ -4,16 +4,19 @@ public class Room {
     private String description;
     private boolean found;
     private Item item;
+    private Door door;
+    private boolean islocked;
     private boolean hasItem = false;
     private boolean hasMonster;
     private Monster monster;
-    private Door door;
-    private boolean islocked;
+    private enum DOOR{NORTH,EAST,SOUTH,WEST}
+
 
     public Room(String description, boolean found) {
         this.description = description;
         this.found = found;
     }
+
 
     public Room(String description, boolean found, Item item, boolean hasItem) {
         this.description = description;
@@ -29,6 +32,25 @@ public class Room {
         this.found = found;
         this.monster = monster;
         this.hasItem = hasItem;
+    }
+
+    public Room(String description, boolean found, Item item, boolean hasItem, boolean hasMonster, Monster monster, Door door, boolean islocked) {
+        this.description = description;
+        this.found = found;
+        this.item = item;
+        this.hasItem = hasItem;
+        this.hasMonster = hasMonster;
+        this.monster = monster;
+        this.door = door;
+        this.islocked = islocked;
+    }
+
+    public Room(String description, boolean found, Item item, Door door, boolean islocked) {
+        this.description = description;
+        this.found = found;
+        this.item = item;
+        this.door = door;
+        this.islocked = islocked;
     }
 
     public String getDescription() {
@@ -85,5 +107,19 @@ public class Room {
         this.hasItem = hasItem;
     }
 
+    public Door getDoor() {
+        return door;
+    }
 
+    public void setDoor(Door door) {
+        this.door = door;
+    }
+
+    public boolean isIslocked() {
+        return islocked;
+    }
+
+    public void setIslocked(boolean islocked) {
+        this.islocked = islocked;
+    }
 }

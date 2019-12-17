@@ -1,15 +1,9 @@
 package project1E7;
 
 
-import project1E7.Controller.HeroController;
-import project1E7.Controller.ItemController;
-import project1E7.Controller.MonsterController;
-import project1E7.Controller.RoomController;
+import project1E7.Controller.*;
 import project1E7.Model.*;
-import project1E7.View.HeroView;
-import project1E7.View.ItemView;
-import project1E7.View.MonsterView;
-import project1E7.View.RoomView;
+import project1E7.View.*;
 
 import java.io.*;
 import java.util.*;
@@ -24,10 +18,9 @@ public class theTextAdventure {
     String userName;
     static ArrayList<User> users;
     Room[][] room = new Room[10][10];
-    public Treasure treasure;
-    public Key key;
     public Random rand = new Random();
     public String controls[] = new String[4];
+    ArrayList<Key> keyRing = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -69,109 +62,136 @@ public class theTextAdventure {
                 RoomController roomController = new RoomController(roomModel, roomView);
                 roomView.flavorTextRoom();
 
-                if (roomController.roomHasMonster()) {
-                    Monster monsterModel = roomController.getMonster();
-                    MonsterView monsterView = new MonsterView(monsterModel);
-                    MonsterController monsterController = new MonsterController(monsterModel, monsterView);
+                theHero.setKeyRing(myApp.keyRing);
+                if (roomModel.getFound() == false) {
+                    if (roomController.roomHasMonster()) {
+                        Monster monsterModel = roomController.getMonster();
+                        MonsterView monsterView = new MonsterView(monsterModel);
+                        MonsterController monsterController = new MonsterController(monsterModel, monsterView);
 
 
-                    int encounterChoice = 0;
-                    monsterView.flavorTextMonster();
+                        int encounterChoice = 0;
+                        monsterView.flavorTextMonster();
 
-                    if (heroController.attackFirst(monsterController) == true) {
+                        if (heroController.attackFirst(monsterController) == true) {
 
-                        do {
-                            encounterChoice = monsterView.encounterMenu();
+                            do {
+                                encounterChoice = monsterView.encounterMenu();
 
-                            switch (encounterChoice) {
+                                switch (encounterChoice) {
 
-                                case 1:
-                                    if (heroController.attack(monsterController) == true) {
-                                        heroView.hitMonsterFlavorText(monsterModel);
-                                        monsterView.printStatus(monsterModel);
+                                    case 1:
+                                        if (theHero.isAlive() == true) {
+                                            if (heroController.attack(monsterController) == true) {
+                                                heroView.hitMonsterFlavorText(monsterModel);
+                                                monsterView.printStatus(monsterModel);
 
-                                    } else {
-                                        heroView.missMonsterFlavorText(monsterModel);
-                                        monsterView.printStatus(monsterModel);
-                                    }
-                                    if (monsterController.attack(heroController) == true && monsterModel.isAlive() == true) {
-                                        monsterView.monsterHitFlavorText(theHero);
-                                        heroView.printStatus(theHero);
-
-                                    } else
-                                        monsterView.monsterMissFlavorText(theHero);
-                                    heroView.printStatus(theHero);
-
-                                    break;
-                                case 2:
-                                    if (heroController.flee(theHero) == true) {
-                                        run = false;
-                                    } else
+                                            } else {
+                                                heroView.missMonsterFlavorText(monsterModel);
+                                                monsterView.printStatus(monsterModel);
+                                            }
+                                        }
+                                        if (monsterModel.isAlive() == true) {
+                                            if (monsterController.attack(heroController) == true) {
+                                                monsterView.monsterHitFlavorText(theHero);
+                                                heroView.printStatus(theHero);
+                                            } else
+                                                monsterView.monsterMissFlavorText(theHero);
+                                            heroView.printStatus(theHero);
+                                        } else {
+                                            run = false;
+                                        }
                                         run = true;
-                                    break;
-                                case 3:
-                                    heroView.inventory(theHero.getBackPack());
-                                    break;
-                                default:
-                                    System.out.println("Please enter a proper value.");
-                            }
-                        } while (run == true && (monsterModel.isAlive() == true && theHero.isAlive() == true));
+                                        break;
+                                    case 2:
+                                        if (heroController.flee(theHero) == true) {
+                                            run = false;
+                                        } else
+                                            run = true;
+                                        break;
+                                    case 3:
+                                        heroView.inventory(theHero.getBackPack());
+                                        break;
+                                    default:
+                                        System.out.println("Please enter a proper value.");
+                                }
+                            } while (run == true && (monsterModel.isAlive() == true && theHero.isAlive() == true));
 
-                    } else
+                        } else
 
-                        do {
+                            do {
 
-                            if (monsterController.attack(heroController) == true && monsterModel.isAlive() == true) {
-                                monsterView.monsterHitFlavorText(theHero);
+                                if (monsterController.attack(heroController) == true && monsterModel.isAlive() == true) {
+                                    monsterView.monsterHitFlavorText(theHero);
+                                    heroView.printStatus(theHero);
+                                    encounterChoice = monsterView.encounterMenu();
+
+                                } else
+                                    monsterView.monsterMissFlavorText(theHero);
                                 heroView.printStatus(theHero);
                                 encounterChoice = monsterView.encounterMenu();
 
-                            } else
-                                monsterView.monsterMissFlavorText(theHero);
-                            heroView.printStatus(theHero);
-                            encounterChoice = monsterView.encounterMenu();
+                                switch (encounterChoice) {
 
-                            switch (encounterChoice) {
-
-                                case 1:
-
-                                    if (heroController.attack(monsterController) == true) {
-                                        heroView.hitMonsterFlavorText(monsterModel);
-                                        monsterView.printStatus(monsterModel);
+                                    case 1:
+                                        if (theHero.isAlive() == true) {
+                                            if (heroController.attack(monsterController) == true) {
+                                                heroView.hitMonsterFlavorText(monsterModel);
+                                                monsterView.printStatus(monsterModel);
 
 
-                                    } else
-                                        heroView.missMonsterFlavorText(monsterModel);
-                                    monsterView.printStatus(monsterModel);
-                                    break;
-                                case 2:
-                                    if (heroController.flee(theHero) == true) {
-
-                                        run = false;
-                                    } else
+                                            } else
+                                                heroView.missMonsterFlavorText(monsterModel);
+                                            monsterView.printStatus(monsterModel);
+                                        } else {
+                                            run = false;
+                                        }
                                         run = true;
+                                        break;
+                                    case 2:
+                                        if (heroController.flee(theHero) == true) {
+
+                                            run = false;
+                                        } else
+                                            run = true;
+                                        break;
+                                    case 3:
+                                        heroView.inventory(theHero.getBackPack());
+                                        break;
+                                    default:
+                                        System.out.println("Please enter a proper value.");
+                                }
+                            } while (run == true && (monsterModel.isAlive() == true));
+
+                    }
+                    int chooseItem = 0;
+                    while (theHero.isAlive() == true && run == true) {
+                        if (roomController.roomHasItem() == true) {
+                            Item item = roomController.getItem();
+                            ItemView itemView = new ItemView(item);
+                            ItemController itemController = new ItemController(item, itemView);
+
+
+                            do {
+                                itemView.viewItem(item);
+                                if (itemController.checkIfTreasure(item) == true) {
+                                    Treasure treasure = (Treasure) item;
+                                    itemController.checkTreasureValue(treasure);
+
+                                    heroController.addTreasure(treasure.getAmount());
+                                    run = false;
                                     break;
-                                case 3:
-                                    heroView.inventory(theHero.getBackPack());
+                                } else if (itemController.checkIfKey(item)) {
+                                    Key key = (Key) item;
+                                    KeyView keyView = new KeyView(key);
+                                    KeyController keyController = new KeyController(key, keyView);
+                                    keyView.foundKey();
+                                    myApp.keyRing = heroController.addKey(myApp.keyRing, key);
+                                    run = false;
                                     break;
-                                default:
-                                    System.out.println("Please enter a proper value.");
-                            }
-                        } while (run == true && (monsterModel.isAlive() == true && theHero.isAlive() == true));
-
-                }
-                int chooseItem = 0;
-                while (theHero.isAlive() == true && run == true) {
-                    if (roomController.roomHasItem() == true) {
-                        Item item = roomController.getItem();
-                        ItemView itemView = new ItemView(item);
-                        ItemController itemController = new ItemController(item, itemView);
-
-
-                        do {
-                            itemView.viewItem(item);
-                            if (itemController.checkUseItem(item) == true) {
-                                itemView.chooseWhatToDoWithItem(item);
+                                } else
+                                    itemView.chooseWhatToDoWithItem(item);
+                                chooseItem = input.nextInt();
                                 switch (chooseItem) {
                                     case 1:
                                         heroController.useItemExternal(item);
@@ -180,213 +200,67 @@ public class theTextAdventure {
                                         break;
                                     default:
                                         System.out.println("Please enter a proper value.");
+                                        break;
                                 }
-                            }
-                        } while (chooseItem >= 3 || chooseItem <= 0);
+
+                            } while (chooseItem >= 3 || chooseItem <= 0);
 
 
-                    } else if (roomController.roomHasItem() == false) {
+                        } else if (roomController.roomHasItem() == false) {
 
-                        Item item = roomController.setRandomItem();
-                        if (item != null) {
-                            ItemView itemView = new ItemView(item);
-                            ItemController itemController = new ItemController(item, itemView);
+                            Item item = roomController.setRandomItem();
+                            if (item != null) {
+                                ItemView itemView = new ItemView(item);
+                                ItemController itemController = new ItemController(item, itemView);
 
-                            do {
-                                boolean selected = false;
-                                itemView.chooseWhatToDoWithItem(item);
+                                do {
+                                    boolean selected = false;
+                                    if (itemController.checkIfTreasure(item) == true) {
+                                        Treasure treasure = (Treasure) item;
+                                        itemController.checkTreasureValue(treasure);
 
-                                while (!selected) {
-                                    try {
-                                        chooseItem = input.nextInt();
-                                        switch (chooseItem) {
-                                            case 1:
-                                                heroController.useItemExternal(item);
-                                                run = false;
-                                                break;
-                                            case 2:
-                                                break;
+                                        heroController.addTreasure(treasure.getAmount());
+                                        run = false;
+                                        break;
+                                    } else
+                                        itemView.chooseWhatToDoWithItem(item);
 
-                                            default:
-                                                System.out.println("Please enter a proper value.");
-
-                                        }
-                                        selected = true;
-
-                                    } catch (InputMismatchException e) {
-
-                                        System.out.println("Invalid choice!");
-                                        selected = false;
-                                    }
-                                }
-                            } while ((chooseItem >= 3 || chooseItem <= 0) && run == true);
-                            run = false;
-                        }
-                        run = false;
-                    }
-
-                    System.out.println("Choose your direction or enter 'm' to open the submenu");
-
-                    String direction = input.nextLine();
-
-                    if (direction.equalsIgnoreCase("m")) {
-
-                        int temp = myApp.subMenu();
-
-                        switch (temp) {
-
-                            case 0:
-
-                                System.out.println("Exited menu");
-
-                                break;
-
-                            case 1:
-
-                                System.out.println("The following are the commands in place:");
-
-                                System.out.printf("Moving up: %s %n" +
-                                        "Moving down: %s %n" +
-                                        "Moving right: %s %n" +
-                                        "Moving left: %s %n", control.getMoveUp(), control.getMoveDown(), control.getMoveRight(), control.getMoveLeft());
-
-                                break;
-
-                            case 2:
-
-                                boolean chosen = false;
-
-                                while (!chosen) {
-
-                                    try {
-
-                                        System.out.printf("Which one of the controls would you like to change: ");
-
-                                        System.out.printf("1- Moving up: %s %n" +
-                                                "2- Moving down: %s %n" +
-                                                "3- Moving right: %s %n" +
-                                                "4- Moving left: %s %n", control.getMoveUp(), control.getMoveDown(), control.getMoveRight(), control.getMoveLeft());
-
-                                        int choice1 = input.nextInt();
-                                        boolean decided = false;
-
-                                        while (!decided) {
-                                            switch (choice1) {
-
+                                    while (!selected) {
+                                        try {
+                                            chooseItem = input.nextInt();
+                                            switch (chooseItem) {
                                                 case 1:
-
-                                                    System.out.print("Enter the new command for moving up: ");
-                                                    String temp1 = input.nextLine();
-                                                    while (temp1.length() > 1) {
-
-                                                        System.out.printf("%n" +
-                                                                "You can only use one character as a command%n");
-                                                        temp1 = input.nextLine();
-                                                    }
-
-                                                    control.setMoveUp(temp1);
-
-                                                    decided=true;
-
+                                                    heroController.useItemExternal(item);
+                                                    run = false;
                                                     break;
-
                                                 case 2:
-
-                                                    System.out.print("Enter the new command for moving down: ");
-                                                    temp1 = input.nextLine();
-                                                    while (temp1.length() > 1) {
-
-                                                        System.out.printf("%n" +
-                                                                "You can only use one character as a command%n");
-                                                        temp1 = input.nextLine();
-                                                    }
-
-                                                    control.setMoveDown(temp1);
-
-                                                    decided=true;
-
-                                                    break;
-
-                                                case 3:
-
-                                                    System.out.print("Enter the new command for moving right: ");
-                                                    temp1 = input.nextLine();
-                                                    while (temp1.length() > 1) {
-
-                                                        System.out.printf("%n" +
-                                                                "You can only use one character as a command%n");
-                                                        temp1 = input.nextLine();
-                                                    }
-
-                                                    control.setMoveRight(temp1);
-
-                                                    decided=true;
-
-                                                    break;
-
-
-                                                case 4:
-
-                                                    System.out.print("Enter the new command for moving left: ");
-                                                    temp1 = input.nextLine();
-                                                    while (temp1.length() > 1) {
-
-                                                        System.out.printf("%n" +
-                                                                "You can only use one character as a command%n");
-                                                        temp1 = input.nextLine();
-                                                    }
-
-                                                    control.setMoveLeft(temp1);
-
-                                                    decided=true;
-
                                                     break;
 
                                                 default:
-                                                    System.out.printf("%n" +
-                                                            "Invalid option%n");
-                                                    decided = false;
+                                                    System.out.println("Please enter a proper value.");
+
                                             }
+                                            selected = true;
+
+                                        } catch (InputMismatchException e) {
+
+                                            System.out.println("Invalid choice!");
+                                            selected = false;
                                         }
-
-                                        chosen = true;
-
-                                    } catch (InputMismatchException a) {
-
-                                        System.out.println("Invalid choice");
-
-                                        chosen = false;
                                     }
-                                }
-
-
-                                break;
-
-                            case 3:
-
-                                break;
-
-                            case 4:
-
-                                break;
-
-                            case 5:
-
-                                break;
-
-                            case 6:
-
-                                break;
-
-                            case 7:
-
-                                break;
+                                } while ((chooseItem >= 3 || chooseItem <= 0) && run == true);
+                                run = false;
+                            }
+                            run = false;
                         }
-                    } else {
-
-                        heroController.moveHero(myApp.room, currentRoom);
                     }
                 }
+
+                roomController.setFound(currentRoom);
+                roomView.roomDoors(myApp.room, currentRoom);
+                currentRoom = heroController.moveHero(myApp.room, currentRoom);
+                run = false;
+
             } while (theHero.isAlive() == true || theHero.getLives() > 0);
 
 
@@ -425,6 +299,162 @@ public class theTextAdventure {
 
         } else if (choice == 4) {
             System.exit(0);
+
+        } else if (choice == 5) {
+            {
+
+                int temp = myApp.subMenu();
+
+                switch (temp) {
+
+                    case 0:
+
+                        System.out.println("Exited menu");
+
+                        break;
+
+                    case 1:
+
+                        System.out.println("The following are the commands in place:");
+
+                        System.out.printf("Moving up: %s %n" +
+                                "Moving down: %s %n" +
+                                "Moving right: %s %n" +
+                                "Moving left: %s %n", control.getMoveUp(), control.getMoveDown(), control.getMoveRight(), control.getMoveLeft());
+
+                        break;
+
+                    case 2:
+
+                        boolean chosen = false;
+
+                        while (!chosen) {
+
+                            try {
+
+                                System.out.printf("Which one of the controls would you like to change: ");
+
+                                System.out.printf("1- Moving up: %s %n" +
+                                        "2- Moving down: %s %n" +
+                                        "3- Moving right: %s %n" +
+                                        "4- Moving left: %s %n", control.getMoveUp(), control.getMoveDown(), control.getMoveRight(), control.getMoveLeft());
+
+                                int choice1 = input.nextInt();
+                                boolean decided = false;
+
+                                while (!decided) {
+                                    switch (choice1) {
+
+                                        case 1:
+
+                                            System.out.print("Enter the new command for moving up: ");
+                                            String temp1 = input.nextLine();
+                                            while (temp1.length() > 1) {
+
+                                                System.out.printf("%n" +
+                                                        "You can only use one character as a command%n");
+                                                temp1 = input.nextLine();
+                                            }
+
+                                            control.setMoveUp(temp1);
+
+                                            decided = true;
+
+                                            break;
+
+                                        case 2:
+
+                                            System.out.print("Enter the new command for moving down: ");
+                                            temp1 = input.nextLine();
+                                            while (temp1.length() > 1) {
+
+                                                System.out.printf("%n" +
+                                                        "You can only use one character as a command%n");
+                                                temp1 = input.nextLine();
+                                            }
+
+                                            control.setMoveDown(temp1);
+
+                                            decided = true;
+
+                                            break;
+
+                                        case 3:
+
+                                            System.out.print("Enter the new command for moving right: ");
+                                            temp1 = input.nextLine();
+                                            while (temp1.length() > 1) {
+
+                                                System.out.printf("%n" +
+                                                        "You can only use one character as a command%n");
+                                                temp1 = input.nextLine();
+                                            }
+
+                                            control.setMoveRight(temp1);
+
+                                            decided = true;
+
+                                            break;
+
+
+                                        case 4:
+
+                                            System.out.print("Enter the new command for moving left: ");
+                                            temp1 = input.nextLine();
+                                            while (temp1.length() > 1) {
+
+                                                System.out.printf("%n" +
+                                                        "You can only use one character as a command%n");
+                                                temp1 = input.nextLine();
+                                            }
+
+                                            control.setMoveLeft(temp1);
+
+                                            decided = true;
+
+                                            break;
+
+                                        default:
+                                            System.out.printf("%n" +
+                                                    "Invalid option%n");
+                                            decided = false;
+                                    }
+                                }
+
+                                chosen = true;
+
+                            } catch (InputMismatchException a) {
+
+                                System.out.println("Invalid choice");
+
+                                chosen = false;
+                            }
+                        }
+
+
+                        break;
+
+                    case 3:
+
+                        break;
+
+                    case 4:
+
+                        break;
+
+                    case 5:
+
+                        break;
+
+                    case 6:
+
+                        break;
+
+                    case 7:
+
+                        break;
+                }
+            }
         }
 
     }
@@ -571,6 +601,14 @@ public class theTextAdventure {
                         return userInput;
                     } else userInput = 0;
                     break;
+                case 5:
+                    System.out.println("You have selected Submenu is this correct? yes/no");
+                    correct = input.nextLine();
+                    if (correct.equals("yes")) {
+                        System.out.println("Opening submenu");
+                        return userInput;
+                    } else userInput = 0;
+                    break;
                 default:
                     System.out.println("Please enter a proper value. ");
                     break;
@@ -661,79 +699,99 @@ public class theTextAdventure {
 
 
         Coffee coffee = new Coffee("Coffee");
-        Treasure treasure = new Treasure("Gold Box", 10);
+        Item itemModelCoffee = coffee;
+        ItemView itemViewCoffee = new ItemView(itemModelCoffee);
+        ItemController itemControllerCoffee = new ItemController(itemModelCoffee, itemViewCoffee);
+        Treasure treasure = new Treasure("Gold Chest", 5000);
+        Item itemModelTreasure = treasure;
+        ItemView itemViewTreasure = new ItemView(itemModelTreasure);
+        ItemController itemControllerTreasure = new ItemController(itemModelTreasure, itemViewTreasure);
         Heart heart = new Heart("Heart");
+        Item itemModelHeart = heart;
+        ItemView itemViewHeart = new ItemView(itemModelHeart);
+        ItemController itemControllerHeart = new ItemController(itemModelHeart, itemViewHeart);
         HealthPotion healthPotion = new HealthPotion("Health portion");
+        Item itemModelHealthPotion = healthPotion;
+        ItemView itemViewHealthPotion = new ItemView(itemModelHealthPotion);
+        ItemController itemControllerHealthPotion = new ItemController(itemModelHealthPotion, itemViewHealthPotion);
         Key goldKey = new Key("Golden key");
-        Monster monster1 = new Monster(50, 40, 15, "Monster 1", "The Monster", treasure, true, 3);
-        MonsterView monsterView = new MonsterView(monster1);
-        MonsterController monsterController = new MonsterController(monster1, monsterView);
-        Monster monster2 = new Monster(40, 30, 10, "Monster 2", "The Monster", coffee, true, 2);
-        MonsterView monster2View = new MonsterView(monster2);
-        MonsterController monster2Controller = new MonsterController(monster2, monster2View);
-        Monster monster3 = new Monster(30, 20, 8, "Monster 3", "The Monster", healthPotion, true, 1);
-        MonsterView monster3View = new MonsterView(monster3);
-        MonsterController monster3Controller = new MonsterController(monster3, monster3View);
-        Monster boss = new Monster(100, 40, 60, "the boss...", "The Boss ", goldKey, true, 40);
-        MonsterView monsterViewBoss = new MonsterView(boss);
-        MonsterController monsterControllerBoss = new MonsterController(boss, monsterViewBoss);
+        KeyView goldKeyView = new KeyView(goldKey);
+        KeyController goldKeyController = new KeyController(goldKey, goldKeyView);
         Key woodenKey = new Key("Wooden key");
         Key stoneKey = new Key("Stone key");
         Key silverKey = new Key("Silver key");
         Key goldenKey = new Key("Golden key");
         Monster theBoss = new Monster(50, 40, 15, "The boss", "The Boss", treasure, true, 4);
         Monster owlBear = new Monster(40, 30, 6, "The owl bear", "The Owl Bear", healthPotion, true, 3);
-        Monster skeleton = new Monster(30, 20, 8, "The owl bear", "The Owl Bear", healthPotion, true, 2);
+        Monster skeleton = new Monster(30, 20, 8, "The Skeleton", "The Skeleton", healthPotion, true, 2);
         Monster bat = new Monster(20, 10, 10, "The Bat", "The Bat", coffee, true, 1);
-        Door woodenDoor = new Door(true, "wooden Key", "The door is ancient and maybe won't open ");
-        Door stoneDoor = new Door(true, "stone key", "you need need to be careful when you use the key inside this door ,might be broken easily");
-        Door goldenDoor = new Door(true, "golden key", "The golden door takes you out ! you are almost free");
-
+        Door woodenDoor = new Door(true, "Wooden Key", "The door is ancient and maybe won't open ");
+        Door stoneDoor = new Door(true, "Stone key", "you need need to be careful when you use the key inside this door ,might be broken easily");
+        Door goldenDoor = new Door(true, "Golden key", "The golden door takes you out ! you are almost free");
+        Door silverDoor = new Door(true, "Silver Key", "This door is bright silver just like the key");
         for (int i = 0; i < room.length; i++) {
             for (int j = 0; j < room[i].length; j++) {
 
                 if (i == 8 && j == 5) {
-                    Room roomModel = new Room("Room description", true);
+                    Room roomModel = new Room("The Starting Room", true);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
+
                 } else if (i == 0 && j == 3) {
-                    Room roomModel = new Room("Room description", false);
+                    Room roomModel = new Room("The Exit", false, treasure, goldenDoor, true);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
 
                 } else if (i == 1 && j == 3) {
-                    Room roomModel = new Room("Room Description", treasure, true, false, theBoss, true);
+                    Room roomModel = new Room("The Boss Room", goldenKey, true, false, theBoss, true);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
 
-                } else if ((i == 1 && j == 1) || (i == 3 && j == 6)) {
-                    Room roomModel = new Room("Room Description", false, heart, true);
+                } else if (i == 1 && j == 1) {
+                    Room roomModel = new Room("The Silver Door room", false, coffee, silverDoor, true);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 5 && j == 8) {
-                    Room roomModel = new Room("Room description", healthPotion, true, false, monster1, true);
+                    Room roomModel = new Room("The Skeleton room", stoneKey, true, false, skeleton, true);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 6 && j == 3) {
-                    Room roomModel = new Room("Room description", coffee, true, false, monster2, true);
+                    Room roomModel = new Room("The Owl bear room", silverKey, true, false, owlBear, true);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 7 && j == 8) {
-                    Room roomModel = new Room("Room Description", false, treasure, true);
+                    Room roomModel = new Room("The wooden door room", false, healthPotion, woodenDoor, true);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
-                } else if (i == 0 || j == 0 || i == 9 || j == 9 || i == 4) {
-                    Room roomModel = new Room("Room description", false);
+
+                } else if (i == 8 && j == 8) {
+                    Room roomModel = new Room("The Bat room", woodenKey, true, false, bat, true);
+                    RoomView roomView = new RoomView(roomModel);
+                    RoomController roomController = new RoomController(roomModel, roomView);
+                    room[i][j] = roomModel;
+
+                } else if (i == 3 && j == 6) {
+                    Room roomModel = new Room(" The Stone Door room", false, heart, stoneDoor, true);
+                    RoomView roomView = new RoomView(roomModel);
+                    RoomController roomController = new RoomController(roomModel, roomView);
+                    room[i][j] = roomModel;
+
+                } else if (i == 0 || j == 0 || i == 9 || j == 9 || i == 1 && j == 2 || i == 2 && j == 2
+                        || i == 1 && j == 4 || i == 1 && j == 8 || i == 2 && j == 6 || i == 3 && j == 3 || i == 3 && j == 4
+                        || i == 3 && j == 7 || i == 4 && j == 1 || i == 4 && j == 3 || i == 4 && j == 4 || i == 4 && j == 5
+                        || i == 4 && j == 6 || i == 6 && j == 2 || i == 6 && j == 4 || i == 6 && j == 5 || i == 7 && j == 7
+                        || i == 6 && j == 7 || i == 6 && j == 8 || i == 7 && j == 3 || i == 7 && j == 4 || i == 8 && j == 1) {
+                    Room roomModel = new Room("wall", false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
@@ -745,10 +803,22 @@ public class theTextAdventure {
                     room[i][j] = roomModel;
 
                 } else if (i == 8 || i == 7) {
-                    int chanceForMonster = rand.nextInt(2);
+                    int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room("Room description", treasure, true, false, monster1, true);
+                        Room roomModel = new Room("Room description", treasure, true, false, bat, true);
+                        RoomView roomView = new RoomView(roomModel);
+                        RoomController roomController = new RoomController(roomModel, roomView);
+                        room[i][j] = roomModel;
+
+                    } else if (chanceForMonster == 2) {
+                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true);
+                        RoomView roomView = new RoomView(roomModel);
+                        RoomController roomController = new RoomController(roomModel, roomView);
+                        room[i][j] = roomModel;
+
+                    } else if (chanceForMonster == 4) {
+                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -760,10 +830,22 @@ public class theTextAdventure {
                         room[i][j] = roomModel;
                     }
                 } else if (i == 5) {
-                    int chanceForMonster = rand.nextInt(2);
+                    int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room("Room description", treasure, true, false, monster2, true);
+                        Room roomModel = new Room("Room description", treasure, true, false, bat, true);
+                        RoomView roomView = new RoomView(roomModel);
+                        RoomController roomController = new RoomController(roomModel, roomView);
+                        room[i][j] = roomModel;
+
+                    } else if (chanceForMonster == 2) {
+                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true);
+                        RoomView roomView = new RoomView(roomModel);
+                        RoomController roomController = new RoomController(roomModel, roomView);
+                        room[i][j] = roomModel;
+
+                    } else if (chanceForMonster == 4) {
+                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -775,10 +857,22 @@ public class theTextAdventure {
                         room[i][j] = roomModel;
                     }
                 } else if (i == 1 || i == 2) {
-                    int chanceForMonster = rand.nextInt(2);
+                    int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room("Room description", treasure, true, false, monster3, true);
+                        Room roomModel = new Room("Room description", treasure, true, false, bat, true);
+                        RoomView roomView = new RoomView(roomModel);
+                        RoomController roomController = new RoomController(roomModel, roomView);
+                        room[i][j] = roomModel;
+
+                    } else if (chanceForMonster == 2) {
+                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true);
+                        RoomView roomView = new RoomView(roomModel);
+                        RoomController roomController = new RoomController(roomModel, roomView);
+                        room[i][j] = roomModel;
+
+                    } else if (chanceForMonster == 4) {
+                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -788,13 +882,12 @@ public class theTextAdventure {
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
-
                     }
                 }
             }
 
         }
-        for (int i = 0; i < room.length; i++) {
+      /*  for (int i = 0; i < room.length; i++) {
             for (int j = 0; j < room[i].length; j++) {
                 if (room[i][j].getFound()) {
                     System.out.println("Empty");
@@ -803,7 +896,7 @@ public class theTextAdventure {
                 }
             }
 
-        }
+        }*/
     }
 
     //
