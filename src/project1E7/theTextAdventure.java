@@ -725,6 +725,8 @@ public class theTextAdventure {
         Monster owlBear = new Monster(40, 30, 6, "The owl bear", "The Owl Bear", healthPotion, true, 3);
         Monster skeleton = new Monster(30, 20, 8, "The Skeleton", "The Skeleton", healthPotion, true, 2);
         Monster bat = new Monster(20, 10, 10, "The Bat", "The Bat", coffee, true, 1);
+        Monster Slime = new Monster(35,15,2,"The Slime","The Slime",null,true ,2 );
+        Monster Spiderling = new Monster(10,6,9,"The Spiderling,","Spiderling",null,true,1 );
         Door woodenDoor = new Door(true, "Wooden Key", "The door is ancient and maybe won't open ");
         Door stoneDoor = new Door(true, "Stone key", "you need need to be careful when you use the key inside this door ,might be broken easily");
         Door goldenDoor = new Door(true, "Golden key", "The golden door takes you out ! you are almost free");
@@ -887,6 +889,54 @@ public class theTextAdventure {
             }
 
         }
+    }
+
+    public void mapPrinter(Room[][] room) {
+
+        for (int i = 0; i < room.length; i++) {
+            for (int i1 = 0; i1 < 3; i1++) {
+                for (int j = 0; j < room[i].length; j++) {
+                    if (!room[i][j].getFound()) {
+                        if (i1 == 0) {
+                            System.out.print("-  -");
+                        } else if (i1 == 1) {
+                            System.out.print(" ?? ");
+                        } else {
+                            System.out.print("-  -");
+                        }
+                    } else if (room[i][j].getDescription().equals("Room")) {
+                        if (i1 == 0) {
+                            System.out.print("-  -");
+                        } else if (i1 == 1) {
+                            System.out.print(" -- ");
+                        } else {
+                            System.out.print("-  -");
+                        }
+                    } else if (room[i][j].getDescription().equals("Wall")) {
+                        if (i1 == 0) {
+                            System.out.print("¤¤¤¤");
+                        } else if (i1 == 1) {
+                            System.out.print("¤¤¤¤");
+                        } else {
+                            System.out.print("¤¤¤¤");
+                        }
+                    } else if (room[i][j].getDescription().equals("CurrentRoom")) {
+                        if (i1 == 0) {
+                            System.out.print(" cD ");
+                        } else if (i1 == 1) {
+                            System.out.print("iHHi");
+                        } else {
+                            System.out.print(" || ");
+                        }
+                    }
+                    System.out.print(" ");
+                }
+                //}
+                System.out.println("");
+            }
+        }
+    }
+
       /*  for (int i = 0; i < room.length; i++) {
             for (int j = 0; j < room[i].length; j++) {
                 if (room[i][j].getFound()) {
@@ -897,7 +947,6 @@ public class theTextAdventure {
             }
 
         }*/
-    }
 
     //
 //
