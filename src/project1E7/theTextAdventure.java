@@ -297,10 +297,10 @@ public class theTextAdventure {
                 }
             }
 
-        } else if (choice == 4) {
+        } else if (choice == 5) {
             System.exit(0);
 
-        } else if (choice == 5) {
+        } else if (choice == 4) {
             {
 
                 int temp = myApp.subMenu();
@@ -599,6 +599,7 @@ public class theTextAdventure {
                     break;
                 case 4:
                     System.out.println("You have selected Submenu is this correct? yes/no");
+                    input.nextLine();
                     correct = input.nextLine();
                     if (correct.equals("yes")) {
                         System.out.println("Opening submenu");
@@ -635,7 +636,7 @@ public class theTextAdventure {
 
     public int subMenu() {
 
-        int choice = 0;
+        int choice1 = 0;
         boolean chosen = false;
 
         do {
@@ -655,14 +656,14 @@ public class theTextAdventure {
                             "6- Load game %n" +
                             "7- Quit game %n ");
 
-                    choice = input.nextInt();
+                    choice1 = input.nextInt();
 
                     if (tempCount == 0) {
 
-                        choice = input.nextInt();
+                        choice1 = input.nextInt();
                     } else {
                         input.nextLine();
-                        choice = input.nextInt();
+                        choice1 = input.nextInt();
                     }
 
                     chosen1 = true;
@@ -673,7 +674,7 @@ public class theTextAdventure {
                     ++tempCount;
                 }
 
-                if (choice > 7 || choice < 0) {
+                if (choice1 > 7 || choice1 < 0) {
 
                     System.out.println("Choose an available option");
 
@@ -683,7 +684,7 @@ public class theTextAdventure {
         }
         while (!chosen);
 
-        return choice;
+        return choice1;
     }
 
 
