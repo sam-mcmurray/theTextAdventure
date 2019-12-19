@@ -50,7 +50,6 @@ public class theTextAdventure {
             Random rand = new Random();
             myApp.createWorld();
             Hero theHero = (myApp.selectHero());
-            myApp.namer(theHero);
             HeroView heroView = new HeroView(theHero);
             HeroController heroController = new HeroController(theHero, heroView);
             heroView.printStats();
@@ -260,6 +259,7 @@ public class theTextAdventure {
                 roomController.setFound(currentRoom);
                 roomView.roomDoors(myApp.room, currentRoom);
                 currentRoom = heroController.moveHero(myApp.room, currentRoom);
+                //myApp.mapPrinter(myApp.room);
                 run = false;
 
             } while (theHero.isAlive() == true || theHero.getLives() > 0);
@@ -461,15 +461,15 @@ public class theTextAdventure {
     }
 
     public Hero selectHero() {
-        Hero warrior = new Hero(100, 70, 30, "The Warrior...", "Warrior", 40,"Warrior");
+        Hero warrior = new Hero(100, 70, 30, "The Warrior...", "Warrior", 40, "Warrior");
         HeroView heroViewWarrior = new HeroView(warrior);
         heroViewWarrior.printStats();
 
-        Hero mage = new Hero(60, 60, 40, "The Mage...", "Mage", 50,"Warrior");
+        Hero mage = new Hero(60, 60, 40, "The Mage...", "Mage", 50, "Warrior");
         HeroView heroViewMage = new HeroView(mage);
         heroViewMage.printStats();
 
-        Hero thief = new Hero(80, 60, 80, "The Thief...", "Thief", 60,"Warrior");
+        Hero thief = new Hero(80, 60, 80, "The Thief...", "Thief", 60, "Warrior");
         HeroView heroViewThief = new HeroView(thief);
         heroViewThief.printStats();
 
@@ -500,6 +500,7 @@ public class theTextAdventure {
                 switch (userInput) {
                     case 1:
                         selected = heroViewWarrior.selectHero(warrior);
+                        warrior.setCharacterClass("Warrior");
                         if (selected == false) {
                             return warrior;
                         } else
@@ -507,6 +508,7 @@ public class theTextAdventure {
                         break;
                     case 2:
                         selected = heroViewWarrior.selectHero(mage);
+                        mage.setCharacterClass("Mage");
                         if (selected == false) {
                             return mage;
                         } else
@@ -514,6 +516,7 @@ public class theTextAdventure {
                         break;
                     case 3:
                         selected = heroViewWarrior.selectHero(thief);
+                        thief.setCharacterClass("Thief");
                         if (selected == false) {
                             return thief;
                         } else
@@ -531,28 +534,7 @@ public class theTextAdventure {
         }
         return null;
     }
-    public void namer(Hero theHero) {
-        String choice = "";
-        do {
-            System.out.println("Would you like to change your characters name? (yes/no)");
-            choice = input.nextLine();
-            if (choice.equals("yes")) {
-                System.out.println("Enter name: ");
-                String tempName = input.nextLine();
-                System.out.println("Your name is currently " + tempName + ", would you like to keep this name? (yes/no)");
-                choice = input.nextLine();
-                if (choice.equals("yes")) {
-                    theHero.setName(tempName);
-                    choice = "yes";
-                } else if (choice.equals("no")) {
-                    System.out.println("Redirecting to name choice menu");
-                } else {
-                    System.out.println("Invalid Response");
-                }
-            }
 
-        } while (!choice.equals("yes"));
-    }
     public int startMenu() {
 
         int userInput = 0;
@@ -748,8 +730,8 @@ public class theTextAdventure {
         Monster owlBear = new Monster(40, 30, 6, "The owl bear", "The Owl Bear", healthPotion, true, 3);
         Monster skeleton = new Monster(30, 20, 8, "The Skeleton", "The Skeleton", healthPotion, true, 2);
         Monster bat = new Monster(20, 10, 10, "The Bat", "The Bat", coffee, true, 1);
-        Monster Slime = new Monster(35,15,2,"The Slime","The Slime",null,true ,2 );
-        Monster Spiderling = new Monster(10,6,9,"The Spiderling,","Spiderling",null,true,1 );
+        Monster Slime = new Monster(35, 15, 2, "The Slime", "The Slime", null, true, 2);
+        Monster Spiderling = new Monster(10, 6, 9, "The Spiderling,", "Spiderling", null, true, 1);
         Door woodenDoor = new Door(true, "Wooden Key", "The door is ancient and maybe won't open ");
         Door stoneDoor = new Door(true, "Stone key", "you need need to be careful when you use the key inside this door ,might be broken easily");
         Door goldenDoor = new Door(true, "Golden key", "The golden door takes you out ! you are almost free");
@@ -758,55 +740,55 @@ public class theTextAdventure {
             for (int j = 0; j < room[i].length; j++) {
 
                 if (i == 8 && j == 5) {
-                    Room roomModel = new Room("The Starting Room", true);
+                    Room roomModel = new Room("The Starting Room", true, true);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
 
                 } else if (i == 0 && j == 3) {
-                    Room roomModel = new Room("The Exit", false, treasure, goldenDoor, true);
+                    Room roomModel = new Room("The Exit", false, treasure, goldenDoor, true, false);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
 
                 } else if (i == 1 && j == 3) {
-                    Room roomModel = new Room("The Boss Room", goldenKey, true, false, theBoss, true);
+                    Room roomModel = new Room("The Boss Room", goldenKey, true, false, theBoss, true, false);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
 
                 } else if (i == 1 && j == 1) {
-                    Room roomModel = new Room("The Silver Door room", false, coffee, silverDoor, true);
+                    Room roomModel = new Room("The Silver Door room", false, coffee, silverDoor, true, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 5 && j == 8) {
-                    Room roomModel = new Room("The Skeleton room", stoneKey, true, false, skeleton, true);
+                    Room roomModel = new Room("The Skeleton room", stoneKey, true, false, skeleton, true, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 6 && j == 3) {
-                    Room roomModel = new Room("The Owl bear room", silverKey, true, false, owlBear, true);
+                    Room roomModel = new Room("The Owl bear room", silverKey, true, false, owlBear, true, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 7 && j == 8) {
-                    Room roomModel = new Room("The wooden door room", false, healthPotion, woodenDoor, true);
+                    Room roomModel = new Room("The wooden door room", false, healthPotion, woodenDoor, true, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 8 && j == 8) {
-                    Room roomModel = new Room("The Bat room", woodenKey, true, false, bat, true);
+                    Room roomModel = new Room("The Bat room", woodenKey, true, false, bat, true, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 3 && j == 6) {
-                    Room roomModel = new Room(" The Stone Door room", false, heart, stoneDoor, true);
+                    Room roomModel = new Room(" The Stone Door room", false, heart, stoneDoor, true, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
@@ -816,13 +798,13 @@ public class theTextAdventure {
                         || i == 3 && j == 7 || i == 4 && j == 1 || i == 4 && j == 3 || i == 4 && j == 4 || i == 4 && j == 5
                         || i == 4 && j == 6 || i == 6 && j == 2 || i == 6 && j == 4 || i == 6 && j == 5 || i == 7 && j == 7
                         || i == 6 && j == 7 || i == 6 && j == 8 || i == 7 && j == 3 || i == 7 && j == 4 || i == 8 && j == 1) {
-                    Room roomModel = new Room("wall", false);
+                    Room roomModel = new Room("wall", false, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 6 || j == 7 || (i == 2 && j == 3) || i == 3) {
-                    Room roomModel = new Room("Room description", false);
+                    Room roomModel = new Room("Room description", false, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
@@ -831,25 +813,25 @@ public class theTextAdventure {
                     int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room("Room description", treasure, true, false, bat, true);
+                        Room roomModel = new Room("Room description", treasure, true, false, bat, true, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 2) {
-                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true);
+                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 4) {
-                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true);
+                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room("Room Descrition", false);
+                        Room roomModel = new Room("Room Descrition", false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -858,25 +840,25 @@ public class theTextAdventure {
                     int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room("Room description", treasure, true, false, bat, true);
+                        Room roomModel = new Room("Room description", treasure, true, false, bat, true, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 2) {
-                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true);
+                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 4) {
-                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true);
+                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room("Room Descrition", false);
+                        Room roomModel = new Room("Room Descrition", false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -885,25 +867,25 @@ public class theTextAdventure {
                     int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room("Room description", treasure, true, false, bat, true);
+                        Room roomModel = new Room("Room description", treasure, true, false, bat, true, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 2) {
-                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true);
+                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 4) {
-                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true);
+                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room("Room Descrition", false);
+                        Room roomModel = new Room("Room Descrition", false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -912,6 +894,7 @@ public class theTextAdventure {
             }
 
         }
+        //mapPrinter(room);
     }
 
     public void mapPrinter(Room[][] room) {
@@ -927,15 +910,7 @@ public class theTextAdventure {
                         } else {
                             System.out.print("-  -");
                         }
-                    } else if (room[i][j].getDescription().equals("Room")) {
-                        if (i1 == 0) {
-                            System.out.print("-  -");
-                        } else if (i1 == 1) {
-                            System.out.print(" -- ");
-                        } else {
-                            System.out.print("-  -");
-                        }
-                    } else if (room[i][j].getDescription().equals("Wall")) {
+                    } else if (room[i][j].getDescription().equals("wall")) {
                         if (i1 == 0) {
                             System.out.print("¤¤¤¤");
                         } else if (i1 == 1) {
@@ -943,7 +918,7 @@ public class theTextAdventure {
                         } else {
                             System.out.print("¤¤¤¤");
                         }
-                    } else if (room[i][j].getDescription().equals("CurrentRoom")) {
+                    } else if (room[i][j].getHasCharacter()) {
                         if (i1 == 0) {
                             System.out.print(" cD ");
                         } else if (i1 == 1) {
@@ -951,15 +926,21 @@ public class theTextAdventure {
                         } else {
                             System.out.print(" || ");
                         }
+                    } else {
+                        if (i1 == 0) {
+                            System.out.print("-  -");
+                        } else if (i1 == 1) {
+                            System.out.print(" -- ");
+                        } else {
+                            System.out.print("-  -");
+                        }
                     }
                     System.out.print(" ");
                 }
-                //}
                 System.out.println("");
             }
         }
     }
-
       /*  for (int i = 0; i < room.length; i++) {
             for (int j = 0; j < room[i].length; j++) {
                 if (room[i][j].getFound()) {

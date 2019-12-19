@@ -18,6 +18,7 @@ public class RoomView {
 
     public void roomDoors(Room[][] room, Room currentRoom) {
         boolean run;
+
             for (int i = 0; i < room.length; i++) {
                 for (int j = 0; j <room.length ; j++) {
                     if (currentRoom == room[i][j]) {

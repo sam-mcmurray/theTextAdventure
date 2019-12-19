@@ -3,6 +3,7 @@ package project1E7.Controller;
 
 import project1E7.Model.*;
 import project1E7.View.HeroView;
+import project1E7.theTextAdventure;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -71,7 +72,9 @@ public class HeroController {
                                 run = true;
                                 room[i][j] = currentRoom;
                             } else {
+                                room[i][(j+1)].setHasCharacter(false);
                                 currentRoom = room[i][j];
+                                currentRoom.setHasCharacter(true);
                                 run = false;
                                 return currentRoom;
                             }
@@ -82,7 +85,9 @@ public class HeroController {
                                 run = true;
                                 room[i][j] = currentRoom;
                             } else {
+                                room[i][(j-1)].setHasCharacter(false);
                                 currentRoom = room[i][j];
+                                currentRoom.setHasCharacter(true);
                                 run = false;
                                 return currentRoom;
                             }
@@ -93,7 +98,9 @@ public class HeroController {
                                 run = true;
                                 room[i][j] = currentRoom;
                             } else {
+                                room[(i-1)][j].setHasCharacter(false);
                                 currentRoom = room[i][j];
+                                currentRoom.setHasCharacter(true);
                                 run = false;
                                 return currentRoom;
                             }
@@ -104,7 +111,9 @@ public class HeroController {
                                 run = true;
                                 room[i][j] = currentRoom;
                             } else {
+                                room[(i+1)][j].setHasCharacter(false);
                                 currentRoom = room[i][j];
+                                currentRoom.setHasCharacter(true);
                                 run = false;
                                 return currentRoom;
                             }

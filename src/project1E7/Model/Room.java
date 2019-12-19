@@ -9,32 +9,36 @@ public class Room {
     private boolean hasItem = false;
     private boolean hasMonster;
     private Monster monster;
+    private boolean hasCharacter;
     private enum DOOR{NORTH,EAST,SOUTH,WEST}
 
 
-    public Room(String description, boolean found) {
+    public Room(String description, boolean found, boolean hasCharacter) {
         this.description = description;
         this.found = found;
+        this.hasCharacter = hasCharacter;
     }
 
 
-    public Room(String description, boolean found, Item item, boolean hasItem) {
+    public Room(String description, boolean found, Item item, boolean hasItem, boolean hasCharacter) {
         this.description = description;
         this.found = found;
         this.item = item;
         this.hasItem = hasItem;
+        this.hasCharacter = hasCharacter;
     }
 
-    public Room(String description, Item item, boolean hasMonster, boolean found, Monster monster, boolean hasItem) {
+    public Room(String description, Item item, boolean hasMonster, boolean found, Monster monster, boolean hasItem, boolean hasCharacter) {
         this.description = description;
         this.item = item;
         this.hasMonster = hasMonster;
         this.found = found;
         this.monster = monster;
         this.hasItem = hasItem;
+        this.hasCharacter = hasCharacter;
     }
 
-    public Room(String description, boolean found, Item item, boolean hasItem, boolean hasMonster, Monster monster, Door door, boolean islocked) {
+    public Room(String description, boolean found, Item item, boolean hasItem, boolean hasMonster, Monster monster, Door door, boolean islocked, boolean hasCharacter) {
         this.description = description;
         this.found = found;
         this.item = item;
@@ -43,14 +47,16 @@ public class Room {
         this.monster = monster;
         this.door = door;
         this.islocked = islocked;
+        this.hasCharacter = hasCharacter;
     }
 
-    public Room(String description, boolean found, Item item, Door door, boolean islocked) {
+    public Room(String description, boolean found, Item item, Door door, boolean islocked, boolean hasCharacter) {
         this.description = description;
         this.found = found;
         this.item = item;
         this.door = door;
         this.islocked = islocked;
+        this.hasCharacter = hasCharacter;
     }
 
     public String getDescription() {
@@ -122,4 +128,8 @@ public class Room {
     public void setIslocked(boolean islocked) {
         this.islocked = islocked;
     }
+
+    public void setHasCharacter(boolean hasCharacter) { this.hasCharacter = hasCharacter; }
+
+    public boolean getHasCharacter() { return hasCharacter; }
 }
