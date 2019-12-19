@@ -639,8 +639,6 @@ public class theTextAdventure {
         int choice1 = 0;
         boolean chosen = false;
 
-        do {
-
             boolean chosen1 = false;
             int tempCount = 0;
 
@@ -678,11 +676,9 @@ public class theTextAdventure {
 
                     System.out.println("Choose an available option");
 
-                    chosen = false;
+                    chosen1 = false;
                 }
             }
-        }
-        while (!chosen);
 
         return choice1;
     }
