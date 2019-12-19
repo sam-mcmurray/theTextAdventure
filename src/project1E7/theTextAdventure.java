@@ -439,7 +439,7 @@ public class theTextAdventure {
                         break;
 
                     case 4:
-
+                        myApp.mapPrinter(myApp.room);
                         break;
 
                     case 5:
