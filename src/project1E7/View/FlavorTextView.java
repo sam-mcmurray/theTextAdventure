@@ -1,6 +1,9 @@
 package project1E7.View;
 
 import project1E7.Model.Hero;
+import project1E7.View.HeroView;
+
+import java.util.*;
 
 public class FlavorTextView {
 //this all should be where they make sense monster flavor text in monster view
@@ -126,7 +129,10 @@ public class FlavorTextView {
     }
 
     public String getEncounterFlavorTextBat1() {
-        encounterFlavorTextBat1 = "Too late! While peering into one p the next rooms ";
+        // Remove '//' when adding to destination
+        //String characterClass = model.getCharacterClass();
+        encounterFlavorTextBat1 = "Too late! While peering into one of the next rooms some leather winged creature flies directly at you. you take out your " + /*getWeapon(characterClass) + */ " without any time to spare " +
+                "perry its razor sharp claws. What the oversized bat thought was an easy meal is going to put up a fight.";
         return encounterFlavorTextBat1;
     }
 

@@ -259,7 +259,6 @@ public class theTextAdventure {
                 roomController.setFound(currentRoom);
                 roomView.roomDoors(myApp.room, currentRoom);
                 currentRoom = heroController.moveHero(myApp.room, currentRoom);
-                //myApp.mapPrinter(myApp.room);
                 run = false;
 
             } while (theHero.isAlive() == true || theHero.getLives() > 0);
@@ -863,6 +862,33 @@ public class theTextAdventure {
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
                     }
+                } else if (i == 4) {
+                    int chanceForMonster = rand.nextInt(6);
+
+                    if (chanceForMonster == 0) {
+                        Room roomModel = new Room("Room description", treasure, true, false, bat, true, false);
+                        RoomView roomView = new RoomView(roomModel);
+                        RoomController roomController = new RoomController(roomModel, roomView);
+                        room[i][j] = roomModel;
+
+                    } else if (chanceForMonster == 2) {
+                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true, false);
+                        RoomView roomView = new RoomView(roomModel);
+                        RoomController roomController = new RoomController(roomModel, roomView);
+                        room[i][j] = roomModel;
+
+                    } else if (chanceForMonster == 4) {
+                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true, false);
+                        RoomView roomView = new RoomView(roomModel);
+                        RoomController roomController = new RoomController(roomModel, roomView);
+                        room[i][j] = roomModel;
+
+                    } else {
+                        Room roomModel = new Room("Room Descrition", false, false);
+                        RoomView roomView = new RoomView(roomModel);
+                        RoomController roomController = new RoomController(roomModel, roomView);
+                        room[i][j] = roomModel;
+                    }
                 } else if (i == 1 || i == 2) {
                     int chanceForMonster = rand.nextInt(6);
 
@@ -894,7 +920,9 @@ public class theTextAdventure {
             }
 
         }
-        //mapPrinter(room);
+
+        mapPrinter(room);
+
     }
 
     public void mapPrinter(Room[][] room) {
