@@ -70,7 +70,7 @@ public class HeroController {
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
                                 run = true;
-                                room[i][j] = currentRoom;
+                                j = j + 1;
                             } else {
                                 room[i][(j+1)].setHasCharacter(false);
                                 currentRoom = room[i][j];
@@ -83,7 +83,7 @@ public class HeroController {
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
                                 run = true;
-                                room[i][j] = currentRoom;
+                                j = j - 1;
                             } else {
                                 room[i][(j-1)].setHasCharacter(false);
                                 currentRoom = room[i][j];
@@ -96,7 +96,7 @@ public class HeroController {
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
                                 run = true;
-                                room[i][j] = currentRoom;
+                                i = i - 1;
                             } else {
                                 room[(i-1)][j].setHasCharacter(false);
                                 currentRoom = room[i][j];
@@ -109,7 +109,7 @@ public class HeroController {
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
                                 run = true;
-                                room[i][j] = currentRoom;
+                                i = i + 1;
                             } else {
                                 room[(i+1)][j].setHasCharacter(false);
                                 currentRoom = room[i][j];
