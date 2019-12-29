@@ -34,187 +34,149 @@ public class theTextAdventure {
         myApp.controls[2] = control.getMoveRight();
         myApp.controls[3] = control.getMoveLeft();
 
-
         int choice;
-        choice = myApp.startMenu();
+        boolean decided1 = false;
 
-        while (choice == 0) {
-
-            System.out.println("Improper value entered");
+        while (!decided1) {
             choice = myApp.startMenu();
-        }
-
-        if (choice == 1) {
 
 
-            Random rand = new Random();
-            myApp.createWorld();
-            Hero theHero = (myApp.selectHero());
-            HeroView heroView = new HeroView(theHero);
-            HeroController heroController = new HeroController(theHero, heroView);
-            heroView.printStats();
-            heroView.heroStory();
-            Room currentRoom = myApp.room[8][5];
-            do {
-                boolean run = true;
-                Room roomModel = currentRoom;
-                RoomView roomView = new RoomView(roomModel);
-                RoomController roomController = new RoomController(roomModel, roomView);
-                roomView.flavorTextRoom();
+            while (choice == 0) {
 
-                theHero.setKeyRing(myApp.keyRing);
-                if (roomModel.getFound() == false) {
-                    if (roomController.roomHasMonster()) {
-                        Monster monsterModel = roomController.getMonster();
-                        MonsterView monsterView = new MonsterView(monsterModel);
-                        MonsterController monsterController = new MonsterController(monsterModel, monsterView);
+                System.out.println("Improper value entered");
+                choice = myApp.startMenu();
+            }
+
+            if (choice == 1) {
 
 
-                        int encounterChoice = 0;
-                        monsterView.flavorTextMonster();
+                Random rand = new Random();
+                myApp.createWorld();
+                Hero theHero = (myApp.selectHero());
+                HeroView heroView = new HeroView(theHero);
+                HeroController heroController = new HeroController(theHero, heroView);
+                heroView.printStats();
+                heroView.heroStory();
+                Room currentRoom = myApp.room[8][5];
+                do {
+                    boolean run = true;
+                    Room roomModel = currentRoom;
+                    RoomView roomView = new RoomView(roomModel);
+                    RoomController roomController = new RoomController(roomModel, roomView);
+                    roomView.flavorTextRoom();
 
-                        if (heroController.attackFirst(monsterController) == true) {
+                    theHero.setKeyRing(myApp.keyRing);
+                    if (roomModel.getFound() == false) {
+                        if (roomController.roomHasMonster()) {
+                            Monster monsterModel = roomController.getMonster();
+                            MonsterView monsterView = new MonsterView(monsterModel);
+                            MonsterController monsterController = new MonsterController(monsterModel, monsterView);
 
-                            do {
-                                encounterChoice = monsterView.encounterMenu();
 
-                                switch (encounterChoice) {
+                            int encounterChoice = 0;
+                            monsterView.flavorTextMonster();
 
-                                    case 1:
-                                        if (theHero.isAlive() == true) {
-                                            if (heroController.attack(monsterController) == true) {
-                                                heroView.hitMonsterFlavorText(monsterModel);
-                                                monsterView.printStatus(monsterModel);
+                            if (heroController.attackFirst(monsterController) == true) {
 
-                                            } else {
-                                                heroView.missMonsterFlavorText(monsterModel);
-                                                monsterView.printStatus(monsterModel);
+                                do {
+                                    encounterChoice = monsterView.encounterMenu();
+
+                                    switch (encounterChoice) {
+
+                                        case 1:
+                                            if (theHero.isAlive() == true) {
+                                                if (heroController.attack(monsterController) == true) {
+                                                    heroView.hitMonsterFlavorText(monsterModel);
+                                                    monsterView.printStatus(monsterModel);
+
+                                                } else {
+                                                    heroView.missMonsterFlavorText(monsterModel);
+                                                    monsterView.printStatus(monsterModel);
+                                                }
                                             }
-                                        }
-                                        if (monsterModel.isAlive() == true) {
-                                            if (monsterController.attack(heroController) == true) {
-                                                monsterView.monsterHitFlavorText(theHero);
+                                            if (monsterModel.isAlive() == true) {
+                                                if (monsterController.attack(heroController) == true) {
+                                                    monsterView.monsterHitFlavorText(theHero);
+                                                    heroView.printStatus(theHero);
+                                                } else
+                                                    monsterView.monsterMissFlavorText(theHero);
                                                 heroView.printStatus(theHero);
-                                            } else
-                                                monsterView.monsterMissFlavorText(theHero);
-                                            heroView.printStatus(theHero);
-                                        } else {
-                                            run = false;
-                                        }
-                                        run = true;
-                                        break;
-                                    case 2:
-                                        if (heroController.flee(theHero) == true) {
-                                            run = false;
-                                        } else
+                                            } else {
+                                                run = false;
+                                            }
                                             run = true;
-                                        break;
-                                    case 3:
-                                        heroView.inventory(theHero.getBackPack());
-                                        break;
-                                    default:
-                                        System.out.println("Please enter a proper value.");
-                                }
-                            } while (run == true && (monsterModel.isAlive() == true && theHero.isAlive() == true));
+                                            break;
+                                        case 2:
+                                            if (heroController.flee(theHero) == true) {
+                                                run = false;
+                                            } else
+                                                run = true;
+                                            break;
+                                        case 3:
+                                            heroView.inventory(theHero.getBackPack());
+                                            break;
+                                        default:
+                                            System.out.println("Please enter a proper value.");
+                                    }
+                                } while (run == true && (monsterModel.isAlive() == true && theHero.isAlive() == true));
 
-                        } else
+                            } else
 
-                            do {
+                                do {
 
-                                if (monsterController.attack(heroController) == true && monsterModel.isAlive() == true) {
-                                    monsterView.monsterHitFlavorText(theHero);
+                                    if (monsterController.attack(heroController) == true && monsterModel.isAlive() == true) {
+                                        monsterView.monsterHitFlavorText(theHero);
+                                        heroView.printStatus(theHero);
+                                        encounterChoice = monsterView.encounterMenu();
+
+                                    } else
+                                        monsterView.monsterMissFlavorText(theHero);
                                     heroView.printStatus(theHero);
                                     encounterChoice = monsterView.encounterMenu();
 
-                                } else
-                                    monsterView.monsterMissFlavorText(theHero);
-                                heroView.printStatus(theHero);
-                                encounterChoice = monsterView.encounterMenu();
+                                    switch (encounterChoice) {
 
-                                switch (encounterChoice) {
+                                        case 1:
+                                            if (theHero.isAlive() == true) {
+                                                if (heroController.attack(monsterController) == true) {
+                                                    heroView.hitMonsterFlavorText(monsterModel);
+                                                    monsterView.printStatus(monsterModel);
 
-                                    case 1:
-                                        if (theHero.isAlive() == true) {
-                                            if (heroController.attack(monsterController) == true) {
-                                                heroView.hitMonsterFlavorText(monsterModel);
+
+                                                } else
+                                                    heroView.missMonsterFlavorText(monsterModel);
                                                 monsterView.printStatus(monsterModel);
-
-
-                                            } else
-                                                heroView.missMonsterFlavorText(monsterModel);
-                                            monsterView.printStatus(monsterModel);
-                                        } else {
-                                            run = false;
-                                        }
-                                        run = true;
-                                        break;
-                                    case 2:
-                                        if (heroController.flee(theHero) == true) {
-
-                                            run = false;
-                                        } else
+                                            } else {
+                                                run = false;
+                                            }
                                             run = true;
-                                        break;
-                                    case 3:
-                                        heroView.inventory(theHero.getBackPack());
-                                        break;
-                                    default:
-                                        System.out.println("Please enter a proper value.");
-                                }
-                            } while (run == true && (monsterModel.isAlive() == true));
+                                            break;
+                                        case 2:
+                                            if (heroController.flee(theHero) == true) {
 
-                    }
-                    int chooseItem = 0;
-                    while (theHero.isAlive() == true && run == true) {
-                        if (roomController.roomHasItem() == true) {
-                            Item item = roomController.getItem();
-                            ItemView itemView = new ItemView(item);
-                            ItemController itemController = new ItemController(item, itemView);
+                                                run = false;
+                                            } else
+                                                run = true;
+                                            break;
+                                        case 3:
+                                            heroView.inventory(theHero.getBackPack());
+                                            break;
+                                        default:
+                                            System.out.println("Please enter a proper value.");
+                                    }
+                                } while (run == true && (monsterModel.isAlive() == true));
 
-
-                            do {
-                                itemView.viewItem(item);
-                                if (itemController.checkIfTreasure(item) == true) {
-                                    Treasure treasure = (Treasure) item;
-                                    itemController.checkTreasureValue(treasure);
-
-                                    heroController.addTreasure(treasure.getAmount());
-                                    run = false;
-                                    break;
-                                } else if (itemController.checkIfKey(item)) {
-                                    Key key = (Key) item;
-                                    KeyView keyView = new KeyView(key);
-                                    KeyController keyController = new KeyController(key, keyView);
-                                    keyView.foundKey();
-                                    myApp.keyRing = heroController.addKey(myApp.keyRing, key);
-                                    run = false;
-                                    break;
-                                } else
-                                    itemView.chooseWhatToDoWithItem(item);
-                                chooseItem = input.nextInt();
-                                switch (chooseItem) {
-                                    case 1:
-                                        heroController.useItemExternal(item);
-                                        break;
-                                    case 2:
-                                        break;
-                                    default:
-                                        System.out.println("Please enter a proper value.");
-                                        break;
-                                }
-
-                            } while (chooseItem >= 3 || chooseItem <= 0);
-
-
-                        } else if (roomController.roomHasItem() == false) {
-
-                            Item item = roomController.setRandomItem();
-                            if (item != null) {
+                        }
+                        int chooseItem = 0;
+                        while (theHero.isAlive() == true && run == true) {
+                            if (roomController.roomHasItem() == true) {
+                                Item item = roomController.getItem();
                                 ItemView itemView = new ItemView(item);
                                 ItemController itemController = new ItemController(item, itemView);
 
+
                                 do {
-                                    boolean selected = false;
+                                    itemView.viewItem(item);
                                     if (itemController.checkIfTreasure(item) == true) {
                                         Treasure treasure = (Treasure) item;
                                         itemController.checkTreasureValue(treasure);
@@ -222,241 +184,295 @@ public class theTextAdventure {
                                         heroController.addTreasure(treasure.getAmount());
                                         run = false;
                                         break;
+                                    } else if (itemController.checkIfKey(item)) {
+                                        Key key = (Key) item;
+                                        KeyView keyView = new KeyView(key);
+                                        KeyController keyController = new KeyController(key, keyView);
+                                        keyView.foundKey();
+                                        myApp.keyRing = heroController.addKey(myApp.keyRing, key);
+                                        run = false;
+                                        break;
                                     } else
                                         itemView.chooseWhatToDoWithItem(item);
-
-                                    while (!selected) {
-                                        try {
-                                            chooseItem = input.nextInt();
-                                            switch (chooseItem) {
-                                                case 1:
-                                                    heroController.useItemExternal(item);
-                                                    run = false;
-                                                    break;
-                                                case 2:
-                                                    break;
-
-                                                default:
-                                                    System.out.println("Please enter a proper value.");
-
-                                            }
-                                            selected = true;
-
-                                        } catch (InputMismatchException e) {
-
-                                            System.out.println("Invalid choice!");
-                                            selected = false;
-                                        }
+                                    chooseItem = input.nextInt();
+                                    switch (chooseItem) {
+                                        case 1:
+                                            heroController.useItemExternal(item);
+                                            break;
+                                        case 2:
+                                            break;
+                                        default:
+                                            System.out.println("Please enter a proper value.");
+                                            break;
                                     }
-                                } while ((chooseItem >= 3 || chooseItem <= 0) && run == true);
+
+                                } while (chooseItem >= 3 || chooseItem <= 0);
+
+
+                            } else if (roomController.roomHasItem() == false) {
+
+                                Item item = roomController.setRandomItem();
+                                if (item != null) {
+                                    ItemView itemView = new ItemView(item);
+                                    ItemController itemController = new ItemController(item, itemView);
+
+                                    do {
+                                        boolean selected = false;
+                                        if (itemController.checkIfTreasure(item) == true) {
+                                            Treasure treasure = (Treasure) item;
+                                            itemController.checkTreasureValue(treasure);
+
+                                            heroController.addTreasure(treasure.getAmount());
+                                            run = false;
+                                            break;
+                                        } else
+                                            itemView.chooseWhatToDoWithItem(item);
+
+                                        while (!selected) {
+                                            try {
+                                                chooseItem = input.nextInt();
+                                                switch (chooseItem) {
+                                                    case 1:
+                                                        heroController.useItemExternal(item);
+                                                        run = false;
+                                                        break;
+                                                    case 2:
+                                                        break;
+
+                                                    default:
+                                                        System.out.println("Please enter a proper value.");
+
+                                                }
+                                                selected = true;
+
+                                            } catch (InputMismatchException e) {
+
+                                                System.out.println("Invalid choice!");
+                                                selected = false;
+                                            }
+                                        }
+                                    } while ((chooseItem >= 3 || chooseItem <= 0) && run == true);
+                                    run = false;
+                                }
                                 run = false;
                             }
-                            run = false;
                         }
                     }
-                }
 
-                roomController.setFound(currentRoom);
-                roomView.roomDoors(myApp.room, currentRoom);
-                currentRoom = heroController.moveHero(myApp.room, currentRoom);
-                run = false;
+                    roomController.setFound(currentRoom);
+                    roomView.roomDoors(myApp.room, currentRoom);
+                    currentRoom = heroController.moveHero(myApp.room, currentRoom);
+                    run = false;
 
-            } while (theHero.isAlive() == true || theHero.getLives() > 0);
+                } while (theHero.isAlive() == true || theHero.getLives() > 0);
 
 
-        } else if (choice == 2) {
-            System.out.println("Load Game");
+            } else if (choice == 2) {
+                System.out.println("Load Game");
 
-        } else if (choice == 3) {
+            } else if (choice == 3) {
 
-            if (!myApp.printUsers(users)) {
+                if (!myApp.printUsers(users)) {
 
-                boolean decision = false;
+                    boolean decision = false;
 
-                while (!decision) {
-                    System.out.printf("%n" +
-                            "There are no current users, would you like to create a new user? (Yes/No)");
+                    while (!decision) {
+                        System.out.printf("%n" +
+                                "There are no current users, would you like to create a new user? (Yes/No)");
 
-                    String answer = input.nextLine();
-                    if (answer == "Yes") {
-                        if (!myApp.createUser()) {
+                        String answer = input.nextLine();
+                        if (answer == "Yes") {
+                            if (!myApp.createUser()) {
+
+                                choice = 0;
+                                decision = true;
+                            }
+                        } else if (answer == "No") {
 
                             choice = 0;
                             decision = true;
+                        } else {
+
+                            System.out.println("Invalid answer!");
+                            decision = false;
                         }
-                    } else if (answer == "No") {
 
-                        choice = 0;
-                        decision = true;
-                    } else {
-
-                        System.out.println("Invalid answer!");
-                        decision = false;
                     }
-
                 }
-            }
 
-        } else if (choice == 5) {
-            System.exit(0);
+            } else if (choice == 5) {
+                System.exit(0);
 
-        } else if (choice == 4) {
-            {
+            } else if (choice == 4) {
+                {
 
-                int temp = myApp.subMenu();
+                    int temp = myApp.subMenu();
 
-                switch (temp) {
+                    switch (temp) {
 
-                    case 0:
+                        case 0:
 
-                        System.out.println("Exited menu");
+                            System.out.println("Exited menu");
 
-                        break;
+                            break;
 
-                    case 1:
+                        case 1:
 
-                        System.out.println("The following are the commands in place:");
+                            System.out.println("The following are the commands in place:");
 
-                        System.out.printf("Moving up: %s %n" +
-                                "Moving down: %s %n" +
-                                "Moving right: %s %n" +
-                                "Moving left: %s %n", control.getMoveUp(), control.getMoveDown(), control.getMoveRight(), control.getMoveLeft());
+                            System.out.printf("Moving up: %s %n" +
+                                    "Moving down: %s %n" +
+                                    "Moving right: %s %n" +
+                                    "Moving left: %s %n", control.getMoveUp(), control.getMoveDown(), control.getMoveRight(), control.getMoveLeft());
 
-                        break;
+                            break;
 
-                    case 2:
+                        case 2:
 
-                        boolean chosen = false;
+                            boolean chosen = false;
 
-                        while (!chosen) {
+                            while (!chosen) {
 
-                            try {
+                                try {
 
-                                System.out.printf("Which one of the controls would you like to change: ");
+                                    System.out.printf("Which one of the controls would you like to change: ");
 
-                                System.out.printf("1- Moving up: %s %n" +
-                                        "2- Moving down: %s %n" +
-                                        "3- Moving right: %s %n" +
-                                        "4- Moving left: %s %n", control.getMoveUp(), control.getMoveDown(), control.getMoveRight(), control.getMoveLeft());
+                                    System.out.printf("%n" +
+                                            "1- Moving up: %s %n" +
+                                            "2- Moving down: %s %n" +
+                                            "3- Moving right: %s %n" +
+                                            "4- Moving left: %s %n", control.getMoveUp(), control.getMoveDown(), control.getMoveRight(), control.getMoveLeft());
 
-                                int choice1 = input.nextInt();
-                                boolean decided = false;
+                                    int choice1 = input.nextInt();
+                                    boolean decided = false;
 
-                                while (!decided) {
-                                    switch (choice1) {
+                                    while (!decided) {
+                                        switch (choice1) {
 
-                                        case 1:
+                                            case 1:
 
-                                            System.out.print("Enter the new command for moving up: ");
-                                            String temp1 = input.nextLine();
-                                            while (temp1.length() > 1) {
+                                                System.out.print("Enter the new command for moving up: ");
+                                                input.nextLine();
+                                                String temp1 = input.nextLine();
+                                                while (temp1.length() > 1) {
 
-                                                System.out.printf("%n" +
-                                                        "You can only use one character as a command%n");
+                                                    System.out.printf("%n" +
+                                                            "You can only use one character as a command%n");
+
+                                                    System.out.print("Enter the new command for moving up: ");
+                                                    temp1 = input.nextLine();
+                                                }
+                                                control.setMoveUp(temp1);
+
+                                                decided = true;
+
+                                                break;
+
+                                            case 2:
+
+                                                System.out.print("Enter the new command for moving down: ");
+                                                input.nextLine();
                                                 temp1 = input.nextLine();
-                                            }
+                                                while (temp1.length() > 1) {
 
-                                            control.setMoveUp(temp1);
+                                                    System.out.printf("%n" +
+                                                            "You can only use one character as a command%n");
 
-                                            decided = true;
+                                                    System.out.print("Enter the new command for moving down: ");
+                                                    temp1 = input.nextLine();
+                                                }
 
-                                            break;
+                                                control.setMoveDown(temp1);
 
-                                        case 2:
+                                                decided = true;
 
-                                            System.out.print("Enter the new command for moving down: ");
-                                            temp1 = input.nextLine();
-                                            while (temp1.length() > 1) {
+                                                break;
 
-                                                System.out.printf("%n" +
-                                                        "You can only use one character as a command%n");
+                                            case 3:
+
+                                                System.out.print("Enter the new command for moving right: ");
+                                                input.nextLine();
                                                 temp1 = input.nextLine();
-                                            }
+                                                while (temp1.length() > 1) {
 
-                                            control.setMoveDown(temp1);
+                                                    System.out.printf("%n" +
+                                                            "You can only use one character as a command%n");
 
-                                            decided = true;
+                                                    System.out.print("Enter the new command for moving right: ");
+                                                    temp1 = input.nextLine();
+                                                }
 
-                                            break;
+                                                control.setMoveRight(temp1);
 
-                                        case 3:
+                                                decided = true;
 
-                                            System.out.print("Enter the new command for moving right: ");
-                                            temp1 = input.nextLine();
-                                            while (temp1.length() > 1) {
+                                                break;
 
-                                                System.out.printf("%n" +
-                                                        "You can only use one character as a command%n");
+
+                                            case 4:
+
+                                                System.out.print("Enter the new command for moving left: ");
+                                                input.nextLine();
                                                 temp1 = input.nextLine();
-                                            }
+                                                while (temp1.length() > 1) {
 
-                                            control.setMoveRight(temp1);
+                                                    System.out.printf("%n" +
+                                                            "You can only use one character as a command%n");
 
-                                            decided = true;
+                                                    System.out.print("Enter the new command for moving left: ");
+                                                    temp1 = input.nextLine();
+                                                }
 
-                                            break;
+                                                control.setMoveLeft(temp1);
 
+                                                decided = true;
 
-                                        case 4:
+                                                break;
 
-                                            System.out.print("Enter the new command for moving left: ");
-                                            temp1 = input.nextLine();
-                                            while (temp1.length() > 1) {
-
+                                            default:
                                                 System.out.printf("%n" +
-                                                        "You can only use one character as a command%n");
-                                                temp1 = input.nextLine();
-                                            }
-
-                                            control.setMoveLeft(temp1);
-
-                                            decided = true;
-
-                                            break;
-
-                                        default:
-                                            System.out.printf("%n" +
-                                                    "Invalid option%n");
-                                            decided = false;
+                                                        "Invalid option%n");
+                                                decided = false;
+                                        }
                                     }
+
+                                    chosen = true;
+
+                                } catch (InputMismatchException a) {
+
+                                    System.out.println("Invalid choice");
+
+                                    chosen = false;
                                 }
-
-                                chosen = true;
-
-                            } catch (InputMismatchException a) {
-
-                                System.out.println("Invalid choice");
-
-                                chosen = false;
                             }
-                        }
 
 
-                        break;
+                            break;
 
-                    case 3:
+                        case 3:
 
-                        break;
+                            break;
 
-                    case 4:
-                        myApp.mapPrinter(myApp.room);
-                        break;
+                        case 4:
+                            myApp.mapPrinter(myApp.room);
+                            break;
 
-                    case 5:
+                        case 5:
 
-                        break;
+                            break;
 
-                    case 6:
+                        case 6:
 
-                        break;
+                            break;
 
-                    case 7:
+                        case 7:
 
-                        break;
+                            break;
+                    }
                 }
+
             }
         }
-
     }
 
     public Hero selectHero() {
@@ -639,46 +655,44 @@ public class theTextAdventure {
         int choice1 = 0;
         boolean chosen = false;
 
-            boolean chosen1 = false;
-            int tempCount = 0;
+        boolean chosen1 = false;
+        int tempCount = 0;
 
-            while (!chosen1) {
+        while (!chosen1) {
 
-                try {
-                    System.out.println("Choose one of the following options. To exit this menu enter 0");
-                    System.out.printf("1- View controls %n" +
-                            "2- Change controls %n" +
-                            "3- View instructions %n" +
-                            "4- View map %n" +
-                            "5- Save game %n" +
-                            "6- Load game %n" +
-                            "7- Quit game %n ");
+            try {
+                System.out.println("Choose one of the following options. To exit this menu enter 0");
+                System.out.printf("1- View controls %n" +
+                        "2- Change controls %n" +
+                        "3- View instructions %n" +
+                        "4- View map %n" +
+                        "5- Save game %n" +
+                        "6- Load game %n" +
+                        "7- Quit game %n ");
+
+                if (tempCount == 0) {
 
                     choice1 = input.nextInt();
-
-                    if (tempCount == 0) {
-
-                        choice1 = input.nextInt();
-                    } else {
-                        input.nextLine();
-                        choice1 = input.nextInt();
-                    }
-
-                    chosen1 = true;
-                } catch (InputMismatchException e) {
-
-                    System.out.println("Invalid choice");
-                    chosen1 = false;
-                    ++tempCount;
+                } else {
+                    input.nextLine();
+                    choice1 = input.nextInt();
                 }
 
-                if (choice1 > 7 || choice1 < 0) {
+                chosen1 = true;
+            } catch (InputMismatchException e) {
 
-                    System.out.println("Choose an available option");
-
-                    chosen1 = false;
-                }
+                System.out.println("Invalid choice");
+                chosen1 = false;
+                ++tempCount;
             }
+
+            if (choice1 > 7 || choice1 < 0) {
+
+                System.out.println("Choose an available option");
+
+                chosen1 = false;
+            }
+        }
 
         return choice1;
     }
@@ -935,7 +949,8 @@ public class theTextAdventure {
                         } else {
                             System.out.print("-  -");
                         }
-                    } else*/ if (room[i][j].getDescription().equals("wall")) {
+                    } else*/
+                    if (room[i][j].getDescription().equals("wall")) {
                         if (i1 == 0) {
                             System.out.print("¤¤¤¤");
                         } else if (i1 == 1) {

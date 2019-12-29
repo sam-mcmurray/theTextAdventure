@@ -18,8 +18,6 @@ public class HeroController {
     private HealthPotion healthPotion;
     private Heart heart;
     private Treasure treasure;
-    public String controls[] = {"w", "s", "d", "a"};
-
 
     public HeroController(Hero model, HeroView view) {
         this.model = model;
