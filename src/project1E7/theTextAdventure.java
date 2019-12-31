@@ -1031,7 +1031,25 @@ public class theTextAdventure {
             String response = input.nextLine();
 
             boolean ok = false;
-            while()
+            while (!ok) {
+
+                for (User i : userz) {
+
+                    if (response == i.getUserName()) {
+
+                        ok = false;
+                    } else {
+
+                        ok = true;
+                    }
+                }
+
+                if (!ok) {
+                    System.out.printf("%n" +
+                            "The name you entered has already been selected. Enter another name%n");
+                    String respoonse = input.nextLine();
+                }
+            }
 
             userModel = new User(response, 0);
             userModel.addUsers(userz, userModel);
@@ -1049,13 +1067,12 @@ public class theTextAdventure {
 
                 int userNo = input.nextInt();
 
-                if(userNo == 0){
+                if (userNo == 0) {
 
                     userModel = new User(null, 0);
                     return userModel;
-                }
-                else
-                userModel = new User (userz.get(--userNo).getUserName(), userz.get(--userNo).getHighScore());
+                } else
+                    userModel = new User(userz.get(--userNo).getUserName(), userz.get(--userNo).getHighScore());
             } catch (InputMismatchException e) {
 
                 System.out.printf("%n" +
