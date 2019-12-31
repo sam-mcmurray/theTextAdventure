@@ -21,7 +21,7 @@ public class theTextAdventure {
     public Random rand = new Random();
     public String controls[] = new String[4];
     ArrayList<Key> keyRing = new ArrayList<>();
-
+    ArrayList<User> userz = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -38,6 +38,7 @@ public class theTextAdventure {
         boolean decided1 = false;
 
         while (!decided1) {
+
             choice = myApp.startMenu();
 
 
@@ -47,11 +48,30 @@ public class theTextAdventure {
                 choice = myApp.startMenu();
             }
 
+            User theUser = null;
+            UserView userView = null;
             if (choice == 1) {
-
 
                 Random rand = new Random();
                 myApp.createWorld();
+                theUser = (myApp.selectUser());
+                userView = new UserView(theUser);
+                UserController userController = new UserController(theUser, userView);
+
+                if (theUser.getUserName() == null) {
+
+                    if (userController.createUser()) {
+
+                        //nuthin
+                    } else {
+
+                        theUser = myApp.selectUser();
+                        userView = new UserView(theUser);
+                        userController = new UserController(theUser, userView);
+                    }
+                }
+
+
                 Hero theHero = (myApp.selectHero());
                 HeroView heroView = new HeroView(theHero);
                 HeroController heroController = new HeroController(theHero, heroView);
@@ -272,33 +292,7 @@ public class theTextAdventure {
 
             } else if (choice == 3) {
 
-                if (!myApp.printUsers(users)) {
-
-                    boolean decision = false;
-
-                    while (!decision) {
-                        System.out.printf("%n" +
-                                "There are no current users, would you like to create a new user? (Yes/No)");
-
-                        String answer = input.nextLine();
-                        if (answer == "Yes") {
-                            if (!myApp.createUser()) {
-
-                                choice = 0;
-                                decision = true;
-                            }
-                        } else if (answer == "No") {
-
-                            choice = 0;
-                            decision = true;
-                        } else {
-
-                            System.out.println("Invalid answer!");
-                            decision = false;
-                        }
-
-                    }
-                }
+                userView.printUsers(theUser);
 
             } else if (choice == 5) {
                 System.exit(0);
@@ -489,6 +483,7 @@ public class theTextAdventure {
         heroViewThief.printStats();
 
         boolean selected = true;
+
         while (selected) {
 
             int tempCount = 0;
@@ -1021,77 +1016,53 @@ public class theTextAdventure {
             System.out.println();
         }
 */
-    public boolean printUsers(ArrayList<User> users) {
 
-        if (users.size() == 0) {
+    public User selectUser() {
+
+        User userModel = null;
+        UserView userView = null;
+        UserController userController = null;
+
+        if (userz.isEmpty()) {
 
             System.out.printf("%n" +
-                    "There are no existing users%n" +
-                    "Returning to the start menu%n");
+                    "Create a new user before beginning the game.%n" +
+                    "Enter the name of your new user%n");
+            String response = input.nextLine();
 
-            for (double a = 0; a < 10000000000000000000000000.0; )
-                a++;
+            boolean ok = false;
+            while()
 
-            return false;
-        } else
-            for (int i = 0; i < users.size(); i++) {
+            userModel = new User(response, 0);
+            userModel.addUsers(userz, userModel);
+            return userModel;
+        }
 
-                System.out.printf("%nUsername: %s%n" +
-                        "Highscore: %d%n", users.get(i).getUserName(), users.get(i).getHighScore());
-            }
-        return true;
-    }
+        System.out.printf("%n" +
+                "Select one of the following users. To create a new user enter 0%n");
 
-    public boolean createUser() {
+        for (int i = 0; i < userz.size(); ) {
 
-        System.out.println("You have selected to Create a New User is this correct? yes/no");
-        String answer = input.nextLine();
-        if (answer.equalsIgnoreCase("yes")) {
+            System.out.printf("%d- %s %d", ++i, userz.get(i).getUserName(), userz.get(i).getHighScore());
 
-            System.out.printf("Enter your new username:");
-            String temp = input.nextLine();
-            Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-            Matcher m = p.matcher(temp);
-            boolean b = m.find();
+            try {
 
-            while (!isUpperCase(temp.charAt(0)) || temp.length() > 12 || b) {
+                int userNo = input.nextInt();
 
-                if (!isUpperCase(temp.charAt(0))) {
-                    System.out.printf("%n" +
-                            "Invalid username! The username must have the first letter as a capital letter");
+                if(userNo == 0){
+
+                    userModel = new User(null, 0);
+                    return userModel;
                 }
-
-                if (temp.length() > 12) {
-                    System.out.printf("%n" +
-                            "Invalid username! Your username must contain a maximum of 12 characters");
-                }
-
-                if (b) {
-                    System.out.printf("%n" +
-                            "Invalid username! Your username cannot contain a special character");
-                }
+                else
+                userModel = new User (userz.get(--userNo).getUserName(), userz.get(--userNo).getHighScore());
+            } catch (InputMismatchException e) {
 
                 System.out.printf("%n" +
-                        "Please enter a valid user name, to quit enter 'no'%n");
-
-                temp = input.nextLine();
-
-                if (answer.equalsIgnoreCase("no")) {
-
-                    return false;
-                }
+                        "Chose user");
             }
-
-            User user = new User(temp, 0);
-            users.add(user);
-            return true;
-
-        } else if (answer.equalsIgnoreCase("no")) {
-            System.out.println("Returning to start menu");
-            return false;
-        } else System.out.println("Invalid answer!");
-        return false;
-
+        }
+        return userModel;
     }
 
 
