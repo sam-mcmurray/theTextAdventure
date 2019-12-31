@@ -79,9 +79,11 @@ public class ItemController {
             switch (chooseItem) {
                 case "1":
                     heroController.useItemExternal(item);
+                    heroController.turnCounter();
                     run = false;
                     return run;
                 case "2":
+                    heroController.turnCounter();
                     run = false;
                     return run;
                 default:

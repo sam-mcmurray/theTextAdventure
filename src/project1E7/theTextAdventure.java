@@ -17,110 +17,30 @@ public class theTextAdventure {
 
     Scanner input = new Scanner(System.in);
     String userName;
-    static ArrayList<User> users;
-    Room[][] room = new Room[10][10];
-    public Random rand = new Random();
-
-    ArrayList<Key> keyRing = new ArrayList<>();
-
+    ArrayList<User> users;
 
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
         theTextAdventure myApp = new theTextAdventure();
 
-        Controls control = new Controls("w", "s", "d", "a");
-        ControlsView controlsView = new ControlsView(control);
-        ControlsController controlsController = new ControlsController(control, controlsView);
-
         MenuView menuView = new MenuView();
         MenuController menuController = new MenuController(menuView);
-
-        String choice = menuController.startMenu();
 
         MapView mapView = new MapView();
         MapController mapController = new MapController(mapView);
 
+        GameManager gameManager = new GameManager();
 
-        if (choice.equals("1")) {
-
-
-
-            Random rand = new Random();
-            mapController.createWorld(myApp.room);
-            Hero theHero = (menuController.selectHero());
-            HeroView heroView = new HeroView(theHero);
-            HeroController heroController = new HeroController(theHero, heroView);
-            heroView.printStats();
-            heroView.heroStory();
-            Room currentRoom = myApp.room[8][5];
-            boolean flee = false;
-            do {
-                boolean run = true;
-                Room roomModel = currentRoom;
-                RoomView roomView = new RoomView(roomModel);
-                RoomController roomController = new RoomController(roomModel, roomView);
-                roomView.flavorTextRoom();
-
-                theHero.setKeyRing(myApp.keyRing);
-                if (roomModel.getFound() == false) {
-                    if (roomController.roomHasMonster()) {
-                        Monster monsterModel = roomController.getMonster();
-                        MonsterView monsterView = new MonsterView(monsterModel);
-                        MonsterController monsterController = new MonsterController(monsterModel, monsterView);
-
-                        monsterView.flavorTextMonster();
-
-                        monsterView.encounter(monsterModel);
-                        if (heroController.attackFirst(monsterController) == true) {
-
-                            if (menuController.encounterHeroFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController)) {
-                                flee = false;
-                            } else {
-                                flee = true;
-                            }
-
-                        } else {
-
-                            if (menuController.encounterMonsterFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController)) {
-                                flee = false;
-                            } else {
-                                flee = true;
-                            }
-                        }
-
-                    }
-
-                    while ((theHero.isAlive() == true && run == true) && flee == false) {
-                        if (roomController.roomHasItem() == true) {
-                            Item item = roomController.getItem();
-                            ItemView itemView = new ItemView(item);
-                            ItemController itemController = new ItemController(item, itemView);
-                            run = itemController.encounterItem(item, heroController, myApp.keyRing);
+        boolean game = true;
+        while (game == true) {
+            String choice = menuController.startMenu();
+            if (choice.equals("1")) {
 
 
-                        } else if (roomController.roomHasItem() == false) {
+               gameManager.newGame();
 
-                            Item item = roomController.setRandomItem();
-                            if (item != null) {
-                                ItemView itemView = new ItemView(item);
-                                ItemController itemController = new ItemController(item, itemView);
-                                run = itemController.encounterItem(item, heroController, myApp.keyRing);
-
-                            }
-                        }
-                    }
-                }
-
-                roomController.setFound(currentRoom);
-                roomView.roomDoors(myApp.room, currentRoom);
-                currentRoom = heroController.moveHero(myApp.keyRing,myApp.room, currentRoom);
-                run = false;
-
-            } while (theHero.isAlive() == true || theHero.getLives() > 0);
-
-
-        } else if (choice.equals("2")) {
+            } else if (choice.equals("2")) {
             System.out.println("Load Game");
             Hero witcher = new Hero(10, 10, 10, "10", "10", 10, "10");
             Monster monster = new Monster(10,10, 10, "test", "test", null, true, 10);
@@ -129,7 +49,7 @@ public class theTextAdventure {
             System.out.println(json);
         } else if (choice.equals("3")) {
 
-            if (!myApp.printUsers(users)) {
+            if (!myApp.printUsers(myApp.users)) {
 
                 boolean decision = false;
 
@@ -158,10 +78,15 @@ public class theTextAdventure {
             }
 
         } else if (choice.equals("4")) {
+            menuView.instructionsStartMenu();
+
+        } else if (choice.equals("5")) {
             System.exit(0);
+        }
 
         }
     }
+
 
 
     public boolean printUsers(ArrayList<User> users) {

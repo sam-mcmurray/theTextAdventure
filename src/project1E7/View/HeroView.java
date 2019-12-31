@@ -135,4 +135,8 @@ public class HeroView {
     public void missMonsterFlavorText(Monster monster) {
         System.out.println("Flavor text missed monster");
     }
+
+    public void printTurnCount(){
+        System.out.println("Current number of turns: " + model.getTurnCounter());
+    }
 }

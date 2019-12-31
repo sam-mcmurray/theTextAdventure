@@ -1,9 +1,6 @@
 package project1E7.Controller;
 
-import project1E7.Model.Controls;
-import project1E7.Model.Hero;
-import project1E7.Model.Monster;
-import project1E7.Model.Room;
+import project1E7.Model.*;
 import project1E7.View.*;
 
 import java.util.InputMismatchException;
@@ -17,7 +14,8 @@ public class MenuController {
         this.view = view;
     }
 
-    public boolean encounterHeroFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel, MonsterView monsterView, MonsterController monsterController) {
+    public boolean encounterHeroFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
+                                      MonsterView monsterView, MonsterController monsterController) {
 
         boolean run = true;
         String encounterChoice = "0";
@@ -31,10 +29,11 @@ public class MenuController {
                         if (heroController.attack(monsterController) == true) {
                             heroView.hitMonsterFlavorText(monsterModel);
                             monsterView.printStatus(monsterModel);
-
+                            heroController.turnCounter();
                         } else {
                             heroView.missMonsterFlavorText(monsterModel);
                             monsterView.printStatus(monsterModel);
+                            heroController.turnCounter();
                         }
                     }
                     if (monsterModel.isAlive() == true) {
@@ -49,12 +48,15 @@ public class MenuController {
                     break;
                 case "2":
                     if (heroController.flee(theHero) == true) {
+                        heroController.turnCounter();
                         run = false;
                     } else
+                        heroController.turnCounter();
                         run = true;
 
                     break;
                 case "3":
+                    heroController.turnCounter();
                     heroView.inventory(theHero.getBackPack());
                     break;
                 default:
@@ -66,7 +68,8 @@ public class MenuController {
         } while (run == true && (monsterModel.isAlive() == true && theHero.isAlive() == true));
         return run;
     }
-    public boolean encounterMonsterFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel, MonsterView monsterView, MonsterController monsterController) {
+    public boolean encounterMonsterFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
+                                         MonsterView monsterView, MonsterController monsterController) {
         String encounterChoice = "0";
         boolean run = true;
         monsterView.encounter(monsterModel);
@@ -92,24 +95,28 @@ public class MenuController {
                         if (heroController.attack(monsterController) == true) {
                             heroView.hitMonsterFlavorText(monsterModel);
                             monsterView.printStatus(monsterModel);
-
+                            heroController.turnCounter();
 
                         } else
                             heroView.missMonsterFlavorText(monsterModel);
-                        monsterView.printStatus(monsterModel);
-                    }
+                            monsterView.printStatus(monsterModel);
+                            heroController.turnCounter();
+
+                        }
                     run = true;
                     break;
                 case "2":
                     if (heroController.flee(theHero) == true) {
-
+                        heroController.turnCounter();
                         run = false;
                         return run;
                     } else
+                        heroController.turnCounter();
                         run = true;
                     break;
                 case "3":
                     heroView.inventory(theHero.getBackPack());
+                    heroController.turnCounter();
                     break;
                 default:
                     System.out.println("Please enter a proper value.");
@@ -138,7 +145,7 @@ public class MenuController {
            view.chooseHeroMenu();
 
             String userInput = "0";
-
+            userInput = input.nextLine();
 
             switch (userInput) {
                 case "1":
@@ -189,7 +196,7 @@ public class MenuController {
                 case "1":
                     System.out.println("You have selected Start Game is this correct? yes/no");
                     correct = input.nextLine();
-                    if (correct.equalsIgnoreCase("yes")) {
+                    if (correct.equalsIgnoreCase("yes") || correct.equalsIgnoreCase("y")) {
                         System.out.println("The game is Starting");
                         run = false;
                         return userInput;
@@ -199,7 +206,7 @@ public class MenuController {
                 case "2":
                     System.out.println("You have selected to Load a saved Game is this correct? yes/no");
                     correct = input.nextLine();
-                    if (correct.equals("yes")) {
+                    if (correct.equalsIgnoreCase("yes") || correct.equalsIgnoreCase("y")) {
                         System.out.println("The game is Starting");
                         return userInput;
                     } else ;
@@ -207,16 +214,16 @@ public class MenuController {
                 case "3":
                     System.out.println("You have selected to View HighScore is this correct? yes/no");
                     correct = input.nextLine();
-                    if (correct.equals("yes")) {
+                    if (correct.equalsIgnoreCase("yes") || correct.equalsIgnoreCase("y")) {
                         run = false;
                         return userInput;
                     } else run = true;
                     break;
                 case "4":
-                    System.out.println("You have selected Submenu is this correct? yes/no");
+                    System.out.println("You have selected Instructions is this correct? yes/no");
                     correct = input.nextLine();
-                    if (correct.equals("yes")) {
-                        System.out.println("Opening submenu");
+                    if (correct.equalsIgnoreCase("yes") || correct.equalsIgnoreCase("y")) {
+                        System.out.println("Opening Instructions");
                         run = false;
                         return userInput;
                     } else run = true;
@@ -224,7 +231,7 @@ public class MenuController {
                 case "5":
                     System.out.println("You have selected Quit is this correct? yes/no");
                     correct = input.nextLine();
-                    if (correct.equals("yes")) {
+                    if (correct.equalsIgnoreCase("yes") || correct.equalsIgnoreCase("y")) {
                         System.out.println("Quiting Game");
                         run = false;
                         return userInput;
@@ -242,7 +249,8 @@ public class MenuController {
         return userInput;
     }
 
-    public void subMenu(ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room, Hero theHero, HeroView heroView){
+    public void subMenu(ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room,
+                        Hero theHero, HeroView heroView, Room currentRoom, Controls controls, User user){
         view.subMenu();
         boolean run = true;
 
@@ -273,7 +281,8 @@ public class MenuController {
                     break;
 
                 case "5":
-
+                    Save save = new Save();
+                    save.saveGame(room,currentRoom,theHero,controls,user);
                     break;
 
                 case "6":
@@ -281,7 +290,11 @@ public class MenuController {
                     break;
 
                 case "7":
-
+                    System.out.println("Are you sure you want to quit the game? yes/no");
+                    String exit = input.nextLine();
+                    if (exit.equalsIgnoreCase("yes") || exit.equalsIgnoreCase("y")) {
+                        System.exit(0);
+                    } else
 
                     break;
                 default:
