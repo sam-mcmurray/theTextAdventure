@@ -2,8 +2,11 @@ package project1E7.Controller;
 
 import project1E7.Model.*;
 import project1E7.View.ItemView;
+import project1E7.View.KeyView;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class ItemController {
     Item model;
@@ -11,6 +14,7 @@ public class ItemController {
     private Key key;
     private Treasure treasure;
     Random rand = new Random();
+    Scanner input = new Scanner(System.in);
     public ItemController(Item model, ItemView view) {
         this.model = model;
         this.view = view;
@@ -48,5 +52,44 @@ public class ItemController {
                 }
         }
         return treasure;
+    }
+    public boolean encounterItem(Item item, HeroController heroController, ArrayList<Key> keyRing) {
+        boolean run = true;
+        String chooseItem = "0";
+        do {
+            view.viewItem(item);
+            if (checkIfTreasure(item) == true) {
+                Treasure treasure = (Treasure) item;
+                checkTreasureValue(treasure);
+
+                heroController.addTreasure(treasure.getAmount());
+                run = false;
+                return run;
+            } else if (checkIfKey(item)) {
+                Key key = (Key) item;
+                KeyView keyView = new KeyView(key);
+                KeyController keyController = new KeyController(key, keyView);
+                keyView.foundKey();
+                keyRing = heroController.addKey(keyRing, key);
+                run = false;
+                return run;
+            } else
+                view.chooseWhatToDoWithItem(item);
+            chooseItem = input.nextLine();
+            switch (chooseItem) {
+                case "1":
+                    heroController.useItemExternal(item);
+                    run = false;
+                    return run;
+                case "2":
+                    run = false;
+                    return run;
+                default:
+                    System.out.println("Please enter a proper value.");
+                    break;
+            }
+
+        } while (run == true);
+        return run;
     }
 }
