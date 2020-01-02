@@ -1099,7 +1099,11 @@ public class theTextAdventure {
                 file.createNewFile();
                 FileWriter writer = new FileWriter(file);
                 BufferedWriter bWriter = new BufferedWriter(writer);
-                bWriter.write((Integer.toString(users.get(users.size()).getHighScore())) + users.get(users.size()).getUserName());
+
+                bWriter.write(users.get(users.size()).getUserName());
+                bWriter.newLine();
+                bWriter.write((Integer.toString(users.get(users.size()).getHighScore())));
+
                 bWriter.flush();
                 bWriter.close();
                 FileReader reader = new FileReader(file);
@@ -1107,8 +1111,7 @@ public class theTextAdventure {
 
                 while ((verify = bReader.readLine()) != null) {
                     if (verify != null) {
-                        putData = verify.replaceAll("here", "there");
-                        bWriter.write(putData);
+
                     }
                 }
                 // use this to edit an existing file for the highscore
@@ -1126,5 +1129,6 @@ public class theTextAdventure {
         }
         return true;
     }
+    
 
 }
