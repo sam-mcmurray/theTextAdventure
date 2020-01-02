@@ -1,20 +1,39 @@
 package project1E7.Controller;
 
 import project1E7.Model.User;
+import project1E7.View.UserView;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.lang.Character.isUpperCase;
+
 public class UserController {
 
-    /**
-     * i moved the create user i had here if its different fix it here because its where its supposed to be
-     */
-    Scanner input = new Scanner(System.in);
-    public boolean createUser(ArrayList<User> users) {
+    UserView view;
+    User model;
+
+    public UserController(User model, UserView view) {
+
+        this.model = model;
+        this.view = view;
+    }
+
+    public void update(int a, String name) {
+
+        model.setHighScore(a);
+        model.setUserName(name);
+    }
+
+    public boolean isEmpty() {
+
+        return model.isEmpty();
+    }
+
+    public boolean createUser() {
+
+        Scanner input = new Scanner(System.in);
 
         System.out.println("You have selected to Create a New User is this correct? yes/no");
         String answer = input.nextLine();
@@ -52,10 +71,14 @@ public class UserController {
 
                     return false;
                 }
+                else{
+
+                    System.out.printf("");
+                }
             }
 
             User user = new User(temp, 0);
-            users.add(user);
+            model.addUsers(model.getUsers(), user);
             return true;
 
         } else if (answer.equalsIgnoreCase("no")) {
@@ -63,6 +86,5 @@ public class UserController {
             return false;
         } else System.out.println("Invalid answer!");
         return false;
-
     }
 }

@@ -19,7 +19,6 @@ public class HeroController {
     private Heart heart;
     private Treasure treasure;
 
-
     public HeroController(Hero model, HeroView view) {
         this.model = model;
         this.view = view;

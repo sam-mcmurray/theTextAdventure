@@ -17,19 +17,21 @@ public class theTextAdventure {
 
     Scanner input = new Scanner(System.in);
     String userName;
-    ArrayList<User> users;
+
+    static ArrayList<User> users;
+
+    static ArrayList<User> userz = new ArrayList<>();
+
 
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
         theTextAdventure myApp = new theTextAdventure();
 
-        MenuView menuView = new MenuView();
-        MenuController menuController = new MenuController(menuView);
-
         MapView mapView = new MapView();
         MapController mapController = new MapController(mapView);
-
+        MenuView menuView = new MenuView();
+        MenuController menuController = new MenuController(menuView);
         GameManager gameManager = new GameManager();
 
         boolean game = true;
@@ -37,87 +39,177 @@ public class theTextAdventure {
             String choice = menuController.startMenu();
             if (choice.equals("1")) {
 
-
-               gameManager.newGame();
+                gameManager.newGame();
 
             } else if (choice.equals("2")) {
-            System.out.println("Load Game");
-            Hero witcher = new Hero(10, 10, 10, "10", "10", 10, "10");
-            Monster monster = new Monster(10,10, 10, "test", "test", null, true, 10);
-            Gson gson = new Gson();
-            String json = gson.toJson(witcher);
-            System.out.println(json);
-        } else if (choice.equals("3")) {
+                System.out.println("Load Game");
 
-            if (!myApp.printUsers(myApp.users)) {
+            } else if (choice.equals("3")) {
 
-                boolean decision = false;
 
-                while (!decision) {
-                    System.out.printf("%n" +
-                            "There are no current users, would you like to create a new user? (Yes/No)");
+                if (!myApp.printUsers(myApp.users)) {
 
-                    String answer = input.nextLine();
-                    if (answer == "Yes") {
-                        if (!myApp.createUser()) {
+                    boolean decision = false;
+
+                    while (!decision) {
+                        System.out.printf("%n" +
+                                "There are no current users, would you like to create a new user? (Yes/No)");
+
+                        String answer = input.nextLine();
+                        if (answer == "Yes") {
+                            if (!myApp.createUser()) {
+
+                                choice.equals("0");
+                                decision = true;
+                            }
+                        } else if (answer == "No") {
 
                             choice.equals("0");
                             decision = true;
-                        }
-                    } else if (answer == "No") {
+                        } else {
 
-                        choice.equals("0");
-                        decision = true;
+                            System.out.println("Invalid answer!");
+                            decision = false;
+                        }
+
+                    }
+                }
+
+
+            } else if (choice.equals("4")) {
+                menuView.instructionsStartMenu();
+            } else if (choice.equals("5")) {
+
+            }
+        }
+    }
+
+            /**
+             * prints users needs to go in user view
+             *
+             * @param users
+             * @return
+             */
+            public boolean printUsers (ArrayList < User > users) {
+
+                if (users.size() == 0) {
+
+                }
+                return true;
+            }
+
+    public User selectUser() {
+
+        User userModel = null;
+        UserView userView = null;
+        UserController userController = null;
+
+        if (userz.isEmpty()) {
+
+            System.out.printf("%n" +
+                    "Create a new user before beginning the game.%n" +
+                    "Enter the name of your new user%n");
+            String response = input.nextLine();
+
+            boolean ok = false;
+            while (!ok) {
+
+                for (User i : userz) {
+
+                    if (response == i.getUserName()) {
+
+                        ok = false;
                     } else {
 
-                        System.out.println("Invalid answer!");
-                        decision = false;
+                        ok = true;
                     }
+                }
 
+                if (!ok) {
+                    System.out.printf("%n" +
+                            "The name you entered has already been selected. Enter another name%n");
+                    String respoonse = input.nextLine();
                 }
             }
 
-        } else if (choice.equals("4")) {
-            menuView.instructionsStartMenu();
-
-        } else if (choice.equals("5")) {
-            System.exit(0);
+            userModel = new User(response, 0);
+            userModel.addUsers(userz, userModel);
+            return userModel;
         }
 
-        }
-    }
+        System.out.printf("%n" +
+                "Select one of the following users. To create a new user enter 0%n");
 
+        for (int i = 0; i < userz.size(); ) {
 
-    /**
-     * prints users needs to go in user view
-     * @param users
-     * @return
-     */
-    public boolean printUsers(ArrayList<User> users) {
+            System.out.printf("%d- %s %d", ++i, userz.get(i).getUserName(), userz.get(i).getHighScore());
 
-        if (users.size() == 0) {
+            try {
 
-            System.out.printf("%n" +
-                    "There are no existing users%n" +
-                    "Returning to the start menu%n");
+                int userNo = input.nextInt();
 
-            for (double a = 0; a < 10000000000000000000000000.0; )
-                a++;
+                if (userNo == 0) {
 
-            return false;
-        } else
-            for (int i = 0; i < users.size(); i++) {
+                    userModel = new User(null, 0);
+                    return userModel;
+                } else
+                    userModel = new User(userz.get(--userNo).getUserName(), userz.get(--userNo).getHighScore());
+            } catch (InputMismatchException e) {
 
-                System.out.printf("%nUsername: %s%n" +
-                        "Highscore: %d%n", users.get(i).getUserName(), users.get(i).getHighScore());
+                System.out.printf("%n" +
+                        "Chose user");
             }
-        return true;
+        }
+        return userModel;
     }
 
-    /**
-     * creates new user needs to go into user controller
-     * @return
-     */
+            /**
+             * creates new user needs to go into user controller
+             * @return
+             */
+            public boolean save() {
+
+                System.out.printf("You have selected to Save Game. Is this correct Yes/No");
+
+                String correct = input.nextLine();
+                if (correct.equalsIgnoreCase("yes")) {
+                    System.out.println("Saving game, please do not turn off the system");
+
+                    try {
+
+                        String saveFile = input.nextLine();
+                        String verify, putData;
+                        File file = new File(saveFile);
+                        file.createNewFile();
+                        FileWriter writer = new FileWriter(file);
+                        BufferedWriter bWriter = new BufferedWriter(writer);
+                        bWriter.write((Integer.toString(users.get(users.size()).getHighScore())) + users.get(users.size()).getUserName());
+                        bWriter.flush();
+                        bWriter.close();
+                        FileReader reader = new FileReader(file);
+                        BufferedReader bReader = new BufferedReader(reader);
+
+                        while ((verify = bReader.readLine()) != null) {
+                            if (verify != null) {
+                                putData = verify.replaceAll("here", "there");
+                                bWriter.write(putData);
+                            }
+                        }
+                        // use this to edit an existing file for the highscore
+
+                        bReader.close();
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                } else if (correct.equalsIgnoreCase("no")) {
+                    System.out.println("Saving aborted");
+                    return false;
+                }
+                return true;
+            }
     public boolean createUser() {
 
         System.out.println("You have selected to Create a New User is this correct? yes/no");
@@ -170,5 +262,5 @@ public class theTextAdventure {
 
     }
 
-
 }
+
