@@ -51,6 +51,11 @@ public class FlavorTextView {
     private String keyGoldFlavorText;
     private String doorGoldFlavorText;
 
+    /**
+     * need to put all this in its proper place this isnt a good place to have this stuff
+     * it should be in the related classes views
+     * @return
+     */
     public String getIntroFlavorText() {
         introFlavorText = "Your head aches as you awake from your fall.  You look up to see where you fell from and try to remember exactly what happened. rappelling down the ruins " +
                 "was going well until you felt your rope go slack. Exploring decrepit ruins of ancient civilizations is dangerous work but it certainly pays well if you can find " +

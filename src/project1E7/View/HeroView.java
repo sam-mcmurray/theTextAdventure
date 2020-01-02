@@ -18,6 +18,9 @@ public class HeroView {
         this.model = model;
     }
 
+    /**
+     * prints bar chart for the hero stats
+     */
     public void printStats() {
         int[] stats = new int[4];
         stats[0] = model.getHealth() / 10;
@@ -44,37 +47,27 @@ public class HeroView {
         }
     }
 
+    /**
+     * prints the select hero confirmation statement
+     * @param hero
+     * @return
+     */
     public boolean selectHero(Hero hero) {
-
-
         System.out.println("Do you want to select the" + hero + " to be your hero? " + "Yes/No");
         String choice = input.next();
         boolean valid = true;
 
-        //while (!valid) {
-        //try {
         if (choice.equalsIgnoreCase("yes")) {
             System.out.println(hero + " has been selected");
             return false;
-        }
-            /*} catch (InputMismatchException e) {
-
-                System.out.printf("%n" +
-                        "Invalid answer%n");
-                valid=false;
-            }
-
-             */
-        //}
-
-        else if (choice.equalsIgnoreCase("no")) {
-
-            return true;
-        }
-
+        } else
         return true;
     }
 
+    /**
+     * prints the heroes status
+     * @param hero
+     */
     public void printStatus(Hero hero) {
         if (model.isAlive() == true) {
             System.out.println("Health: " + model.getHealth());
@@ -84,6 +77,10 @@ public class HeroView {
         }
     }
 
+    /**
+     * suppose to show heroes inventory i dont think it works its untested
+     * @param items
+     */
     public void inventory(ArrayList<Item> items) {
         items = model.getBackPack();
 
@@ -93,18 +90,16 @@ public class HeroView {
 
     }
 
-    public int getCurrentTreasure() {
-        System.out.println(model.getCurrentTreasure() + " gold pieces");
-        return model.getCurrentTreasure();
-    }
+    /**
+     * not sure what this is suppose to do lukas
+     */
     public void printClassDescription() {
 
     }
 
-    public void currentTreasure() {
-        System.out.println("Treasure total: " + model.getCurrentTreasure());
-    }
-
+    /**
+     * prints the heroes story
+     */
     public void heroStory() {
         String characterClass = model.getCharacterClass();
         System.out.println("Your head aches as you awake from your fall.  You look up to see where you fell from and try to remember exactly what happened. rappelling down the ruins\n" +
@@ -115,6 +110,12 @@ public class HeroView {
                 "able to climb back the way you came. ahead of you are three doors. One to your North, East, and West. It looks like you'll have to find another way out. It sounds as if\n" +
                 "there is movement in the other rooms but it's impossible to tell which. It's time to make a choice. Which direction should you go?");
     }
+
+    /**
+     * returns the current heroes weapon
+     * @param characterClass
+     * @return
+     */
     public String getWeapon(String characterClass) {
         String weapon = "";
         if (model.getCharacterClass().equals("Warrior")) {
@@ -128,14 +129,26 @@ public class HeroView {
         }
             return weapon;
     }
+
+    /**
+     * prints hit landed flavor text for hero
+     * @param monster
+     */
     public void hitMonsterFlavorText(Monster monster) {
         System.out.println("flavor text hit monster");
     }
 
+    /**
+     * prints missed flavor text for the hero
+     * @param monster
+     */
     public void missMonsterFlavorText(Monster monster) {
         System.out.println("Flavor text missed monster");
     }
 
+    /**
+     * prints the number of hero turns for the game
+     */
     public void printTurnCount(){
         System.out.println("Current number of turns: " + model.getTurnCounter());
     }

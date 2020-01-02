@@ -8,6 +8,10 @@ public class ControlsView {
     public ControlsView(Controls model) {
         this.model = model;
     }
+
+    /**
+     * view the current controls
+     */
     public void viewControls() {
         System.out.println("The following are the commands in place:");
 
@@ -16,6 +20,10 @@ public class ControlsView {
                 "Moving right: %s %n" +
                 "Moving left: %s %n", model.getMoveUp(), model.getMoveDown(), model.getMoveRight(), model.getMoveLeft());
     }
+
+    /**
+     * change controls for the sub menu change controls section
+     */
     public void changeControlsView() {
         System.out.printf("Which one of the controls would you like to change: ");
 

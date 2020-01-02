@@ -9,6 +9,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GameManager {
+
+    /**
+     * creates new game
+     */
     public void newGame(){
         Controls control = new Controls("w", "s", "d", "a");
         ControlsView controlsView = new ControlsView(control);
@@ -32,6 +36,7 @@ public class GameManager {
         heroView.printStats();
         heroView.heroStory();
         Room currentRoom = room[8][5];
+        Room previousRoom = currentRoom;
         boolean flee = false;
         do {
             boolean run = true;
@@ -89,13 +94,19 @@ public class GameManager {
                     }
                 }
             }
+            if (flee == true) {
+                currentRoom = previousRoom;
+            } else {
+                previousRoom = currentRoom;
+                roomController.setFound(currentRoom);
+                roomView.roomDoors(room, currentRoom);
+                currentRoom = heroController.moveHero(keyRing, room, currentRoom, control);
+                run = false;
+            }
 
-            roomController.setFound(currentRoom);
-            roomView.roomDoors(room, currentRoom);
-            currentRoom = heroController.moveHero( keyRing, room, currentRoom);
-            run = false;
+        } while (theHero.isAlive() == true || theHero.getLives() > 0 || currentRoom != room[0][3]);
 
-        } while (theHero.isAlive() == true || theHero.getLives() > 0);
+
     }
 
 

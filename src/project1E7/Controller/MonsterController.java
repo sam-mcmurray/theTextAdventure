@@ -14,6 +14,10 @@ public class MonsterController {
         this.view = view;
     }
 
+    /**
+     * monster takes damage
+     * @param incDamage
+     */
     public void takeDamage(int incDamage) {
 
         if (incDamage >= model.getHealth()) {
@@ -23,14 +27,19 @@ public class MonsterController {
 
     }
 
+    /**
+     * monster attacking with 50% chance to hit
+     * @param hero
+     * @return
+     */
     public boolean attack(HeroController hero) {
 
         int damageDone;
         Random rand = new Random();
 
-        int chanceToHit = rand.nextInt(100);
+        int chanceToHit = rand.nextInt(2);
 
-        if (chanceToHit < 50) {
+        if (chanceToHit < 0) {
             return false;
         } else
 

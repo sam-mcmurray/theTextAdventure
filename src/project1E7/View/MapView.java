@@ -3,6 +3,11 @@ package project1E7.View;
 import project1E7.Model.Room;
 
 public class MapView {
+
+    /**
+     * prints the map
+     * @param room
+     */
     public void mapPrinter(Room[][] room) {
 
         for (int i = 0; i < room.length; i++) {

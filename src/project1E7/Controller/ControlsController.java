@@ -15,6 +15,9 @@ public class ControlsController {
         this.view = view;
     }
 
+    /**
+     * change the game controls 
+     */
     public void changeControls() {
 
         view.changeControlsView();

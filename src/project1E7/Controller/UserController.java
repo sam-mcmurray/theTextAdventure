@@ -8,8 +8,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.lang.Character.isUpperCase;
-
 public class UserController {
+
+    /**
+     * i moved the create user i had here if its different fix it here because its where its supposed to be
+     */
     Scanner input = new Scanner(System.in);
     public boolean createUser(ArrayList<User> users) {
 

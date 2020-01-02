@@ -19,18 +19,37 @@ public class ItemController {
         this.model = model;
         this.view = view;
     }
+
+    /**
+     * checks if item is a treasure
+     * @param item
+     * @return
+     */
     public boolean checkIfTreasure(Item item) {
      if (item instanceof Treasure) {
          return true;
      } else
      return false;
     }
+
+    /**
+     * checks if item is a key
+     * @param item
+     * @return
+     */
     public boolean checkIfKey(Item item) {
         if (item instanceof Key){
             return true;
         } else
             return false;
     }
+
+    /**
+     * checks to make sure that treasure has a value if not it will assign a value
+     * so we dont get null pointers
+     * @param treasure
+     * @return
+     */
     public Treasure checkTreasureValue(Treasure treasure) {
         if (treasure.getAmount() == 0) {
             int setRand = rand.nextInt(100);
@@ -53,6 +72,14 @@ public class ItemController {
         }
         return treasure;
     }
+
+    /**
+     * encounter an item i kept the menu here because i didnt know how to break it up exactly
+     * @param item
+     * @param heroController
+     * @param keyRing
+     * @return
+     */
     public boolean encounterItem(Item item, HeroController heroController, ArrayList<Key> keyRing) {
         boolean run = true;
         String chooseItem = "0";

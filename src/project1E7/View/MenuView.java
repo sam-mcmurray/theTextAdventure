@@ -2,6 +2,9 @@ package project1E7.View;
 
 public class MenuView {
 
+    /**
+     * prints the encounter menu
+     */
     public void encounterMenu() {
             System.out.println("What is your next move?");
             System.out.println("1)Fight ");
@@ -9,6 +12,10 @@ public class MenuView {
             System.out.println("3)Use Item");
 
     }
+
+    /**
+     * prints the hero choice menu
+     */
     public void chooseHeroMenu() {
         System.out.println("Select the hero: ");
         System.out.println("1)Warrior");
@@ -16,6 +23,10 @@ public class MenuView {
         System.out.println("3)Thief ");
         System.out.println("Please enter your choice");
     }
+
+    /**
+     * prints the start menu
+     */
     public void startMenu() {
         System.out.println("1)Start New Game");
         System.out.println("2)Load Saved Game");
@@ -23,6 +34,10 @@ public class MenuView {
         System.out.println("4)Instructions");
         System.out.println("5)Quit Game");
     }
+
+    /**
+     * prints the sub menu
+     */
     public void subMenu() {
         System.out.println("Choose one of the following options. To exit this menu enter 0");
         System.out.printf("1- View controls %n" +

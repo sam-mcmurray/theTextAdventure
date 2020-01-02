@@ -15,6 +15,10 @@ public class MapController {
         this.view = view;
     }
 
+    /**
+     * creates the map
+     * @param room
+     */
     public void createWorld(Room[][] room) {
         Random rand = new Random();
         Coffee coffee = new Coffee("Coffee");

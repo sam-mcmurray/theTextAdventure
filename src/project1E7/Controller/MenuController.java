@@ -14,6 +14,16 @@ public class MenuController {
         this.view = view;
     }
 
+    /**
+     * encounter with monster hero first
+     * @param theHero
+     * @param heroView
+     * @param heroController
+     * @param monsterModel
+     * @param monsterView
+     * @param monsterController
+     * @return
+     */
     public boolean encounterHeroFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
                                       MonsterView monsterView, MonsterController monsterController) {
 
@@ -68,6 +78,17 @@ public class MenuController {
         } while (run == true && (monsterModel.isAlive() == true && theHero.isAlive() == true));
         return run;
     }
+
+    /**
+     * encounter with monster monster goes first
+     * @param theHero
+     * @param heroView
+     * @param heroController
+     * @param monsterModel
+     * @param monsterView
+     * @param monsterController
+     * @return
+     */
     public boolean encounterMonsterFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
                                          MonsterView monsterView, MonsterController monsterController) {
         String encounterChoice = "0";
@@ -125,6 +146,11 @@ public class MenuController {
         } while (run == true && (monsterModel.isAlive() == true && theHero.isAlive() == true));
         return run;
     }
+
+    /**
+     * select hero menu
+     * @return
+     */
     public Hero selectHero() {
         Hero warrior = new Hero(100, 70, 30, "The Warrior...", "Warrior", 100, "Warrior");
         HeroView heroViewWarrior = new HeroView(warrior);
@@ -180,6 +206,11 @@ public class MenuController {
         }
         return null;
     }
+
+    /**
+     * start menu
+     * @return
+     */
     public String startMenu() {
 
         String userInput = "0";
@@ -249,6 +280,18 @@ public class MenuController {
         return userInput;
     }
 
+    /**
+     * sub menu
+     * @param controlsController
+     * @param controlsView
+     * @param mapView
+     * @param room
+     * @param theHero
+     * @param heroView
+     * @param currentRoom
+     * @param controls
+     * @param user
+     */
     public void subMenu(ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room,
                         Hero theHero, HeroView heroView, Room currentRoom, Controls controls, User user){
         view.subMenu();

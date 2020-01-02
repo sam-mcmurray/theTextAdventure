@@ -18,7 +18,6 @@ public class HeroController {
     private HealthPotion healthPotion;
     private Heart heart;
     private Treasure treasure;
-    public String controls[] = {"w", "s", "d", "a"};
 
 
     public HeroController(Hero model, HeroView view) {
@@ -26,6 +25,11 @@ public class HeroController {
         this.view = view;
     }
 
+    /**
+     * hero attacks monster 50% chance of landing hit
+     * @param monster
+     * @return
+     */
     public boolean attack(MonsterController monster) {
 
         if (model.getEndurance() < 10) {
@@ -46,6 +50,10 @@ public class HeroController {
 
     }
 
+    /**
+     * hero takes damage from enemy attack
+     * @param incDamage
+     */
     public void takeDamage(int incDamage) {
         if (incDamage >= model.getHealth()) {
             model.setAlive(false);
@@ -53,7 +61,15 @@ public class HeroController {
         model.setHealth(model.getHealth() - incDamage);
     }
 
-    public Room moveHero(ArrayList<Key> keys, Room[][] room, Room currentRoom) {
+    /**
+     * move hero through the map
+     * @param keys
+     * @param room
+     * @param currentRoom
+     * @param controls
+     * @return
+     */
+    public Room moveHero(ArrayList<Key> keys, Room[][] room, Room currentRoom, Controls controls) {
 
         Scanner input = new Scanner(System.in);
         String direction;
@@ -65,7 +81,7 @@ public class HeroController {
 
                         System.out.println("Choose your direction ");
                         direction = input.nextLine();
-                        if (direction.equalsIgnoreCase("a")) {
+                        if (direction.equalsIgnoreCase(controls.moveLeft)) {
                             j = j - 1;
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
@@ -94,7 +110,7 @@ public class HeroController {
                                 run = false;
                                 return currentRoom;
                             }
-                        } else if (direction.equalsIgnoreCase("d")) {
+                        } else if (direction.equalsIgnoreCase(controls.moveRight)) {
                             j = j + 1;
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
@@ -123,7 +139,7 @@ public class HeroController {
                                 run = false;
                                 return currentRoom;
                             }
-                        } else if (direction.equalsIgnoreCase("s")) {
+                        } else if (direction.equalsIgnoreCase(controls.moveDown)) {
                             i = i + 1;
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
@@ -152,7 +168,7 @@ public class HeroController {
                                 run = false;
                                 return currentRoom;
                             }
-                        } else if (direction.equalsIgnoreCase("w")) {
+                        } else if (direction.equalsIgnoreCase(controls.moveUp)) {
                             i = i - 1;
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
@@ -190,6 +206,11 @@ public class HeroController {
         return currentRoom;
     }
 
+    /**
+     * check to see who goes first
+     * @param monster
+     * @return
+     */
     public boolean attackFirst(MonsterController monster) {
         if (model.getSpeed() < monster.model.getSpeed()) {
             return false;
@@ -197,6 +218,11 @@ public class HeroController {
             return true;
     }
 
+    /**
+     * check to see if fleeing is successful
+     * @param hero
+     * @return
+     */
     public boolean flee(Hero hero) {
         Random rand = new Random();
 
@@ -207,6 +233,10 @@ public class HeroController {
             return true;
     }
 
+    /**
+     * use an item externally
+     * @param item
+     */
     public void useItemExternal(Item item) {
         if (item == coffee) {
             model.setSpeed(coffee.getSpeed() + model.getSpeed());
@@ -221,19 +251,32 @@ public class HeroController {
         }
     }
 
+    /**
+     * add treasure to current treasure
+      * @param treasure
+     */
+    public void addTreasure ( int treasure){
+        System.out.println("That chest contained " + treasure + " gold pieces");
+        model.setCurrentTreasure(model.getCurrentTreasure() + treasure);
+        System.out.println("Your new total " + model.getCurrentTreasure() + " of gold pieces");
+    }
 
-        public void addTreasure ( int treasure){
-            System.out.println("That chest contained " + treasure + " gold pieces");
-            model.setCurrentTreasure(view.getCurrentTreasure() + treasure);
-            System.out.println("Your new total " + model.getCurrentTreasure() + " of gold pieces");
+    /**
+     * add key to keyring
+     * @param keyRing
+     * @param key
+     * @return
+     */
+    public ArrayList<Key> addKey (ArrayList < Key > keyRing, Key key){
+
+        keyRing.add(0, key);
+        return keyRing;
         }
 
-        public ArrayList<Key> addKey (ArrayList < Key > keyRing, Key key){
-
-            keyRing.add(0, key);
-            return keyRing;
-        }
-        public void turnCounter(){
+    /**
+     * turn counter
+     */
+    public void turnCounter(){
         model.setTurnCounter(model.getTurnCounter() + 1);
         view.printTurnCount();
         }

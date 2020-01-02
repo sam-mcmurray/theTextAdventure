@@ -88,7 +88,11 @@ public class theTextAdventure {
     }
 
 
-
+    /**
+     * prints users needs to go in user view
+     * @param users
+     * @return
+     */
     public boolean printUsers(ArrayList<User> users) {
 
         if (users.size() == 0) {
@@ -110,6 +114,10 @@ public class theTextAdventure {
         return true;
     }
 
+    /**
+     * creates new user needs to go into user controller
+     * @return
+     */
     public boolean createUser() {
 
         System.out.println("You have selected to Create a New User is this correct? yes/no");
@@ -162,58 +170,5 @@ public class theTextAdventure {
 
     }
 
-
-    public boolean save() {
-        Test(1, 2);
-        System.out.printf("You have selected to Save Game. Is this correct Yes/No");
-
-        String correct = input.nextLine();
-        if (correct.equalsIgnoreCase("yes")) {
-            System.out.println("Saving game, please do not turn off the system");
-
-            try {
-
-                String saveFile = input.nextLine();
-                String verify, putData;
-                File file = new File(saveFile);
-                file.createNewFile();
-                FileWriter writer = new FileWriter(file);
-                BufferedWriter bWriter = new BufferedWriter(writer);
-                bWriter.write((Integer.toString(users.get(users.size()).getHighScore())) + users.get(users.size()).getUserName());
-                bWriter.flush();
-                bWriter.close();
-                FileReader reader = new FileReader(file);
-                BufferedReader bReader = new BufferedReader(reader);
-
-                while ((verify = bReader.readLine()) != null) {
-                    if (verify != null) {
-                        putData = verify.replaceAll("here", "there");
-                        bWriter.write(putData);
-                    }
-                }
-                // use this to edit an existing file for the highscore
-
-                bReader.close();
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        } else if (correct.equalsIgnoreCase("no")) {
-            System.out.println("Saving aborted");
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Does nothing
-     * @param param1
-     * @param param2
-     */
-    public void Test(int param1, int param2){
-
-    }
 
 }

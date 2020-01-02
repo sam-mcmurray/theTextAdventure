@@ -9,6 +9,9 @@ public class KeyView {
         this.model = model;
     }
 
+    /**
+     * prints finding a key
+     */
     public void foundKey() {
         System.out.println("You found " + model.getName());
     }
