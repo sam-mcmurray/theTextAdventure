@@ -40,6 +40,7 @@ public class ItemView {
 
             System.out.printf("%n" +
                     "Invalid answer%n");
+            return;
         }
     }
 }

@@ -22,9 +22,8 @@ public class theTextAdventure {
     public String controls[] = new String[4];
     ArrayList<Key> keyRing = new ArrayList<>();
 
-
     public static void main(String[] args) {
-
+        ArrayList<Item> backPack = new ArrayList<>();
         Scanner input = new Scanner(System.in);
         theTextAdventure myApp = new theTextAdventure();
         Controls control = new Controls("w", "s", "d", "a");
@@ -111,6 +110,7 @@ public class theTextAdventure {
                                         break;
                                     case 3:
                                         heroView.inventory(theHero.getBackPack());
+
                                         break;
                                     default:
                                         System.out.println("Please enter a proper value.");
@@ -197,6 +197,7 @@ public class theTextAdventure {
                                         heroController.useItemExternal(item);
                                         break;
                                     case 2:
+                                        heroController.saveItem(item,backPack);
                                         break;
                                     default:
                                         System.out.println("Please enter a proper value.");
@@ -234,6 +235,7 @@ public class theTextAdventure {
                                                     run = false;
                                                     break;
                                                 case 2:
+                                                    heroController.saveItem(item,backPack);
                                                     break;
 
                                                 default:
@@ -639,46 +641,46 @@ public class theTextAdventure {
         int choice1 = 0;
         boolean chosen = false;
 
-            boolean chosen1 = false;
-            int tempCount = 0;
+        boolean chosen1 = false;
+        int tempCount = 0;
 
-            while (!chosen1) {
+        while (!chosen1) {
 
-                try {
-                    System.out.println("Choose one of the following options. To exit this menu enter 0");
-                    System.out.printf("1- View controls %n" +
-                            "2- Change controls %n" +
-                            "3- View instructions %n" +
-                            "4- View map %n" +
-                            "5- Save game %n" +
-                            "6- Load game %n" +
-                            "7- Quit game %n ");
+            try {
+                System.out.println("Choose one of the following options. To exit this menu enter 0");
+                System.out.printf("1- View controls %n" +
+                        "2- Change controls %n" +
+                        "3- View instructions %n" +
+                        "4- View map %n" +
+                        "5- Save game %n" +
+                        "6- Load game %n" +
+                        "7- Quit game %n ");
+
+                choice1 = input.nextInt();
+
+                if (tempCount == 0) {
 
                     choice1 = input.nextInt();
-
-                    if (tempCount == 0) {
-
-                        choice1 = input.nextInt();
-                    } else {
-                        input.nextLine();
-                        choice1 = input.nextInt();
-                    }
-
-                    chosen1 = true;
-                } catch (InputMismatchException e) {
-
-                    System.out.println("Invalid choice");
-                    chosen1 = false;
-                    ++tempCount;
+                } else {
+                    input.nextLine();
+                    choice1 = input.nextInt();
                 }
 
-                if (choice1 > 7 || choice1 < 0) {
+                chosen1 = true;
+            } catch (InputMismatchException e) {
 
-                    System.out.println("Choose an available option");
-
-                    chosen1 = false;
-                }
+                System.out.println("Invalid choice");
+                chosen1 = false;
+                ++tempCount;
             }
+
+            if (choice1 > 7 || choice1 < 0) {
+
+                System.out.println("Choose an available option");
+
+                chosen1 = false;
+            }
+        }
 
         return choice1;
     }
@@ -935,7 +937,8 @@ public class theTextAdventure {
                         } else {
                             System.out.print("-  -");
                         }
-                    } else*/ if (room[i][j].getDescription().equals("wall")) {
+                    } else*/
+                    if (room[i][j].getDescription().equals("wall")) {
                         if (i1 == 0) {
                             System.out.print("¤¤¤¤");
                         } else if (i1 == 1) {
