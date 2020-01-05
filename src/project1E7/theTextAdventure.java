@@ -116,7 +116,7 @@ public class theTextAdventure {
 
                 for (User i : userz) {
 
-                    if (response == i.getUserName()) {
+                    if (response.equals(i.getUserName())) {
 
                         ok = false;
                     } else {
