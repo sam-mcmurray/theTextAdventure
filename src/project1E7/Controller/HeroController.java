@@ -5,6 +5,7 @@ import project1E7.Model.*;
 import project1E7.View.HeroView;
 import project1E7.theTextAdventure;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -18,6 +19,18 @@ public class HeroController {
     private HealthPotion healthPotion;
     private Heart heart;
     private Treasure treasure;
+    public String controls[] = {"w", "s", "d", "a"};
+    private ArrayList<Item> backPack = new ArrayList<>();
+    private Scanner input = new Scanner(System.in);
+
+    public ArrayList printItem (ArrayList<Item> backPack){
+
+        for (int i = 0 ; i<=backPack.size()-1;i++) {
+            System.out.println( "["+ i+1+ "]"+backPack.get(i));
+        }
+        return backPack;
+    }
+
 
     public HeroController(Hero model, HeroView view) {
         this.model = model;
@@ -249,6 +262,45 @@ public class HeroController {
             model.setCurrentTreasure(treasure.getAmount() + model.getCurrentTreasure());
         }
     }
+    public Item saveItem(Item item,ArrayList<Item> backPack) {
+        String choice;
+
+        int choice1;
+
+        if (backPack.size() < 1) {
+            backPack.add(item);
+            System.out.println(item.getName()+" Has been added to your satchel");
+            return item;
+        } else {
+            System.out.println("Your backPack is full ... Do you want to drop an item from your back ? Y/N ");
+        }
+        try{
+        choice = input.next();
+        if (choice.equalsIgnoreCase("Y")) {
+            printItem(backPack);
+            System.out.println("Please choose one item to drop ..");
+            choice1 = input.nextInt();
+            input.nextLine();
+            backPack.remove(choice1 - 1);
+            System.out.println("Item has been removed");
+            System.out.println("Do you want to drop another item ? Y/N");
+            choice = input.nextLine();
+            while (choice.equalsIgnoreCase("Y")) {
+                System.out.println("Please choose one item to drop ..");
+                choice1 = input.nextInt();
+                input.nextLine();
+                backPack.remove(choice1 - 1);
+                System.out.println("Item has been removed");
+            }
+        }
+
+        }
+        catch (IndexOutOfBoundsException e){
+            System.out.println("There is no item in your satchel");
+        }
+        return item;
+    }
+
 
     /**
      * add treasure to current treasure
