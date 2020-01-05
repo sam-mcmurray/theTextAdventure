@@ -6,10 +6,11 @@ public class MenuView {
      * prints the encounter menu
      */
     public void encounterMenu() {
-            System.out.println("What is your next move?");
-            System.out.println("1)Fight ");
-            System.out.println("2)Flee");
-            System.out.println("3)Use Item");
+        System.out.println("What is your next move?");
+        System.out.println("1)Fight ");
+        System.out.println("2)Flee");
+        System.out.println("3)Use Item");
+        System.out.println("4)Sub Menu");
 
     }
 

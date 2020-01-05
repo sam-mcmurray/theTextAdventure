@@ -279,4 +279,39 @@ public class HeroController {
         model.setTurnCounter(model.getTurnCounter() + 1);
         view.printTurnCount();
         }
+    public void loseLife() {
+        model.setLives(model.getLives() - 1);
+    }
+    public void heroAlive() {
+        model.setAlive(true);
+        model.setHealth(100);
+    }
+    public Room previousRoom(Room previousRoom, Room[][] room) {
+        for (int i = 0; i < room.length ; i++) {
+            for (int j = 0; j < room.length ; j++) {
+                if (room[i][j] == previousRoom) {
+                    previousRoom = room[i][j];
+                    return previousRoom;
+                }
+            }
+
+        }
+        return previousRoom;
+    }
+    public Room currentRoom(Room currentRoom, Room[][] room) {
+        for (int i = 0; i < room.length ; i++) {
+            for (int j = 0; j < room.length ; j++) {
+                if (room[i][j] == currentRoom) {
+                    currentRoom = room[i][j];
+                    return currentRoom;
+                }
+            }
+
+        }
+        return currentRoom;
+    }
+    public void addEndurance() {
+        if (model.getEndurance() < 95)
+        model.setEndurance(model.getEndurance() + 5);
+    }
     }

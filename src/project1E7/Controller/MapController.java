@@ -1,10 +1,7 @@
 package project1E7.Controller;
 
 import project1E7.Model.*;
-import project1E7.View.ItemView;
-import project1E7.View.KeyView;
-import project1E7.View.MapView;
-import project1E7.View.RoomView;
+import project1E7.View.*;
 
 import java.util.Random;
 
@@ -41,15 +38,30 @@ public class MapController {
         KeyView goldKeyView = new KeyView(goldKey);
         KeyController goldKeyController = new KeyController(goldKey, goldKeyView);
         Key woodenKey = new Key("Wooden key");
+        KeyView woodenKeyView = new KeyView(woodenKey);
+        KeyController woodenKeyController = new KeyController(woodenKey, woodenKeyView);
         Key stoneKey = new Key("Stone key");
+        KeyView stoneKeyView = new KeyView(stoneKey);
+        KeyController stoneKeyController = new KeyController(stoneKey, stoneKeyView);
         Key silverKey = new Key("Silver key");
-        Key goldenKey = new Key("Golden key");
+        KeyView silverKeyView = new KeyView(silverKey);
+        KeyController silverKeyController = new KeyController(silverKey, silverKeyView);
         Monster theBoss = new Monster(50, 40, 15, "The boss", "The Boss", treasure, true, 4);
+        MonsterView theBossMonsterView = new MonsterView(theBoss);
+        MonsterController theBossMonsterController = new MonsterController(theBoss, theBossMonsterView);
         Monster owlBear = new Monster(40, 30, 6, "The owl bear", "The Owl Bear", healthPotion, true, 3);
+        MonsterView owlBearMonsterView = new MonsterView(owlBear);
+        MonsterController owlBearMonsterController = new MonsterController(owlBear, owlBearMonsterView);
         Monster skeleton = new Monster(30, 20, 8, "The Skeleton", "The Skeleton", healthPotion, true, 2);
+        MonsterView skeletonMonsterView = new MonsterView(skeleton);
+        MonsterController skeletonMonsterController = new MonsterController(skeleton, skeletonMonsterView);
         Monster bat = new Monster(20, 10, 10, "The Bat", "The Bat", coffee, true, 1);
-        Monster Slime = new Monster(35, 15, 2, "The Slime", "The Slime", null, true, 2);
-        Monster Spiderling = new Monster(10, 6, 9, "The Spiderling,", "Spiderling", null, true, 1);
+        MonsterView batMonsterView = new MonsterView(bat);
+        MonsterController batMonsterController = new MonsterController(bat, batMonsterView);
+        Monster slime = new Monster(35, 15, 2, "The Slime", "The Slime", null, true, 2);
+        MonsterView slimeMonsterView = new MonsterView(slime);
+
+        Monster spiderling = new Monster(10, 6, 9, "The Spiderling,", "Spiderling", null, true, 1);
         Door woodenDoor = new Door(true, "Wooden Key", "The door is ancient and maybe won't open ");
         Door stoneDoor = new Door(true, "Stone key", "you need need to be careful when you use the key inside this door ,might be broken easily");
         Door goldenDoor = new Door(true, "Golden key", "The golden door takes you out ! you are almost free");
@@ -70,7 +82,7 @@ public class MapController {
                     RoomController roomController = new RoomController(roomModel, roomView);
 
                 } else if (i == 1 && j == 3) {
-                    Room roomModel = new Room("The Boss Room", goldenKey, true, false, theBoss, true, false);
+                    Room roomModel = new Room("The Boss Room", goldKey, true, false, theBoss, true, false);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);

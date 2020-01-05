@@ -69,9 +69,9 @@ public class HeroView {
      * @param hero
      */
     public void printStatus(Hero hero) {
-        if (model.isAlive() == true) {
-            System.out.println("Health: " + model.getHealth());
-            System.out.println("Endurance: " + model.getEndurance());
+        if (model.isAlive()) {
+            System.out.println(model.getName() + " Health: " + model.getHealth());
+            System.out.println(model.getName() + " Endurance: " + model.getEndurance());
         } else {
             System.out.println("You have been defeated...");
         }
@@ -135,7 +135,13 @@ public class HeroView {
      * @param monster
      */
     public void hitMonsterFlavorText(Monster monster) {
-        System.out.println("flavor text hit monster");
+        if (model.getName().equalsIgnoreCase("warrior")) {
+            System.out.println("flavor text hit monster warrior");
+        } else if (model.getName().equalsIgnoreCase("mage")) {
+            System.out.println("flavor text hit monster mage");
+        } else {
+            System.out.println("flavor text hit monster thief");
+        };
     }
 
     /**
@@ -143,7 +149,14 @@ public class HeroView {
      * @param monster
      */
     public void missMonsterFlavorText(Monster monster) {
-        System.out.println("Flavor text missed monster");
+        if (model.getName().equalsIgnoreCase("warrior")) {
+            System.out.println("flavor text missed monster warrior");
+        } else if (model.getName().equalsIgnoreCase("mage")) {
+            System.out.println("flavor text missed monster mage");
+        } else {
+            System.out.println("flavor text missed monster thief");
+        }
+
     }
 
     /**
@@ -151,5 +164,15 @@ public class HeroView {
      */
     public void printTurnCount(){
         System.out.println("Current number of turns: " + model.getTurnCounter());
+    }
+
+    public void printLives() {
+        System.out.println("Current number of lives: " + model.getLives());
+    }
+    public void fleeFail() {
+        System.out.println("You were unable to flee.");
+    }
+    public void fleeSuccess() {
+        System.out.println("You were successful in your attempt to flee.");
     }
 }

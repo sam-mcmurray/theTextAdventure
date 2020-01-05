@@ -50,5 +50,9 @@ public class MonsterController {
         return true;
 
     }
+    public void resetMonster() {
+        model.setHealth(100);
+        model.setAlive(true);
+    }
 
 }

@@ -25,7 +25,8 @@ public class MenuController {
      * @return
      */
     public boolean encounterHeroFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
-                                      MonsterView monsterView, MonsterController monsterController) {
+                                      MonsterView monsterView, MonsterController monsterController, MapView mapView, Controls controls,
+                                      ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom ) {
 
         boolean run = true;
         String encounterChoice = "0";
@@ -35,8 +36,8 @@ public class MenuController {
             switch (encounterChoice) {
 
                 case "1":
-                    if (theHero.isAlive() == true) {
-                        if (heroController.attack(monsterController) == true) {
+                    if (theHero.isAlive()) {
+                        if (heroController.attack(monsterController)) {
                             heroView.hitMonsterFlavorText(monsterModel);
                             monsterView.printStatus(monsterModel);
                             heroController.turnCounter();
@@ -46,28 +47,43 @@ public class MenuController {
                             heroController.turnCounter();
                         }
                     }
-                    if (monsterModel.isAlive() == true) {
-                        if (monsterController.attack(heroController) == true) {
+                    if (monsterModel.isAlive() && theHero.isAlive()) {
+                        if (monsterController.attack(heroController)) {
                             monsterView.monsterHitFlavorText(theHero);
                             heroView.printStatus(theHero);
-                        } else
+                        } else {
                             monsterView.monsterMissFlavorText(theHero);
-                        heroView.printStatus(theHero);
+                            heroView.printStatus(theHero);
+                        }
                     }
                     run = true;
                     break;
                 case "2":
-                    if (heroController.flee(theHero) == true) {
+                    if (heroController.flee(theHero)) {
+                        heroView.fleeSuccess();
                         heroController.turnCounter();
                         run = false;
-                    } else
+                    } else {
+                        heroView.fleeFail();
                         heroController.turnCounter();
                         run = true;
 
+                        if (monsterModel.isAlive() && theHero.isAlive()) {
+                            if (monsterController.attack(heroController)) {
+                                monsterView.monsterHitFlavorText(theHero);
+                                heroView.printStatus(theHero);
+                            } else
+                                monsterView.monsterMissFlavorText(theHero);
+                            heroView.printStatus(theHero);
+                        }
+                    }
                     break;
                 case "3":
                     heroController.turnCounter();
                     heroView.inventory(theHero.getBackPack());
+                    break;
+                case "4":
+                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, controls, user);
                     break;
                 default:
                     System.out.println("Please enter a proper value.");
@@ -75,7 +91,7 @@ public class MenuController {
                     break;
             }
 
-        } while (run == true && (monsterModel.isAlive() == true && theHero.isAlive() == true));
+        } while (run && (monsterModel.isAlive() && theHero.isAlive()));
         return run;
     }
 
@@ -90,13 +106,14 @@ public class MenuController {
      * @return
      */
     public boolean encounterMonsterFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
-                                         MonsterView monsterView, MonsterController monsterController) {
+                                         MonsterView monsterView, MonsterController monsterController, MapView mapView, Controls controls,
+                                         ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom ) {
         String encounterChoice = "0";
         boolean run = true;
         monsterView.encounter(monsterModel);
         do {
 
-            if (monsterController.attack(heroController) == true && monsterModel.isAlive() == true) {
+            if (monsterController.attack(heroController) && monsterModel.isAlive()) {
                 monsterView.monsterHitFlavorText(theHero);
                 heroView.printStatus(theHero);
                 view.encounterMenu();
@@ -112,8 +129,8 @@ public class MenuController {
             switch (encounterChoice) {
 
                 case "1":
-                    if (theHero.isAlive() == true) {
-                        if (heroController.attack(monsterController) == true) {
+                    if (theHero.isAlive()) {
+                        if (heroController.attack(monsterController)) {
                             heroView.hitMonsterFlavorText(monsterModel);
                             monsterView.printStatus(monsterModel);
                             heroController.turnCounter();
@@ -127,11 +144,13 @@ public class MenuController {
                     run = true;
                     break;
                 case "2":
-                    if (heroController.flee(theHero) == true) {
+                    if (heroController.flee(theHero)) {
                         heroController.turnCounter();
+                        heroView.fleeSuccess();
                         run = false;
                         return run;
                     } else
+                        heroView.fleeFail();
                         heroController.turnCounter();
                         run = true;
                     break;
@@ -139,11 +158,15 @@ public class MenuController {
                     heroView.inventory(theHero.getBackPack());
                     heroController.turnCounter();
                     break;
+                case "4":
+                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, controls, user);
+                    break;
                 default:
                     System.out.println("Please enter a proper value.");
+                    run = true;
                     break;
             }
-        } while (run == true && (monsterModel.isAlive() == true && theHero.isAlive() == true));
+        } while (run && (monsterModel.isAlive() && theHero.isAlive()));
         return run;
     }
 
@@ -177,7 +200,7 @@ public class MenuController {
                 case "1":
                     selected = heroViewWarrior.selectHero(warrior);
                     warrior.setCharacterClass("Warrior");
-                    if (selected == false) {
+                    if (!selected) {
                         return warrior;
                     } else
                         selected = true;
@@ -185,7 +208,7 @@ public class MenuController {
                 case "2":
                     selected = heroViewWarrior.selectHero(mage);
                     mage.setCharacterClass("Mage");
-                    if (selected == false) {
+                    if (!selected) {
                         return mage;
                     } else
                         selected = true;
@@ -193,7 +216,7 @@ public class MenuController {
                 case "3":
                     selected = heroViewWarrior.selectHero(thief);
                     thief.setCharacterClass("Thief");
-                    if (selected == false) {
+                    if (!selected) {
                         return thief;
                     } else
                         selected = true;
@@ -240,7 +263,8 @@ public class MenuController {
                     if (correct.equalsIgnoreCase("yes") || correct.equalsIgnoreCase("y")) {
                         System.out.println("The game is Starting");
                         return userInput;
-                    } else ;
+                    } else
+                        run = true;
                     break;
                 case "3":
                     System.out.println("You have selected to View HighScore is this correct? yes/no");
@@ -275,7 +299,7 @@ public class MenuController {
             }
 
 
-        } while (run == true);
+        } while (run);
 
         return userInput;
     }
@@ -294,10 +318,11 @@ public class MenuController {
      */
     public void subMenu(ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room,
                         Hero theHero, HeroView heroView, Room currentRoom, Controls controls, User user){
-        view.subMenu();
+
         boolean run = true;
 
         do {
+            view.subMenu();
             String choice = input.nextLine();
             switch (choice) {
 
@@ -343,7 +368,7 @@ public class MenuController {
                 default:
                     System.out.println("Please enter a proper value");
             }
-        } while (run == true);
+        } while (run);
     }
 }
 
