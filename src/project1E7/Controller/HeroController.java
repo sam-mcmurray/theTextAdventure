@@ -178,13 +178,14 @@ public class HeroController {
         } else {
             System.out.println("Your backPack is full ... Do you want to drop an item from your back ? Y/N ");
         }
+        try{
         choice = input.next();
         if (choice.equalsIgnoreCase("Y")) {
-          printItem(backPack);
+            printItem(backPack);
             System.out.println("Please choose one item to drop ..");
             choice1 = input.nextInt();
             input.nextLine();
-            backPack.remove(choice1-1);
+            backPack.remove(choice1 - 1);
             System.out.println("Item has been removed");
             System.out.println("Do you want to drop another item ? Y/N");
             choice = input.nextLine();
@@ -192,10 +193,14 @@ public class HeroController {
                 System.out.println("Please choose one item to drop ..");
                 choice1 = input.nextInt();
                 input.nextLine();
-                backPack.remove(choice1-1);
+                backPack.remove(choice1 - 1);
                 System.out.println("Item has been removed");
             }
+        }
 
+        }
+        catch (IndexOutOfBoundsException e){
+            System.out.println("There is no item in you stachel");
         }
         return item;
     }
