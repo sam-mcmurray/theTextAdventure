@@ -200,7 +200,7 @@ public class HeroController {
 
         }
         catch (IndexOutOfBoundsException e){
-            System.out.println("There is no item in you stachel");
+            System.out.println("There is no item in your satchel");
         }
         return item;
     }
