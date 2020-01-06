@@ -49,10 +49,10 @@ public class MenuController {
                     }
                     if (monsterModel.isAlive() && theHero.isAlive()) {
                         if (monsterController.attack(heroController)) {
-                            monsterView.monsterHitFlavorText(theHero);
+                            monsterView.monsterHitFlavorText(monsterModel);
                             heroView.printStatus(theHero);
                         } else {
-                            monsterView.monsterMissFlavorText(theHero);
+                            monsterView.monsterMissFlavorText(monsterModel);
                             heroView.printStatus(theHero);
                         }
                     }
@@ -70,10 +70,10 @@ public class MenuController {
 
                         if (monsterModel.isAlive() && theHero.isAlive()) {
                             if (monsterController.attack(heroController)) {
-                                monsterView.monsterHitFlavorText(theHero);
+                                monsterView.monsterHitFlavorText(monsterModel);
                                 heroView.printStatus(theHero);
                             } else
-                                monsterView.monsterMissFlavorText(theHero);
+                                monsterView.monsterMissFlavorText(monsterModel);
                             heroView.printStatus(theHero);
                         }
                     }
@@ -114,13 +114,13 @@ public class MenuController {
         do {
 
             if (monsterController.attack(heroController) && monsterModel.isAlive()) {
-                monsterView.monsterHitFlavorText(theHero);
+                monsterView.monsterHitFlavorText(monsterModel);
                 heroView.printStatus(theHero);
                 view.encounterMenu();
                 encounterChoice = input.nextLine();
 
             } else
-                monsterView.monsterMissFlavorText(theHero);
+                monsterView.monsterMissFlavorText(monsterModel);
             heroView.printStatus(theHero);
             view.encounterMenu();
             encounterChoice = input.nextLine();

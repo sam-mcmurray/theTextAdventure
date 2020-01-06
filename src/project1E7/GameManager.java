@@ -18,6 +18,7 @@ public class GameManager {
         ControlsView controlsView = new ControlsView(control);
         ControlsController controlsController = new ControlsController(control, controlsView);
 
+
         MenuView menuView = new MenuView();
         MenuController menuController = new MenuController(menuView);
         Scanner input = new Scanner(System.in);
@@ -41,9 +42,10 @@ public class GameManager {
             boolean flee = false;
             boolean run = true;
             Room roomModel = currentRoom;
+            mapView.mapPrinter(room);
             RoomView roomView = new RoomView(roomModel);
             RoomController roomController = new RoomController(roomModel, roomView);
-            roomView.flavorTextRoom();
+            roomView.flavorTextRoom(currentRoom);
             theHero.setKeyRing(keyRing);
             if (!roomModel.getFound()) {
                 if (roomController.roomHasMonster()) {
@@ -52,7 +54,7 @@ public class GameManager {
                     MonsterController monsterController = new MonsterController(monsterModel, monsterView);
                     monsterController.resetMonster();
 
-                    monsterView.flavorTextMonster();
+                    monsterView.flavorTextMonster(theHero);
 
                     monsterView.encounter(monsterModel);
                     if (heroController.attackFirst(monsterController)) {
@@ -74,7 +76,6 @@ public class GameManager {
                             flee = true;
                         }
                     }
-
                 }
 
                 while ((theHero.isAlive() && run) && !flee) {
@@ -82,7 +83,7 @@ public class GameManager {
                         Item item = roomController.getItem();
                         ItemView itemView = new ItemView(item);
                         ItemController itemController = new ItemController(item, itemView);
-                        run = itemController.encounterItem(item, heroController, keyRing);
+                        run = itemController.encounterItem(item, heroController, keyRing, theHero);
                         heroController.addEndurance();
 
                     } else if (roomController.roomHasItem() == false) {
@@ -91,7 +92,7 @@ public class GameManager {
                         if (item != null) {
                             ItemView itemView = new ItemView(item);
                             ItemController itemController = new ItemController(item, itemView);
-                            run = itemController.encounterItem(item, heroController, keyRing);
+                            run = itemController.encounterItem(item, heroController, keyRing, theHero);
                             heroController.addEndurance();
 
                         }
@@ -119,9 +120,5 @@ public class GameManager {
             }
 
         } while ((theHero.isAlive() && theHero.getLives() > 0 ) || currentRoom != room[0][3]);
-
-
     }
-
-
 }

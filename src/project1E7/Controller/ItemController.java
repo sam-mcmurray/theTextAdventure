@@ -45,6 +45,18 @@ public class ItemController {
     }
 
     /**
+     * checks if item is a weapon
+     * @param item
+     * @return
+     */
+    public boolean checkIfWeapon(Item item) {
+        if (item instanceof Weapon){
+            return true;
+        } else
+            return false;
+    }
+
+    /**
      * checks to make sure that treasure has a value if not it will assign a value
      * so we dont get null pointers
      * @param treasure
@@ -55,18 +67,23 @@ public class ItemController {
             int setRand = rand.nextInt(100);
                 if(setRand <= 49) {
                     treasure.setAmount(1000);
+                    treasure.setName("a pile of copper coins");
                     return treasure;
                 } else if (setRand >= 50 && setRand <= 69) {
+                    treasure.setName("a pile of silver coins");
                     treasure.setAmount(4000);
                     return treasure;
                 } else if (setRand >= 70 && setRand <= 84) {
+                    treasure.setName("a pile of gold coins");
                     treasure.setAmount(6000);
                     return treasure;
                 } else if (setRand >= 85 && setRand <= 94) {
+                    treasure.setName("a pile of precious gemstones");
                     treasure.setAmount(8500);
                     return treasure;
                 } else if (setRand >= 95) {
                     treasure.setAmount(10000);
+                    treasure.setName("a beautifully crafted ornate goblet");
                     return treasure;
                 }
         }
@@ -80,16 +97,16 @@ public class ItemController {
      * @param keyRing
      * @return
      */
-    public boolean encounterItem(Item item, HeroController heroController, ArrayList<Key> keyRing) {
+    public boolean encounterItem(Item item, HeroController heroController, ArrayList<Key> keyRing, Hero theHero) {
         boolean run = true;
         String chooseItem = "0";
         do {
             view.viewItem(item);
             if (checkIfTreasure(item) == true) {
                 Treasure treasure = (Treasure) item;
-                checkTreasureValue(treasure);
+                        checkTreasureValue(treasure);
 
-                heroController.addTreasure(treasure.getAmount());
+                heroController.addTreasure(treasure);
                 run = false;
                 return run;
             } else if (checkIfKey(item)) {
@@ -98,6 +115,13 @@ public class ItemController {
                 KeyController keyController = new KeyController(key, keyView);
                 keyView.foundKey();
                 keyRing = heroController.addKey(keyRing, key);
+                run = false;
+                return run;
+            } else if (checkIfWeapon(item)) {
+                Weapon weapon = new Weapon(theHero.getWeapon()+"+1");
+                theHero.setStrength(weapon.getStrength() + theHero.getStrength());
+
+                System.out.println("You have found " + weapon.getName() + "! \nFrom now on all your attacks will do more damage!");
                 run = false;
                 return run;
             } else

@@ -2,7 +2,7 @@ package project1E7.Controller;
 
 
 import project1E7.Model.*;
-import project1E7.View.HeroView;
+import project1E7.View.*;
 import project1E7.theTextAdventure;
 
 import java.util.ArrayList;
@@ -26,6 +26,7 @@ public class HeroController {
 
     /**
      * hero attacks monster 50% chance of landing hit
+     *
      * @param monster
      * @return
      */
@@ -51,6 +52,7 @@ public class HeroController {
 
     /**
      * hero takes damage from enemy attack
+     *
      * @param incDamage
      */
     public void takeDamage(int incDamage) {
@@ -62,6 +64,7 @@ public class HeroController {
 
     /**
      * move hero through the map
+     *
      * @param keys
      * @param room
      * @param currentRoom
@@ -86,25 +89,35 @@ public class HeroController {
                                 System.out.println("You can not go that way there is no door.");
                                 run = true;
                                 j = j + 1;
-                            } else if (room[i][j].isIslocked() == true) {
+                            } else if (room[i][j].getIslocked() == true) {
                                 for (Key key : keys)
-                                if(key.getName().equalsIgnoreCase(room[i][j].getDoor().getNameOfKey())){
-                                    System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
-                                    room[i][(j+1)].setHasCharacter(false);
-                                    currentRoom = room[i][j];
-                                    currentRoom.setHasCharacter(true);
-                                    turnCounter();
-                                    run = false;
-                                    return currentRoom;
-                                } else {
-                                    System.out.println("You haven't obtained this key yet, you need to find it");
-                                    j = j + 1;
-                                    run = true;
-                                }
+                                    if (key.getName().equalsIgnoreCase(room[i][j].getDoor().getNameOfKey())) {
+                                        System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
+                                        room[i][(j + 1)].setHasCharacter(false);
+                                        room[(i+1)][j].setBeenSeen(true);
+                                        room[(i-1)][j].setBeenSeen(true);
+                                        room[i][(j+1)].setBeenSeen(true);
+                                        room[i][(j-1)].setBeenSeen(true);
+                                        currentRoom = room[i][j];
+                                        currentRoom.setHasCharacter(true);
+                                        currentRoom.setBeenSeen(true);
+                                        turnCounter();
+                                        run = false;
+                                        return currentRoom;
+                                    } else {
+                                        System.out.println("You haven't obtained this key yet, you need to find it");
+                                        j = j + 1;
+                                        run = true;
+                                    }
                             } else {
-                                room[i][(j+1)].setHasCharacter(false);
+                                room[i][(j + 1)].setHasCharacter(false);
+                                room[(i+1)][j].setBeenSeen(true);
+                                room[(i-1)][j].setBeenSeen(true);
+                                room[i][(j+1)].setBeenSeen(true);
+                                room[i][(j-1)].setBeenSeen(true);
                                 currentRoom = room[i][j];
                                 currentRoom.setHasCharacter(true);
+                                currentRoom.setBeenSeen(true);
                                 turnCounter();
                                 run = false;
                                 return currentRoom;
@@ -115,13 +128,18 @@ public class HeroController {
                                 System.out.println("You can not go that way there is no door.");
                                 run = true;
                                 j = j - 1;
-                            }  else if (room[i][j].isIslocked() == true) {
+                            } else if (room[i][j].getIslocked() == true) {
                                 for (Key key : keys)
                                     if (key.getName().equalsIgnoreCase(room[i][j].getDoor().getNameOfKey())) {
                                         System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
                                         room[i][(j - 1)].setHasCharacter(false);
                                         currentRoom = room[i][j];
+                                        room[(i+1)][j].setBeenSeen(true);
+                                        room[(i-1)][j].setBeenSeen(true);
+                                        room[i][(j+1)].setBeenSeen(true);
+                                        room[i][(j-1)].setBeenSeen(true);
                                         currentRoom.setHasCharacter(true);
+                                        currentRoom.setBeenSeen(true);
                                         turnCounter();
                                         run = false;
                                         return currentRoom;
@@ -131,9 +149,14 @@ public class HeroController {
                                         run = true;
                                     }
                             } else {
-                                room[i][(j-1)].setHasCharacter(false);
+                                room[i][(j - 1)].setHasCharacter(false);
+                                room[(i+1)][j].setBeenSeen(true);
+                                room[(i-1)][j].setBeenSeen(true);
+                                room[i][(j+1)].setBeenSeen(true);
+                                room[i][(j-1)].setBeenSeen(true);
                                 currentRoom = room[i][j];
                                 currentRoom.setHasCharacter(true);
+                                currentRoom.setBeenSeen(true);
                                 turnCounter();
                                 run = false;
                                 return currentRoom;
@@ -144,13 +167,18 @@ public class HeroController {
                                 System.out.println("You can not go that way there is no door.");
                                 run = true;
                                 i = i - 1;
-                            }  else if (room[i][j].isIslocked() == true) {
+                            } else if (room[i][j].getIslocked() == true) {
                                 for (Key key : keys)
                                     if (key.getName().equalsIgnoreCase(room[i][j].getDoor().getNameOfKey())) {
                                         System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
-                                        room[i-1][(j)].setHasCharacter(false);
+                                        room[i - 1][(j)].setHasCharacter(false);
+                                        room[(i+1)][j].setBeenSeen(true);
+                                        room[(i-1)][j].setBeenSeen(true);
+                                        room[i][(j+1)].setBeenSeen(true);
+                                        room[i][(j-1)].setBeenSeen(true);
                                         currentRoom = room[i][j];
                                         currentRoom.setHasCharacter(true);
+                                        currentRoom.setBeenSeen(true);
                                         turnCounter();
                                         run = false;
                                         return currentRoom;
@@ -160,9 +188,14 @@ public class HeroController {
                                         run = true;
                                     }
                             } else {
-                                room[(i-1)][j].setHasCharacter(false);
+                                room[(i - 1)][j].setHasCharacter(false);
+                                room[(i+1)][j].setBeenSeen(true);
+                                room[(i-1)][j].setBeenSeen(true);
+                                room[i][(j+1)].setBeenSeen(true);
+                                room[i][(j-1)].setBeenSeen(true);
                                 currentRoom = room[i][j];
                                 currentRoom.setHasCharacter(true);
+                                currentRoom.setBeenSeen(true);
                                 turnCounter();
                                 run = false;
                                 return currentRoom;
@@ -173,13 +206,18 @@ public class HeroController {
                                 System.out.println("You can not go that way there is no door.");
                                 run = true;
                                 i = i + 1;
-                            }  else if (room[i][j].isIslocked() == true) {
+                            } else if (room[i][j].getIslocked() == true) {
                                 for (Key key : keys)
                                     if (key.getName().equalsIgnoreCase(room[i][j].getDoor().getNameOfKey())) {
                                         System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
-                                        room[(i+1)][j].setHasCharacter(false);
+                                        room[(i + 1)][j].setHasCharacter(false);
+                                        room[(i+1)][j].setBeenSeen(true);
+                                        room[(i-1)][j].setBeenSeen(true);
+                                        room[i][(j+1)].setBeenSeen(true);
+                                        room[i][(j-1)].setBeenSeen(true);
                                         currentRoom = room[i][j];
                                         currentRoom.setHasCharacter(true);
+                                        currentRoom.setBeenSeen(true);
                                         turnCounter();
                                         run = false;
                                         return currentRoom;
@@ -189,9 +227,14 @@ public class HeroController {
                                         run = true;
                                     }
                             } else {
-                                room[(i+1)][j].setHasCharacter(false);
+                                room[(i + 1)][j].setHasCharacter(false);
+                                room[(i+1)][j].setBeenSeen(true);
+                                room[(i-1)][j].setBeenSeen(true);
+                                room[i][(j+1)].setBeenSeen(true);
+                                room[i][(j-1)].setBeenSeen(true);
                                 currentRoom = room[i][j];
                                 currentRoom.setHasCharacter(true);
+                                currentRoom.setBeenSeen(true);
                                 turnCounter();
                                 run = false;
                                 return currentRoom;
@@ -207,6 +250,7 @@ public class HeroController {
 
     /**
      * check to see who goes first
+     *
      * @param monster
      * @return
      */
@@ -219,6 +263,7 @@ public class HeroController {
 
     /**
      * check to see if fleeing is successful
+     *
      * @param hero
      * @return
      */
@@ -226,6 +271,7 @@ public class HeroController {
         Random rand = new Random();
 
         int chanceToFlee = rand.nextInt(100);
+        chanceToFlee = chanceToFlee + hero.getSpeed();
         if (chanceToFlee <= 50) {
             return false;
         } else
@@ -234,6 +280,7 @@ public class HeroController {
 
     /**
      * use an item externally
+     *
      * @param item
      */
     public void useItemExternal(Item item) {
@@ -252,43 +299,57 @@ public class HeroController {
 
     /**
      * add treasure to current treasure
-      * @param treasure
+     *
+     * @param treasure
      */
-    public void addTreasure ( int treasure){
-        System.out.println("That chest contained " + treasure + " gold pieces");
-        model.setCurrentTreasure(model.getCurrentTreasure() + treasure);
-        System.out.println("Your new total " + model.getCurrentTreasure() + " of gold pieces");
+    public void addTreasure(Treasure treasure) {
+
+        System.out.println("You found a chest that contained " + treasure.getName() + "\n" + treasure.getAmount() + " was added to your treasure score!");
+        model.setCurrentTreasure(treasure.getAmount() + model.getCurrentTreasure());
+        System.out.println("Your new score is: " + model.getCurrentTreasure() + "!");
     }
 
     /**
+     * add treasure to current treasure
+     *
+     * @param weapon
+     */
+
+
+
+    /**
      * add key to keyring
+     *
      * @param keyRing
      * @param key
      * @return
      */
-    public ArrayList<Key> addKey (ArrayList < Key > keyRing, Key key){
+    public ArrayList<Key> addKey(ArrayList<Key> keyRing, Key key) {
 
         keyRing.add(0, key);
         return keyRing;
-        }
+    }
 
     /**
      * turn counter
      */
-    public void turnCounter(){
+    public void turnCounter() {
         model.setTurnCounter(model.getTurnCounter() + 1);
         view.printTurnCount();
-        }
+    }
+
     public void loseLife() {
         model.setLives(model.getLives() - 1);
     }
+
     public void heroAlive() {
         model.setAlive(true);
         model.setHealth(100);
     }
+
     public Room previousRoom(Room previousRoom, Room[][] room) {
-        for (int i = 0; i < room.length ; i++) {
-            for (int j = 0; j < room.length ; j++) {
+        for (int i = 0; i < room.length; i++) {
+            for (int j = 0; j < room.length; j++) {
                 if (room[i][j] == previousRoom) {
                     previousRoom = room[i][j];
                     return previousRoom;
@@ -298,9 +359,10 @@ public class HeroController {
         }
         return previousRoom;
     }
+
     public Room currentRoom(Room currentRoom, Room[][] room) {
-        for (int i = 0; i < room.length ; i++) {
-            for (int j = 0; j < room.length ; j++) {
+        for (int i = 0; i < room.length; i++) {
+            for (int j = 0; j < room.length; j++) {
                 if (room[i][j] == currentRoom) {
                     currentRoom = room[i][j];
                     return currentRoom;
@@ -310,8 +372,9 @@ public class HeroController {
         }
         return currentRoom;
     }
+
     public void addEndurance() {
         if (model.getEndurance() < 95)
-        model.setEndurance(model.getEndurance() + 5);
+            model.setEndurance(model.getEndurance() + 5);
     }
-    }
+}

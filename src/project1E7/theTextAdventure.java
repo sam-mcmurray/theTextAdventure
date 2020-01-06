@@ -1,7 +1,6 @@
 package project1E7;
 
 
-import com.google.gson.Gson;
 import project1E7.Controller.*;
 import project1E7.Model.*;
 import project1E7.View.*;

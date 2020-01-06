@@ -20,16 +20,16 @@ public class ItemView {
      */
     public Item viewItem(Item item) {
        if (item == coffee) {
-           System.out.println("flavor text for coffee");
+           System.out.println("a delicious mug of coffee. How is it still warm?");
            return coffee;
        } else if (item == healthPotion) {
-           System.out.println("flavor text health potion");
+           System.out.println("a glowing red potion with a label on the back saying not to drink if pregnant.");
            return healthPotion;
        } else if (item == heart) {
-           System.out.println("flavor text for heart");
+           System.out.println("a human heart within a crystal casing. It still beats.");
            return heart;
        } else if (item == treasure) {
-           System.out.println("flavor text for treasure");
+           System.out.println("a chest full of treasure!");
            return treasure;
        }
        return null;

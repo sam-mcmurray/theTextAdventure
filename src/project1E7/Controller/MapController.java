@@ -33,6 +33,8 @@ public class MapController {
         HealthPotion healthPotion = new HealthPotion("Health portion");
         Item itemModelHealthPotion = healthPotion;
         ItemView itemViewHealthPotion = new ItemView(itemModelHealthPotion);
+        Weapon weapon = new Weapon("+1");
+        Item itemModelWeapon = weapon;
         ItemController itemControllerHealthPotion = new ItemController(itemModelHealthPotion, itemViewHealthPotion);
         Key goldKey = new Key("Golden key");
         KeyView goldKeyView = new KeyView(goldKey);
@@ -60,65 +62,67 @@ public class MapController {
         MonsterController batMonsterController = new MonsterController(bat, batMonsterView);
         Monster slime = new Monster(35, 15, 2, "The Slime", "The Slime", null, true, 2);
         MonsterView slimeMonsterView = new MonsterView(slime);
-
         Monster spiderling = new Monster(10, 6, 9, "The Spiderling,", "Spiderling", null, true, 1);
-        Door woodenDoor = new Door(true, "Wooden Key", "The door is ancient and maybe won't open ");
-        Door stoneDoor = new Door(true, "Stone key", "you need need to be careful when you use the key inside this door ,might be broken easily");
-        Door goldenDoor = new Door(true, "Golden key", "The golden door takes you out ! you are almost free");
-        Door silverDoor = new Door(true, "Silver Key", "This door is bright silver just like the key");
+
+        Door woodenDoor = new Door(true, "Wooden Key", "The wooden door is worn and rather unimpressive.");
+        Door stoneDoor = new Door(true, "Stone key", "The stone door in front of you is immense and made with a solid stone slab.  There is a large slot for a key");
+        Door goldenDoor = new Door(true, "Golden key", "The golden door looks like it will take you outside!  Freedom is within your grasp!");
+        Door silverDoor = new Door(true, "Silver Key", "This door is an unnaturally shiny silver, who or what could possible be polishing it?");
         for (int i = 0; i < room.length; i++) {
             for (int j = 0; j < room[i].length; j++) {
 
+                String description = flavorTextRoom();
+
                 if (i == 8 && j == 5) {
-                    Room roomModel = new Room("The Starting Room", true, true);
+                    Room roomModel = new Room("The bottom of a large chasm you were rappelling into. Unfortunately your rope was cut and the it's \nimpossible to climb back up. Best to look for another way out", true, true,true);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
 
                 } else if (i == 0 && j == 3) {
-                    Room roomModel = new Room("The Exit", false, treasure, goldenDoor, true, false);
+                    Room roomModel = new Room("The Exit", false, treasure, goldenDoor, true, false,false);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
 
                 } else if (i == 1 && j == 3) {
-                    Room roomModel = new Room("The Boss Room", goldKey, true, false, theBoss, true, false);
+                    Room roomModel = new Room("The Boss Room", goldKey, true, false, theBoss, true, false,false);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
 
                 } else if (i == 1 && j == 1) {
-                    Room roomModel = new Room("The Silver Door room", false, coffee, silverDoor, true, false);
+                    Room roomModel = new Room("This room has a weapon", false, weapon, silverDoor, true, false,false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 5 && j == 8) {
-                    Room roomModel = new Room("The Skeleton room", stoneKey, true, false, skeleton, true, false);
+                    Room roomModel = new Room("The Skeleton room", stoneKey, true, false, skeleton, true, false,false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 6 && j == 3) {
-                    Room roomModel = new Room("The Owl bear room", silverKey, true, false, owlBear, true, false);
+                    Room roomModel = new Room("The Owl bear room", silverKey, true, false, owlBear, true, false,false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 7 && j == 8) {
-                    Room roomModel = new Room("The wooden door room", false, healthPotion, woodenDoor, true, false);
+                    Room roomModel = new Room("The wooden door room", false, healthPotion, woodenDoor, true, false,false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 8 && j == 8) {
-                    Room roomModel = new Room("The Bat room", woodenKey, true, false, bat, true, false);
+                    Room roomModel = new Room("", woodenKey, true, false, bat, true, false,false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 3 && j == 6) {
-                    Room roomModel = new Room(" The Stone Door room", false, heart, stoneDoor, true, false);
+                    Room roomModel = new Room(" The Stone Door room", false, heart, stoneDoor, true, false,false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
@@ -128,13 +132,13 @@ public class MapController {
                         || i == 3 && j == 7 || i == 4 && j == 1 || i == 4 && j == 3 || i == 4 && j == 4 || i == 4 && j == 5
                         || i == 4 && j == 6 || i == 6 && j == 2 || i == 6 && j == 4 || i == 6 && j == 5 || i == 7 && j == 7
                         || i == 6 && j == 7 || i == 6 && j == 8 || i == 7 && j == 3 || i == 7 && j == 4 || i == 8 && j == 1) {
-                    Room roomModel = new Room("wall", false, false);
+                    Room roomModel = new Room("wall", false, false,false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 6 || j == 7 || (i == 2 && j == 3) || i == 3) {
-                    Room roomModel = new Room("Room description", false, false);
+                    Room roomModel = new Room(description, false, false,false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
@@ -143,25 +147,37 @@ public class MapController {
                     int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room("Room description", treasure, true, false, bat, true, false);
+                        Room roomModel = new Room(description, treasure, true, false, bat, true, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 2) {
-                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true, false);
+                        Room roomModel = new Room(description, treasure, true, false, skeleton, true, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 4) {
-                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true, false);
+                        Room roomModel = new Room(description, treasure, true, false, owlBear, true, false,false);
+                        RoomView roomView = new RoomView(roomModel);
+                        RoomController roomController = new RoomController(roomModel, roomView);
+                        room[i][j] = roomModel;
+
+                    } else if (chanceForMonster == 4) {
+                        Room roomModel = new Room(description, treasure, true, false, slime, true, false,false);
+                        RoomView roomView = new RoomView(roomModel);
+                        RoomController roomController = new RoomController(roomModel, roomView);
+                        room[i][j] = roomModel;
+
+                    } else if (chanceForMonster == 4) {
+                        Room roomModel = new Room(description, treasure, true, false, spiderling, true, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room("Room Descrition", false, false);
+                        Room roomModel = new Room(description, false, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -170,25 +186,25 @@ public class MapController {
                     int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room("Room description", treasure, true, false, bat, true, false);
+                        Room roomModel = new Room(description, treasure, true, false, bat, true, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 2) {
-                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true, false);
+                        Room roomModel = new Room(description, treasure, true, false, skeleton, true, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 4) {
-                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true, false);
+                        Room roomModel = new Room(description, treasure, true, false, owlBear, true, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room("Room Descrition", false, false);
+                        Room roomModel = new Room(description, false, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -197,25 +213,25 @@ public class MapController {
                     int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room("Room description", treasure, true, false, bat, true, false);
+                        Room roomModel = new Room(description, treasure, true, false, bat, true, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 2) {
-                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true, false);
+                        Room roomModel = new Room(description, treasure, true, false, skeleton, true, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 4) {
-                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true, false);
+                        Room roomModel = new Room(description, treasure, true, false, owlBear, true, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room("Room Descrition", false, false);
+                        Room roomModel = new Room(description, false, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -224,25 +240,25 @@ public class MapController {
                     int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room("Room description", treasure, true, false, bat, true, false);
+                        Room roomModel = new Room(description, treasure, true, false, bat, true, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 2) {
-                        Room roomModel = new Room("Room description", treasure, true, false, skeleton, true, false);
+                        Room roomModel = new Room(description, treasure, true, false, skeleton, true, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 4) {
-                        Room roomModel = new Room("Room description", treasure, true, false, owlBear, true, false);
+                        Room roomModel = new Room(description, treasure, true, false, owlBear, true, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room("Room Descrition", false, false);
+                        Room roomModel = new Room(description, false, false,false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -251,8 +267,52 @@ public class MapController {
             }
 
         }
+        room[(9)][5].setBeenSeen(true);
+        room[(7)][5].setBeenSeen(true);
+        room[8][(6)].setBeenSeen(true);
+        room[8][(4)].setBeenSeen(true);
+    }
+    public String flavorTextRoom() {
 
-        view.mapPrinter(room);
+        Random random = new Random();
+        String description = "";
+        int numberGen = random.nextInt(5);
 
+        if (numberGen == 0) {
+            description = "Upon stepping into the room you are immediately hit with a putrid stench. Bones scatter the \n" +
+                    "ground in front of you so thickly you can't even see the floor. Whatever lives here has quite the \n" +
+                    "appetite. Perhaps you shouldn't stay for long.";
+            return description;
+        } else if (numberGen == 1) {
+            description = "The first thing you notice as you enter the room is how dark it is. As a seasoned adventurer \n" +
+                    "this shouldn't be anything new, but this is something unnatural. You can barely see your hands in \n" +
+                    "front of you let alone whatever dark entity might lurk in here. You suddenly feel very cold, like \n" +
+                    "someone is watching you.";
+            return description;
+        } else if (numberGen == 2) {
+            description = "Whatever this room was used for before it became a decrepit ruin was something sinister. The \n" +
+                    "walls are carved with some indecipherable runes and the center of the room has a table clearly made \n" +
+                    "for some type of sacrifice, and judging by the size and shape, they preferred human. The ornate \n" +
+                    "dagger resting on the center of the table looks to be the tool they used. You reach out to grab it \n" +
+                    "to add to your pack but as soon as you touch it you feel as though you grabbed white hot metal. \n" +
+                    "After you yelp in pain  and pull back you take a look at what should be a permanently disfigured \n" +
+                    "hand only to find it unscathed. You decide it would be best to leave the cursed dagger. \n" +
+                    "Unfortunately something may have heard your scream. It would be best to get as far away from this \n" +
+                    "room as you can.";
+            return description;
+        } else if (numberGen == 3) {
+            description = "The dilapidated library you entered is filled with books and scrolls ravaged by time. A \n" +
+                    "more scholarly type with more time might find ancient tomes and knowledge long forgotten. \n" +
+                    "Unfortunately, to you they are nothing more than the cause of an ever invading stench of mold and \n" +
+                    "decay. Time to look elsewhere...";
+            return description;
+        } else {
+            description = "As you walk into the room you almost fall into the meter and a half long opening to what \n" +
+                    "appears to be a pit of considerable depth. Curious, you drop the rest of your half used torch \n" +
+                    "down the shaft and watch as the light continues to fall. You continue to watch for perhaps 40 \n" +
+                    "seconds before the light from your torch is consumed entirely by the darkness. You shiver after \n" +
+                    "realizing how close you were to falling in there. Might be best to look for another way out.";
+            return description;
+        }
     }
 }
