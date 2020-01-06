@@ -23,7 +23,7 @@ public class theTextAdventure {
     static ArrayList<User> userz = new ArrayList<>();
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
         Scanner input = new Scanner(System.in);
         theTextAdventure myApp = new theTextAdventure();
@@ -38,11 +38,22 @@ public class theTextAdventure {
         while (game == true) {
             String choice = menuController.startMenu();
             if (choice.equals("1")) {
-
-                gameManager.newGame();
+                Hero theHero = (menuController.selectHero());
+                Controls control = new Controls("w", "s", "d", "a");
+                Room[][] room = new Room[10][10];
+                mapController.createWorld(room);
+                User user = new User("Sam", 100);
+                gameManager.newGame(theHero,room, room[8][5], control,user);
 
             } else if (choice.equals("2")) {
                 System.out.println("Load Game");
+                ClassLoader classLoader = new theTextAdventure().getClass().getClassLoader();
+                String fileName = "SavedGame.json";
+                File file = new File("SavedGame.json");
+                Load load = new Load(file, fileName);
+                LoadView loadView = new LoadView(load);
+                LoadController loadController = new LoadController(load, loadView);
+                loadController.loadGame();
 
             } else if (choice.equals("3")) {
 
@@ -79,7 +90,7 @@ public class theTextAdventure {
             } else if (choice.equals("4")) {
                 menuView.instructionsStartMenu();
             } else if (choice.equals("5")) {
-
+                System.exit(0);
             }
         }
     }

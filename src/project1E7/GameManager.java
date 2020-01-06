@@ -9,38 +9,32 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GameManager {
-
+    ArrayList<Key> keyRing = new ArrayList<>();
+    String userName;
+    ArrayList<User> users;
     /**
      * creates new game
      */
-    public void newGame(){
-        Controls control = new Controls("w", "s", "d", "a");
+    public void newGame(Hero theHero, Room[][] room, Room currentRoom, Controls control, User user){
+        Random rand = new Random();
+        Scanner input = new Scanner(System.in);
         ControlsView controlsView = new ControlsView(control);
         ControlsController controlsController = new ControlsController(control, controlsView);
-
         MenuView menuView = new MenuView();
         MenuController menuController = new MenuController(menuView);
-        Scanner input = new Scanner(System.in);
-        String userName;
-        ArrayList<User> users;
-        Room[][] room = new Room[10][10];
-        ArrayList<Key> keyRing = new ArrayList<>();
-        User user = new User("Sam", 100);
         MapView mapView = new MapView();
         MapController mapController = new MapController(mapView);
-        Random rand = new Random();
-        mapController.createWorld(room);
-        Hero theHero = (menuController.selectHero());
-        HeroView heroView = new HeroView(theHero);
-        HeroController heroController = new HeroController(theHero, heroView);
+        Hero hero = theHero;
+        HeroView heroView = new HeroView(hero);
+        HeroController heroController = new HeroController(hero, heroView);
         heroView.printStats();
         heroView.heroStory();
-        Room currentRoom = room[8][5];
+
         Room previousRoom = currentRoom;
         do {
             boolean flee = false;
             boolean run = true;
-            Room roomModel = currentRoom;
+            Room roomModel = heroController.currentRoom(currentRoom, room);
             RoomView roomView = new RoomView(roomModel);
             RoomController roomController = new RoomController(roomModel, roomView);
             roomView.flavorTextRoom();
@@ -103,6 +97,7 @@ public class GameManager {
                 currentRoom = heroController.previousRoom(previousRoom, room);
 
 
+
             } else if (!theHero.isAlive() && theHero.getLives() > 1){
                 heroController.loseLife();
                 currentRoom = heroController.previousRoom(previousRoom, room);
@@ -118,7 +113,7 @@ public class GameManager {
                 run = false;
             }
 
-        } while ((theHero.isAlive() && theHero.getLives() > 0 ) || currentRoom != room[0][3]);
+        } while ((theHero.isAlive() && theHero.getLives() >= 1 ) || heroController.currentRoom(currentRoom, room)!= room[0][3]);
 
 
     }

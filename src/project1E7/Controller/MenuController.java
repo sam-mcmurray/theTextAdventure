@@ -3,7 +3,6 @@ package project1E7.Controller;
 import project1E7.Model.*;
 import project1E7.View.*;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuController {
@@ -349,8 +348,11 @@ public class MenuController {
                     break;
 
                 case "5":
-                    Save save = new Save();
-                    save.saveGame(room,currentRoom,theHero,controls,user);
+                    Game game = new Game(theHero, room, controls, user, currentRoom);
+                    Save save = new Save(theHero,room, controls, user, currentRoom);
+                    SaveView saveView = new SaveView(save);
+                    SaveController saveController = new SaveController(save, saveView);
+                    saveController.saveGame(game);
                     break;
 
                 case "6":
