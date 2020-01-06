@@ -47,7 +47,7 @@ public class theTextAdventure {
 
             } else if (choice.equals("2")) {
                 System.out.println("Load Game");
-                ClassLoader classLoader = new theTextAdventure().getClass().getClassLoader();
+
                 String fileName = "SavedGame.json";
                 File file = new File("SavedGame.json");
                 Load load = new Load(file, fileName);
