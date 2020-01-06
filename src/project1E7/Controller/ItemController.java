@@ -97,7 +97,9 @@ public class ItemController {
      * @param keyRing
      * @return
      */
-    public boolean encounterItem(Item item, HeroController heroController, ArrayList<Key> keyRing, Hero theHero) {
+
+    public boolean encounterItem(Item item, HeroController heroController, ArrayList<Key> keyRing,ArrayList<Item> backPack, Hero theHero) {
+
         boolean run = true;
         String chooseItem = "0";
         do {
@@ -134,6 +136,7 @@ public class ItemController {
                     run = false;
                     return run;
                 case "2":
+                    heroController.saveItem(item,backPack);
                     heroController.turnCounter();
                     run = false;
                     return run;

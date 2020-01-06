@@ -17,8 +17,7 @@ public class GameManager {
         Controls control = new Controls("w", "s", "d", "a");
         ControlsView controlsView = new ControlsView(control);
         ControlsController controlsController = new ControlsController(control, controlsView);
-
-
+        ArrayList<Item> backPack = new ArrayList<>();
         MenuView menuView = new MenuView();
         MenuController menuController = new MenuController(menuView);
         Scanner input = new Scanner(System.in);
@@ -83,7 +82,7 @@ public class GameManager {
                         Item item = roomController.getItem();
                         ItemView itemView = new ItemView(item);
                         ItemController itemController = new ItemController(item, itemView);
-                        run = itemController.encounterItem(item, heroController, keyRing, theHero);
+                        run = itemController.encounterItem(item, heroController, keyRing, backPack, theHero);
                         heroController.addEndurance();
 
                     } else if (roomController.roomHasItem() == false) {
@@ -92,7 +91,7 @@ public class GameManager {
                         if (item != null) {
                             ItemView itemView = new ItemView(item);
                             ItemController itemController = new ItemController(item, itemView);
-                            run = itemController.encounterItem(item, heroController, keyRing, theHero);
+                            run = itemController.encounterItem(item, heroController, keyRing, backPack, theHero);
                             heroController.addEndurance();
 
                         }

@@ -83,8 +83,8 @@ public class HeroView {
      */
     public void inventory(ArrayList<Item> items) {
         items = model.getBackPack();
-
-        for (int i = 0; i < 5; i++) {
+        int choice;
+        for (int i = 0; i<=items.size()-1; i++) {
             System.out.println("[" + (i + 1) + "]" + items.get(i));
         }
 

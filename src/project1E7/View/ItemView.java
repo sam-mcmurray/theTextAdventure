@@ -2,6 +2,8 @@ package project1E7.View;
 
 import project1E7.Model.*;
 
+import java.util.InputMismatchException;
+
 public class ItemView {
     Item model;
     private Coffee coffee;
@@ -19,6 +21,7 @@ public class ItemView {
      * @return
      */
     public Item viewItem(Item item) {
+
        if (item == coffee) {
            System.out.println("a delicious mug of coffee. How is it still warm?");
            return coffee;
@@ -35,12 +38,23 @@ public class ItemView {
        return null;
     }
 
+
     /**
      * prints the item decision menu
      * @param item
      */
-    public void chooseWhatToDoWithItem(Item item){
-        System.out.println("Would you like to use " + item.getName() + " or save in your satchel?" +
-                "\n 1)Use " + item.getName() + "\n 2)Save " + item.getName() + " in satchel");
+
+    public void chooseWhatToDoWithItem(Item item) {
+        try {
+            System.out.println("Would you like to use " + item.getName() + " or save in your satchel?" +
+                    "\n 1)Use " + item.getName() + "\n 2)Save " + item.getName() + " in satchel");
+        }
+        catch (InputMismatchException e) {
+
+            System.out.printf("%n" +
+                    "Invalid answer%n");
+            return;
+        }
+
     }
 }
