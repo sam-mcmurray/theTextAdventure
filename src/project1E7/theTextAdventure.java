@@ -23,7 +23,7 @@ public class theTextAdventure {
     static ArrayList<User> userz = new ArrayList<>();
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
         Scanner input = new Scanner(System.in);
         theTextAdventure myApp = new theTextAdventure();
@@ -38,11 +38,22 @@ public class theTextAdventure {
         while (game == true) {
             String choice = menuController.startMenu();
             if (choice.equals("1")) {
-
-                gameManager.newGame();
+                Hero theHero = (menuController.selectHero());
+                Controls control = new Controls("w", "s", "d", "a");
+                Room[][] room = new Room[10][10];
+                mapController.createWorld(room);
+                User user = new User("Sam", 100);
+                gameManager.newGame(theHero,room, room[8][5], control,user);
 
             } else if (choice.equals("2")) {
                 System.out.println("Load Game");
+
+                String fileName = "SavedGame.json";
+                File file = new File("SavedGame.json");
+                Load load = new Load(file, fileName);
+                LoadView loadView = new LoadView(load);
+                LoadController loadController = new LoadController(load, loadView);
+                loadController.loadGame();
 
             } else if (choice.equals("3")) {
 
@@ -79,24 +90,24 @@ public class theTextAdventure {
             } else if (choice.equals("4")) {
                 menuView.instructionsStartMenu();
             } else if (choice.equals("5")) {
-
+                System.exit(0);
             }
         }
     }
 
-    /**
-     * prints users needs to go in user view
-     *
-     * @param users
-     * @return
-     */
-    public boolean printUsers (ArrayList < User > users) {
+            /**
+             * prints users needs to go in user view
+             *
+             * @param users
+             * @return
+             */
+            public boolean printUsers (ArrayList < User > users) {
 
-        if (users.size() == 0) {
+                if (users.size() == 0) {
 
-        }
-        return true;
-    }
+                }
+                return true;
+            }
 
     public User selectUser() {
 
@@ -116,7 +127,7 @@ public class theTextAdventure {
 
                 for (User i : userz) {
 
-                    if (response.equals(i.getUserName())) {
+                    if (response == i.getUserName()) {
 
                         ok = false;
                     } else {
@@ -163,53 +174,53 @@ public class theTextAdventure {
         return userModel;
     }
 
-    /**
-     * creates new user needs to go into user controller
-     * @return
-     */
-    public boolean save() {
+            /**
+             * creates new user needs to go into user controller
+             * @return
+             */
+            public boolean save() {
 
-        System.out.printf("You have selected to Save Game. Is this correct Yes/No");
+                System.out.printf("You have selected to Save Game. Is this correct Yes/No");
 
-        String correct = input.nextLine();
-        if (correct.equalsIgnoreCase("yes")) {
-            System.out.println("Saving game, please do not turn off the system");
+                String correct = input.nextLine();
+                if (correct.equalsIgnoreCase("yes")) {
+                    System.out.println("Saving game, please do not turn off the system");
 
-            try {
+                    try {
 
-                String saveFile = input.nextLine();
-                String verify, putData;
-                File file = new File(saveFile);
-                file.createNewFile();
-                FileWriter writer = new FileWriter(file);
-                BufferedWriter bWriter = new BufferedWriter(writer);
-                bWriter.write((Integer.toString(users.get(users.size()).getHighScore())) + users.get(users.size()).getUserName());
-                bWriter.flush();
-                bWriter.close();
-                FileReader reader = new FileReader(file);
-                BufferedReader bReader = new BufferedReader(reader);
+                        String saveFile = input.nextLine();
+                        String verify, putData;
+                        File file = new File(saveFile);
+                        file.createNewFile();
+                        FileWriter writer = new FileWriter(file);
+                        BufferedWriter bWriter = new BufferedWriter(writer);
+                        bWriter.write((Integer.toString(users.get(users.size()).getHighScore())) + users.get(users.size()).getUserName());
+                        bWriter.flush();
+                        bWriter.close();
+                        FileReader reader = new FileReader(file);
+                        BufferedReader bReader = new BufferedReader(reader);
 
-                while ((verify = bReader.readLine()) != null) {
-                    if (verify != null) {
-                        putData = verify.replaceAll("here", "there");
-                        bWriter.write(putData);
+                        while ((verify = bReader.readLine()) != null) {
+                            if (verify != null) {
+                                putData = verify.replaceAll("here", "there");
+                                bWriter.write(putData);
+                            }
+                        }
+                        // use this to edit an existing file for the highscore
+
+                        bReader.close();
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+
+                } else if (correct.equalsIgnoreCase("no")) {
+                    System.out.println("Saving aborted");
+                    return false;
                 }
-                // use this to edit an existing file for the highscore
-
-                bReader.close();
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
+                return true;
             }
-
-        } else if (correct.equalsIgnoreCase("no")) {
-            System.out.println("Saving aborted");
-            return false;
-        }
-        return true;
-    }
     public boolean createUser() {
 
         System.out.println("You have selected to Create a New User is this correct? yes/no");

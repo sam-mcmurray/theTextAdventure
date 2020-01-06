@@ -1,16 +1,15 @@
 package project1E7.Model;
 
-import java.util.Scanner;
+import java.util.Arrays;
 
-public class Save {
-    Scanner input = new Scanner(System.in);
-    Hero jsonHero;
-    Room[][] jsonMap;
-    Controls jsonControls;
-    User jsonUser;
-    Room jsonCurrentRoom;
+public class Game {
+    private Hero jsonHero;
+    private Room[][] jsonMap;
+    private Controls jsonControls;
+    private User jsonUser;
+    private Room jsonCurrentRoom;
 
-    public Save(Hero jsonHero, Room[][] jsonMap, Controls jsonControls, User jsonUser, Room jsonCurrentRoom) {
+    public Game(Hero jsonHero, Room[][] jsonMap, Controls jsonControls, User jsonUser, Room jsonCurrentRoom) {
         this.jsonHero = jsonHero;
         this.jsonMap = jsonMap;
         this.jsonControls = jsonControls;
@@ -57,4 +56,6 @@ public class Save {
     public void setJsonCurrentRoom(Room jsonCurrentRoom) {
         this.jsonCurrentRoom = jsonCurrentRoom;
     }
+
+
 }
