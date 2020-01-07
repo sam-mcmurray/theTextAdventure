@@ -46,14 +46,6 @@ public class User {
         return highScore;
     }
 
-    public void setHighestScore(int highestScore){
-
-        this.highestScore=highestScore;
-    }
-
-    public int getHighestScore(ArrayList){
-
-        return highestScore;
-    }
+ 
 
 }
