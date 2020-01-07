@@ -46,6 +46,6 @@ public class User {
         return highScore;
     }
 
- 
+
 
 }
