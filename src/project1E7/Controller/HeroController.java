@@ -53,13 +53,13 @@ public class HeroController {
         int chanceToHit = rand.nextInt(2);
         if (chanceToHit == 0) {
             return false;
+        } else {
+
+            model.setEndurance(model.getEndurance() - 10);
+            monster.takeDamage(model.getStrength());
+
+            return true;
         }
-
-        model.setEndurance(model.getEndurance() - 10);
-        monster.takeDamage(model.getStrength());
-
-        return true;
-
     }
 
     /**

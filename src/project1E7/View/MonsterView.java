@@ -60,11 +60,11 @@ public class MonsterView {
      */
     public void monsterHitFlavorText(Hero theHero) {
         if (theHero.getName().equalsIgnoreCase("warrior")) {
-            System.out.println("flavor text monster missed warrior");
+            System.out.println("flavor text monster hit warrior");
         } else if (theHero.getName().equalsIgnoreCase("mage")) {
-            System.out.println("flavor text monster missed mage");
+            System.out.println("flavor text monster hit mage");
         } else {
-            System.out.println("flavor text monster missed thief");
+            System.out.println("flavor text monster hit thief");
         }
     }
 

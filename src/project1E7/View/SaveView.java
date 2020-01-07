@@ -8,4 +8,9 @@ public class SaveView {
     public SaveView(Save model) {
         this.model = model;
     }
+
+    public void printSave() {
+            System.out.println("Your game has been saved");
+        }
+
 }

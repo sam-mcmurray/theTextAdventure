@@ -15,21 +15,22 @@ public class GameManager {
     /**
      * creates new game
      */
-    public void newGame(Hero theHero, Room[][] room, Room currentRoom, Controls control, User user){
+    public void game(Hero theHero, Room[][] room, Room currentRoom, Controls control, User user){
         Random rand = new Random();
         Scanner input = new Scanner(System.in);
+        Controls controls = control;
         ControlsView controlsView = new ControlsView(control);
         ControlsController controlsController = new ControlsController(control, controlsView);
         ArrayList<Item> backPack = new ArrayList<>();
-        MenuView menuView = new MenuView();
-        MenuController menuController = new MenuController(menuView);
+        Menu menu = new Menu();
+        MenuView menuView = new MenuView(menu);
+        MenuController menuController = new MenuController(menuView,menu);
         MapView mapView = new MapView();
         MapController mapController = new MapController(mapView);
         Hero hero = theHero;
         HeroView heroView = new HeroView(hero);
         HeroController heroController = new HeroController(hero, heroView);
-        heroView.printStats();
-        heroView.heroStory();
+
 
         Room previousRoom = currentRoom;
         do {
@@ -77,7 +78,8 @@ public class GameManager {
                         Item item = roomController.getItem();
                         ItemView itemView = new ItemView(item);
                         ItemController itemController = new ItemController(item, itemView);
-                        run = itemController.encounterItem(item, heroController, keyRing, backPack);
+                        run = itemController.encounterItem(item, heroController, keyRing, backPack, menuController, controlsController
+                                , controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
                         heroController.addEndurance();
 
                     } else if (roomController.roomHasItem() == false) {
@@ -86,7 +88,8 @@ public class GameManager {
                         if (item != null) {
                             ItemView itemView = new ItemView(item);
                             ItemController itemController = new ItemController(item, itemView);
-                            run = itemController.encounterItem(item, heroController, keyRing, backPack);
+                            run = itemController.encounterItem(item, heroController, keyRing, backPack, menuController, controlsController
+                            , controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
                             heroController.addEndurance();
 
                         }

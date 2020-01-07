@@ -57,7 +57,7 @@ public class HeroView {
         String choice = input.next();
         boolean valid = true;
 
-        if (choice.equalsIgnoreCase("yes")) {
+        if (choice.equalsIgnoreCase("yes") || choice.equalsIgnoreCase("y")) {
             System.out.println(hero + " has been selected");
             return false;
         } else

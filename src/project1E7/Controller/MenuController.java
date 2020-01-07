@@ -3,24 +3,23 @@ package project1E7.Controller;
 import project1E7.Model.*;
 import project1E7.View.*;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class MenuController {
     MenuView view;
+    Menu model;
     Scanner input = new Scanner(System.in);
 
-    public MenuController(MenuView view) {
+    public MenuController(MenuView view, Menu model) {
         this.view = view;
+        this.model = model;
     }
 
     /**
-     * encounter with monster hero first
-     * @param theHero
-     * @param heroView
-     * @param heroController
-     * @param monsterModel
-     * @param monsterView
-     * @param monsterController
+     *
+     * @param room
+     * @param currentRoom
      * @return
      */
     public boolean encounterHeroFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
@@ -30,6 +29,7 @@ public class MenuController {
         boolean run = true;
         String encounterChoice = "0";
         do {
+
             view.encounterMenu();
             encounterChoice = input.nextLine();
             switch (encounterChoice) {
@@ -73,7 +73,7 @@ public class MenuController {
                                 heroView.printStatus(theHero);
                             } else
                                 monsterView.monsterMissFlavorText(theHero);
-                            heroView.printStatus(theHero);
+                                heroView.printStatus(theHero);
                         }
                     }
                     break;
@@ -82,7 +82,7 @@ public class MenuController {
                     heroView.inventory(theHero.getBackPack());
                     break;
                 case "4":
-                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, controls, user);
+                    subMenu(controlsController,controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
                     break;
                 default:
                     System.out.println("Please enter a proper value.");
@@ -118,12 +118,12 @@ public class MenuController {
                 view.encounterMenu();
                 encounterChoice = input.nextLine();
 
-            } else
+            } else {
                 monsterView.monsterMissFlavorText(theHero);
-            heroView.printStatus(theHero);
-            view.encounterMenu();
-            encounterChoice = input.nextLine();
-
+                heroView.printStatus(theHero);
+                view.encounterMenu();
+                encounterChoice = input.nextLine();
+            }
 
             switch (encounterChoice) {
 
@@ -134,11 +134,11 @@ public class MenuController {
                             monsterView.printStatus(monsterModel);
                             heroController.turnCounter();
 
-                        } else
+                        } else {
                             heroView.missMonsterFlavorText(monsterModel);
                             monsterView.printStatus(monsterModel);
                             heroController.turnCounter();
-
+                        }
                         }
                     run = true;
                     break;
@@ -158,8 +158,8 @@ public class MenuController {
                     heroController.turnCounter();
                     break;
                 case "4":
-                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, controls, user);
-                    break;
+                    subMenu(controlsController,controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
+                        break;
                 default:
                     System.out.println("Please enter a proper value.");
                     run = true;
@@ -316,7 +316,7 @@ public class MenuController {
      * @param user
      */
     public void subMenu(ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room,
-                        Hero theHero, HeroView heroView, Room currentRoom, Controls controls, User user){
+                        Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls){
 
         boolean run = true;
 
@@ -356,7 +356,12 @@ public class MenuController {
                     break;
 
                 case "6":
-
+                    String fileName = "SavedGame.json";
+                    File file = new File("SavedGame.json");
+                    Load load = new Load(file, fileName);
+                    LoadView loadView = new LoadView(load);
+                    LoadController loadController = new LoadController(load, loadView);
+                    loadController.loadGame();
                     break;
 
                 case "7":
