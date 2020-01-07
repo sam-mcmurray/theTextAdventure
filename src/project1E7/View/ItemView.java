@@ -37,7 +37,6 @@ public class ItemView {
         return null;
     }
 
-
     /**
      * prints the item decision menu
      * @param item
@@ -52,7 +51,6 @@ public class ItemView {
 
             System.out.printf("%n" +
                     "Invalid answer%n");
-            return;
         }
 
     }

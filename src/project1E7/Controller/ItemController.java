@@ -111,8 +111,14 @@ public class ItemController {
                     run = false;
                     return run;
                 case "2":
-                    heroController.saveItem(item,backPack);
-                    heroController.turnCounter();
+                    if (backPack.size()<1) {
+                        heroController.saveItem(item, backPack);
+                        heroController.turnCounter();
+                    }else {
+                        heroController.dropItem(backPack);
+                        heroController.saveItem(item,backPack);
+                        heroController.printItem(backPack);
+                    }
                     run = false;
                     return run;
                 case "3":
