@@ -10,6 +10,7 @@ public class ItemView {
     private HealthPotion healthPotion;
     private Heart heart;
     private Treasure treasure;
+    private Weapon weapon;
 
     public ItemView(Item model) {
         this.model = model;
@@ -22,18 +23,22 @@ public class ItemView {
      */
     public Item viewItem(Item item) {
 
-       if (item == coffee) {
+       if (item instanceof Coffee) {
            System.out.println("a delicious mug of coffee. How is it still warm?");
            return coffee;
-       } else if (item == healthPotion) {
+       } else if (item instanceof HealthPotion) {
            System.out.println("a glowing red potion with a label on the back saying not to drink if pregnant.");
            return healthPotion;
-       } else if (item == heart) {
+       } else if (item instanceof Heart) {
            System.out.println("a human heart within a crystal casing. It still beats.");
            return heart;
-       } else if (item == treasure) {
+       } else if (item instanceof Weapon) {
+           System.out.println("an upgraded version of your signature weapon. How convenient!");
+       } else if (item instanceof Treasure) {
            System.out.println("a chest full of treasure!");
            return treasure;
+       } else {
+           System.out.println("No item was found");
        }
        return null;
     }
@@ -53,7 +58,6 @@ public class ItemView {
 
             System.out.printf("%n" +
                     "Invalid answer%n");
-            return;
         }
 
     }

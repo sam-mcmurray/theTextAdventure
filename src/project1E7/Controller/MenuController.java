@@ -175,7 +175,7 @@ public class MenuController {
      * @return
      */
     public Hero selectHero() {
-        Hero warrior = new Hero(100, 70, 30, "The Warrior...", "Warrior", 100, "Warrior");
+        Hero warrior = new Hero(1000, 70, 30, "The Warrior...", "Warrior", 100, "Warrior");
         HeroView heroViewWarrior = new HeroView(warrior);
         heroViewWarrior.printStats();
 

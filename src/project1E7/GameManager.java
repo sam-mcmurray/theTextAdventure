@@ -87,7 +87,7 @@ public class GameManager {
 
                     } else if (roomController.roomHasItem() == false) {
 
-                        Item item = roomController.setRandomItem();
+                        Item item = new Item("No item was found");
                         if (item != null) {
                             ItemView itemView = new ItemView(item);
                             ItemController itemController = new ItemController(item, itemView);

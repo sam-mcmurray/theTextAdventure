@@ -5,7 +5,7 @@ public class Weapon extends Item {
 
     public Weapon(String name) {
         super(name);
-        strength = 2;
+        strength = 10;
     }
 
     public Integer getStrength() {
