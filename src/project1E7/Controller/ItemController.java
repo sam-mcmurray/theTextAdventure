@@ -1,8 +1,7 @@
 package project1E7.Controller;
 
 import project1E7.Model.*;
-import project1E7.View.ItemView;
-import project1E7.View.KeyView;
+import project1E7.View.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -104,7 +103,9 @@ public class ItemController {
      * @return
      */
 
-    public boolean encounterItem(Item item, HeroController heroController, ArrayList<Key> keyRing, ArrayList<Item> backPack, Hero theHero) {
+    public boolean encounterItem(Item item, HeroController heroController, ArrayList<Key> keyRing,ArrayList<Item> backPack,
+                                 MenuController menuController, ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room,
+                                 Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls) {
 
         boolean run = true;
         String chooseItem = "0";
@@ -144,10 +145,20 @@ public class ItemController {
                     run = false;
                     return run;
                 case "2":
-                    heroController.saveItem(item, backPack);
-                    heroController.turnCounter();
+                    if (backPack.size()<1) {
+                        heroController.saveItem(item, backPack);
+                        heroController.turnCounter();
+                    }else {
+                        heroController.dropItem(backPack);
+                        heroController.saveItem(item,backPack);
+                        heroController.printItem(backPack);
+                    }
                     run = false;
                     return run;
+                case "3":
+                    menuController.subMenu(controlsController, controlsView,mapView, room,
+                        theHero, heroView, currentRoom, user, controls);
+                    break;
                 default:
                     System.out.println("Please enter a proper value.");
                     break;

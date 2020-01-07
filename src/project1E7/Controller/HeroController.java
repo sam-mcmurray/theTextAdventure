@@ -4,10 +4,8 @@ package project1E7.Controller;
 import project1E7.Model.*;
 import project1E7.View.*;
 import project1E7.theTextAdventure;
-
-import javax.swing.*;
+import project1E7.View.HeroView;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -23,12 +21,11 @@ public class HeroController {
     private ArrayList<Item> backPack = new ArrayList<>();
     private Scanner input = new Scanner(System.in);
 
-    public ArrayList printItem (ArrayList<Item> backPack){
+    public void printItem(ArrayList<Item> backPack) {
 
-        for (int i = 0 ; i<=backPack.size()-1;i++) {
-            System.out.println( "["+ i+1+ "]"+backPack.get(i));
+        for (int i = 0; i <= backPack.size() - 1; i++) {
+            System.out.println("[" + (i + 1) + "]" + backPack.get(i).getName());
         }
-        return backPack;
     }
 
 
@@ -54,13 +51,13 @@ public class HeroController {
         int chanceToHit = rand.nextInt(2);
         if (chanceToHit == 0) {
             return false;
+        } else {
+
+            model.setEndurance(model.getEndurance() - 10);
+            monster.takeDamage(model.getStrength());
+
+            return true;
         }
-
-        model.setEndurance(model.getEndurance() - 10);
-        monster.takeDamage(model.getStrength());
-
-        return true;
-
     }
 
     /**
@@ -309,51 +306,42 @@ public class HeroController {
             model.setCurrentTreasure(treasure.getAmount() + model.getCurrentTreasure());
         }
     }
-    public Item saveItem(Item item,ArrayList<Item> backPack) {
-        String choice;
 
+    public ArrayList<Item> saveItem(Item item, ArrayList<Item> backPack) {
+        String choice;
         int choice1;
 
-        if (backPack.size() < 1) {
             backPack.add(item);
-            System.out.println(item.getName()+" Has been added to your satchel");
-            return item;
-        } else {
-            System.out.println("Your backPack is full ... Do you want to drop an item from your back ? Y/N ");
-        }
-        try{
-        choice = input.next();
-        if (choice.equalsIgnoreCase("Y")) {
-            printItem(backPack);
-            System.out.println("Please choose one item to drop ..");
-            choice1 = input.nextInt();
-            input.nextLine();
-            backPack.remove(choice1 - 1);
-            System.out.println("Item has been removed");
-            System.out.println("Do you want to drop another item ? Y/N");
-            choice = input.nextLine();
-            while (choice.equalsIgnoreCase("Y")) {
-                System.out.println("Please choose one item to drop ..");
-                choice1 = input.nextInt();
-                input.nextLine();
-                backPack.remove(choice1 - 1);
-                System.out.println("Item has been removed");
-            }
-        }
-
-        }
-        catch (IndexOutOfBoundsException e){
-            System.out.println("There is no item in your satchel");
-        }
-        return item;
+            System.out.println(item.getName() + " Has been added to your satchel");
+            return backPack;
     }
 
+    public ArrayList<Item> dropItem(ArrayList<Item> backPack) {
+        String choice;
+        int choice1;
+        try {
+            System.out.println("Your backPack is full ... Do you want to drop an item from your back ? Y/N ");
+            choice=input.nextLine();
+            if (choice.equalsIgnoreCase("y")) {
+                System.out.println("choose an item to drop");
+                printItem(backPack);
+                choice1 = input.nextInt();
+                input.nextLine();
+                System.out.println(backPack.get(choice1 - 1).getName() + " Has been removed");
+                backPack.remove(choice1 - 1);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("There is no item to remove");
+        }
+        return backPack;
+    }
 
     /**
      * add treasure to current treasure
      *
      * @param treasure
      */
+
     public void addTreasure(Treasure treasure) {
 
         System.out.println("You found a chest that contained " + treasure.getName() + "\n" + treasure.getAmount() + " was added to your treasure score!");
