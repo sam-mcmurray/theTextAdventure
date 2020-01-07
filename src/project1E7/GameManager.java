@@ -9,41 +9,38 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GameManager {
-
+    ArrayList<Key> keyRing = new ArrayList<>();
+    String userName;
+    ArrayList<User> users;
     /**
      * creates new game
      */
-    public void newGame(){
-        Controls control = new Controls("w", "s", "d", "a");
+    public void game(Hero theHero, Room[][] room, Room currentRoom, Controls control, User user){
+        Random rand = new Random();
+        Scanner input = new Scanner(System.in);
+        Controls controls = control;
         ControlsView controlsView = new ControlsView(control);
         ControlsController controlsController = new ControlsController(control, controlsView);
-
-        MenuView menuView = new MenuView();
-        MenuController menuController = new MenuController(menuView);
-        Scanner input = new Scanner(System.in);
-        String userName;
-        ArrayList<User> users;
-        Room[][] room = new Room[10][10];
-        ArrayList<Key> keyRing = new ArrayList<>();
-        User user = new User("Sam", 100);
+        ArrayList<Item> backPack = new ArrayList<>();
+        Menu menu = new Menu();
+        MenuView menuView = new MenuView(menu);
+        MenuController menuController = new MenuController(menuView,menu);
         MapView mapView = new MapView();
         MapController mapController = new MapController(mapView);
-        Random rand = new Random();
-        mapController.createWorld(room);
-        Hero theHero = (menuController.selectHero());
-        HeroView heroView = new HeroView(theHero);
-        HeroController heroController = new HeroController(theHero, heroView);
-        heroView.printStats();
-        heroView.heroStory();
-        Room currentRoom = room[8][5];
+        Hero hero = theHero;
+        HeroView heroView = new HeroView(hero);
+        HeroController heroController = new HeroController(hero, heroView);
+
+
         Room previousRoom = currentRoom;
         do {
             boolean flee = false;
             boolean run = true;
-            Room roomModel = currentRoom;
+            mapView.mapPrinter(room);
+            Room roomModel = heroController.currentRoom(currentRoom, room);
             RoomView roomView = new RoomView(roomModel);
             RoomController roomController = new RoomController(roomModel, roomView);
-            roomView.flavorTextRoom();
+            roomView.flavorTextRoom(currentRoom);
             theHero.setKeyRing(keyRing);
             if (!roomModel.getFound()) {
                 if (roomController.roomHasMonster()) {
@@ -52,13 +49,13 @@ public class GameManager {
                     MonsterController monsterController = new MonsterController(monsterModel, monsterView);
                     monsterController.resetMonster();
 
-                    monsterView.flavorTextMonster();
+                    monsterView.flavorTextMonster(theHero);
 
                     monsterView.encounter(monsterModel);
                     if (heroController.attackFirst(monsterController)) {
 
                         if (menuController.encounterHeroFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController, mapView,
-                                control, controlsController, controlsView, user, room, currentRoom)) {
+                                control, controlsController, controlsView, user, room, currentRoom,backPack)) {
                             flee = false;
                         } else {
                             flee = true;
@@ -67,14 +64,13 @@ public class GameManager {
                     } else {
 
                         if (menuController.encounterMonsterFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController, mapView,
-                                control, controlsController, controlsView, user, room, currentRoom)) {
+                                control, controlsController, controlsView, user, room, currentRoom,backPack)) {
                             flee = false;
 
                         } else {
                             flee = true;
                         }
                     }
-
                 }
 
                 while ((theHero.isAlive() && run) && !flee) {
@@ -82,16 +78,18 @@ public class GameManager {
                         Item item = roomController.getItem();
                         ItemView itemView = new ItemView(item);
                         ItemController itemController = new ItemController(item, itemView);
-                        run = itemController.encounterItem(item, heroController, keyRing);
+                        run = itemController.encounterItem(item, heroController, keyRing, backPack, menuController, controlsController
+                                , controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
                         heroController.addEndurance();
 
                     } else if (roomController.roomHasItem() == false) {
 
-                        Item item = roomController.setRandomItem();
+                        Item item = new Item("No item was found");
                         if (item != null) {
                             ItemView itemView = new ItemView(item);
                             ItemController itemController = new ItemController(item, itemView);
-                            run = itemController.encounterItem(item, heroController, keyRing);
+                            run = itemController.encounterItem(item, heroController, keyRing, backPack, menuController, controlsController
+                            , controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
                             heroController.addEndurance();
 
                         }
@@ -101,6 +99,7 @@ public class GameManager {
             if (flee) {
                 heroController.addEndurance();
                 currentRoom = heroController.previousRoom(previousRoom, room);
+
 
 
             } else if (!theHero.isAlive() && theHero.getLives() > 1){
@@ -118,10 +117,6 @@ public class GameManager {
                 run = false;
             }
 
-        } while ((theHero.isAlive() && theHero.getLives() > 0 ) || currentRoom != room[0][3]);
-
-
+        } while ((theHero.isAlive() && theHero.getLives() >= 1 ) || heroController.currentRoom(currentRoom, room)!= room[0][3]);
     }
-
-
 }

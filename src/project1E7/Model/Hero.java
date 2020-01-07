@@ -16,7 +16,7 @@ public class Hero extends Character {
     public Hero(int health, int strength, int speed, String description, String name, int endurance,String characterClass) {
         super(health, strength, speed, description, name);
         this.endurance = endurance;
-        lives = 5;
+        lives = 3;
         currentTreasure = 0;
         alive = true;
         turnCounter = 0;

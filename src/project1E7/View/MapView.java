@@ -6,6 +6,7 @@ public class MapView {
 
     /**
      * prints the map
+     *
      * @param room
      */
     public void mapPrinter(Room[][] room) {
@@ -13,37 +14,45 @@ public class MapView {
         for (int i = 0; i < room.length; i++) {
             for (int i1 = 0; i1 < 3; i1++) {
                 for (int j = 0; j < room[i].length; j++) {
-                    if (!room[i][j].getFound()) {
+                    if (!room[i][j].getBeenSeen()) {
                         if (i1 == 0) {
-                            System.out.print("-  -");
+                            System.out.print("UN     -");
                         } else if (i1 == 1) {
-                            System.out.print(" ?? ");
+                            System.out.print("   KNO  ");
                         } else {
-                            System.out.print("-  -");
+                            System.out.print("-     WN");
                         }
-                    } else if (room[i][j].getDescription().equals("wall")) {
+                    } else if (room[i][j].getBeenSeen() && room[i][j].getDescription().equals("wall")) {
                         if (i1 == 0) {
-                            System.out.print("¤¤¤¤");
+                            System.out.print("¤¤¤¤¤¤¤¤");
                         } else if (i1 == 1) {
-                            System.out.print("¤¤¤¤");
+                            System.out.print("¤¤¤¤¤¤¤¤");
                         } else {
-                            System.out.print("¤¤¤¤");
+                            System.out.print("¤¤¤¤¤¤¤¤");
                         }
-                    } else if (room[i][j].getHasCharacter()) {
+                    } else if (room[i][j].getBeenSeen() && room[i][j].getHasCharacter()) {
                         if (i1 == 0) {
-                            System.out.print(" cD ");
+                            System.out.print("   O    ");
                         } else if (i1 == 1) {
-                            System.out.print("iHHi");
+                            System.out.print("  |H|   ");
                         } else {
-                            System.out.print(" || ");
+                            System.out.print("  | |   ");
                         }
-                    } else {
+                    } else if (room[i][j].getBeenSeen() && room[i][j].getIslocked()) {
                         if (i1 == 0) {
-                            System.out.print("-  -");
+                            System.out.print("        ");
                         } else if (i1 == 1) {
-                            System.out.print(" -- ");
+                            System.out.print(" LOCKED ");
                         } else {
-                            System.out.print("-  -");
+                            System.out.print("        ");
+                        }
+                    } else if (room[i][j].getBeenSeen()) {
+                        if (i1 == 0) {
+                            System.out.print("-      -");
+                        } else if (i1 == 1) {
+                            System.out.print("-      -");
+                        } else {
+                            System.out.print("-      -");
                         }
                     }
                     System.out.print(" ");

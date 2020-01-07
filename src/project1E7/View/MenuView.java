@@ -1,6 +1,13 @@
 package project1E7.View;
 
+import project1E7.Model.Menu;
+
 public class MenuView {
+    Menu model;
+
+    public MenuView(Menu model) {
+        this.model = model;
+    }
 
     /**
      * prints the encounter menu

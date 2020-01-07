@@ -22,9 +22,9 @@ public class MonsterController {
 
         if (incDamage >= model.getHealth()) {
             model.setAlive(false);
-        } else
-        model.setHealth(model.getHealth() - incDamage);
-
+        } else {
+            model.setHealth(model.getHealth() - incDamage);
+        }
     }
 
     /**
@@ -39,16 +39,16 @@ public class MonsterController {
 
         int chanceToHit = rand.nextInt(2);
 
-        if (chanceToHit < 0) {
+        if (chanceToHit == 0) {
             return false;
-        } else
+        } else {
 
-        damageDone = model.getStrength();
+            damageDone = model.getStrength();
 
-        hero.takeDamage(damageDone);
+            hero.takeDamage(damageDone);
 
-        return true;
-
+            return true;
+        }
     }
     public void resetMonster() {
         model.setHealth(100);

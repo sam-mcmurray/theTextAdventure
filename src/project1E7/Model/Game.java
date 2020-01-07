@@ -1,20 +1,15 @@
 package project1E7.Model;
 
-import com.google.gson.Gson;
+import java.util.Arrays;
 
-import java.util.Scanner;
+public class Game {
+    private Hero jsonHero;
+    private Room[][] jsonMap;
+    private Controls jsonControls;
+    private User jsonUser;
+    private Room jsonCurrentRoom;
 
-public class Save {
-    Scanner input = new Scanner(System.in);
-    Gson gson = new Gson();
-    Hero jsonHero;
-    Room[][] jsonMap;
-    Controls jsonControls;
-    User jsonUser;
-    Room jsonCurrentRoom;
-
-
-    public Save(Hero jsonHero, Room[][] jsonMap, Controls jsonControls, User jsonUser, Room jsonCurrentRoom) {
+    public Game(Hero jsonHero, Room[][] jsonMap, Controls jsonControls, User jsonUser, Room jsonCurrentRoom) {
         this.jsonHero = jsonHero;
         this.jsonMap = jsonMap;
         this.jsonControls = jsonControls;
@@ -60,6 +55,7 @@ public class Save {
 
     public void setJsonCurrentRoom(Room jsonCurrentRoom) {
         this.jsonCurrentRoom = jsonCurrentRoom;
-
     }
+
+
 }

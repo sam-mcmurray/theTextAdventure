@@ -20,7 +20,7 @@ public class theTextAdventure {
      static ArrayList<User> users = new ArrayList<>();
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
         User userModel = new User(null, 0);
         UserView userView = new UserView(userModel);
@@ -32,8 +32,9 @@ public class theTextAdventure {
 
         MapView mapView = new MapView();
         MapController mapController = new MapController(mapView);
-        MenuView menuView = new MenuView();
-        MenuController menuController = new MenuController(menuView);
+        Menu menu = new Menu();
+        MenuView menuView = new MenuView(menu);
+        MenuController menuController = new MenuController(menuView,menu);
         GameManager gameManager = new GameManager();
 
         boolean game = true;
@@ -41,24 +42,29 @@ public class theTextAdventure {
             String choice = menuController.startMenu();
             if (choice.equals("1")) {
 
-                userModel = userController.selectUser();
+                userModel=userController.createUser();
 
-                while(userModel==null){
+                Hero theHero = (menuController.selectHero());
+                Controls control = new Controls("w", "s", "d", "a");
+                Room[][] room = new Room[10][10];
+                mapController.createWorld(room);
+                User user = new User("Sam", 100);
+                HeroView heroView = new HeroView(theHero);
+                HeroController heroController = new HeroController(theHero, heroView);
+                heroView.printStats();
+                heroView.heroStory();
+                gameManager.game(theHero,room, room[8][5], control,user);
 
-                    userModel=userController.createUser();
-
-                    if(userModel==null){
-
-                        userModel=userController.selectUser();
-                    }
-                }
-
-
-
-                gameManager.newGame();
 
             } else if (choice.equals("2")) {
                 System.out.println("Load Game");
+
+                String fileName = "SavedGame.json";
+                File file = new File("SavedGame.json");
+                Load load = new Load(file, fileName);
+                LoadView loadView = new LoadView(load);
+                LoadController loadController = new LoadController(load, loadView);
+                loadController.loadGame();
 
             } else if (choice.equals("3")) {
 
@@ -91,7 +97,7 @@ public class theTextAdventure {
             } else if (choice.equals("4")) {
                 menuView.instructionsStartMenu();
             } else if (choice.equals("5")) {
-
+                System.exit(0);
             }
         }
     }

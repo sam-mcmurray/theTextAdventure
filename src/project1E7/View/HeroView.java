@@ -5,8 +5,9 @@ import project1E7.Model.Hero;
 import project1E7.Model.Item;
 import project1E7.Model.Monster;
 import project1E7.theTextAdventure;
-
-import java.util.*;
+import project1E7.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class HeroView {
@@ -57,7 +58,7 @@ public class HeroView {
         String choice = input.next();
         boolean valid = true;
 
-        if (choice.equalsIgnoreCase("yes")) {
+        if (choice.equalsIgnoreCase("yes") || choice.equalsIgnoreCase("y")) {
             System.out.println(hero + " has been selected");
             return false;
         } else
@@ -83,17 +84,10 @@ public class HeroView {
      */
     public void inventory(ArrayList<Item> items) {
         items = model.getBackPack();
-
-        for (int i = 0; i < 5; i++) {
-            System.out.println("[" + (i + 1) + "]" + items.get(i));
+        int choice;
+        for (int i = 0; i<=items.size()-1; i++) {
+            System.out.println("[" + (i + 1) + "]" + items.get(i).getName());
         }
-
-    }
-
-    /**
-     * not sure what this is suppose to do lukas
-     */
-    public void printClassDescription() {
 
     }
 
@@ -136,11 +130,14 @@ public class HeroView {
      */
     public void hitMonsterFlavorText(Monster monster) {
         if (model.getName().equalsIgnoreCase("warrior")) {
-            System.out.println("flavor text hit monster warrior");
+            System.out.println("Swinging your longsword in a long sweeping hit starting from top right of your head and ending downwards to the bottom left, your blade makes contact with " + monster.getName() + ".\n" +
+                    monster.getName() + " shrieks in pain and anger.");
         } else if (model.getName().equalsIgnoreCase("mage")) {
-            System.out.println("flavor text hit monster mage");
+            System.out.println("Using your staff and an intense focus, you conjure an ever growing fireball at the crystal focal of your staff until you finally launch it.\n" +
+                    monster.getName() + " burns horribly dealing substantial damage");
         } else {
-            System.out.println("flavor text hit monster thief");
+            System.out.println("Your dagger is a whirlwind of flashing steel as you stab at "+ monster.getName() + " with lightning speed and an unnatural precision.\n" +
+                    monster.getName() + " recoils in confusion and pain.");
         };
     }
 
@@ -150,11 +147,16 @@ public class HeroView {
      */
     public void missMonsterFlavorText(Monster monster) {
         if (model.getName().equalsIgnoreCase("warrior")) {
-            System.out.println("flavor text missed monster warrior");
+            System.out.println("With extreme confidence you attempt to spin in a circle while holding your blade out creating a spinning circle of death as you've seen all your favorite heroes do.\n" +
+                    monster.getName() + "appears confused but was never in any danger. Your arrogance ended in absolute failure and your attack misses!");
         } else if (model.getName().equalsIgnoreCase("mage")) {
-            System.out.println("flavor text missed monster mage");
+            System.out.println("Despite years of training in the arcane arts, the fireball you attempt to conjure at the end of your staff only sparks pitifully before fizzling out. \n" +
+                    monster.getName() + " appears almost embarrassed for you as you try and explain this doesn't normally happen and you just haven't been in a battle in a little while! \n"
+                    + monster.getName() + " explains that he thinks they make pills for that now and to maybe check it out.  Your attack misses!");
         } else {
-            System.out.println("flavor text missed monster thief");
+            System.out.println("With your enemy out of range of your dagger, you fall back and attempt to use your hidden ninja stars you recently acquired from an exotic weapons vendor. \n" +
+                    "You launch three of them right at " + monster.getName() + "only to see them harmlessly bounce off of it as the ninja stars clatter on the stone ground.\n" +
+                    "Damn, you the clerk who sold them to you swore they were real.  Your attack misses!");
         }
 
     }
