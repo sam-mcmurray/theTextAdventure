@@ -53,7 +53,7 @@ public class GameManager {
                     if (heroController.attackFirst(monsterController)) {
 
                         if (menuController.encounterHeroFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController, mapView,
-                                control, controlsController, controlsView, user, room, currentRoom)) {
+                                control, controlsController, controlsView, user, room, currentRoom,backPack)) {
                             flee = false;
                         } else {
                             flee = true;
@@ -62,7 +62,7 @@ public class GameManager {
                     } else {
 
                         if (menuController.encounterMonsterFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController, mapView,
-                                control, controlsController, controlsView, user, room, currentRoom)) {
+                                control, controlsController, controlsView, user, room, currentRoom,backPack)) {
                             flee = false;
 
                         } else {

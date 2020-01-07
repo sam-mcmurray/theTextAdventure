@@ -3,12 +3,12 @@ package project1E7.Controller;
 import project1E7.Model.*;
 import project1E7.View.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuController {
     MenuView view;
     Scanner input = new Scanner(System.in);
-
     public MenuController(MenuView view) {
         this.view = view;
     }
@@ -25,7 +25,7 @@ public class MenuController {
      */
     public boolean encounterHeroFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
                                       MonsterView monsterView, MonsterController monsterController, MapView mapView, Controls controls,
-                                      ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom ) {
+                                      ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom ,ArrayList<Item> backPack) {
 
         boolean run = true;
         String encounterChoice = "0";
@@ -78,8 +78,9 @@ public class MenuController {
                     }
                     break;
                 case "3":
+                    heroController.printItem(backPack);
+                    heroController.useItem(backPack);
                     heroController.turnCounter();
-                    heroView.inventory(theHero.getBackPack());
                     break;
                 case "4":
                     subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, controls, user);
@@ -106,7 +107,7 @@ public class MenuController {
      */
     public boolean encounterMonsterFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
                                          MonsterView monsterView, MonsterController monsterController, MapView mapView, Controls controls,
-                                         ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom ) {
+                                         ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom,ArrayList<Item> backPack) {
         String encounterChoice = "0";
         boolean run = true;
         monsterView.encounter(monsterModel);
@@ -154,7 +155,8 @@ public class MenuController {
                         run = true;
                     break;
                 case "3":
-                    heroView.inventory(theHero.getBackPack());
+                    heroController.printItem(backPack);
+                    heroController.useItem(backPack);
                     heroController.turnCounter();
                     break;
                 case "4":

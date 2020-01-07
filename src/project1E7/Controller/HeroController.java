@@ -21,9 +21,13 @@ public class HeroController {
     private Scanner input = new Scanner(System.in);
 
     public void printItem(ArrayList<Item> backPack) {
-
-        for (int i = 0; i <= backPack.size() - 1; i++) {
-            System.out.println("[" + (i + 1) + "]" + backPack.get(i).getName());
+        try {
+            for (int i = 0; i <= backPack.size() - 1; i++) {
+                System.out.println("[" + (i + 1) + "]" + backPack.get(i).getName());
+            }
+        }
+        catch (NullPointerException e){
+            System.out.println("You do not have any item to use");
         }
     }
 
@@ -265,20 +269,37 @@ public class HeroController {
         }
     }
 
+        public void useItem (ArrayList<Item> backPack){
+        int choice1;
+        if (backPack.isEmpty()){
+            System.out.println("You do not have any item to use");
+        }
+        else {
+            try {
+                System.out.println("Choose an item to use ..");
+                choice1 = input.nextInt();
+                input.nextLine();
+                useItemExternal(backPack.get(choice1 - 1));
+                System.out.println(backPack.get(choice1 - 1).getName() + " has been used");
+                backPack.remove(choice1 - 1);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("You do not have any item to use");
+            }
+        }
+    }
+
     public ArrayList<Item> saveItem(Item item, ArrayList<Item> backPack) {
         String choice;
         int choice1;
-
             backPack.add(item);
             System.out.println(item.getName() + " Has been added to your satchel");
             return backPack;
     }
-
     public ArrayList<Item> dropItem(ArrayList<Item> backPack) {
         String choice;
         int choice1;
         try {
-            System.out.println("Your backPack is full ... Do you want to drop an item from your back ? Y/N ");
+            System.out.println("Your backPack is full ... Do you want to drop an item from your back ! 'to be able to save the new one' ? Y/N ");
             choice=input.nextLine();
             if (choice.equalsIgnoreCase("y")) {
                 System.out.println("choose an item to drop");

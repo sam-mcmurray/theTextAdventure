@@ -4,9 +4,9 @@ package project1E7.View;
 import project1E7.Model.Hero;
 import project1E7.Model.Item;
 import project1E7.Model.Monster;
-import project1E7.theTextAdventure;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class HeroView {
@@ -85,7 +85,7 @@ public class HeroView {
         items = model.getBackPack();
         int choice;
         for (int i = 0; i<=items.size()-1; i++) {
-            System.out.println("[" + (i + 1) + "]" + items.get(i));
+            System.out.println("[" + (i + 1) + "]" + items.get(i).getName());
         }
 
     }

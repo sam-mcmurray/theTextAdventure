@@ -110,13 +110,15 @@ public class ItemController {
                     run = false;
                     return run;
                 case "2":
-                    if (backPack.size()<1) {
+                    if (backPack.size()<2) {
                         heroController.saveItem(item, backPack);
                         heroController.turnCounter();
                     }else {
                         heroController.dropItem(backPack);
-                        heroController.saveItem(item,backPack);
-                        heroController.printItem(backPack);
+                        if (backPack.size()<2) {
+                            heroController.saveItem(item, backPack);
+                            heroController.printItem(backPack);
+                        }else System.out.println("Oops!! You missed the Item in this room ");
                     }
                     run = false;
                     return run;
