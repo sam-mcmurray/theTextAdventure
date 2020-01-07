@@ -12,10 +12,18 @@ public class RoomView {
         this.model = model;
     }
 
+    /**
+     * flavor text for description of room
+     */
     public void flavorTextRoom(){
         System.out.println("flavor text room");
     }
 
+    /**
+     * does doors for the rooms
+     * @param room
+     * @param currentRoom
+     */
     public void roomDoors(Room[][] room, Room currentRoom) {
         boolean run;
 

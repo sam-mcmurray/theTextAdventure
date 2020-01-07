@@ -11,6 +11,7 @@ public class Hero extends Character {
     private boolean alive;
     private String characterClass;
     private String weapon;
+    private int turnCounter;
 
     public Hero(int health, int strength, int speed, String description, String name, int endurance,String characterClass) {
         super(health, strength, speed, description, name);
@@ -18,6 +19,7 @@ public class Hero extends Character {
         lives = 5;
         currentTreasure = 0;
         alive = true;
+        turnCounter = 0;
 
     }
 
@@ -76,6 +78,14 @@ public class Hero extends Character {
     public String getWeapon() { return weapon; }
 
     public void setWeapon(String weapon) { this.weapon = weapon; }
+
+    public int getTurnCounter() {
+        return turnCounter;
+    }
+
+    public void setTurnCounter(int turnCounter) {
+        this.turnCounter = turnCounter;
+    }
 
     @Override
     public String toString() {

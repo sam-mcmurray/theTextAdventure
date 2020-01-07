@@ -16,7 +16,10 @@ public class RoomController {
         this.view = view;
     }
 
-
+    /**
+     * if room has monster boolean
+     * @return
+     */
     public boolean roomHasMonster() {
         if (model.isHasMonster() == true) {
             return true;
@@ -24,11 +27,21 @@ public class RoomController {
             return false;
 
     }
+
+    /**
+     * return the monster
+     * @return
+     */
     public Monster getMonster() {
         return model.getMonster();
 
 
     }
+
+    /**
+     * room has item boolean
+     * @return
+     */
     public boolean roomHasItem() {
         if (model.isHasItem() == true) {
             return true;
@@ -36,11 +49,20 @@ public class RoomController {
             return false;
     }
 
+    /**
+     * get the room item
+     * @return
+     */
     public Item getItem() {
         Item item = model.getItem();
         return item;
 
     }
+
+    /**
+     * if the room didnt have an item but it got a random drop this creates the items
+     * @return
+     */
     public Item setRandomItem() {
         Random rand = new Random();
 
@@ -82,6 +104,10 @@ public class RoomController {
         return null;
     }
 
+    /**
+     * set the current room as found
+     * @param currentRoom
+     */
     public void setFound(Room currentRoom) {
         currentRoom.setFound(true);
     }

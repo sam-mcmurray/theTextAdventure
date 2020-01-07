@@ -13,6 +13,11 @@ public class ItemView {
         this.model = model;
     }
 
+    /**
+     * prints flavor text for a particular item
+     * @param item
+     * @return
+     */
     public Item viewItem(Item item) {
        if (item == coffee) {
            System.out.println("flavor text for coffee");
@@ -29,6 +34,11 @@ public class ItemView {
        }
        return null;
     }
+
+    /**
+     * prints the item decision menu
+     * @param item
+     */
     public void chooseWhatToDoWithItem(Item item){
         System.out.println("Would you like to use " + item.getName() + " or save in your satchel?" +
                 "\n 1)Use " + item.getName() + "\n 2)Save " + item.getName() + " in satchel");

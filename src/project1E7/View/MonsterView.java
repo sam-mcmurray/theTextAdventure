@@ -14,68 +14,72 @@ public class MonsterView {
         this.model = model;
     }
 
+    /**
+     * prints the status of the monster
+     * @param monster
+     */
     public void printStatus(Monster monster) {
         System.out.println("Enemy Type: " + model.getDescription());
         if (model.isAlive()) {
-            System.out.println("Health: " + model.getHealth());
+            System.out.println(model.getName() + " Health: " + model.getHealth());
         } else {
-            System.out.println("The " + monster + "has been defeated at your hands...");
+            System.out.println("The " + model.getName() + " has been defeated at your hands...");
         }
     }
 
-    public int encounterMenu() {
-
-        boolean decision = false;
-        int choice = 0;
-        int count = 0;
-
-        while (!decision) {
-            System.out.printf("You have encountered a %s ! ", model.getDescription());
-            System.out.println("What is your next move?");
-            System.out.println("1)Fight ");
-            System.out.println("2)Flee");
-            System.out.println("3)Use Item");
-
-            try {
-                if (count > 1) {
-
-                    input.nextLine();
-                    choice = input.nextInt();
-
-                } else {
-
-                    choice = input.nextInt();
-
-                }
-                while (choice < 1 || choice > 3) {
-
-                    System.out.println("Enter an available option!");
-                    choice = input.nextInt();
-                }
-
-                decision = true;
-
-            } catch (InputMismatchException e) {
-
-                System.out.println("Invalid answer");
-                decision = false;
-                count++;
-            }
-        }
-
-        return choice;
+    /**
+     *  prints encountering a monster
+     * @param monster
+     */
+    public void encounter(Monster monster){
+        System.out.printf("You have encountered a %s ! ", monster.getDescription());
     }
 
+    /**
+     * prints the flavor text for the monster
+     */
     public void flavorTextMonster() {
-        System.out.println("flavor text monster present");
+        if (model.getName().equalsIgnoreCase("The Boss")){
+            System.out.println("flavor text the boss");
+        } else if (model.getName().equalsIgnoreCase("The Owl Bear")) {
+            System.out.println("flavor text the owl bear");
+        } else if (model.getName().equalsIgnoreCase("The Skeleton")) {
+            System.out.println("flavor text the skeleton");
+        } else if (model.getName().equalsIgnoreCase("The Bat")) {
+            System.out.println("flavor text the bat");
+        } else if (model.getName().equalsIgnoreCase("The Slime")) {
+            System.out.println("flavor text the slime");
+        } else {
+            System.out.println("flavor text the spiderling");
+        }
     }
 
+    /**
+     * prints monster hit landing flavor text
+     * @param theHero
+     */
     public void monsterHitFlavorText(Hero theHero) {
-        System.out.println("monster hit flavor text");
+        if (theHero.getName().equalsIgnoreCase("warrior")) {
+            System.out.println("flavor text monster missed warrior");
+        } else if (theHero.getName().equalsIgnoreCase("mage")) {
+            System.out.println("flavor text monster missed mage");
+        } else {
+            System.out.println("flavor text monster missed thief");
+        }
     }
 
+    /**
+     * prints monster miss flavor text
+     * @param theHero
+     */
     public void monsterMissFlavorText(Hero theHero) {
-        System.out.println("Monster miss flavor text");
+        if (theHero.getName().equalsIgnoreCase("warrior")) {
+            System.out.println("flavor text monster missed warrior");
+        } else if (theHero.getName().equalsIgnoreCase("mage")) {
+            System.out.println("flavor text monster missed mage");
+        } else {
+            System.out.println("flavor text monster missed thief");
+        }
     }
 
 }

@@ -24,6 +24,11 @@ public class HeroController {
         this.view = view;
     }
 
+    /**
+     * hero attacks monster 50% chance of landing hit
+     * @param monster
+     * @return
+     */
     public boolean attack(MonsterController monster) {
 
         if (model.getEndurance() < 10) {
@@ -44,6 +49,10 @@ public class HeroController {
 
     }
 
+    /**
+     * hero takes damage from enemy attack
+     * @param incDamage
+     */
     public void takeDamage(int incDamage) {
         if (incDamage >= model.getHealth()) {
             model.setAlive(false);
@@ -51,7 +60,15 @@ public class HeroController {
         model.setHealth(model.getHealth() - incDamage);
     }
 
-    public Room moveHero(Room[][] room, Room currentRoom) {
+    /**
+     * move hero through the map
+     * @param keys
+     * @param room
+     * @param currentRoom
+     * @param controls
+     * @return
+     */
+    public Room moveHero(ArrayList<Key> keys, Room[][] room, Room currentRoom, Controls controls) {
 
         Scanner input = new Scanner(System.in);
         String direction;
@@ -63,55 +80,119 @@ public class HeroController {
 
                         System.out.println("Choose your direction ");
                         direction = input.nextLine();
-                        if (direction.equalsIgnoreCase("a")) {
+                        if (direction.equalsIgnoreCase(controls.moveLeft)) {
                             j = j - 1;
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
                                 run = true;
                                 j = j + 1;
+                            } else if (room[i][j].isIslocked() == true) {
+                                for (Key key : keys)
+                                if(key.getName().equalsIgnoreCase(room[i][j].getDoor().getNameOfKey())){
+                                    System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
+                                    room[i][(j+1)].setHasCharacter(false);
+                                    currentRoom = room[i][j];
+                                    currentRoom.setHasCharacter(true);
+                                    turnCounter();
+                                    run = false;
+                                    return currentRoom;
+                                } else {
+                                    System.out.println("You haven't obtained this key yet, you need to find it");
+                                    j = j + 1;
+                                    run = true;
+                                }
                             } else {
                                 room[i][(j+1)].setHasCharacter(false);
                                 currentRoom = room[i][j];
                                 currentRoom.setHasCharacter(true);
+                                turnCounter();
                                 run = false;
                                 return currentRoom;
                             }
-                        } else if (direction.equalsIgnoreCase("d")) {
+                        } else if (direction.equalsIgnoreCase(controls.moveRight)) {
                             j = j + 1;
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
                                 run = true;
                                 j = j - 1;
+                            }  else if (room[i][j].isIslocked() == true) {
+                                for (Key key : keys)
+                                    if (key.getName().equalsIgnoreCase(room[i][j].getDoor().getNameOfKey())) {
+                                        System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
+                                        room[i][(j - 1)].setHasCharacter(false);
+                                        currentRoom = room[i][j];
+                                        currentRoom.setHasCharacter(true);
+                                        turnCounter();
+                                        run = false;
+                                        return currentRoom;
+                                    } else {
+                                        System.out.println("You haven't obtained this key yet, you need to find it");
+                                        j = j - 1;
+                                        run = true;
+                                    }
                             } else {
                                 room[i][(j-1)].setHasCharacter(false);
                                 currentRoom = room[i][j];
                                 currentRoom.setHasCharacter(true);
+                                turnCounter();
                                 run = false;
                                 return currentRoom;
                             }
-                        } else if (direction.equalsIgnoreCase("s")) {
+                        } else if (direction.equalsIgnoreCase(controls.moveDown)) {
                             i = i + 1;
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
                                 run = true;
                                 i = i - 1;
+                            }  else if (room[i][j].isIslocked() == true) {
+                                for (Key key : keys)
+                                    if (key.getName().equalsIgnoreCase(room[i][j].getDoor().getNameOfKey())) {
+                                        System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
+                                        room[i-1][(j)].setHasCharacter(false);
+                                        currentRoom = room[i][j];
+                                        currentRoom.setHasCharacter(true);
+                                        turnCounter();
+                                        run = false;
+                                        return currentRoom;
+                                    } else {
+                                        System.out.println("You haven't obtained this key yet, you need to find it");
+                                        i = i - 1;
+                                        run = true;
+                                    }
                             } else {
                                 room[(i-1)][j].setHasCharacter(false);
                                 currentRoom = room[i][j];
                                 currentRoom.setHasCharacter(true);
+                                turnCounter();
                                 run = false;
                                 return currentRoom;
                             }
-                        } else if (direction.equalsIgnoreCase("w")) {
+                        } else if (direction.equalsIgnoreCase(controls.moveUp)) {
                             i = i - 1;
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
                                 run = true;
                                 i = i + 1;
+                            }  else if (room[i][j].isIslocked() == true) {
+                                for (Key key : keys)
+                                    if (key.getName().equalsIgnoreCase(room[i][j].getDoor().getNameOfKey())) {
+                                        System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
+                                        room[(i+1)][j].setHasCharacter(false);
+                                        currentRoom = room[i][j];
+                                        currentRoom.setHasCharacter(true);
+                                        turnCounter();
+                                        run = false;
+                                        return currentRoom;
+                                    } else {
+                                        System.out.println("You haven't obtained this key yet, you need to find it");
+                                        j = j - 1;
+                                        run = true;
+                                    }
                             } else {
                                 room[(i+1)][j].setHasCharacter(false);
                                 currentRoom = room[i][j];
                                 currentRoom.setHasCharacter(true);
+                                turnCounter();
                                 run = false;
                                 return currentRoom;
                             }
@@ -124,6 +205,11 @@ public class HeroController {
         return currentRoom;
     }
 
+    /**
+     * check to see who goes first
+     * @param monster
+     * @return
+     */
     public boolean attackFirst(MonsterController monster) {
         if (model.getSpeed() < monster.model.getSpeed()) {
             return false;
@@ -131,6 +217,11 @@ public class HeroController {
             return true;
     }
 
+    /**
+     * check to see if fleeing is successful
+     * @param hero
+     * @return
+     */
     public boolean flee(Hero hero) {
         Random rand = new Random();
 
@@ -141,6 +232,10 @@ public class HeroController {
             return true;
     }
 
+    /**
+     * use an item externally
+     * @param item
+     */
     public void useItemExternal(Item item) {
         if (item == coffee) {
             model.setSpeed(coffee.getSpeed() + model.getSpeed());
@@ -155,214 +250,68 @@ public class HeroController {
         }
     }
 
-
-        public void addTreasure ( int treasure){
-            System.out.println("That chest contained " + treasure + " gold pieces");
-            model.setCurrentTreasure(view.getCurrentTreasure() + treasure);
-            System.out.println("Your new total " + model.getCurrentTreasure() + " of gold pieces");
-        }
-
-        public ArrayList<Key> addKey (ArrayList < Key > keyRing, Key key){
-
-            keyRing.add(0, key);
-            return keyRing;
-        }
+    /**
+     * add treasure to current treasure
+      * @param treasure
+     */
+    public void addTreasure ( int treasure){
+        System.out.println("That chest contained " + treasure + " gold pieces");
+        model.setCurrentTreasure(model.getCurrentTreasure() + treasure);
+        System.out.println("Your new total " + model.getCurrentTreasure() + " of gold pieces");
     }
-    /*
-    public void subMenu() {
 
-        Scanner input = new Scanner(System.in);
+    /**
+     * add key to keyring
+     * @param keyRing
+     * @param key
+     * @return
+     */
+    public ArrayList<Key> addKey (ArrayList < Key > keyRing, Key key){
 
-        int choice = 0;
-        boolean chosen = false;
+        keyRing.add(0, key);
+        return keyRing;
+        }
 
-        subMenu();
-
-        do {
-
-            boolean chosen1 = false;
-            int tempCount = 0;
-
-            while (!chosen1) {
-
-                try {
-                    System.out.println("Choose one of the following options. To exit this menu enter 0");
-                    System.out.printf("1- View controls %n" +
-                            "2- Change controls %n" +
-                            "3- View instructions %n" +
-                            "4- View map %n" +
-                            "5- Save game %n" +
-                            "6- Load game %n" +
-                            "7- Quit game %n ");
-
-                    choice = input.nextInt();
-
-                    if (tempCount == 0) {
-
-                        choice = input.nextInt();
-                    } else {
-                        input.nextLine();
-                        choice = input.nextInt();
-                    }
-
-                    chosen1 = true;
-                } catch (InputMismatchException e) {
-
-                    System.out.println("Invalid choice");
-                    chosen1 = false;
-                    ++tempCount;
-                }
-
-                if (choice > 7 || choice < 0) {
-
-                    System.out.println("Choose an available option");
-
-                    chosen = false;
+    /**
+     * turn counter
+     */
+    public void turnCounter(){
+        model.setTurnCounter(model.getTurnCounter() + 1);
+        view.printTurnCount();
+        }
+    public void loseLife() {
+        model.setLives(model.getLives() - 1);
+    }
+    public void heroAlive() {
+        model.setAlive(true);
+        model.setHealth(100);
+    }
+    public Room previousRoom(Room previousRoom, Room[][] room) {
+        for (int i = 0; i < room.length ; i++) {
+            for (int j = 0; j < room.length ; j++) {
+                if (room[i][j] == previousRoom) {
+                    previousRoom = room[i][j];
+                    return previousRoom;
                 }
             }
 
-
         }
-
-        while (!chosen);
-
-
-        switch (choice) {
-
-            case 0:
-
-                System.out.println("Exited menu");
-
-                break;
-
-            case 1:
-
-                System.out.println("The following are the commands in place:");
-
-                System.out.printf("Moving up: %s %n" +
-                        "Moving down: %s %n" +
-                        "Moving right: %s %n" +
-                        "Moving left: %s %n", control.getMoveUp(), control.getMoveDown(), control.getMoveRight(), control.getMoveLeft());
-
-                break;
-
-            case 2:
-
-                chosen = false;
-
-                while (!chosen) {
-
-                    try {
-
-                        System.out.printf("Which one of the controls would you like to change: ");
-
-                        System.out.printf("1- Moving up: %s %n" +
-                                "2- Moving down: %s %n" +
-                                "3- Moving right: %s %n" +
-                                "4- Moving left: %s %n", controls[0], controls[1], controls[2], controls[3]);
-
-                        int choice1 = input.nextInt();
-                        boolean decided = false;
-
-                        switch (choice1) {
-
-                            case 1:
-
-                                changeControls(controls);
-
-                                break;
-
-                            case 2:
-
-                                break;
-
-                            case 3:
-
-                                break;
-
-
-                            case 4:
-
-                                break;
-
-                        }
-
-                        chosen = true;
-
-                    } catch (InputMismatchException a) {
-
-                        System.out.println("Invalid choice");
-
-                        chosen = false;
-                    }
-                }
-
-
-                break;
-
-            case 3:
-
-                break;
-
-            case 4:
-
-                break;
-
-            case 5:
-
-                break;
-
-            case 6:
-
-                break;
-
-            case 7:
-
-                break;
-        }
+        return previousRoom;
     }
-
-
-    public String changeControls(String Controls[]) {
-
-        Scanner input = new Scanner(System.in);
-
-        System.out.println("Enter which control you would like to change");
-        System.out.printf("1- %s%n" +
-                "2- %s%n" +
-                "3- %s%n" +
-                "4- %s%n", controls[0], controls[1], controls[2], controls[3]);
-
-        try {
-            int temp = input.nextInt();
-
-            switch (temp) {
-
-                case 1:
-
-                    break;
-
-                case 2:
-
-                    break;
-
-
-                case 3:
-
-
-                    break;
-
-                case 4:
-
-                    break;
-
-                default:
-
+    public Room currentRoom(Room currentRoom, Room[][] room) {
+        for (int i = 0; i < room.length ; i++) {
+            for (int j = 0; j < room.length ; j++) {
+                if (room[i][j] == currentRoom) {
+                    currentRoom = room[i][j];
+                    return currentRoom;
+                }
             }
 
-        } catch (InputMismatchException e) {
-
         }
-
-
-    }*/
+        return currentRoom;
+    }
+    public void addEndurance() {
+        if (model.getEndurance() < 95)
+        model.setEndurance(model.getEndurance() + 5);
+    }
+    }

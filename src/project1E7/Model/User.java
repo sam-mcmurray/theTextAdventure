@@ -7,8 +7,7 @@ public class User {
     String UserName;
     int highScore;
     ArrayList<User> users;
-    boolean empty;
-
+    int highestScore;
 
     public User(String UserName, int highScore) {
 
@@ -24,13 +23,13 @@ public class User {
         this.highScore = highScore;
     }
 
-    public void setEmpty(boolean empty) {
-
-        empty = true;
-    }
-
     public void addUsers(ArrayList<User> users, User user) {
         users.add(user);
+    }
+
+    public void setUsers(ArrayList <User> users){
+
+        this.users=users;
     }
 
     public ArrayList getUsers() {
@@ -38,9 +37,6 @@ public class User {
         return users;
     }
 
-    public boolean isEmpty() {
-        return empty;
-    }
 
     public String getUserName() {
         return UserName;
@@ -48,6 +44,16 @@ public class User {
 
     public int getHighScore() {
         return highScore;
+    }
+
+    public void setHighestScore(int highestScore){
+
+        this.highestScore=highestScore;
+    }
+
+    public int getHighestScore(ArrayList){
+
+        return highestScore;
     }
 
 }

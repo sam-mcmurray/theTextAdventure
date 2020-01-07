@@ -24,10 +24,7 @@ public class UserView {
 
             System.out.printf("%n" +
                     "There are no existing users%n" +
-                    "Returning to the start menu%n");
-
-            for (double a = 0; a < 10000000000000000000000000.0; )
-                a++;
+                    "Creating a new user%n");
 
             return false;
         } else
