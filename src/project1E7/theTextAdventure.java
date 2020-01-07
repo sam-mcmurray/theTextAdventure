@@ -30,8 +30,9 @@ public class theTextAdventure {
 
         MapView mapView = new MapView();
         MapController mapController = new MapController(mapView);
-        MenuView menuView = new MenuView();
-        MenuController menuController = new MenuController(menuView);
+        Menu menu = new Menu();
+        MenuView menuView = new MenuView(menu);
+        MenuController menuController = new MenuController(menuView,menu);
         GameManager gameManager = new GameManager();
 
         boolean game = true;
@@ -43,7 +44,11 @@ public class theTextAdventure {
                 Room[][] room = new Room[10][10];
                 mapController.createWorld(room);
                 User user = new User("Sam", 100);
-                gameManager.newGame(theHero,room, room[8][5], control,user);
+                HeroView heroView = new HeroView(theHero);
+                HeroController heroController = new HeroController(theHero, heroView);
+                heroView.printStats();
+                heroView.heroStory();
+                gameManager.game(theHero,room, room[8][5], control,user);
 
             } else if (choice.equals("2")) {
                 System.out.println("Load Game");

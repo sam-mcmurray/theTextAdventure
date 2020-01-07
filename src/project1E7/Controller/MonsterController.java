@@ -39,7 +39,7 @@ public class MonsterController {
 
         int chanceToHit = rand.nextInt(2);
 
-        if (chanceToHit < 0) {
+        if (chanceToHit == 0) {
             return false;
         } else {
 

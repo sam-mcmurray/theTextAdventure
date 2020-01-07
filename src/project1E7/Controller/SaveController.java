@@ -33,6 +33,7 @@ public class SaveController {
             FileWriter fileWriter = new FileWriter("SavedGame.json");
             fileWriter.write(theGame);
             fileWriter.close();
+            view.printSave();
         }
         catch(Exception e) {
             System.out.println("please delete existing file");

@@ -37,7 +37,7 @@ public class LoadController {
             HeroController heroController = new HeroController(game.getJsonHero(), heroView);
 
             GameManager gameManager = new GameManager();
-            gameManager.newGame(game.getJsonHero(),game.getJsonMap(), heroController.currentRoom(game.getJsonCurrentRoom(), game.getJsonMap()),game.getJsonControls(),game.getJsonUser());
+            gameManager.game(game.getJsonHero(),game.getJsonMap(), heroController.currentRoom(game.getJsonCurrentRoom(), game.getJsonMap()),game.getJsonControls(),game.getJsonUser());
     } catch (IOException e) {
         e.printStackTrace();
     }
