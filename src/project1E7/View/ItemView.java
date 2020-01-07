@@ -24,21 +24,21 @@ public class ItemView {
     public Item viewItem(Item item) {
 
        if (item instanceof Coffee) {
-           System.out.println("a delicious mug of coffee. How is it still warm?");
+           System.out.println("Incredible! A delicious mug of coffee was just sitting on the ground. How is it still warm?");
            return coffee;
        } else if (item instanceof HealthPotion) {
-           System.out.println("a glowing red potion with a label on the back saying not to drink if pregnant.");
+           System.out.println("Salvation! A glowing red potion health potion was just waiting for you within the room! \n" +
+                   "The label on the back says not to drink if you're pregnant.");
            return healthPotion;
        } else if (item instanceof Heart) {
-           System.out.println("a human heart within a crystal casing. It still beats.");
+           System.out.println("Morbid but not unwelcome, a human heart within a crystal casing is set upon a table in \n" +
+                   "the room. It still beats.");
            return heart;
        } else if (item instanceof Weapon) {
-           System.out.println("an upgraded version of your signature weapon. How convenient!");
+           System.out.println("Sitting on a pedestal in the center of the room is an upgraded version of your signature \n" +
+                   "weapon. How convenient!");
        } else if (item instanceof Treasure) {
-           System.out.println("a chest full of treasure!");
-           return treasure;
-       } else {
-           System.out.println("No item was found");
+           System.out.println("Loot! There is treasure in the room!");
        }
        return null;
     }

@@ -174,15 +174,15 @@ public class MenuController {
      * @return
      */
     public Hero selectHero() {
-        Hero warrior = new Hero(1000, 70, 30, "The Warrior...", "Warrior", 100, "Warrior");
+        Hero warrior = new Hero(1000, 60, 30, "The Warrior...", "Warrior", 100,"Warrior", "Long Sword");
         HeroView heroViewWarrior = new HeroView(warrior);
         heroViewWarrior.printStats();
 
-        Hero mage = new Hero(60, 60, 40, "The Mage...", "Mage", 100, "Warrior");
+        Hero mage = new Hero(70, 70, 40, "The Mage...", "Mage", 100, "Mage", "Magic Scepter");
         HeroView heroViewMage = new HeroView(mage);
         heroViewMage.printStats();
 
-        Hero thief = new Hero(80, 60, 80, "The Thief...", "Thief", 100, "Warrior");
+        Hero thief = new Hero(80, 55, 80, "The Thief...", "Thief", 100, "Thief", "Curved Dagger");
         HeroView heroViewThief = new HeroView(thief);
         heroViewThief.printStats();
 

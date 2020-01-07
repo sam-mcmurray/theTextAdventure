@@ -53,7 +53,8 @@ public class RoomController {
      * get the room item
      * @return
      */
-    public Item getItem() {
+    public Item findItem() {
+
         Item item = model.getItem();
         return item;
 
@@ -70,7 +71,7 @@ public class RoomController {
         int itemType = rand.nextInt(100);
         int treasureAmount = rand.nextInt(100);
 
-        if (possibleItem <=50) {
+        if (possibleItem <=20) {
             if(itemType <=74){
                 Treasure treasure = new Treasure("Gold Chest",1000);
                 if(treasureAmount <= 49) {
@@ -95,10 +96,10 @@ public class RoomController {
                     return treasure;
                 }
 
-            } else if (itemType >= 75 && itemType <= 84) {
+            } else if (itemType <= 84) {
                 Coffee coffee = new Coffee("a steaming cup of Coffee");
                 return coffee;
-            } else if (itemType >= 85 && itemType <= 94) {
+            } else if (itemType <= 94) {
                 HealthPotion healthPotion = new HealthPotion("a glowing red health potion");
                 return healthPotion;
             } else if (itemType >= 95) {
@@ -106,7 +107,9 @@ public class RoomController {
                 return heart;
             }
         }
-        return null;
+        Item item = new Item("missing");
+        return item;
+
     }
 
 

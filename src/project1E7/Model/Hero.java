@@ -13,7 +13,7 @@ public class Hero extends Character {
     private String weapon;
     private int turnCounter;
 
-    public Hero(int health, int strength, int speed, String description, String name, int endurance,String characterClass) {
+    public Hero(int health, int strength, int speed, String description, String name, int endurance,String characterClass, String weapon) {
         super(health, strength, speed, description, name);
         this.endurance = endurance;
         lives = 3;

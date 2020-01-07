@@ -48,7 +48,7 @@ public class HeroController {
 
         Random rand = new Random();
 
-        int chanceToHit = rand.nextInt(2);
+        int chanceToHit = rand.nextInt(3);
         if (chanceToHit == 0) {
             return false;
         } else {

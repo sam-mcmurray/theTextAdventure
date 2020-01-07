@@ -126,15 +126,17 @@ public class ItemController {
                 keyRing = heroController.addKey(keyRing, key);
                 run = false;
                 return run;
-            } else if (checkIfWeapon(item)) {
+            } else if (item instanceof Weapon) {
                 Weapon weapon = (Weapon) item;
-                weapon.setName(theHero.getWeapon() + "+1");
+                weapon.setName(weaponName(theHero));
                 theHero.setStrength(weapon.getStrength() + theHero.getStrength());
-                System.out.println("You have found " + weapon.getName() + "! \nFrom now on all your attacks will do more damage!");
+                System.out.println("You have found a(n) " + weapon.getName() + "! \nFrom now on all your attacks will do more damage!");
                 run = false;
                 return run;
-            } else if (item.getName() == "No item was found") {
-                System.out.println(item);
+            } else if (item.getName().equals("missing")) {
+                System.out.println("Nothing of significance was found.");
+                run = false;
+                return run;
             } else
                 view.chooseWhatToDoWithItem(item);
             chooseItem = input.nextLine();
@@ -166,5 +168,16 @@ public class ItemController {
 
         } while (run == true);
         return run;
+    }
+
+    public String weaponName(Hero theHero) {
+        String weapon;
+        if (theHero.getCharacterClass().equals("Warrior")) {
+            return weapon = "Great Sword";
+        } else if (theHero.getCharacterClass().equals("Mage")) {
+            return weapon = "Ancient Scepter";
+        } else {
+            return weapon = "Deadly Curved Dagger";
+        }
     }
 }

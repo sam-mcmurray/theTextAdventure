@@ -34,7 +34,7 @@ public class MonsterView {
      * @param monster
      */
     public void encounter(Monster monster){
-        System.out.printf("You have encountered a %s ! ", monster.getDescription());
+        System.out.printf("You have encountered %s ", monster.getDescription());
     }
 
     /**
@@ -50,24 +50,24 @@ public class MonsterView {
                 System.out.println("Standing before you is an ornate gateway that could be marveled as a piece of art if \n" +
                         "it weren't for the tens of broken and dead adventurers representing the danger on the other \n" +
                         "side of the door.");
-            } else if (model.getName().equalsIgnoreCase("The Owl Bear")) {
+            } else if (model.getName().equalsIgnoreCase("Owlbear")) {
                 System.out.println("Too late! The bones and feathers strewn across the room should have been your first \n" +
                         "warning. The second being a shrieking growl barreling towards you from a large cavern in the \n" +
                         "wall. Stopping just before you as a hulking beast has the head of an owl and the body of a \n" +
                         "brown bear. The owlbears beak and claws both look razor sharp and ready to fight.");
-            } else if (model.getName().equalsIgnoreCase("The Skeleton")) {
+            } else if (model.getName().equalsIgnoreCase("Skeleton")) {
                 System.out.println("Too late! As you are traversing the debris on the floor of the room you step over a \n" +
                         "pile of rubble from some collapsed pillar you mistakenly trample the remains of a poor \n" +
                         "dungeuoneer not all that different from yourself minus the not being alive and all. \n" +
                         "Unfortunately, the dead don't welcome disturbance and the bones begin to rattle to life all \n" +
                         "over again not long after you stepped on them. Pulling out your " + hero.getWeapon() + " you \n" +
                         "prepare to put the skeleton back where you found them.");
-            } else if (model.getName().equalsIgnoreCase("The Bat")) {
+            } else if (model.getName().equalsIgnoreCase("Bat")) {
                 System.out.println("Too late! While peering into one of the next rooms some leather winged creature \n" +
                         "flies directly at you. you take out your " + hero.getWeapon() + " without any time to spare \n" +
                         "perry its razor sharp claws. What the oversized bat thought was an easy meal is going to put \n" +
                         "up a fight.");
-            } else if (model.getName().equalsIgnoreCase("The Slime")) {
+            } else if (model.getName().equalsIgnoreCase("Slime")) {
                 System.out.println("Too late! The room itself appears far more wet than what you first realized. In \n" +
                         "fact, the whole room is dripping a strange blue goo and the blue liquid moves in an unusual \n" +
                         "way. To your horror, the liquid began to move together and form a single large blob.  Whatever \n" +
@@ -81,7 +81,7 @@ public class MonsterView {
         } else {
             if (model.getName().equalsIgnoreCase("The Boss")) {
                 System.out.println("Standing before is ");
-            } else if (model.getName().equalsIgnoreCase("The Owl Bear")) {
+            } else if (model.getName().equalsIgnoreCase("Owlbear")) {
                 System.out.println("Clearly there was some kind of battle in this room, recently too. Inside there are \n" +
                         "many dead creatures ranging from bats, spiderlings, and even a couple of slimes. In the center \n" +
                         "lays the gruesome remains of a bear whose head had been twisted around backwards. What could \n" +
@@ -89,14 +89,14 @@ public class MonsterView {
                         "WHoOoO'. You turn around just in time to realize that was no ordinary bear, and it was certainly \n" +
                         "not dead. The head of it spins around 180 degrees and faces you. It's an owlbear who was \n" +
                         "slumbering after eating it's fill. Now his goal is to defend his prizes from you. Prepare to fight");
-            } else if (model.getName().equalsIgnoreCase("The Skeleton")) {
+            } else if (model.getName().equalsIgnoreCase("Skeleton")) {
                 System.out.println("Several large black sarcophagi are embedded into the walls of the room around you. \n" +
                         "One in particular catches your eye as its been decorated with large precious stones on the \n" +
                         "outside of it. You realize that whoever is inside won't be missing them and decide to try and \n" +
                         "pry them off the tomb. Perhaps it wasn't your brightest idea since as soon as you go to touch \n" +
                         "one of the gems the stone slab breaks off the wall and a mummified corpse draws it's sword. \n" +
                         "It's time to fight.");
-            } else if (model.getName().equalsIgnoreCase("The Bat")) {
+            } else if (model.getName().equalsIgnoreCase("Bat")) {
                 System.out.println("As you are admiring the ancient architecture of the room you come to the slow yet \n" +
                         "horrifying realization that what you thought was decorative ceiling art are actually hundreds \n" +
                         "of sleeping bats, every one of them easily the size of yourself. Slowly backing up while \n" +
@@ -107,7 +107,7 @@ public class MonsterView {
                         "Thankfully all except one pay no attention to you and decide to evacuate the room, likely to \n" +
                         "their sensitive hearing being disrupted by the loudness coming from the well. Regardless the \n" +
                         "last one left with you looks pissed of and hungry. Prepare to fight!");
-            } else if (model.getName().equalsIgnoreCase("The Slime")) {
+            } else if (model.getName().equalsIgnoreCase("Slime")) {
                 System.out.println("Finally some respite after the long and difficult process of dungeon crawling! You \n" +
                         "have come across a large pool of what appears to be mana restoration portion.  It's very well \n" +
                         "coveted for its rejuvenation properties. Soon you have decided to take a dip in this natural \n" +
@@ -153,16 +153,16 @@ public class MonsterView {
         }
         if (model.getName().equalsIgnoreCase("The Boss")) {
             System.out.println("The fallen dungeoneer uses a spell and hits your " + rBodyPart + "!");
-        } else if (model.getName().equalsIgnoreCase("The Owl Bear")) {
+        } else if (model.getName().equalsIgnoreCase("Owlbear")) {
             System.out.println("The owlbear uses its sharp beak to bite your " + rBodyPart + "!");
-        } else if (model.getName().equalsIgnoreCase("The Skeleton")) {
+        } else if (model.getName().equalsIgnoreCase("Skeleton")) {
             System.out.println("The skeletons rusty sword strikes your " + rBodyPart + "!");
-        } else if (model.getName().equalsIgnoreCase("The Bat")) {
+        } else if (model.getName().equalsIgnoreCase("Bat")) {
             System.out.println("The bats claws draws marks across your " + rBodyPart + "!");
-        } else if (model.getName().equalsIgnoreCase("The Slime")) {
+        } else if (model.getName().equalsIgnoreCase("Slime")) {
             System.out.println("The slime lurches forward and burns your " + rBodyPart + "!");
         } else {
-            System.out.println("The spiderlings fangs stab into your !" + rBodyPart + "!");
+            System.out.println("The spiderlings fangs stab into your " + rBodyPart + "!");
         }
     }
 
@@ -195,13 +195,13 @@ public class MonsterView {
         }
         if (model.getName().equalsIgnoreCase("The Boss")) {
             System.out.println("The fallen dungeoneer tries to use a spell to hit your " + rBodyPart + " but misses!");
-        } else if (model.getName().equalsIgnoreCase("The Owl Bear")) {
+        } else if (model.getName().equalsIgnoreCase("Owlbear")) {
             System.out.println("The owlbear tries to use its sharp beak to bite your " + rBodyPart + " but misses!");
-        } else if (model.getName().equalsIgnoreCase("The Skeleton")) {
+        } else if (model.getName().equalsIgnoreCase("Skeleton")) {
             System.out.println("The skeletons tries to use its rusty sword to strike your " + rBodyPart + " but misses!");
-        } else if (model.getName().equalsIgnoreCase("The Bat")) {
+        } else if (model.getName().equalsIgnoreCase("Bat")) {
             System.out.println("The bat tries to use its claws to scratch your " + rBodyPart + " but misses!");
-        } else if (model.getName().equalsIgnoreCase("The Slime")) {
+        } else if (model.getName().equalsIgnoreCase("Slime")) {
             System.out.println("The slime tries to lurch forward to burn your " + rBodyPart + " but misses!");
         } else {
             System.out.println("The spiderlings tries to use its fangs to stab into your !" + rBodyPart + " but misses!");

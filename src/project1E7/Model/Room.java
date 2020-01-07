@@ -43,13 +43,12 @@ public class Room {
 
     }
 
-    public Room(String description, boolean found, Item item, boolean hasItem, boolean hasMonster, Monster monster, Door door, boolean islocked, boolean hasCharacter, boolean beenSeen) {
+    public Room(String description, boolean found, Item item, boolean hasItem, boolean hasMonster, Door door, boolean islocked, boolean hasCharacter, boolean beenSeen) {
         this.description = description;
         this.found = found;
         this.item = item;
         this.hasItem = hasItem;
         this.hasMonster = hasMonster;
-        this.monster = monster;
         this.door = door;
         this.islocked = islocked;
         this.hasCharacter = hasCharacter;
@@ -64,6 +63,7 @@ public class Room {
         this.islocked = islocked;
         this.hasCharacter = hasCharacter;
         this.beenSeen = beenSeen;
+        this.hasItem = isHasItem();
     }
 
     public String getDescription() {
