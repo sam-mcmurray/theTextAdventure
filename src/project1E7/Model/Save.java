@@ -44,11 +44,8 @@ public class Save {
             FileWriter writer = new FileWriter(file);
             BufferedWriter bWriter = new BufferedWriter(writer);
 
-            bWriter.write("");
-            bWriter.flush();
-            bWriter.close();
-
             bWriter.write();
+            bWriter.newLine();
             bWriter.flush();
             bWriter.close();
             FileReader reader = new FileReader(file);
