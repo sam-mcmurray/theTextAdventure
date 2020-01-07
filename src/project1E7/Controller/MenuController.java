@@ -50,10 +50,10 @@ public class MenuController {
                     }
                     if (monsterModel.isAlive() && theHero.isAlive()) {
                         if (monsterController.attack(heroController)) {
-                            monsterView.monsterHitFlavorText(theHero);
+                            monsterView.monsterHitFlavorText(monsterModel);
                             heroView.printStatus(theHero);
                         } else {
-                            monsterView.monsterMissFlavorText(theHero);
+                            monsterView.monsterMissFlavorText(monsterModel);
                             heroView.printStatus(theHero);
                         }
                     }
@@ -71,11 +71,12 @@ public class MenuController {
 
                         if (monsterModel.isAlive() && theHero.isAlive()) {
                             if (monsterController.attack(heroController)) {
-                                monsterView.monsterHitFlavorText(theHero);
+                                monsterView.monsterHitFlavorText(monsterModel);
                                 heroView.printStatus(theHero);
                             } else
-                                monsterView.monsterMissFlavorText(theHero);
-                                heroView.printStatus(theHero);
+                                monsterView.monsterMissFlavorText(monsterModel);
+                            heroView.printStatus(theHero);
+
                         }
                     }
                     break;
@@ -116,17 +117,16 @@ public class MenuController {
         do {
 
             if (monsterController.attack(heroController) && monsterModel.isAlive()) {
-                monsterView.monsterHitFlavorText(theHero);
+                monsterView.monsterHitFlavorText(monsterModel);
                 heroView.printStatus(theHero);
                 view.encounterMenu();
                 encounterChoice = input.nextLine();
 
-            } else {
-                monsterView.monsterMissFlavorText(theHero);
-                heroView.printStatus(theHero);
-                view.encounterMenu();
-                encounterChoice = input.nextLine();
-            }
+            } else
+                monsterView.monsterMissFlavorText(monsterModel);
+            heroView.printStatus(theHero);
+            view.encounterMenu();
+            encounterChoice = input.nextLine();
 
             switch (encounterChoice) {
 
@@ -178,7 +178,7 @@ public class MenuController {
      * @return
      */
     public Hero selectHero() {
-        Hero warrior = new Hero(100, 70, 30, "The Warrior...", "Warrior", 100, "Warrior");
+        Hero warrior = new Hero(1000, 70, 30, "The Warrior...", "Warrior", 100, "Warrior");
         HeroView heroViewWarrior = new HeroView(warrior);
         heroViewWarrior.printStats();
 

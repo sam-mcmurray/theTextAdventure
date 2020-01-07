@@ -36,10 +36,11 @@ public class GameManager {
         do {
             boolean flee = false;
             boolean run = true;
+            mapView.mapPrinter(room);
             Room roomModel = heroController.currentRoom(currentRoom, room);
             RoomView roomView = new RoomView(roomModel);
             RoomController roomController = new RoomController(roomModel, roomView);
-            roomView.flavorTextRoom();
+            roomView.flavorTextRoom(currentRoom);
             theHero.setKeyRing(keyRing);
             if (!roomModel.getFound()) {
                 if (roomController.roomHasMonster()) {
@@ -48,7 +49,7 @@ public class GameManager {
                     MonsterController monsterController = new MonsterController(monsterModel, monsterView);
                     monsterController.resetMonster();
 
-                    monsterView.flavorTextMonster();
+                    monsterView.flavorTextMonster(theHero);
 
                     monsterView.encounter(monsterModel);
                     if (heroController.attackFirst(monsterController)) {
@@ -70,7 +71,6 @@ public class GameManager {
                             flee = true;
                         }
                     }
-
                 }
 
                 while ((theHero.isAlive() && run) && !flee) {
@@ -84,7 +84,7 @@ public class GameManager {
 
                     } else if (roomController.roomHasItem() == false) {
 
-                        Item item = roomController.setRandomItem();
+                        Item item = new Item("No item was found");
                         if (item != null) {
                             ItemView itemView = new ItemView(item);
                             ItemController itemController = new ItemController(item, itemView);
@@ -118,9 +118,5 @@ public class GameManager {
             }
 
         } while ((theHero.isAlive() && theHero.getLives() >= 1 ) || heroController.currentRoom(currentRoom, room)!= room[0][3]);
-
-
     }
-
-
 }
