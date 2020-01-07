@@ -3,6 +3,8 @@ package project1E7.Controller;
 import project1E7.Model.User;
 import project1E7.View.UserView;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,18 +22,12 @@ public class UserController {
         this.view = view;
     }
 
-    public void update(int a, String name) {
+    public void update(int a) {
 
         model.setHighScore(a);
-        model.setUserName(name);
     }
 
-    public boolean isEmpty() {
-
-        return model.isEmpty();
-    }
-
-    public boolean createUser() {
+    public User createUser() {
 
         Scanner input = new Scanner(System.in);
 
@@ -41,50 +37,122 @@ public class UserController {
 
             System.out.printf("Enter your new username:");
             String temp = input.nextLine();
-            Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-            Matcher m = p.matcher(temp);
-            boolean b = m.find();
 
-            while (!isUpperCase(temp.charAt(0)) || temp.length() > 12 || b) {
-
-                if (!isUpperCase(temp.charAt(0))) {
-                    System.out.printf("%n" +
-                            "Invalid username! The username must have the first letter as a capital letter");
-                }
+            while (temp.length() > 12) {
 
                 if (temp.length() > 12) {
                     System.out.printf("%n" +
                             "Invalid username! Your username must contain a maximum of 12 characters");
                 }
 
-                if (b) {
-                    System.out.printf("%n" +
-                            "Invalid username! Your username cannot contain a special character");
-                }
-
                 System.out.printf("%n" +
-                        "Please enter a valid user name, to quit enter 'no'%n");
-
+                        "Enter a valid username:%n");
                 temp = input.nextLine();
 
-                if (answer.equalsIgnoreCase("no")) {
+            }
 
-                    return false;
+            boolean ok = false;
+
+            while (!ok) {
+                for (Object i : model.getUsers()) {
+
+                    if (temp == ((User) i).getUserName()) {
+
+                        ok = false;
+                    } else {
+
+                        ok = true;
+                    }
                 }
-                else{
 
-                    System.out.printf("");
+                if (!ok) {
+                    System.out.printf("%n" +
+                            "This name already exists. Please choose another name%n");
                 }
             }
 
             User user = new User(temp, 0);
             model.addUsers(model.getUsers(), user);
-            return true;
-
         } else if (answer.equalsIgnoreCase("no")) {
-            System.out.println("Returning to start menu");
-            return false;
+            System.out.println("R");
+
+            return null;
+
         } else System.out.println("Invalid answer!");
-        return false;
+
+        return null;
+    }
+
+    public User selectUser() {
+
+        Scanner input = new Scanner(System.in);
+        User userModel = new User(null, 0);
+
+        if (model.getUsers().isEmpty()) {
+
+            System.out.printf("%n" +
+                    "Create a new user before beginning the game.%n" +
+                    "Enter the name of your new user%n");
+            String response = input.nextLine();
+
+            boolean ok = false;
+            while (!ok) {
+
+                for (Object i : model.getUsers()) {
+
+                    if (response == ((User) i).getUserName()) {
+
+                        ok = false;
+                    } else {
+
+                        ok = true;
+                    }
+                }
+
+                if (!ok) {
+                    System.out.printf("%n" +
+                            "The name you entered has already been selected. Enter another name%n");
+                    response = input.nextLine();
+                }
+            }
+
+            userModel = new User(response, 0);
+            userModel.addUsers(model.getUsers(), userModel);
+            return userModel;
+        } else {
+
+            System.out.printf("%n" +
+                    "Select one of the following users. To create a new user enter 0%n");
+
+            for (int i = 0; i < model.getUsers().size(); ) {
+
+                System.out.printf("%d- %s %d", ++i, ((User) model.getUsers().get(i)).getUserName(), ((User) model.getUsers().get(i)).getHighScore());
+            }
+
+            try {
+
+                try {
+
+                    int userNo = input.nextInt();
+
+                    if (userNo == 0) {
+
+                        return null;
+                    } else
+                        userModel = new User(((User) userModel.getUsers().get(--userNo)).getUserName(), (((User) userModel.getUsers().get(--userNo)).getHighScore()));
+
+                } catch (IndexOutOfBoundsException e) {
+
+                    System.out.printf("%n" +
+                            "Enter the number of an available user!%n");
+                }
+            } catch (InputMismatchException e) {
+
+                System.out.printf("%n" +
+                        "Invalid answer!%n" +
+                        "Choose user%n");
+            }
+        }
+        return userModel;
     }
 }

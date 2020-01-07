@@ -39,43 +39,21 @@ public class SaveController {
             System.out.println("please delete existing file");
         }
     }
-    public boolean saveHighScore(ArrayList<User> users) {
-
-
-        System.out.printf("Saving your score");
+    public void saveHighScore(String username, int highscore) {
 
         try {
 
-            String saveFile = input.nextLine();
-            String verify, putData;
-            File file = new File(saveFile);
-            file.createNewFile();
+            File file = new File("HighScore.txt");
             FileWriter writer = new FileWriter(file);
             BufferedWriter bWriter = new BufferedWriter(writer);
-            bWriter.write((Integer.toString(users.get(users.size()).getHighScore())) + users.get(users.size()).getUserName());
-            bWriter.flush();
-            bWriter.close();
-            FileReader reader = new FileReader(file);
-            BufferedReader bReader = new BufferedReader(reader);
 
-            while ((verify = bReader.readLine()) != null) {
-                if (verify != null) {
-                    putData = verify.replaceAll("here", "there");
-                    bWriter.write(putData);
-                }
-            }
-            // use this to edit an existing file for the highscore
-
-            bReader.close();
-
+            bWriter.write(username);
+            bWriter.newLine();
+            bWriter.write(highscore);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-        return true;
     }
 
 }

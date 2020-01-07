@@ -5,7 +5,11 @@ import project1E7.Model.Hero;
 import project1E7.Model.Item;
 import project1E7.Model.Monster;
 
-import java.util.*;
+import project1E7.theTextAdventure;
+import project1E7.*;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class HeroView {
@@ -48,6 +52,7 @@ public class HeroView {
 
     /**
      * prints the select hero confirmation statement
+     *
      * @param hero
      * @return
      */
@@ -60,11 +65,12 @@ public class HeroView {
             System.out.println(hero + " has been selected");
             return false;
         } else
-        return true;
+            return true;
     }
 
     /**
      * prints the heroes status
+     *
      * @param hero
      */
     public void printStatus(Hero hero) {
@@ -78,17 +84,14 @@ public class HeroView {
 
     /**
      * suppose to show heroes inventory i dont think it works its untested
+     *
      * @param items
      */
     public void inventory(ArrayList<Item> items) {
         items = model.getBackPack();
         int choice;
-        if (items.size() > 0) {
-            for (int i = 0; i <= items.size() - 1; i++) {
-                System.out.println("[" + (i + 1) + "]" + items.get(i));
-            }
-        } else {
-            System.out.println("Your backpack is empty");
+        for (int i = 0; i <= items.size() - 1; i++) {
+            System.out.println("[" + (i + 1) + "]" + items.get(i).getName());
         }
     }
 
@@ -108,6 +111,7 @@ public class HeroView {
 
     /**
      * returns the current heroes weapon
+     *
      * @return
      */
     public String getWeapon() {
@@ -121,11 +125,12 @@ public class HeroView {
         } else {
             weapon = "ERROR: No weapon found";
         }
-            return weapon;
+        return weapon;
     }
 
     /**
      * prints hit landed flavor text for hero
+     *
      * @param monster
      */
     public void hitMonsterFlavorText(Monster monster) {
@@ -136,13 +141,15 @@ public class HeroView {
             System.out.println("Using your staff and an intense focus, you conjure an ever growing fireball at the crystal focal of your staff until you finally launch it.\n" +
                     monster.getName() + " burns horribly dealing substantial damage");
         } else {
-            System.out.println("Your dagger is a whirlwind of flashing steel as you stab at "+ monster.getName() + " with lightning speed and an unnatural precision.\n" +
+            System.out.println("Your dagger is a whirlwind of flashing steel as you stab at " + monster.getName() + " with lightning speed and an unnatural precision.\n" +
                     monster.getName() + " recoils in confusion and pain.");
-        };
+        }
+        ;
     }
 
     /**
      * prints missed flavor text for the hero
+     *
      * @param monster
      */
     public void missMonsterFlavorText(Monster monster) {
@@ -164,16 +171,18 @@ public class HeroView {
     /**
      * prints the number of hero turns for the game
      */
-    public void printTurnCount(){
+    public void printTurnCount() {
         System.out.println("Current number of turns: " + model.getTurnCounter());
     }
 
     public void printLives() {
         System.out.println("Current number of lives: " + model.getLives());
     }
+
     public void fleeFail() {
         System.out.println("You were unable to flee.");
     }
+
     public void fleeSuccess() {
         System.out.println("You were successful in your attempt to flee.");
     }

@@ -1,14 +1,18 @@
 package project1E7.Model;
 
+import com.google.gson.Gson;
+
 import java.util.Scanner;
 
 public class Save {
     Scanner input = new Scanner(System.in);
+    Gson gson = new Gson();
     Hero jsonHero;
     Room[][] jsonMap;
     Controls jsonControls;
     User jsonUser;
     Room jsonCurrentRoom;
+
 
     public Save(Hero jsonHero, Room[][] jsonMap, Controls jsonControls, User jsonUser, Room jsonCurrentRoom) {
         this.jsonHero = jsonHero;
@@ -56,5 +60,6 @@ public class Save {
 
     public void setJsonCurrentRoom(Room jsonCurrentRoom) {
         this.jsonCurrentRoom = jsonCurrentRoom;
+
     }
 }

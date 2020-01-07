@@ -3,6 +3,7 @@ package project1E7.Controller;
 import project1E7.Model.*;
 import project1E7.View.*;
 
+import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
 
@@ -10,7 +11,8 @@ public class MenuController {
     MenuView view;
     Menu model;
     Scanner input = new Scanner(System.in);
-
+    public MenuController(MenuView view) {
+    }
     public MenuController(MenuView view, Menu model) {
         this.view = view;
         this.model = model;
@@ -24,7 +26,7 @@ public class MenuController {
      */
     public boolean encounterHeroFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
                                       MonsterView monsterView, MonsterController monsterController, MapView mapView, Controls controls,
-                                      ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom ) {
+                                      ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom ,ArrayList<Item> backPack) {
 
         boolean run = true;
         String encounterChoice = "0";
@@ -79,8 +81,9 @@ public class MenuController {
                     }
                     break;
                 case "3":
+                    heroController.printItem(backPack);
+                    heroController.useItem(backPack);
                     heroController.turnCounter();
-                    heroView.inventory(theHero.getBackPack());
                     break;
                 case "4":
                     subMenu(controlsController,controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
@@ -107,7 +110,7 @@ public class MenuController {
      */
     public boolean encounterMonsterFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
                                          MonsterView monsterView, MonsterController monsterController, MapView mapView, Controls controls,
-                                         ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom ) {
+                                         ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom,ArrayList<Item> backPack) {
         String encounterChoice = "0";
         boolean run = true;
         monsterView.encounter(monsterModel);
@@ -154,7 +157,8 @@ public class MenuController {
                         run = true;
                     break;
                 case "3":
-                    heroView.inventory(theHero.getBackPack());
+                    heroController.printItem(backPack);
+                    heroController.useItem(backPack);
                     heroController.turnCounter();
                     break;
                 case "4":
@@ -341,6 +345,11 @@ public class MenuController {
 
                 case "3":
 
+                    File file = new File("HighScore.txt");
+                    Load load = new Load(file, "HighScore.txt");
+                    LoadView loadView = new LoadView(load);
+                    LoadController loadController = new LoadController(load, loadView);
+                    loadController.loadHighestScore();
                     break;
 
                 case "4":
@@ -357,10 +366,10 @@ public class MenuController {
 
                 case "6":
                     String fileName = "SavedGame.json";
-                    File file = new File("SavedGame.json");
-                    Load load = new Load(file, fileName);
-                    LoadView loadView = new LoadView(load);
-                    LoadController loadController = new LoadController(load, loadView);
+                    file = new File("SavedGame.json");
+                    load = new Load(file, fileName);
+                    loadView = new LoadView(load);
+                    loadController = new LoadController(load, loadView);
                     loadController.loadGame();
                     break;
 

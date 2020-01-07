@@ -4,6 +4,10 @@ import project1E7.Controller.*;
 import project1E7.Model.*;
 import project1E7.View.*;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -56,7 +60,7 @@ public class GameManager {
                     if (heroController.attackFirst(monsterController)) {
 
                         if (menuController.encounterHeroFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController, mapView,
-                                control, controlsController, controlsView, user, room, currentRoom)) {
+                                control, controlsController, controlsView, user, room, currentRoom,backPack)) {
                             flee = false;
                         } else {
                             flee = true;
@@ -65,7 +69,7 @@ public class GameManager {
                     } else {
 
                         if (menuController.encounterMonsterFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController, mapView,
-                                control, controlsController, controlsView, user, room, currentRoom)) {
+                                control, controlsController, controlsView, user, room, currentRoom,backPack)) {
                             flee = false;
 
                         } else {
@@ -116,6 +120,22 @@ public class GameManager {
                 run = false;
             }
 
-        } while ((theHero.isAlive() && theHero.getLives() >= 1) || heroController.currentRoom(currentRoom, room) != room[0][3]);
+
+        } while ((theHero.isAlive() && theHero.getLives() >= 1 ) || heroController.currentRoom(currentRoom, room)!= room[0][3]);
+
+        File file = new File("HighScore.txt");
+        Load load = new Load(file, "HighScore.txt");
+        LoadView loadView = new LoadView(load);
+        LoadController loadController = new LoadController(load, loadView);
+
+        if(theHero.getCurrentTreasure()>loadController.loadHighestScore())
+        {
+
+            Save save = new Save(theHero,room, controls, user, currentRoom);
+            SaveView saveView = new SaveView(save);
+            SaveController saveController = new SaveController(save, saveView);
+
+            saveController.saveHighScore(user.getUserName(),theHero.getCurrentTreasure());
+        }
     }
 }
