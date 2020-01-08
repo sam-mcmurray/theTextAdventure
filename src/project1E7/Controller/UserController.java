@@ -50,7 +50,6 @@ public class UserController {
             }
 
             User user = new User(temp, 0);
-            model.addUsers(model.getUsers(), user);
             return user;
     }
 

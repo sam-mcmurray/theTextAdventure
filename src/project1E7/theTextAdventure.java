@@ -25,7 +25,6 @@ public class theTextAdventure {
         User userModel = new User(null, 0);
         UserView userView = new UserView(userModel);
         UserController userController = new UserController(userModel, userView);
-        userModel.setUsers(users);
 
         Scanner input = new Scanner(System.in);
         theTextAdventure myApp = new theTextAdventure();
@@ -41,12 +40,12 @@ public class theTextAdventure {
         while (game == true) {
             String choice = menuController.startMenu();
             if (choice.equals("1")) {
-
+                
+                User user = userController.createUser();
                 Hero theHero = (menuController.selectHero());
                 Controls control = new Controls("w", "s", "d", "a");
                 Room[][] room = new Room[10][10];
                 mapController.createWorld(room, theHero);
-                User user = userController.createUser();
                 HeroView heroView = new HeroView(theHero);
                 HeroController heroController = new HeroController(theHero, heroView);
                 heroView.printStats();

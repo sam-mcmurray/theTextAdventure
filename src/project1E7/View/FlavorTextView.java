@@ -124,12 +124,14 @@ public class FlavorTextView {
     public String getEncounterFlavorTextSpiderling1() {
         encounterFlavorTextSpiderling1 = "Too late! The skittering of the eight hairy black legs warns you before you ever see it. You barely dodge the meter long spiderling as it pounces forward to " +
                 "sink its fangs deep in the soft tissue of your neck. Pulling back from the monstrosity you ready to fight.";
+
         return encounterFlavorTextSpiderling1;
     }
 
     public String getEncounterFlavorTextSpiderling2() {
         encounterFlavorTextSpiderling2 = "Too late! You just barely notice the dark shape on the ceiling hurrying towards yourself and ready your weapon. Perhaps you should have been more weary of walking into " +
                 "a room with a web infested ceiling. The spiderling slowly drops down while hanging off a silken strand and prepares for a fight.";
+
         return encounterFlavorTextSpiderling2;
     }
 
