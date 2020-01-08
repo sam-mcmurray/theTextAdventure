@@ -5,7 +5,7 @@ public class Coffee extends Item {
 
     public Coffee(String name) {
         super(name);
-        speed = 3;
+        speed = 5;
     }
 
     public Integer getSpeed() {

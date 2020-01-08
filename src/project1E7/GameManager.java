@@ -56,7 +56,7 @@ public class GameManager {
 
                     monsterView.flavorTextMonster(theHero);
 
-                    monsterView.encounter(monsterModel);
+                    //monsterView.encounter(monsterModel);
                     if (heroController.attackFirst(monsterController)) {
 
                         if (menuController.encounterHeroFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController, mapView,

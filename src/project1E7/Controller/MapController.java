@@ -77,10 +77,12 @@ public class MapController {
                 Treasure cashMoney = new Treasure("", 0);
                 checkTreasureValue(cashMoney);
                 String description = flavorTextRoom();
+                Item noItem = new Item("");
                 Item endItem = new Item("endItem");
 
                 if (i == 8 && j == 5) {
-                    Room roomModel = new Room("The bottom of a large chasm you were rappelling into. Unfortunately your rope was cut and the it's \nimpossible to climb back up. Best to look for another way out", true, true, true);
+                    Room roomModel = new Room("The bottom of a large chasm you were rappelling into. Unfortunately your rope was cut and the it's " +
+                            "\nimpossible to climb back up. Best to look for another way out", true, true, true, true, noItem);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
@@ -156,19 +158,19 @@ public class MapController {
                         || i == 3 && j == 7 || i == 4 && j == 1 || i == 4 && j == 3 || i == 4 && j == 4 || i == 4 && j == 5
                         || i == 4 && j == 6 || i == 6 && j == 2 || i == 6 && j == 4 || i == 6 && j == 5 || i == 7 && j == 7
                         || i == 6 && j == 7 || i == 6 && j == 8 || i == 7 && j == 3 || i == 7 && j == 4 || i == 8 && j == 1) {
-                    Room roomModel = new Room("wall", false, false, false);
+                    Room roomModel = new Room("wall", false, false, false,true,noItem);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 6 || j == 7 || (i == 2 && j == 3) || i == 3) {
-                    Room roomModel = new Room(description, false, false, false);
+                    Room roomModel = new Room(description, false, false, false,true,item);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 8 || i == 7) {
-                    int chanceForMonster = rand.nextInt(8);
+                    int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
                         Room roomModel = new Room(description, cashMoney, true, false, bat, true, false, false);
@@ -201,7 +203,7 @@ public class MapController {
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room(description, false, false, false);
+                        Room roomModel = new Room(description, false, false, false, true,item);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -240,7 +242,7 @@ public class MapController {
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room(description, false, false, false);
+                        Room roomModel = new Room(description, false, false, false,true,item);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -279,7 +281,7 @@ public class MapController {
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room(description, false, false, false);
+                        Room roomModel = new Room(description, false, false, false,true,item);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -318,7 +320,7 @@ public class MapController {
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room(description, false, false, false);
+                        Room roomModel = new Room(description, false, false, false,true,item);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -384,22 +386,22 @@ public class MapController {
         int itemType = rand.nextInt(100);
         int treasureAmount = rand.nextInt(100);
 
-        if (possibleItem <= 50) {
-            if (itemType <= 74) {
+        if (possibleItem <= 70) {
+            if (itemType <= 60) {
                 Treasure treasure = new Treasure("Gold Chest", 1000);
                 if (treasureAmount <= 49) {
                     treasure.setAmount(1000);
                     treasure.setName("a pile of copper coins");
                     return treasure;
-                } else if (treasureAmount >= 50 && treasureAmount <= 69) {
+                } else if (treasureAmount <= 69) {
                     treasure.setAmount(4000);
                     treasure.setName("a pile of silver coins");
                     return treasure;
-                } else if (treasureAmount >= 70 && treasureAmount <= 84) {
+                } else if (treasureAmount <= 84) {
                     treasure.setAmount(6000);
                     treasure.setName("a pile of gold coins");
                     return treasure;
-                } else if (treasureAmount >= 85 && treasureAmount <= 94) {
+                } else if (treasureAmount <= 94) {
                     treasure.setName("a pile of precious gemstones");
                     treasure.setAmount(8500);
                     return treasure;
@@ -409,10 +411,10 @@ public class MapController {
                     return treasure;
                 }
 
-            } else if (itemType >= 75 && itemType <= 84) {
+            } else if (itemType <= 85) {
                 Coffee coffee = new Coffee("a steaming cup of Coffee");
                 return coffee;
-            } else if (itemType >= 85 && itemType <= 94) {
+            } else if (itemType <= 90) {
                 HealthPotion healthPotion = new HealthPotion("a glowing red health potion");
                 return healthPotion;
             } else if (itemType >= 95) {

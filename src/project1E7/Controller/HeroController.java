@@ -115,6 +115,7 @@ public class HeroController {
                                         currentRoom = room[i][j];
                                         currentRoom.setHasCharacter(true);
                                         currentRoom.setBeenSeen(true);
+                                        currentRoom.setIslocked(false);
                                         turnCounter();
                                         run = false;
                                         return currentRoom;
@@ -154,6 +155,7 @@ public class HeroController {
                                         room[i][(j-1)].setBeenSeen(true);
                                         currentRoom.setHasCharacter(true);
                                         currentRoom.setBeenSeen(true);
+                                        currentRoom.setIslocked(false);
                                         turnCounter();
                                         run = false;
                                         return currentRoom;
@@ -193,6 +195,7 @@ public class HeroController {
                                         currentRoom = room[i][j];
                                         currentRoom.setHasCharacter(true);
                                         currentRoom.setBeenSeen(true);
+                                        currentRoom.setIslocked(false);
                                         turnCounter();
                                         run = false;
                                         return currentRoom;
@@ -232,6 +235,7 @@ public class HeroController {
                                         currentRoom = room[i][j];
                                         currentRoom.setHasCharacter(true);
                                         currentRoom.setBeenSeen(true);
+                                        currentRoom.setIslocked(false);
                                         turnCounter();
                                         run = false;
                                         return currentRoom;
