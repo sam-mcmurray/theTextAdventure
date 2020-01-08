@@ -77,6 +77,7 @@ public class HeroView {
         if (model.isAlive()) {
             System.out.println(model.getName() + " Health: " + model.getHealth());
             System.out.println(model.getName() + " Endurance: " + model.getEndurance());
+            System.out.println("Speed : "+model.getSpeed());
         } else {
             System.out.println("You have been defeated...");
         }

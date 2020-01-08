@@ -5,7 +5,9 @@ import project1E7.Model.*;
 import project1E7.View.*;
 import project1E7.theTextAdventure;
 import project1E7.View.HeroView;
+
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -26,8 +28,7 @@ public class HeroController {
             for (int i = 0; i <= backPack.size() - 1; i++) {
                 System.out.println("[" + (i + 1) + "]" + backPack.get(i).getName());
             }
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("You do not have any item to use");
         }
     }
@@ -108,10 +109,10 @@ public class HeroController {
                                     if (key.getName().equalsIgnoreCase(room[i][j].getDoor().getNameOfKey())) {
                                         System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
                                         room[i][(j + 1)].setHasCharacter(false);
-                                        room[(i+1)][j].setBeenSeen(true);
-                                        room[(i-1)][j].setBeenSeen(true);
-                                        room[i][(j+1)].setBeenSeen(true);
-                                        room[i][(j-1)].setBeenSeen(true);
+                                        room[(i + 1)][j].setBeenSeen(true);
+                                        room[(i - 1)][j].setBeenSeen(true);
+                                        room[i][(j + 1)].setBeenSeen(true);
+                                        room[i][(j - 1)].setBeenSeen(true);
                                         currentRoom = room[i][j];
                                         currentRoom.setHasCharacter(true);
                                         currentRoom.setBeenSeen(true);
@@ -126,10 +127,10 @@ public class HeroController {
                                     }
                             } else {
                                 room[i][(j + 1)].setHasCharacter(false);
-                                room[(i+1)][j].setBeenSeen(true);
-                                room[(i-1)][j].setBeenSeen(true);
-                                room[i][(j+1)].setBeenSeen(true);
-                                room[i][(j-1)].setBeenSeen(true);
+                                room[(i + 1)][j].setBeenSeen(true);
+                                room[(i - 1)][j].setBeenSeen(true);
+                                room[i][(j + 1)].setBeenSeen(true);
+                                room[i][(j - 1)].setBeenSeen(true);
                                 currentRoom = room[i][j];
                                 currentRoom.setHasCharacter(true);
                                 currentRoom.setBeenSeen(true);
@@ -149,10 +150,10 @@ public class HeroController {
                                         System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
                                         room[i][(j - 1)].setHasCharacter(false);
                                         currentRoom = room[i][j];
-                                        room[(i+1)][j].setBeenSeen(true);
-                                        room[(i-1)][j].setBeenSeen(true);
-                                        room[i][(j+1)].setBeenSeen(true);
-                                        room[i][(j-1)].setBeenSeen(true);
+                                        room[(i + 1)][j].setBeenSeen(true);
+                                        room[(i - 1)][j].setBeenSeen(true);
+                                        room[i][(j + 1)].setBeenSeen(true);
+                                        room[i][(j - 1)].setBeenSeen(true);
                                         currentRoom.setHasCharacter(true);
                                         currentRoom.setBeenSeen(true);
                                         currentRoom.setIslocked(false);
@@ -166,10 +167,10 @@ public class HeroController {
                                     }
                             } else {
                                 room[i][(j - 1)].setHasCharacter(false);
-                                room[(i+1)][j].setBeenSeen(true);
-                                room[(i-1)][j].setBeenSeen(true);
-                                room[i][(j+1)].setBeenSeen(true);
-                                room[i][(j-1)].setBeenSeen(true);
+                                room[(i + 1)][j].setBeenSeen(true);
+                                room[(i - 1)][j].setBeenSeen(true);
+                                room[i][(j + 1)].setBeenSeen(true);
+                                room[i][(j - 1)].setBeenSeen(true);
                                 currentRoom = room[i][j];
                                 currentRoom.setHasCharacter(true);
                                 currentRoom.setBeenSeen(true);
@@ -188,10 +189,10 @@ public class HeroController {
                                     if (key.getName().equalsIgnoreCase(room[i][j].getDoor().getNameOfKey())) {
                                         System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
                                         room[i - 1][(j)].setHasCharacter(false);
-                                        room[(i+1)][j].setBeenSeen(true);
-                                        room[(i-1)][j].setBeenSeen(true);
-                                        room[i][(j+1)].setBeenSeen(true);
-                                        room[i][(j-1)].setBeenSeen(true);
+                                        room[(i + 1)][j].setBeenSeen(true);
+                                        room[(i - 1)][j].setBeenSeen(true);
+                                        room[i][(j + 1)].setBeenSeen(true);
+                                        room[i][(j - 1)].setBeenSeen(true);
                                         currentRoom = room[i][j];
                                         currentRoom.setHasCharacter(true);
                                         currentRoom.setBeenSeen(true);
@@ -206,10 +207,10 @@ public class HeroController {
                                     }
                             } else {
                                 room[(i - 1)][j].setHasCharacter(false);
-                                room[(i+1)][j].setBeenSeen(true);
-                                room[(i-1)][j].setBeenSeen(true);
-                                room[i][(j+1)].setBeenSeen(true);
-                                room[i][(j-1)].setBeenSeen(true);
+                                room[(i + 1)][j].setBeenSeen(true);
+                                room[(i - 1)][j].setBeenSeen(true);
+                                room[i][(j + 1)].setBeenSeen(true);
+                                room[i][(j - 1)].setBeenSeen(true);
                                 currentRoom = room[i][j];
                                 currentRoom.setHasCharacter(true);
                                 currentRoom.setBeenSeen(true);
@@ -228,10 +229,10 @@ public class HeroController {
                                     if (key.getName().equalsIgnoreCase(room[i][j].getDoor().getNameOfKey())) {
                                         System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
                                         room[(i + 1)][j].setHasCharacter(false);
-                                        room[(i+1)][j].setBeenSeen(true);
-                                        room[(i-1)][j].setBeenSeen(true);
-                                        room[i][(j+1)].setBeenSeen(true);
-                                        room[i][(j-1)].setBeenSeen(true);
+                                        room[(i + 1)][j].setBeenSeen(true);
+                                        room[(i - 1)][j].setBeenSeen(true);
+                                        room[i][(j + 1)].setBeenSeen(true);
+                                        room[i][(j - 1)].setBeenSeen(true);
                                         currentRoom = room[i][j];
                                         currentRoom.setHasCharacter(true);
                                         currentRoom.setBeenSeen(true);
@@ -246,10 +247,10 @@ public class HeroController {
                                     }
                             } else {
                                 room[(i + 1)][j].setHasCharacter(false);
-                                room[(i+1)][j].setBeenSeen(true);
-                                room[(i-1)][j].setBeenSeen(true);
-                                room[i][(j+1)].setBeenSeen(true);
-                                room[i][(j-1)].setBeenSeen(true);
+                                room[(i + 1)][j].setBeenSeen(true);
+                                room[(i - 1)][j].setBeenSeen(true);
+                                room[i][(j + 1)].setBeenSeen(true);
+                                room[i][(j - 1)].setBeenSeen(true);
                                 currentRoom = room[i][j];
                                 currentRoom.setHasCharacter(true);
                                 currentRoom.setBeenSeen(true);
@@ -315,12 +316,11 @@ public class HeroController {
         }
     }
 
-        public void useItem (ArrayList<Item> backPack){
+    public void useItem(ArrayList<Item> backPack) {
         int choice1;
-        if (backPack.isEmpty()){
+        if (backPack.isEmpty()) {
             System.out.println("You do not have any item to use");
-        }
-        else {
+        } else {
             try {
                 System.out.println("Choose an item to use ..");
                 choice1 = input.nextInt();
@@ -328,25 +328,27 @@ public class HeroController {
                 useItemExternal(backPack.get(choice1 - 1));
                 System.out.println(backPack.get(choice1 - 1).getName() + " has been used");
                 backPack.remove(choice1 - 1);
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("You do not have any item to use");
+            } catch (InputMismatchException e) {
+                System.out.println("Enter a proper value");
+            }catch (IndexOutOfBoundsException e) {
+                System.out.println("You do not have this item to use");
             }
         }
     }
 
-    public ArrayList<Item> saveItem(Item item, ArrayList<Item> backPack) {
+    public void saveItem(Item item, ArrayList<Item> backPack) {
         String choice;
         int choice1;
-            backPack.add(item);
-            System.out.println(item.getName() + " Has been added to your satchel");
-            return backPack;
+        backPack.add(item);
+        System.out.println(item.getName() + " Has been added to your satchel");
     }
-    public ArrayList<Item> dropItem(ArrayList<Item> backPack) {
+
+    public void dropItem(ArrayList<Item> backPack) {
         String choice;
         int choice1;
         try {
             System.out.println("Your backPack is full ... Do you want to drop an item from your back ! 'to be able to save the new one' ? Y/N ");
-            choice=input.nextLine();
+            choice = input.nextLine();
             if (choice.equalsIgnoreCase("y")) {
                 System.out.println("choose an item to drop");
                 printItem(backPack);
@@ -358,7 +360,6 @@ public class HeroController {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("There is no item to remove");
         }
-        return backPack;
     }
 
     /**
@@ -379,7 +380,6 @@ public class HeroController {
      *
      * @param weapon
      */
-
 
 
     /**
