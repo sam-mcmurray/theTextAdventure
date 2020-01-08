@@ -66,7 +66,7 @@ public class MonsterView {
                 System.out.println("Too late! While peering into one of the next rooms some leather winged creature \n" +
                         "flies directly at you. you take out your " + hero.getWeapon() + " without any time to spare \n" +
                         "perry its razor sharp claws. What the oversized bat thought was an easy meal is going to put \n" +
-                        "up a fight.");
+                        "up a fight");
             } else if (model.getName().equalsIgnoreCase("Slime")) {
                 System.out.println("Too late! The room itself appears far more wet than what you first realized. In \n" +
                         "fact, the whole room is dripping a strange blue goo and the blue liquid moves in an unusual \n" +
