@@ -39,7 +39,11 @@ public class SaveController {
             System.out.println("please delete existing file");
         }
     }
-    public void saveHighScore(String username, int highscore) {
+    public void saveHighScore(String username, int highscore, Room[][] checkForBoss) {
+
+        if (!(checkForBoss[1][3].getMonster().isAlive())) {
+            highscore = 2 * highscore;
+        }
 
         try {
 
@@ -55,5 +59,4 @@ public class SaveController {
             e.printStackTrace();
         }
     }
-
 }

@@ -60,5 +60,4 @@ public class LoadController {
 
         return Integer.parseInt(line);
     }
-
 }

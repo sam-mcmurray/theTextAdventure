@@ -112,6 +112,7 @@ public class GameManager {
                 heroView.printLives();
 
             } else {
+                if (heroController.endCheck(room, currentRoom)) {break;}
                 heroController.addEndurance();
                 previousRoom = heroController.currentRoom(currentRoom, room);
                 roomController.setFound(currentRoom);
@@ -128,6 +129,7 @@ public class GameManager {
         LoadView loadView = new LoadView(load);
         LoadController loadController = new LoadController(load, loadView);
 
+        heroView.theEndGame(loadController.loadHighestScore(),"jeff" ,theHero.getCurrentTreasure());
         if(theHero.getCurrentTreasure()>loadController.loadHighestScore())
         {
 
@@ -135,7 +137,7 @@ public class GameManager {
             SaveView saveView = new SaveView(save);
             SaveController saveController = new SaveController(save, saveView);
 
-            saveController.saveHighScore(user.getUserName(),theHero.getCurrentTreasure());
+            saveController.saveHighScore(user.getUserName(),theHero.getCurrentTreasure(), room);
         }
     }
 }

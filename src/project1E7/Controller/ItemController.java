@@ -138,6 +138,9 @@ public class ItemController {
                 System.out.println("Nothing of significance was found.");
                 run = false;
                 return run;
+            } else if (item.getName().equals("endItem")) {
+                run = false;
+                return run;
             } else
                 view.chooseWhatToDoWithItem(item);
             chooseItem = input.nextLine();

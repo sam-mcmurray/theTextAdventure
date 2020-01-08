@@ -170,6 +170,27 @@ public class HeroView {
     }
 
     /**
+     * the end
+     */
+
+    public void theEndGame(int hightscore, String bossName, int currentScore) {
+
+        if (currentScore > hightscore) {
+            System.out.println("Fighting " + bossName + " was a struggle, not because it was a particularly difficult fight, but in reality you have been weighed down \n" +
+                    "from carrying all these treasures you've accrued. Before " + bossName + " was even slayed you caught glint of a golden key \n" +
+                    "on their belt. After struggling towards them to loot you realize with the addition of the key you won't be able to move. \n" +
+                    "Unable to bare losing even a single item, staying here to guard your treasure becomes your only option. Over time you forget \n" +
+                    "there ever was a world outside the dungeon despite the outside being only a key turn away. There you sit and wait, until the \n" +
+                    "next comes!");
+        } else {
+            System.out.println("With " + bossName + " slain, you caste away all your wealth realize that the real treasure from this journey isn't the gems and precious \n" +
+                    "metals you found, but the friends you made along the way! Well it would have been if you made any. Look the moral of the \n" +
+                    "story is money corrupts... or something. Take whatever moral stance you want on it since I doubt this is even being read \n" +
+                    "at this point. You unlock the golden gate and spend the rest of your days free of both the dungeon and wealth.");
+        }
+    }
+
+    /**
      * prints the number of hero turns for the game
      */
     public void printTurnCount() {

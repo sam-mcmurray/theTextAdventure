@@ -102,7 +102,11 @@ public class MapController {
                     RoomController roomController = new RoomController(roomModel, roomView);
 
                 } else if (i == 1 && j == 1) {
-                    Room roomModel = new Room("Silver room", false, weapon, true, false, silverDoor, true, false, false);
+                    Room roomModel = new Room("After unlocking the grand silver door it becomes clear why they key was so coveted. Insede the \n" +
+                            "room are perhaps 40 hooded figures all kneeling and praying towards the one object at the end of the room. \n" +
+                            "The object is a weapon, same as the one you're holding in fact but also different, more powerful. The do not \n" +
+                            "protest as you walk for wards and pick up your new weapon, and as you turn around again to face the quite chanting \n" +
+                            "you see they vanished in thin air. Only their robes remain.", false, weapon, true, false, silverDoor, true, false, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
@@ -114,13 +118,15 @@ public class MapController {
                             "You carefully reach inside and feel around for some mysterious item. Suddenly something grabs back! \n" +
                             "For several moments you try and pull back your arm in vain, when suddenly whatever was holding onto \n" +
                             "you let go. When you go to look at your hand and check if all your digits are still there, you realize \n" +
-                            "you're holding onto a key made of stone. ", stoneKey, true, false, skeleton, true, false, false);
+                            "you're holding onto a key made of stone.", stoneKey, true, false, skeleton, true, false, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 6 && j == 3) {
-                    Room roomModel = new Room("", silverKey, true, false, owlBear, true, false, false);
+                    Room roomModel = new Room("Sitting upon an alter in the center of the room is a glass case. Inside there is but one item, \n" +
+                            "a key. The surrounding room is made up of various religious paraphernalia. It appears this key held some \n" +
+                            "sort of religious importance. Regardless it's yours now. You break the glass and stash the key on your belt.", silverKey, true, false, owlBear, true, false, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;

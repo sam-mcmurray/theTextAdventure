@@ -230,7 +230,9 @@ public class HeroController {
                                         System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
                                         room[(i + 1)][j].setHasCharacter(false);
                                         room[(i + 1)][j].setBeenSeen(true);
-                                        room[(i - 1)][j].setBeenSeen(true);
+                                        if (!(currentRoom == room[1][3])) {
+                                            room[(i - 1)][j].setBeenSeen(true);
+                                        }
                                         room[i][(j + 1)].setBeenSeen(true);
                                         room[i][(j - 1)].setBeenSeen(true);
                                         currentRoom = room[i][j];
@@ -306,11 +308,9 @@ public class HeroController {
             model.setSpeed(coffee.getSpeed() + model.getSpeed());
             System.out.println("Current Speed: " + model.getSpeed());
         } else if (item instanceof Heart) {
-            //heart.setExtraLife(1);
             model.setLives(heart.getExtraLife() + model.getLives());
             System.out.println("Current Lives: " + model.getLives());
         } else if (item instanceof HealthPotion) {
-            //healthPotion.setAddHealth(60);
             if (model.getCharacterClass().equals("Warrior")) {
                 if (model.getHealth() >= 60) {
                     model.setHealth(120);
@@ -367,14 +367,15 @@ public class HeroController {
         String choice;
         int choice1;
         try {
-            System.out.println("Your backPack is full ... Do you want to drop an item from your back ! 'to be able to save the new one' ? Y/N ");
+            System.out.println("Your backPack is full, Would you like to use an item from your bag in order to store the new one? Y/N ");
             choice = input.nextLine();
             if (choice.equalsIgnoreCase("y")) {
-                System.out.println("choose an item to drop");
+                System.out.println("choose an item to use");
                 printItem(backPack);
                 choice1 = input.nextInt();
                 input.nextLine();
                 System.out.println(backPack.get(choice1 - 1).getName() + " Has been removed");
+                useItemExternal(backPack.get(choice1 - 1));
                 backPack.remove(choice1 - 1);
             }
         } catch (IndexOutOfBoundsException e) {
@@ -463,5 +464,14 @@ public class HeroController {
     public void addEndurance() {
         if (model.getEndurance() < 95)
             model.setEndurance(model.getEndurance() + 5);
+    }
+
+    public boolean endCheck (Room[][] room, Room currentRoom) {
+
+        if (!(currentRoom == room[0][3])) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
