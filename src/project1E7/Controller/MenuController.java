@@ -331,7 +331,6 @@ public class MenuController {
             switch (choice) {
 
                 case "0":
-
                     System.out.println("Exited menu");
                     run = false;
                     break;
@@ -345,12 +344,7 @@ public class MenuController {
                     break;
 
                 case "3":
-
-                    File file = new File("HighScore.txt");
-                    Load load = new Load(file, "HighScore.txt");
-                    LoadView loadView = new LoadView(load);
-                    LoadController loadController = new LoadController(load, loadView);
-                    loadController.loadHighestScore();
+                    heroView.gameInstructions();
                     break;
 
                 case "4":
@@ -367,14 +361,20 @@ public class MenuController {
 
                 case "6":
                     String fileName = "SavedGame.json";
-                    file = new File("SavedGame.json");
-                    load = new Load(file, fileName);
-                    loadView = new LoadView(load);
-                    loadController = new LoadController(load, loadView);
-                    loadController.loadGame();
+                    File gameFile = new File("SavedGame.json");
+                    Load gameLoad = new Load(gameFile, fileName);
+                    LoadView gameLoadView = new LoadView(gameLoad);
+                    LoadController gameLoadController = new LoadController(gameLoad, gameLoadView);
+                    gameLoadController.loadGame();
                     break;
-
                 case "7":
+                    File file = new File("HighScore.txt");
+                    Load load = new Load(file, "HighScore.txt");
+                    LoadView loadView = new LoadView(load);
+                    LoadController loadController = new LoadController(load, loadView);
+                    loadController.loadHighestScore();
+                    break;
+                case "8":
                     System.out.println("Are you sure you want to quit the game? yes/no");
                     String exit = input.nextLine();
                     if (exit.equalsIgnoreCase("yes") || exit.equalsIgnoreCase("y")) {

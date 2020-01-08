@@ -187,4 +187,39 @@ public class HeroView {
     public void fleeSuccess() {
         System.out.println("You were successful in your attempt to flee.");
     }
+
+    public void gameInstructions() {
+        if (model.getName().equalsIgnoreCase("Warrior")) {
+            System.out.printf("\t Welcome to our labyrinth adventure game! The goal of the game is collect treasure and make it to the exit.%n" +
+                    "You will have selected Warrior the Thief has a unique ability to land 100 percent of blows within a single room. This %n " +
+                    "unique ability can only be activated 2 times in a single game so you will need resist the urge to use it unless you need to. %n" +
+                    "the map contains many doors and some of them have a possibility to be locked but you need to find the unique key for that door each room %n" +
+                    "is generated randomly but has a chance to contain monsters, items, or keys. The monsters vary in difficulty but the boss is the most difficult %n" +
+                    "The menu controls are simple enter the number of your corresponding decision, these mechanics are not changeable but you can change %n" +
+                    "how you move the current controls are W for North or up on the map, S is for South or down on the map, A is for West or left on the map, %n" +
+                    "and D is for East or Right on the map. You start with 5 lives but it is possible to find items such as Hearts to increase those lives %n" +
+                    "and Health Potions to increase your health. The other item is coffee which increases your the Warriors speed. %n ");
+        } else if (model.getName().equalsIgnoreCase("Mage")) {
+            System.out.printf("\t Welcome to our labyrinth adventure game! The goal of the game is collect treasure and make it to the exit.%n" +
+                    "You will have selected Mage the Mage has a unique ability to randomly transport into a non locked room within the map. This %n " +
+                    "unique ability can only be activated 2 times in a single game so you will need resist the urge to use it unless you need to. %n" +
+                    "the map contains many doors and some of them have a possibility to be locked but you need to find the unique key for that door each room %n" +
+                    "is generated randomly but has a chance to contain monsters, items, or keys. The monsters vary in difficulty but the boss is the most difficult %n" +
+                    "The menu controls are simple enter the number of your corresponding decision, these mechanics are not changeable but you can change %n" +
+                    "how you move the current controls are W for North or up on the map, S is for South or down on the map, A is for West or left on the map, %n" +
+                    "and D is for East or Right on the map. You start with 5 lives but it is possible to find items such as Hearts to increase those lives %n" +
+                    "and Health Potions to increase your health. The other item is coffee which increases your the Mages speed. %n ");
+        } else {
+            System.out.printf("\t Welcome to our labyrinth adventure game! The goal of the game is collect treasure and make it to the exit.%n" +
+                    "You will have selected Thief the Thief has a unique ability to be invisible for the duration of a single room and deactivates once left. This %n " +
+                    "unique ability can only be activated 2 times in a single game so you will need resist the urge to use it unless you need to. %n" +
+                    "the map contains many doors and some of them have a possibility to be locked but you need to find the unique key for that door each room %n" +
+                    "is generated randomly but has a chance to contain monsters, items, or keys. The monsters vary in difficulty but the boss is the most difficult %n" +
+                    "The menu controls are simple enter the number of your corresponding decision, these mechanics are not changeable but you can change %n" +
+                    "how you move the current controls are W for North or up on the map, S is for South or down on the map, A is for West or left on the map, %n" +
+                    "and D is for East or Right on the map. You start with 5 lives but it is possible to find items such as Hearts to increase those lives %n" +
+                    "and Health Potions to increase your health. The other item is coffee which increases your the Thiefs speed. %n ");
+
+        }
+    }
 }
