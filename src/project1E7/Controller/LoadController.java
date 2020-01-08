@@ -60,4 +60,20 @@ public class LoadController {
 
         return Integer.parseInt(line);
     }
+
+    public String loadHighestScorer(){
+
+        String line = "";
+        try {
+
+            Scanner inputS = new Scanner(model.getFile());
+
+            line=inputS.nextLine();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return line;
+    }
 }
