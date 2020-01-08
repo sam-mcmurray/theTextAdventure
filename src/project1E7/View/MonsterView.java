@@ -47,9 +47,7 @@ public class MonsterView {
 
         if (randomInt == 0) {
             if (model.getName().equalsIgnoreCase("The Boss")) {
-                System.out.println("Standing before you is an ornate gateway that could be marveled as a piece of art if \n" +
-                        "it weren't for the tens of broken and dead adventurers representing the danger on the other \n" +
-                        "side of the door.");
+                System.out.println("");
             } else if (model.getName().equalsIgnoreCase("Owlbear")) {
                 System.out.println("Too late! The bones and feathers strewn across the room should have been your first \n" +
                         "warning. The second being a shrieking growl barreling towards you from a large cavern in the \n" +
@@ -80,7 +78,7 @@ public class MonsterView {
             }
         } else {
             if (model.getName().equalsIgnoreCase("The Boss")) {
-                System.out.println("Standing before is ");
+                System.out.println("");
             } else if (model.getName().equalsIgnoreCase("Owlbear")) {
                 System.out.println("Clearly there was some kind of battle in this room, recently too. Inside there are \n" +
                         "many dead creatures ranging from bats, spiderlings, and even a couple of slimes. In the center \n" +

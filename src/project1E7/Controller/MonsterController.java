@@ -50,9 +50,27 @@ public class MonsterController {
             return true;
         }
     }
-    public void resetMonster() {
-        model.setHealth(100);
-        model.setAlive(true);
-    }
 
+    public void resetMonster() {
+
+        if (model.getName().equals("Spiderling")) {
+            model.setHealth(40);
+            model.setAlive(true);
+        } else if (model.getName().equals("Bat")) {
+            model.setHealth(70);
+            model.setAlive(true);
+        } else if (model.getName().equals("Skeleton")) {
+            model.setHealth(80);
+            model.setAlive(true);
+        } else if (model.getName().equals("Slime")) {
+            model.setHealth(90);
+            model.setAlive(true);
+        } else if (model.getName().equals("Owlbear")) {
+            model.setHealth(130);
+            model.setAlive(true);
+        } else {
+            model.setHealth(180);
+            model.setAlive(true);
+        }
+    }
 }
