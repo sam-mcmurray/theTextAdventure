@@ -34,7 +34,7 @@ public class MonsterView {
      * @param monster
      */
     public void encounter(Monster monster){
-        System.out.printf("You have encountered %s ", monster.getDescription());
+        System.out.printf("You have encountered %s %n", monster.getDescription());
     }
 
     /**

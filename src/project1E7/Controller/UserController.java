@@ -31,7 +31,7 @@ public class UserController {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.println("You need to create a new user before starting the game%n");
+        System.out.println("You need to create a new user before starting the game");
 
             System.out.printf("Enter your new username:");
             String temp = input.nextLine();

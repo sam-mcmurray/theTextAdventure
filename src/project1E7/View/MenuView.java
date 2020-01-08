@@ -54,19 +54,20 @@ public class MenuView {
                 "4- View map %n" +
                 "5- Save game %n" +
                 "6- Load game %n" +
-                "7- Quit game %n ");
+                "7- View HighScore%n" +
+                "8- Quit game %n ");
 
     }
     public void instructionsStartMenu() {
         System.out.printf("\t Welcome to our labyrinth adventure game! The goal of the game is collect treasure and make it to the exit.%n" +
                 "You will select either a Mage, Warrior or a Thief each having unique abilities. The Mage can transport to a random room in the game.%n " +
-                "The Warrior can land all his hits for 5 turns. The Thief has a 50 percent chance of successfully lock picking a door you dont have a %n" +
-                "a key for. These abilities are limited and you can't use them every turn. Some doors are locked and require a unique key other doors %n" +
+                "The Warrior can land all his hits while he is in the room. The Thief has the ability to be invisible for the duration of   %n" +
+                "staying in the room. These abilities are limited and you can't use them every turn. Some doors are locked and require a unique key other doors %n" +
                 "are open every room has a chance to contain monsters, items, or keys. The monsters vary in difficulty but the boss is the most difficult %n" +
                 "The menu controls are simple enter the number of your corresponding decision, these mechanics are not changeable but you can change %n" +
                 "how you move the current controls are W for North or up on the map, S is for South or down on the map, A is for West or left on the map, %n" +
                 "and D is for East or Right on the map. You start with 3 lives but it is possible to find items such as Hearts to increase those lives %n" +
-                "and Health Potions to increase your health. The other item is coffee which increases your speed for 3 turns. ");
+                "and Health Potions to increase your health. The other item is coffee which increases your speed. %n ");
     }
 
 }

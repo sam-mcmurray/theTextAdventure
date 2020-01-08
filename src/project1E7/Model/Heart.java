@@ -12,4 +12,7 @@ public class Heart extends Item {
         return extraLife;
     }
 
+    public void setExtraLife(int extraLife) {
+        this.extraLife = extraLife;
+    }
 }

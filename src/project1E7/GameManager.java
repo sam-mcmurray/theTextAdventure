@@ -56,7 +56,7 @@ public class GameManager {
 
                     monsterView.flavorTextMonster(theHero);
 
-                    monsterView.encounter(monsterModel);
+                    //monsterView.encounter(monsterModel);
                     if (heroController.attackFirst(monsterController)) {
 
                         if (menuController.encounterHeroFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController, mapView,
@@ -102,12 +102,12 @@ public class GameManager {
             }
             if (flee) {
                 heroController.addEndurance();
-                currentRoom = heroController.previousRoom(previousRoom, room);
+                currentRoom = heroController.previousRoom(previousRoom, room, currentRoom);
 
 
             } else if (!theHero.isAlive() && theHero.getLives() > 1) {
                 heroController.loseLife();
-                currentRoom = heroController.previousRoom(previousRoom, room);
+                currentRoom = heroController.previousRoom(previousRoom, room, currentRoom);
                 heroController.heroAlive();
                 heroView.printLives();
 

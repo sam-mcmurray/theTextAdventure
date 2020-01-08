@@ -14,11 +14,13 @@ public class Room {
     private enum DOOR{NORTH,EAST,SOUTH,WEST}
 
 
-    public Room(String description, boolean found, boolean hasCharacter, boolean beenSeen) {
+    public Room(String description, boolean found, boolean hasCharacter, boolean beenSeen, boolean hasItem, Item item) {
         this.description = description;
         this.found = found;
         this.hasCharacter = hasCharacter;
         this.beenSeen = beenSeen;
+        this.hasItem = hasItem;
+        this.item = item;
     }
 
 
