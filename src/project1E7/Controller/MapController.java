@@ -15,6 +15,7 @@ public class MapController {
 
     /**
      * creates the map
+     *
      * @param room
      */
     public void createWorld(Room[][] room, Hero theHero) {
@@ -50,21 +51,21 @@ public class MapController {
         Key silverKey = new Key("Silver key");
         KeyView silverKeyView = new KeyView(silverKey);
         KeyController silverKeyController = new KeyController(silverKey, silverKeyView);
-        Monster theBoss = new Monster(50, 40, 15, "The Boss", "The Boss", treasure, true, 4);
+        Monster theBoss = new Monster(180, 30, 70, "The Boss", "Boss", null, true, 4);
         MonsterView theBossMonsterView = new MonsterView(theBoss);
         MonsterController theBossMonsterController = new MonsterController(theBoss, theBossMonsterView);
-        Monster owlBear = new Monster(40, 30, 6, "a Owlbear", "Owlbear", healthPotion, true, 3);
+        Monster owlBear = new Monster(130, 15, 60, "an Owlbear", "Owlbear", null, true, 3);
         MonsterView owlBearMonsterView = new MonsterView(owlBear);
         MonsterController owlBearMonsterController = new MonsterController(owlBear, owlBearMonsterView);
-        Monster skeleton = new Monster(30, 20, 8, "a Skeleton", "Skeleton", healthPotion, true, 2);
+        Monster skeleton = new Monster(80, 10, 50, "a Skeleton", "Skeleton", null, true, 2);
         MonsterView skeletonMonsterView = new MonsterView(skeleton);
         MonsterController skeletonMonsterController = new MonsterController(skeleton, skeletonMonsterView);
-        Monster bat = new Monster(20, 10, 10, "a Bat", "Bat", coffee, true, 1);
+        Monster bat = new Monster(70, 8, 70, "a Bat", "Bat", coffee, true, 1);
         MonsterView batMonsterView = new MonsterView(bat);
         MonsterController batMonsterController = new MonsterController(bat, batMonsterView);
-        Monster slime = new Monster(35, 15, 2, "a Slime", "Slime", null, true, 2);
+        Monster slime = new Monster(90, 12, 20, "a Slime", "Slime", null, true, 2);
         MonsterView slimeMonsterView = new MonsterView(slime);
-        Monster spiderling = new Monster(10, 6, 9, "The Spiderling,", "Spiderling", null, true, 1);
+        Monster spiderling = new Monster(40, 6, 90, "The Spiderling,", "Spiderling", null, true, 1);
         Door woodenDoor = new Door(true, "Wooden Key", "The wooden door is worn and rather unimpressive.");
         Door stoneDoor = new Door(true, "Stone key", "The stone door in front of you is immense and made with a solid stone slab.  There is a large slot for a key");
         Door goldenDoor = new Door(true, "Golden key", "The golden door looks like it will take you outside!  Freedom is within your grasp!");
@@ -76,22 +77,24 @@ public class MapController {
                 Treasure cashMoney = new Treasure("", 0);
                 checkTreasureValue(cashMoney);
                 String description = flavorTextRoom();
-                Item endItem = new Item("");
+                Item endItem = new Item("endItem");
 
                 if (i == 8 && j == 5) {
-                    Room roomModel = new Room("The bottom of a large chasm you were rappelling into. Unfortunately your rope was cut and the it's \nimpossible to climb back up. Best to look for another way out", true, true,true);
+                    Room roomModel = new Room("The bottom of a large chasm you were rappelling into. Unfortunately your rope was cut and the it's \nimpossible to climb back up. Best to look for another way out", true, true, true);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
 
                 } else if (i == 0 && j == 3) {
-                    Room roomModel = new Room("The Exit", false, endItem, true, false, goldenDoor, true, false, false);
+                    Room roomModel = new Room("This is it. You see the daylight at the end of the cave.", false, endItem, true, false, goldenDoor, true, false, false);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
 
                 } else if (i == 1 && j == 3) {
-                    Room roomModel = new Room("The Boss Room", goldKey, true, false, theBoss, true, false,false);
+                    Room roomModel = new Room("Standing before you is an ornate gateway that could be marveled as a piece of art if \n" +
+                            "it weren't for the tens of broken and dead adventurers representing the danger on the other \n" +
+                            "side of the door. Taking a deep breath you open the gates and enter the room.", goldKey, true, false, theBoss, true, false, false);
                     room[i][j] = roomModel;
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
@@ -103,31 +106,47 @@ public class MapController {
                     room[i][j] = roomModel;
 
                 } else if (i == 5 && j == 8) {
-                    Room roomModel = new Room("The Skeleton room", stoneKey, true, false, skeleton, true, false,false);
+                    Room roomModel = new Room("Within the center of the room stands a massive stone pillar reaching towards the top of the \n" +
+                            "cavern. On the face of the pillar is a hole that could fit your arm inside. For some strange reason \n" +
+                            "you feel drawn towards it and decide it's a good idea to reach inside and pull whatever is inside, out. \n" +
+                            "You carefully reach inside and feel around for some mysterious item. Suddenly something grabs back! \n" +
+                            "For several moments you try and pull back your arm in vain, when suddenly whatever was holding onto \n" +
+                            "you let go. When you go to look at your hand and check if all your digits are still there, you realize \n" +
+                            "you're holding onto a key made of stone. ", stoneKey, true, false, skeleton, true, false, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 6 && j == 3) {
-                    Room roomModel = new Room("The Owl bear room", silverKey, true, false, owlBear, true, false,false);
+                    Room roomModel = new Room("", silverKey, true, false, owlBear, true, false, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 7 && j == 8) {
-                    Room roomModel = new Room("The wooden door room", false, healthPotion, true, false, woodenDoor, true, false, false);
+                    Room roomModel = new Room("The room would appear rather ordinary except for the large oak tree growing in the center \n" +
+                            "of the room. A single skylight shines down upon tree allowing it to grow. You notice a water pail \n" +
+                            "beside the tree and decide it probably hasn't been watered in a while. Moments after watering it, \n" +
+                            "the ground seems to move. The roots of the tree twist and unravel revealing a health potion.",
+                            false, healthPotion, true, false, woodenDoor, true, false, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 8 && j == 8) {
-                    Room roomModel = new Room("", woodenKey, true, false, bat, true, false,false);
+                    Room roomModel = new Room("It is a simple room. Small and candle light, this room feels more ancient than the others \n" +
+                            "you've come across. Someone has lived here and you notice a bed in which lays a mummified \n" +
+                            "skeleton gripping an a large wooden key.  Conveniently there appears to be a large carved \n" +
+                            "wooden door to the north. Maybe it fits in there?", woodenKey, true, false, bat, true, false, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 3 && j == 6) {
-                    Room roomModel = new Room(" The Stone Door room", false, heart, true, false, stoneDoor, true, false, false);
+                    Room roomModel = new Room(" Once again you find yourself face to face with another stone pillar, this time however its \n" +
+                            "crumbling. This time you decide not to play its games. With all your might you push the all your might \n" +
+                            "and the pillar tips and crashes down. When the dust clears you see a small creature that was crushed \n" +
+                            "by the rubble. inside his open chest is a still beating heart.", false, heart, true, false, stoneDoor, true, false, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
@@ -137,13 +156,13 @@ public class MapController {
                         || i == 3 && j == 7 || i == 4 && j == 1 || i == 4 && j == 3 || i == 4 && j == 4 || i == 4 && j == 5
                         || i == 4 && j == 6 || i == 6 && j == 2 || i == 6 && j == 4 || i == 6 && j == 5 || i == 7 && j == 7
                         || i == 6 && j == 7 || i == 6 && j == 8 || i == 7 && j == 3 || i == 7 && j == 4 || i == 8 && j == 1) {
-                    Room roomModel = new Room("wall", false, false,false);
+                    Room roomModel = new Room("wall", false, false, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
 
                 } else if (i == 6 || j == 7 || (i == 2 && j == 3) || i == 3) {
-                    Room roomModel = new Room(description, false, false,false);
+                    Room roomModel = new Room(description, false, false, false);
                     RoomView roomView = new RoomView(roomModel);
                     RoomController roomController = new RoomController(roomModel, roomView);
                     room[i][j] = roomModel;
@@ -152,37 +171,37 @@ public class MapController {
                     int chanceForMonster = rand.nextInt(8);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room(description, cashMoney, true, false, bat, true, false,false);
+                        Room roomModel = new Room(description, cashMoney, true, false, bat, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 1) {
-                        Room roomModel = new Room(description, item, true, false, skeleton, true, false,false);
+                        Room roomModel = new Room(description, item, true, false, skeleton, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 2) {
-                        Room roomModel = new Room(description, item, true, false, owlBear, true, false,false);
+                        Room roomModel = new Room(description, item, true, false, owlBear, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 3) {
-                        Room roomModel = new Room(description, item, true, false, slime, true, false,false);
+                        Room roomModel = new Room(description, item, true, false, slime, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 4) {
-                        Room roomModel = new Room(description, cashMoney, true, false, spiderling, true, false,false);
+                        Room roomModel = new Room(description, cashMoney, true, false, spiderling, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room(description, false, false,false);
+                        Room roomModel = new Room(description, false, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -191,37 +210,37 @@ public class MapController {
                     int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room(description, cashMoney, true, false, bat, true, false,false);
+                        Room roomModel = new Room(description, cashMoney, true, false, bat, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 2) {
-                        Room roomModel = new Room(description, item, true, false, skeleton, true, false,false);
+                        Room roomModel = new Room(description, item, true, false, skeleton, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 3) {
-                        Room roomModel = new Room(description, item, true, false, owlBear, true, false,false);
+                        Room roomModel = new Room(description, item, true, false, owlBear, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 4) {
-                        Room roomModel = new Room(description, item, true, false, slime, true, false,false);
+                        Room roomModel = new Room(description, item, true, false, slime, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 5) {
-                        Room roomModel = new Room(description, cashMoney, true, false, spiderling, true, false,false);
+                        Room roomModel = new Room(description, cashMoney, true, false, spiderling, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room(description, false, false,false);
+                        Room roomModel = new Room(description, false, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -230,37 +249,37 @@ public class MapController {
                     int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room(description, cashMoney, true, false, bat, true, false,false);
+                        Room roomModel = new Room(description, cashMoney, true, false, bat, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 1) {
-                        Room roomModel = new Room(description, item, true, false, skeleton, true, false,false);
+                        Room roomModel = new Room(description, item, true, false, skeleton, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 2) {
-                        Room roomModel = new Room(description, item, true, false, owlBear, true, false,false);
+                        Room roomModel = new Room(description, item, true, false, owlBear, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 3) {
-                        Room roomModel = new Room(description, item, true, false, slime, true, false,false);
+                        Room roomModel = new Room(description, item, true, false, slime, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 4) {
-                        Room roomModel = new Room(description, cashMoney, true, false, spiderling, true, false,false);
+                        Room roomModel = new Room(description, cashMoney, true, false, spiderling, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room(description, false, false,false);
+                        Room roomModel = new Room(description, false, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -269,37 +288,37 @@ public class MapController {
                     int chanceForMonster = rand.nextInt(6);
 
                     if (chanceForMonster == 0) {
-                        Room roomModel = new Room(description, cashMoney, true, false, bat, true, false,false);
+                        Room roomModel = new Room(description, cashMoney, true, false, bat, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 1) {
-                        Room roomModel = new Room(description, item, true, false, skeleton, true, false,false);
+                        Room roomModel = new Room(description, item, true, false, skeleton, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 2) {
-                        Room roomModel = new Room(description, item, true, false, owlBear, true, false,false);
+                        Room roomModel = new Room(description, item, true, false, owlBear, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 3) {
-                        Room roomModel = new Room(description, item, true, false, slime, true, false,false);
+                        Room roomModel = new Room(description, item, true, false, slime, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else if (chanceForMonster == 4) {
-                        Room roomModel = new Room(description, cashMoney, true, false, spiderling, true, false,false);
+                        Room roomModel = new Room(description, cashMoney, true, false, spiderling, true, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
 
                     } else {
-                        Room roomModel = new Room(description, false, false,false);
+                        Room roomModel = new Room(description, false, false, false);
                         RoomView roomView = new RoomView(roomModel);
                         RoomController roomController = new RoomController(roomModel, roomView);
                         room[i][j] = roomModel;
@@ -313,6 +332,7 @@ public class MapController {
         room[8][(6)].setBeenSeen(true);
         room[8][(4)].setBeenSeen(true);
     }
+
     public String flavorTextRoom() {
 
         Random random = new Random();
@@ -364,10 +384,10 @@ public class MapController {
         int itemType = rand.nextInt(100);
         int treasureAmount = rand.nextInt(100);
 
-        if (possibleItem <=50) {
-            if(itemType <=74){
-                Treasure treasure = new Treasure("Gold Chest",1000);
-                if(treasureAmount <= 49) {
+        if (possibleItem <= 50) {
+            if (itemType <= 74) {
+                Treasure treasure = new Treasure("Gold Chest", 1000);
+                if (treasureAmount <= 49) {
                     treasure.setAmount(1000);
                     treasure.setName("a pile of copper coins");
                     return treasure;
@@ -403,10 +423,11 @@ public class MapController {
         Item item = new Item("missing");
         return item;
     }
+
     public Treasure checkTreasureValue(Treasure treasure) {
         if (treasure.getAmount() == 0) {
             int setRand = rand.nextInt(100);
-            if(setRand <= 49) {
+            if (setRand <= 49) {
                 treasure.setAmount(1000);
                 treasure.setName("a pile of copper coins");
                 return treasure;

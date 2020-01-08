@@ -50,10 +50,4 @@ public class User {
 
         this.highestScore=highestScore;
     }
-
-    public int getHighestScore(ArrayList){
-
-        return highestScore;
-    }
-
 }
