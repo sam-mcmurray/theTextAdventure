@@ -55,7 +55,7 @@ public class LoadController {
             line=inputS.nextLine();
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return 100;
         }
 
         return Integer.parseInt(line);
@@ -71,7 +71,7 @@ public class LoadController {
             line=inputS.nextLine();
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return line = "Trogdor the Berninator";
         }
 
         return line;

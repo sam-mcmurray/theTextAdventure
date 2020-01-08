@@ -112,7 +112,6 @@ public class GameManager {
                 heroView.printLives();
 
             } else {
-                if (heroController.endCheck(room, currentRoom)) {break;}
                 heroController.addEndurance();
                 previousRoom = heroController.currentRoom(currentRoom, room);
                 roomController.setFound(currentRoom);
@@ -120,7 +119,7 @@ public class GameManager {
                 currentRoom = heroController.moveHero(keyRing, room, currentRoom, control);
                 run = false;
             }
-
+            if (heroController.endCheck(room, currentRoom)) {break;}
 
         } while ((theHero.isAlive() && theHero.getLives() >= 1 ) || heroController.currentRoom(currentRoom, room)!= room[0][3]);
 
@@ -129,8 +128,9 @@ public class GameManager {
         LoadView loadView = new LoadView(load);
         LoadController loadController = new LoadController(load, loadView);
 
-        heroView.theEndGame(loadController.loadHighestScore(),"jeff" ,theHero.getCurrentTreasure());
-        if(theHero.getCurrentTreasure()>loadController.loadHighestScore())
+        heroView.theEndGame(100,"Trogdar" ,theHero.getCurrentTreasure());
+        //heroView.theEndGame(loadController.loadHighestScore(),loadController.loadHighestScorer() ,theHero.getCurrentTreasure());
+       // if(theHero.getCurrentTreasure()>loadController.loadHighestScore())
         {
 
             Save save = new Save(theHero,room, controls, user, currentRoom);
