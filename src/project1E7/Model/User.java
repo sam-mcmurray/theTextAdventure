@@ -27,9 +27,9 @@ public class User {
         users.add(user);
     }
 
-    public void setUsers(ArrayList <User> users){
+    public void setUsers(ArrayList<User> users) {
 
-        this.users=users;
+        this.users = users;
     }
 
     public ArrayList getUsers() {
@@ -44,10 +44,5 @@ public class User {
 
     public int getHighScore() {
         return highScore;
-    }
-
-    public void setHighestScore(int highestScore){
-
-        this.highestScore=highestScore;
     }
 }

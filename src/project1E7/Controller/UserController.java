@@ -31,9 +31,7 @@ public class UserController {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.println("You have selected to Create a New User is this correct? yes/no");
-        String answer = input.nextLine();
-        if (answer.equalsIgnoreCase("yes")) {
+        System.out.println("You need to create a new user before starting the game%n");
 
             System.out.printf("Enter your new username:");
             String temp = input.nextLine();
@@ -51,36 +49,9 @@ public class UserController {
 
             }
 
-            boolean ok = false;
-
-            while (!ok) {
-                for (Object i : model.getUsers()) {
-
-                    if (temp == ((User) i).getUserName()) {
-
-                        ok = false;
-                    } else {
-
-                        ok = true;
-                    }
-                }
-
-                if (!ok) {
-                    System.out.printf("%n" +
-                            "This name already exists. Please choose another name%n");
-                }
-            }
-
             User user = new User(temp, 0);
             model.addUsers(model.getUsers(), user);
-        } else if (answer.equalsIgnoreCase("no")) {
-            System.out.println("R");
-
-            return null;
-
-        } else System.out.println("Invalid answer!");
-
-        return null;
+            return user;
     }
 
     public User selectUser() {

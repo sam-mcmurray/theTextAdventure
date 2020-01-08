@@ -42,13 +42,11 @@ public class theTextAdventure {
             String choice = menuController.startMenu();
             if (choice.equals("1")) {
 
-                userModel=userController.createUser();
-
                 Hero theHero = (menuController.selectHero());
                 Controls control = new Controls("w", "s", "d", "a");
                 Room[][] room = new Room[10][10];
                 mapController.createWorld(room, theHero);
-                User user = new User("Sam", 100);
+                User user = userController.createUser();
                 HeroView heroView = new HeroView(theHero);
                 HeroController heroController = new HeroController(theHero, heroView);
                 heroView.printStats();
