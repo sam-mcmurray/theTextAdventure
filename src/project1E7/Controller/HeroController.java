@@ -15,9 +15,9 @@ import java.util.Scanner;
 public class HeroController {
     Hero model;
     HeroView view;
-    private Coffee coffee;
-    private HealthPotion healthPotion;
-    private Heart heart;
+    private Coffee coffee = new Coffee("a steaming cup of Coffee");
+    private HealthPotion healthPotion = new HealthPotion("a glowing red health potion");
+    private Heart heart = new Heart("a heart inside a crystalline container. It still beats.");
     private Treasure treasure;
     public String controls[] = {"w", "s", "d", "a"};
     private ArrayList<Item> backPack = new ArrayList<>();
@@ -290,8 +290,7 @@ public class HeroController {
         Random rand = new Random();
 
         int chanceToFlee = rand.nextInt(100);
-        chanceToFlee = chanceToFlee + hero.getSpeed();
-        if (chanceToFlee <= 50) {
+        if (chanceToFlee >= hero.getSpeed()) {
             return false;
         } else
             return true;
@@ -303,14 +302,35 @@ public class HeroController {
      * @param item
      */
     public void useItemExternal(Item item) {
-        if (item == coffee) {
+        if (item instanceof Coffee) {
             model.setSpeed(coffee.getSpeed() + model.getSpeed());
-        } else if (item == heart) {
+            System.out.println("Current Speed: " + model.getSpeed());
+        } else if (item instanceof Heart) {
+            //heart.setExtraLife(1);
             model.setLives(heart.getExtraLife() + model.getLives());
-        } else if (item == healthPotion) {
-            if (model.getHealth() <= 40) {
-                model.setHealth(healthPotion.getAddHealth() + model.getHealth());
-            } else model.setHealth(100);
+            System.out.println("Current Lives: " + model.getLives());
+        } else if (item instanceof HealthPotion) {
+            //healthPotion.setAddHealth(60);
+            if (model.getCharacterClass().equals("Warrior")) {
+                if (model.getHealth() >= 60) {
+                    model.setHealth(120);
+                } else {
+                    model.setHealth(healthPotion.getAddHealth() + model.getHealth());
+                }
+            } else if (model.getCharacterClass().equals("Mage")) {
+                if (model.getHealth() >= 40) {
+                    model.setHealth(100);
+                } else {
+                    model.setHealth(healthPotion.getAddHealth() + model.getHealth());
+                }
+            } else {
+                if (model.getHealth() >= 20) {
+                    model.setHealth(80);
+                } else {
+                    model.setHealth(healthPotion.getAddHealth() + model.getHealth());
+                }
+            }
+            System.out.println("Current Health: " + model.getHealth());
         } else if (item == treasure) {
             model.setCurrentTreasure(treasure.getAmount() + model.getCurrentTreasure());
         }
@@ -412,11 +432,13 @@ public class HeroController {
         model.setHealth(100);
     }
 
-    public Room previousRoom(Room previousRoom, Room[][] room) {
+    public Room previousRoom(Room previousRoom, Room[][] room, Room currentRoom) {
+        currentRoom.setHasCharacter(false);
         for (int i = 0; i < room.length; i++) {
             for (int j = 0; j < room.length; j++) {
                 if (room[i][j] == previousRoom) {
                     previousRoom = room[i][j];
+                    previousRoom.setHasCharacter(true);
                     return previousRoom;
                 }
             }

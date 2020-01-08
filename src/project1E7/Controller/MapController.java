@@ -411,14 +411,14 @@ public class MapController {
                     return treasure;
                 }
 
-            } else if (itemType <= 85) {
+            } else if (itemType <= 80) {
                 Coffee coffee = new Coffee("a steaming cup of Coffee");
                 return coffee;
-            } else if (itemType <= 90) {
+            } else if (itemType <= 93) {
                 HealthPotion healthPotion = new HealthPotion("a glowing red health potion");
                 return healthPotion;
-            } else if (itemType >= 95) {
-                Heart heart = new Heart("a heart inside a glass container. It still beats.");
+            } else if (itemType >= 94) {
+                Heart heart = new Heart("a heart inside a crystalline container. It still beats.");
                 return heart;
             }
         }

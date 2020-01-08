@@ -130,6 +130,7 @@ public class ItemController {
                 Weapon weapon = (Weapon) item;
                 weapon.setName(weaponName(theHero));
                 theHero.setStrength(weapon.getStrength() + theHero.getStrength());
+                theHero.setWeapon(weapon.getName());
                 System.out.println("You have found a(n) " + weapon.getName() + "! \nFrom now on all your attacks will do more damage!");
                 run = false;
                 return run;

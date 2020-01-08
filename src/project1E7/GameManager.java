@@ -102,12 +102,12 @@ public class GameManager {
             }
             if (flee) {
                 heroController.addEndurance();
-                currentRoom = heroController.previousRoom(previousRoom, room);
+                currentRoom = heroController.previousRoom(previousRoom, room, currentRoom);
 
 
             } else if (!theHero.isAlive() && theHero.getLives() > 1) {
                 heroController.loseLife();
-                currentRoom = heroController.previousRoom(previousRoom, room);
+                currentRoom = heroController.previousRoom(previousRoom, room, currentRoom);
                 heroController.heroAlive();
                 heroView.printLives();
 
