@@ -3,6 +3,9 @@ package project1E7.View;
 import project1E7.GameManager;
 import project1E7.Model.Hero;
 import project1E7.Model.Monster;
+import project1E7.Model.Load;
+import project1E7.View.LoadView;
+import project1E7.Controller.LoadController;
 
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -47,7 +50,9 @@ public class MonsterView {
 
         if (randomInt == 0) {
             if (model.getName().equalsIgnoreCase("The Boss")) {
-                System.out.println("");
+                System.out.println("What you imagined would be a horrible monster leading this dungeon almost looks \n" +
+                        "like you, if you had been trapped in here for a couple hundred years and \n" +
+                        "grown mad due the cursed treasure in this place. ");
             } else if (model.getName().equalsIgnoreCase("Owlbear")) {
                 System.out.println("Too late! The bones and feathers strewn across the room should have been your first \n" +
                         "warning. The second being a shrieking growl barreling towards you from a large cavern in the \n" +

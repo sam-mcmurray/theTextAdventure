@@ -181,12 +181,12 @@ public class HeroView {
                     "on their belt. After struggling towards them to loot you realize with the addition of the key you won't be able to move. \n" +
                     "Unable to bare losing even a single item, staying here to guard your treasure becomes your only option. Over time you forget \n" +
                     "there ever was a world outside the dungeon despite the outside being only a key turn away. There you sit and wait, until the \n" +
-                    "next comes!");
+                    "next comes! \n\n\n");
         } else {
             System.out.println("With " + bossName + " slain, you caste away all your wealth realize that the real treasure from this journey isn't the gems and precious \n" +
                     "metals you found, but the friends you made along the way! Well it would have been if you made any. Look the moral of the \n" +
                     "story is money corrupts... or something. Take whatever moral stance you want on it since I doubt this is even being read \n" +
-                    "at this point. You unlock the golden gate and spend the rest of your days free of both the dungeon and wealth.");
+                    "at this point. You unlock the golden gate and spend the rest of your days free of both the dungeon and wealth.\n\n\n");
         }
     }
 

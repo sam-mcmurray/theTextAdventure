@@ -51,7 +51,7 @@ public class MapController {
         Key silverKey = new Key("Silver key");
         KeyView silverKeyView = new KeyView(silverKey);
         KeyController silverKeyController = new KeyController(silverKey, silverKeyView);
-        Monster theBoss = new Monster(180, 30, 70, "The Boss", "Boss", null, true, 4);
+        Monster theBoss = new Monster(180, 30, 70, "Boss", "The Boss", null, true, 4);
         MonsterView theBossMonsterView = new MonsterView(theBoss);
         MonsterController theBossMonsterController = new MonsterController(theBoss, theBossMonsterView);
         Monster owlBear = new Monster(130, 15, 60, "an Owlbear", "Owlbear", null, true, 3);
@@ -397,18 +397,23 @@ public class MapController {
                 Treasure treasure = new Treasure("Gold Chest", 1000);
                 if (treasureAmount <= 49) {
                     treasure.setAmount(1000);
+                    treasure.setName("a pile of copper coins");
                     return treasure;
                 } else if (treasureAmount <= 69) {
                     treasure.setAmount(4000);
+                    treasure.setName("a pile of silver coins");
                     return treasure;
                 } else if (treasureAmount <= 84) {
                     treasure.setAmount(6000);
+                    treasure.setName("a pile of gold coins");
                     return treasure;
                 } else if (treasureAmount <= 94) {
                     treasure.setAmount(8500);
+                    treasure.setName("a pile of precious gemstones");
                     return treasure;
                 } else if (treasureAmount >= 95) {
                     treasure.setAmount(10000);
+                    treasure.setName("a beautifully crafted ornate goblet");
                     return treasure;
                 }
 

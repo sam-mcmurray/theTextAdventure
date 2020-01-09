@@ -137,11 +137,11 @@ public class GameManager {
         LoadController loadController = new LoadController(load, loadView);
 
 
-        if(user.getHighScore() > loadController.loadHighestScore())
+    //    if(user.getHighScore() > loadController.loadHighestScore())
 
-        heroView.theEndGame(100,"Trogdar" ,theHero.getCurrentTreasure());
-        //heroView.theEndGame(loadController.loadHighestScore(),loadController.loadHighestScorer() ,theHero.getCurrentTreasure());
-       // if(theHero.getCurrentTreasure()>loadController.loadHighestScore())
+        //heroView.theEndGame(100,"Trogdar" ,theHero.getCurrentTreasure());
+        heroView.theEndGame(loadController.loadHighestScore(),loadController.loadHighestScorer() ,theHero.getCurrentTreasure());
+        if(user.getHighScore() > loadController.loadHighestScore())
 
         {
             Save save = new Save(theHero,room, controls, user, currentRoom);

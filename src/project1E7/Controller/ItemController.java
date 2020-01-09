@@ -60,6 +60,20 @@ public class ItemController {
     }
 
     /**
+     * checks if item is usable
+     *
+     * @param item
+     * @return
+     */
+    public boolean checkIfUsable(Item item) {
+        if (item instanceof Coffee || item instanceof HealthPotion || item instanceof Heart) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * checks to make sure that treasure has a value if not it will assign a value
      * so we dont get null pointers
      *
@@ -76,7 +90,6 @@ public class ItemController {
                 treasure.setAmount(4000);
                 return treasure;
             } else if (setRand >= 70 && setRand <= 84) {
-
                 treasure.setAmount(6000);
                 return treasure;
             } else if (setRand >= 85 && setRand <= 94) {
@@ -99,7 +112,7 @@ public class ItemController {
      * @return
      */
 
-    public boolean encounterItem(Item item, HeroController heroController, ArrayList<Key> keyRing,ArrayList<Item> backPack,
+    public boolean encounterItem(Item item, HeroController heroController, ArrayList<Key> keyRing, ArrayList<Item> backPack,
                                  MenuController menuController, ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room,
                                  Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls) {
 
@@ -122,7 +135,7 @@ public class ItemController {
                 keyRing = heroController.addKey(keyRing, key);
                 run = false;
                 return run;
-            } else if (item instanceof Weapon) {
+            } else if (checkIfWeapon(item)) {
                 Weapon weapon = (Weapon) item;
                 weapon.setName(weaponName(theHero));
                 theHero.setStrength(weapon.getStrength() + theHero.getStrength());
@@ -130,42 +143,43 @@ public class ItemController {
                 System.out.println("You have found a(n) " + weapon.getName() + "! \nFrom now on all your attacks will do more damage!");
                 run = false;
                 return run;
-            } else if (item.getName().equals("missing")) {
-                System.out.println("Nothing of significance was found.");
-                run = false;
-                return run;
             } else if (item.getName().equals("endItem")) {
                 run = false;
                 return run;
-            } else
+            } else if (checkIfUsable(item)) {
                 view.chooseWhatToDoWithItem(item);
-            chooseItem = input.nextLine();
-            switch (chooseItem) {
-                case "1":
-                    heroController.useItemExternal(item);
-                    heroController.turnCounter();
-                    run = false;
-                    return run;
-                case "2":
-                    if (backPack.size()<2) {
-                        heroController.saveItem(item, backPack);
+                chooseItem = input.nextLine();
+                switch (chooseItem) {
+                    case "1":
+                        heroController.useItemExternal(item);
                         heroController.turnCounter();
-                    }else {
-                        heroController.dropItem(backPack);
-                        if (backPack.size()<2) {
+                        run = false;
+                        return run;
+                    case "2":
+                        if (backPack.size() < 2) {
                             heroController.saveItem(item, backPack);
-                            heroController.printItem(backPack);
-                        }else System.out.println("Oops!! You missed the Item in this room ");
-                    }
-                    run = false;
-                    return run;
-                case "3":
-                    menuController.subMenu(controlsController, controlsView,mapView, room,
-                        theHero, heroView, currentRoom, user, controls);
-                    break;
-                default:
-                    System.out.println("Please enter a proper value.");
-                    break;
+                            heroController.turnCounter();
+                        } else {
+                            heroController.dropItem(backPack);
+                            if (backPack.size() < 2) {
+                                heroController.saveItem(item, backPack);
+                                heroController.printItem(backPack);
+                            } else System.out.println("Oops!! You missed the Item in this room ");
+                        }
+                        run = false;
+                        return run;
+                    case "3":
+                        menuController.subMenu(controlsController, controlsView, mapView, room,
+                                theHero, heroView, currentRoom, user, controls);
+                        break;
+                    default:
+                        System.out.println("Please enter a proper value.");
+                        break;
+                }
+            } else {
+                System.out.println("Nothing of significance was found.");
+                run = false;
+                return run;
             }
 
         } while (run == true);
