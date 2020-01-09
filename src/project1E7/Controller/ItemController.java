@@ -71,23 +71,19 @@ public class ItemController {
             int setRand = rand.nextInt(100);
             if (setRand <= 49) {
                 treasure.setAmount(1000);
-                treasure.setName("a pile of copper coins");
                 return treasure;
             } else if (setRand >= 50 && setRand <= 69) {
-                treasure.setName("a pile of silver coins");
                 treasure.setAmount(4000);
                 return treasure;
             } else if (setRand >= 70 && setRand <= 84) {
-                treasure.setName("a pile of gold coins");
+
                 treasure.setAmount(6000);
                 return treasure;
             } else if (setRand >= 85 && setRand <= 94) {
-                treasure.setName("a pile of precious gemstones");
                 treasure.setAmount(8500);
                 return treasure;
             } else if (setRand >= 95) {
                 treasure.setAmount(10000);
-                treasure.setName("a beautifully crafted ornate goblet");
                 return treasure;
             }
         }

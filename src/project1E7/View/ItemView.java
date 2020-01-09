@@ -51,7 +51,8 @@ public class ItemView {
     public void chooseWhatToDoWithItem(Item item) {
         try {
             System.out.println("Would you like to use " + item.getName() + " or save in your satchel?" +
-                    "\n 1)Use " + item.getName() + "\n 2)Save " + item.getName() + " in satchel");
+                    "\n1)Use " + item.getName() + "\n2)Save " + item.getName() + " in satchel \n" +
+                    "3)SubMenu");
         }
         catch (InputMismatchException e) {
 

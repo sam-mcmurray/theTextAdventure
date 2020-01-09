@@ -391,22 +391,17 @@ public class MapController {
                 Treasure treasure = new Treasure("Gold Chest", 1000);
                 if (treasureAmount <= 49) {
                     treasure.setAmount(1000);
-                    treasure.setName("a pile of copper coins");
                     return treasure;
                 } else if (treasureAmount <= 69) {
                     treasure.setAmount(4000);
-                    treasure.setName("a pile of silver coins");
                     return treasure;
                 } else if (treasureAmount <= 84) {
                     treasure.setAmount(6000);
-                    treasure.setName("a pile of gold coins");
                     return treasure;
                 } else if (treasureAmount <= 94) {
-                    treasure.setName("a pile of precious gemstones");
                     treasure.setAmount(8500);
                     return treasure;
                 } else if (treasureAmount >= 95) {
-                    treasure.setName("a beautifully crafted ornate goblet");
                     treasure.setAmount(10000);
                     return treasure;
                 }

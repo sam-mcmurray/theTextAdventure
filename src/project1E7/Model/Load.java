@@ -8,6 +8,8 @@ import java.io.File;
 public class Load {
     File file;
     String fileName;
+    String userName;
+    int highScore;
 
     public Load(File file, String fileName) {
         this.file = file;
@@ -28,5 +30,21 @@ public class Load {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public int getHighScore() {
+        return highScore;
+    }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

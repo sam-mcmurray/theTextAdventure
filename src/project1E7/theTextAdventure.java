@@ -64,32 +64,12 @@ public class theTextAdventure {
                 loadController.loadGame();
 
             } else if (choice.equals("3")) {
-
-
-                if (!myApp.printUsers(myApp.users)) {
-
-                    boolean decision = false;
-
-                    while (!decision) {
-                        System.out.printf("%n" +
-                                "There are no current users, would you like to create a new user? (Yes/No)");
-
-                        String answer = input.nextLine();
-                        if (answer == "Yes") {
-
-                        } else if (answer == "No") {
-
-                            choice.equals("0");
-                            decision = true;
-                        } else {
-
-                            System.out.println("Invalid answer!");
-                            decision = false;
-                        }
-
-                    }
-                }
-
+                String fileName = "HighScore.txt";
+                File file = new File("HighScore.txt");
+                Load load = new Load(file, fileName);
+                LoadView loadView = new LoadView(load);
+                LoadController loadController = new LoadController(load, loadView);
+                loadController.printHighScore();
 
             } else if (choice.equals("4")) {
                 menuView.instructionsStartMenu();

@@ -1,20 +1,14 @@
 package project1E7.Controller;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import project1E7.GameManager;
 import project1E7.Model.*;
 import project1E7.View.SaveView;
-
 import java.io.*;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
 public class SaveController {
+
     Scanner input = new Scanner(System.in);
     Save model;
     SaveView view;
@@ -39,20 +33,20 @@ public class SaveController {
             System.out.println("please delete existing file");
         }
     }
-    public void saveHighScore(String username, int highscore) {
+    public void saveHighScore(User user) {
+
+        Formatter save;
 
         try {
-
-            File file = new File("HighScore.txt");
-            FileWriter writer = new FileWriter(file);
-            BufferedWriter bWriter = new BufferedWriter(writer);
-
-            bWriter.write(username);
-            bWriter.newLine();
-            bWriter.write(highscore);
+            String name = user.getUserName();
+            String highScore = "";
+            highScore = Integer.toString(user.getHighScore());
+            save = new Formatter("HighScore.txt");
+            save.format("Username: %s, HighScore: %s", name,highScore);
+            save.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 

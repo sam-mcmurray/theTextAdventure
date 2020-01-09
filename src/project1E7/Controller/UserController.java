@@ -1,5 +1,6 @@
 package project1E7.Controller;
 
+import project1E7.Model.Hero;
 import project1E7.Model.User;
 import project1E7.View.UserView;
 
@@ -124,5 +125,8 @@ public class UserController {
             }
         }
         return userModel;
+    }
+    public void Score(Hero thehero) {
+        model.setHighScore(thehero.getCurrentTreasure());
     }
 }

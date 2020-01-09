@@ -17,6 +17,7 @@ public class LoadController {
     Load model;
     LoadView view;
     Gson gson = new Gson();
+    private Scanner inputS;
 
 
     public LoadController(Load model, LoadView view) {
@@ -39,26 +40,50 @@ public class LoadController {
 
             GameManager gameManager = new GameManager();
             gameManager.game(game.getJsonHero(), game.getJsonMap(), heroController.currentRoom(game.getJsonCurrentRoom(), game.getJsonMap()), game.getJsonControls(), game.getJsonUser());
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
     public int loadHighestScore(){
 
-            String line = "";
+            String userName;
+            String highScorePrint;
+
         try {
 
-            Scanner inputS = new Scanner(model.getFile());
-
-            inputS.nextLine();
-            line=inputS.nextLine();
-
+            inputS = new Scanner(new File("HighScore.txt"));
+            String a = inputS.next();
+            userName = inputS.next();
+            String b = inputS.next();
+            highScorePrint = inputS.next();
+            inputS.close();
+            int highScore = Integer.parseInt(highScorePrint);
+            model.setHighScore(highScore);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
+        return model.getHighScore();
+    }
+    public void printHighScore() {
+        String userNamePrint;
+        String highScorePrint;
 
-        return Integer.parseInt(line);
+        try {
+            inputS = new Scanner(new File("HighScore.txt"));
+                String a = inputS.next();
+                userNamePrint = inputS.next();
+                model.setUserName(userNamePrint);
+                String b = inputS.next();
+                highScorePrint = inputS.next();
+                int highScore = Integer.parseInt(highScorePrint);
+                model.setHighScore(highScore);
+                System.out.println("UserName: " + model.getUserName() + "HighScore: " + model.getHighScore());
+                inputS.close();
+
+    } catch (FileNotFoundException e) {
+        e.getMessage();
+    }
     }
 
 }

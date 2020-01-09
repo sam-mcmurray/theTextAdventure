@@ -52,6 +52,7 @@ public class MenuController {
                         if (monsterController.attack(heroController)) {
                             monsterView.monsterHitFlavorText(monsterModel);
                             heroView.printStatus(theHero);
+                            run = theHero.isAlive();
                         } else {
                             monsterView.monsterMissFlavorText(monsterModel);
                             heroView.printStatus(theHero);
@@ -72,11 +73,13 @@ public class MenuController {
                         if (monsterModel.isAlive() && theHero.isAlive()) {
                             if (monsterController.attack(heroController)) {
                                 monsterView.monsterHitFlavorText(monsterModel);
+                                monsterView.printStatus(monsterModel);
                                 heroView.printStatus(theHero);
-                            } else
+                            } else {
                                 monsterView.monsterMissFlavorText(monsterModel);
-                            heroView.printStatus(theHero);
-
+                                monsterView.printStatus(monsterModel);
+                                heroView.printStatus(theHero);
+                            }
                         }
                     }
                     break;
@@ -122,11 +125,12 @@ public class MenuController {
                 view.encounterMenu();
                 encounterChoice = input.nextLine();
 
-            } else
+            } else {
                 monsterView.monsterMissFlavorText(monsterModel);
-            heroView.printStatus(theHero);
-            view.encounterMenu();
-            encounterChoice = input.nextLine();
+                heroView.printStatus(theHero);
+                view.encounterMenu();
+                encounterChoice = input.nextLine();
+            }
 
             switch (encounterChoice) {
 

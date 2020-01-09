@@ -23,6 +23,8 @@ public class GameManager {
     public void game(Hero theHero, Room[][] room, Room currentRoom, Controls control, User user) {
         Random rand = new Random();
         Scanner input = new Scanner(System.in);
+        UserView userView = new UserView(user);
+        UserController userController = new UserController(user,userView);
         Controls controls = control;
         ControlsView controlsView = new ControlsView(control);
         ControlsController controlsController = new ControlsController(control, controlsView);
@@ -115,27 +117,32 @@ public class GameManager {
                 heroController.addEndurance();
                 previousRoom = heroController.currentRoom(currentRoom, room);
                 roomController.setFound(currentRoom);
-                roomView.roomDoors(room, currentRoom);
-                currentRoom = heroController.moveHero(keyRing, room, currentRoom, control);
-                run = false;
+                if (heroController.currentRoom(currentRoom,room) == room[1][3]) {
+                    currentRoom = heroController.moveHero(keyRing, room, currentRoom, control);
+                    run = false;
+                } else {
+                    roomView.roomDoors(room, currentRoom);
+                    currentRoom = heroController.moveHero(keyRing, room, currentRoom, control);
+                    run = false;
+                }
             }
 
 
-        } while ((theHero.isAlive() && theHero.getLives() >= 1 ) || heroController.currentRoom(currentRoom, room)!= room[0][3]);
+        } while ((theHero.isAlive() && theHero.getLives() >= 1 ) && heroController.currentRoom(currentRoom, room)!= room[0][3]);
+        userController.Score(theHero);
 
         File file = new File("HighScore.txt");
         Load load = new Load(file, "HighScore.txt");
         LoadView loadView = new LoadView(load);
         LoadController loadController = new LoadController(load, loadView);
 
-        if(theHero.getCurrentTreasure()>loadController.loadHighestScore())
+        if(user.getHighScore() > loadController.loadHighestScore())
         {
-
             Save save = new Save(theHero,room, controls, user, currentRoom);
             SaveView saveView = new SaveView(save);
             SaveController saveController = new SaveController(save, saveView);
 
-            saveController.saveHighScore(user.getUserName(),theHero.getCurrentTreasure());
-        }
+            saveController.saveHighScore(user);
+       }
     }
 }
