@@ -90,17 +90,25 @@ public class LoadController {
 
     public String loadHighestScorer(){
 
-        String line = "";
+        String userNamePrint;
+        String highScorePrint;
+
         try {
-
-            Scanner inputS = new Scanner(model.getFile());
-
-            line=inputS.nextLine();
+            inputS = new Scanner(new File("HighScore.txt"));
+            String a = inputS.next();
+            userNamePrint = inputS.next();
+            model.setUserName(userNamePrint);
+            String b = inputS.next();
+            highScorePrint = inputS.next();
+            int highScore = Integer.parseInt(highScorePrint);
+            model.setHighScore(highScore);
+            inputS.close();
 
         } catch (FileNotFoundException e) {
-            return line = "Trogdor the Berninator";
+            e.getMessage();
         }
 
-        return line;
+
+        return model.getUserName();
     }
 }
