@@ -31,11 +31,38 @@ public class ControlsController {
 
                     System.out.print("Enter the new command for moving up: ");
                     String temp1 = input.nextLine();
-                    while (temp1.length() > 1) {
 
-                        System.out.printf("%n" +
-                                "You can only use one character as a command%n");
-                        temp1 = input.nextLine();
+
+                            while (temp1.length() > 1) {
+
+                                System.out.printf("%n" +
+                                        "You can only use one character as a command%n");
+                                temp1 = input.nextLine();
+                            }
+
+                            while(temp1==model.getMoveDown()||temp1==model.getMoveLeft()||
+                                    temp1==model.getMoveRight()||temp1==model.getMoveUp()) {
+
+                                if(temp1==model.getMoveDown()){
+
+                                    System.out.printf("%n" +
+                                            "This key is already used for moving down%n");
+                                }
+
+                                if(temp1==model.getMoveLeft()){
+
+                                    System.out.printf("%n" +
+                                            "This key is already used for moving left%n");                                }
+
+                                if(temp1==model.getMoveRight()){
+
+                                    System.out.printf("%n" +
+                                            "This key is already used for moving right%n");                                }
+
+                                if(temp1==model.getMoveUp()){
+
+                                    System.out.printf("%n" +
+                                            "This key is already used for moving up%n");                                }
                     }
 
                     model.setMoveUp(temp1);

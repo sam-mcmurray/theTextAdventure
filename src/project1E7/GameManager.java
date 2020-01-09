@@ -39,6 +39,8 @@ public class GameManager {
         HeroController heroController = new HeroController(hero, heroView);
 
 
+        theHero.setCurrentTreasure(100);
+
         Room previousRoom = currentRoom;
         do {
             boolean flee = false;

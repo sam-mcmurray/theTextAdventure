@@ -27,7 +27,8 @@ public class ControlsView {
     public void changeControlsView() {
         System.out.printf("Which one of the controls would you like to change: ");
 
-        System.out.printf("1- Moving up: %s %n" +
+        System.out.printf("%n" +
+                "1- Moving up: %s %n" +
                 "2- Moving down: %s %n" +
                 "3- Moving right: %s %n" +
                 "4- Moving left: %s %n", model.getMoveUp(), model.getMoveDown(), model.getMoveRight(), model.getMoveLeft());
