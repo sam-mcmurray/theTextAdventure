@@ -60,6 +60,10 @@ public class Save {
 
     public void setJsonCurrentRoom(Room jsonCurrentRoom) {
         this.jsonCurrentRoom = jsonCurrentRoom;
-
     }
+
+    public int getJsonHeroCurrentTreasure() {return jsonUser.getHighScore();}
+
+    public String getJsonHeroUserName() {return jsonUser.getUserName();}
+
 }

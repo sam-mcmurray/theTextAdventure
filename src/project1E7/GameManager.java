@@ -126,7 +126,7 @@ public class GameManager {
                     run = false;
                 }
             }
-
+            if (heroController.endCheck(room, currentRoom)) {break;}
 
         } while ((theHero.isAlive() && theHero.getLives() >= 1 ) && heroController.currentRoom(currentRoom, room)!= room[0][3]);
         userController.Score(theHero);
@@ -136,13 +136,24 @@ public class GameManager {
         LoadView loadView = new LoadView(load);
         LoadController loadController = new LoadController(load, loadView);
 
+
         if(user.getHighScore() > loadController.loadHighestScore())
+
+        heroView.theEndGame(100,"Trogdar" ,theHero.getCurrentTreasure());
+        //heroView.theEndGame(loadController.loadHighestScore(),loadController.loadHighestScorer() ,theHero.getCurrentTreasure());
+       // if(theHero.getCurrentTreasure()>loadController.loadHighestScore())
+
         {
             Save save = new Save(theHero,room, controls, user, currentRoom);
             SaveView saveView = new SaveView(save);
             SaveController saveController = new SaveController(save, saveView);
 
+
             saveController.saveHighScore(user);
        }
+
+
+        }
+
     }
-}
+

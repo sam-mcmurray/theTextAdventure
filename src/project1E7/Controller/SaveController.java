@@ -33,6 +33,8 @@ public class SaveController {
             System.out.println("please delete existing file");
         }
     }
+
+
     public void saveHighScore(User user) {
 
         Formatter save;
@@ -49,5 +51,4 @@ public class SaveController {
             e.getMessage();
         }
     }
-
 }

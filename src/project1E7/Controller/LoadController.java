@@ -61,7 +61,9 @@ public class LoadController {
             int highScore = Integer.parseInt(highScorePrint);
             model.setHighScore(highScore);
         } catch (FileNotFoundException e) {
+
             e.getMessage();
+
         }
         return model.getHighScore();
     }
@@ -86,4 +88,19 @@ public class LoadController {
     }
     }
 
+    public String loadHighestScorer(){
+
+        String line = "";
+        try {
+
+            Scanner inputS = new Scanner(model.getFile());
+
+            line=inputS.nextLine();
+
+        } catch (FileNotFoundException e) {
+            return line = "Trogdor the Berninator";
+        }
+
+        return line;
+    }
 }
