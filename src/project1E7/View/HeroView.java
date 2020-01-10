@@ -5,6 +5,7 @@ import project1E7.Model.Hero;
 import project1E7.Model.Item;
 import project1E7.Model.Monster;
 
+import project1E7.Model.Room;
 import project1E7.theTextAdventure;
 import project1E7.*;
 
@@ -77,6 +78,7 @@ public class HeroView {
         if (model.isAlive()) {
             System.out.println(model.getName() + " Health: " + model.getHealth());
             System.out.println(model.getName() + " Endurance: " + model.getEndurance());
+            System.out.println(model.getName() + " Speed : " + model.getSpeed());
             System.out.println("Speed : "+model.getSpeed());
         } else {
             System.out.println("You have been defeated...");
@@ -147,6 +149,42 @@ public class HeroView {
         }
         ;
     }
+    public void viewSuperAbility(Hero hero, Room currentRoom) {
+        System.out.println(hero.getName() + " Super ability has been used ");
+        switch (hero.getCharacterClass()) {
+            case "Warrior":
+                System.out.println(currentRoom.getMonster().getName() + "Is poisoned and has no power and no speed");
+                break;
+            case "Thief":
+                System.out.println(currentRoom.getMonster().getName() + " is frosted now by your super power ability he has no speed and has no chance to hit you ! take him down ");
+                break;
+            case "Mage":
+                System.out.println("You burned the " + currentRoom.getMonster().getName() + " by your super power ability ");
+                break;
+        }
+    }
+
+    public void viewAbility(Hero hero, Room currentRoom) {
+        System.out.println(hero.getName() + " ability has been used");
+        switch (hero.getCharacterClass()) {
+            case "Warrior":
+                System.out.println("Your became too fast ! now your chance to hit the enemy is very high .. ");
+                System.out.println("Your speed now : " + hero.getSpeed());
+                System.out.println("Be careful Warrior you don't have the same ability outside this room ! ");
+                break;
+            case "Thief":
+                System.out.println("You have just disappeared and escaped from the " + currentRoom.getMonster().getName() + " by your ability");
+                break;
+            case "Mage":
+                System.out.println("The " + currentRoom.getMonster().getName() + " has been possessed now by your ability and has no power to damage you ! finish him ");
+                break;
+        }
+
+    }
+    public void printAbilityCounter() {
+        System.out.println("you can not use your ability more than 3 times ");
+        System.out.println("You have used your ability for : " + model.getAbilityCounter() + " time");
+    }
 
     /**
      * prints missed flavor text for the hero
@@ -181,12 +219,55 @@ public class HeroView {
                     "on their belt. After struggling towards them to loot you realize with the addition of the key you won't be able to move. \n" +
                     "Unable to bare losing even a single item, staying here to guard your treasure becomes your only option. Over time you forget \n" +
                     "there ever was a world outside the dungeon despite the outside being only a key turn away. There you sit and wait, until the \n" +
-                    "next comes! \n\n\n");
+                    "next comes! " +
+                    "\n" +
+                    "*******************************************************************************\n" +
+                    "          |                   |                  |                     |\n" +
+                    " _________|________________.=\"\"_;=.______________|_____________________|_______\n" +
+                    "|                   |  ,-\"_,=\"\"     `\"=.|                  |\n" +
+                    "|___________________|__\"=._o`\"-._        `\"=.______________|___________________\n" +
+                    "          |                `\"=._o`\"=._      _`\"=._                     |\n" +
+                    " _________|_____________________:=._o \"=._.\"_.-=\"'\"=.__________________|_______\n" +
+                    "|                   |    __.--\" , ; `\"=._o.\" ,-\"\"\"-._ \".   |\n" +
+                    "|___________________|_._\"  ,. .` ` `` ,  `\"-._\"-._   \". '__|___________________\n" +
+                    "          |           |o`\"=._` , \"` `; .\". ,  \"-._\"-._; ;              |\n" +
+                    " _________|___________| ;`-.o`\"=._; .\" ` '`.\"\\` . \"-._ /_______________|_______\n" +
+                    "|                   | |o;    `\"-.o`\"=._``  '` \" ,__.--o;   |\n" +
+                    "|___________________|_| ;     (#) `-.o `\"=.`_.--\"_o.-; ;___|___________________\n" +
+                    "____/______/______/___|o;._    \"      `\".o|o_.--\"    ;o;____/______/______/____\n" +
+                    "/______/______/______/_\"=._o--._        ; | ;        ; ;/______/______/______/_\n" +
+                    "____/______/______/______/__\"=._o--._   ;o|o;     _._;o;____/______/______/____\n" +
+                    "/______/______/______/______/____\"=._o._; | ;_.--\"o.--\"_/______/______/______/_\n" +
+                    "____/______/______/______/______/_____\"=.o|o_.--\"\"___/______/______/______/____\n" +
+                    "/______/______/______/______/______/______/______/______/______/______/[TomekK]\n" +
+                    "*******************************************************************************");
         } else {
             System.out.println("With " + bossName + " slain, you caste away all your wealth realize that the real treasure from this journey isn't the gems and precious \n" +
                     "metals you found, but the friends you made along the way! Well it would have been if you made any. Look the moral of the \n" +
                     "story is money corrupts... or something. Take whatever moral stance you want on it since I doubt this is even being read \n" +
-                    "at this point. You unlock the golden gate and spend the rest of your days free of both the dungeon and wealth.\n\n\n");
+                    "at this point. You unlock the golden gate and spend the rest of your days free of both the dungeon and wealth.\n" +
+                    " ********************************************************************************\n" +
+                    "*                    /   \\              /'\\       _       \\    |    /            *\n" +
+                    "*\\_..           /'.,/     \\_         .,'   \\     / \\_      \\       /             *\n" +
+                    "*    \\         /            \\      _/       \\_  /    \\     _ ,d8b,               *\n" +
+                    "*     \\__,.   /              \\    /           \\/.,   _|  _/ \\88888 ---           *\n" +
+                    "*          \\_/                \\  /',.,''\\      \\_ \\_/  \\/    \\98P'               *\n" +
+                    "*                           _  \\/   /    ',../',.\\    _/      \\    \\             *\n" +
+                    "*             /           _/m\\  \\  /    |         \\  /.,/'\\   _\\    \\            *\n" +
+                    "*           _/           /MMmm\\  \\_     |          \\/      \\_/  \\                *\n" +
+                    "*          /      \\     |MMMMmm|   \\__   \\          \\_       \\   \\_              *\n" +
+                    "*                  \\   /MMMMMMm|      \\   \\           \\       \\    \\             *\n" +
+                    "*                   \\  |MMMMMMmm\\      \\___            \\_      \\_   \\            *\n" +
+                    "*                    \\|MMMMMMMMmm|____.'  /\\_            \\       \\   \\_          *\n" +
+                    "*                    /'.,___________...,,'   \\            \\   \\        \\         *\n" +
+                    "*                   /       \\          |      \\    |__     \\   \\_       \\        *\n" +
+                    "*                 _/        |           \\      \\_     \\     \\    \\       \\_      *\n" +
+                    "*                /                               \\     \\     \\_   \\        \\     *\n" +
+                    "*                                                 \\     \\      \\   \\__      \\    *\n" +
+                    "*                                                  \\     \\_     \\     \\      \\   *\n" +
+                    "*                                                   |      \\     \\     \\      \\  *\n" +
+                    "*                                                    \\ms          |            \\ *\n" +
+                    " ********************************************************************************");
         }
     }
 

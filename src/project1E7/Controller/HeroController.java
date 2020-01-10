@@ -229,7 +229,7 @@ public class HeroController {
                                     if (key.getName().equalsIgnoreCase(room[i][j].getDoor().getNameOfKey())) {
                                         System.out.println("You have the " + key.getName() + "you unlocked " + room[i][j].getDoor().getDescription());
 
-                                        if(i == 0 || j == 0){
+                                        if (i == 0 || j == 0) {
                                             currentRoom = room[i][j];
                                             return currentRoom;
                                         } else {
@@ -341,6 +341,55 @@ public class HeroController {
         }
     }
 
+    public void useWarriorAbility(Room currentRoom) {
+        int temp = model.getSpeed();
+        model.setSpeed(temp * 3);
+    }
+
+    public void useWarriorSuperAbility(Room currentRoom) {
+        currentRoom.getMonster().setSpeed(0);
+        currentRoom.getMonster().setStrength(0);
+    }
+
+    public void useThiefSuperAbility(Room currentRoom) {
+        currentRoom.getMonster().setSpeed(0);
+    }
+
+    public Room useThiefAbility(Room[][] room, Room currentRoom) {
+        flee(model);
+        Random rand = new Random();
+        int randomRoom = rand.nextInt(10);
+        int randomRoom1 = rand.nextInt(10);
+        for (int i = 0; i < room.length; i++) {
+            for (int j = 0; j < room.length; j++) {
+                if (room[i][j] == currentRoom) {
+                    currentRoom = room[randomRoom][randomRoom1];
+                }
+
+            }
+
+        }
+        return currentRoom;
+    }
+
+
+    public void useMageAbility(Room currentRoom) {
+        currentRoom.getMonster().setStrength(0);
+    }
+
+    public void useMageSuperAbility(Room currentRoom) {
+        currentRoom.getMonster().setAlive(false);
+    }
+
+    public void abilityCounter() {
+        model.setAbilityCounter(model.getAbilityCounter() + 1);
+        view.printAbilityCounter();
+    }
+
+    public void superAbilityCounter() {
+        model.setSuperAbilityCounter(model.getSuperAbilityCounter() + 1);
+    }
+
     public void useItem(ArrayList<Item> backPack) {
         int choice1;
         if (backPack.isEmpty()) {
@@ -355,7 +404,7 @@ public class HeroController {
                 backPack.remove(choice1 - 1);
             } catch (InputMismatchException e) {
                 System.out.println("Enter a proper value");
-            }catch (IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 System.out.println("You do not have this item to use");
             }
         }
@@ -439,7 +488,7 @@ public class HeroController {
     }
 
     public Room previousRoom(Room previousRoom, Room[][] room, Room currentRoom) {
-        currentRoom(currentRoom,room).setHasCharacter(false);
+        currentRoom(currentRoom, room).setHasCharacter(false);
         for (int i = 0; i < room.length; i++) {
             for (int j = 0; j < room.length; j++) {
                 if (room[i][j] == previousRoom) {
@@ -470,7 +519,7 @@ public class HeroController {
             model.setEndurance(model.getEndurance() + 5);
     }
 
-    public boolean endCheck (Room[][] room, Room currentRoom) {
+    public boolean endCheck(Room[][] room, Room currentRoom) {
 
         if (!(currentRoom == room[0][3])) {
             return false;

@@ -12,6 +12,10 @@ public class Hero extends Character {
     private String characterClass;
     private String weapon;
     private int turnCounter;
+    private String ability;
+    private int abilityCounter;
+    private int superAbilityCounter;
+
 
     public Hero(int health, int strength, int speed, String description, String name, int endurance,String characterClass, String weapon) {
         super(health, strength, speed, description, name);
@@ -87,6 +91,29 @@ public class Hero extends Character {
 
     public void setTurnCounter(int turnCounter) {
         this.turnCounter = turnCounter;
+    }
+    public String getAbility() {
+        return ability;
+    }
+
+    public void setAbility(String ability) {
+        this.ability = ability;
+    }
+
+    public int getAbilityCounter() {
+        return abilityCounter;
+    }
+
+    public void setAbilityCounter(int abilityCounter) {
+        this.abilityCounter = abilityCounter;
+    }
+
+    public int getSuperAbilityCounter() {
+        return superAbilityCounter;
+    }
+
+    public void setSuperAbilityCounter(int superAbilityCounter) {
+        this.superAbilityCounter = superAbilityCounter;
     }
 
     @Override
