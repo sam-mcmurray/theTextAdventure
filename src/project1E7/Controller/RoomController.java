@@ -55,8 +55,35 @@ public class RoomController {
      */
     public Item findItem() {
 
-        Item item = model.getItem();
-        return item;
+            if (model.getItem() instanceof Coffee) {
+                Coffee coffee = (Coffee) model.getItem();
+                return coffee;
+            } else if (model.getItem() instanceof Treasure) {
+                Treasure treasure = (Treasure) model.getItem();
+                return treasure;
+            } else if (model.getItem() instanceof Key) {
+                Key key = (Key) model.getItem();
+                return key;
+            } else if (model.getItem() instanceof HealthPotion) {
+                HealthPotion healthPotion = (HealthPotion) model.getItem();
+                return healthPotion;
+            } else if (model.getItem() instanceof Heart) {
+                Heart heart = (Heart) model.getItem();
+                return heart;
+            } else if (model.getKey() != null) {
+                return model.getKey();
+            } else if (model.getWeapon() != null) {
+                return model.getWeapon();
+            } else if (model.getCoffee() != null) {
+                return model.getCoffee();
+            } else if (model.getHealthPotion() != null) {
+                return model.getHealthPotion();
+            } else if (model.getTreasure() != null) {
+                return model.getTreasure();
+            } else if (model.getHeart() != null) {
+                return model.getHeart();
+            } else
+                return model.getItem();
 
     }
 

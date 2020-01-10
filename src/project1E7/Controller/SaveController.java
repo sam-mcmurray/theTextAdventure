@@ -44,7 +44,7 @@ public class SaveController {
             String highScore = "";
             highScore = Integer.toString(user.getHighScore());
             save = new Formatter("HighScore.txt");
-            save.format("Username: %s, HighScore: %s", name,highScore);
+            save.format("Username: %s HighScore: %s", name,highScore);
             save.close();
 
         } catch (IOException e) {
