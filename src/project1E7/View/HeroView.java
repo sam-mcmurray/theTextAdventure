@@ -5,6 +5,7 @@ import project1E7.Model.Hero;
 import project1E7.Model.Item;
 import project1E7.Model.Monster;
 
+import project1E7.Model.Room;
 import project1E7.theTextAdventure;
 import project1E7.*;
 
@@ -77,6 +78,7 @@ public class HeroView {
         if (model.isAlive()) {
             System.out.println(model.getName() + " Health: " + model.getHealth());
             System.out.println(model.getName() + " Endurance: " + model.getEndurance());
+            System.out.println(model.getName() + " Speed : " + model.getSpeed());
             System.out.println("Speed : "+model.getSpeed());
         } else {
             System.out.println("You have been defeated...");
@@ -146,6 +148,42 @@ public class HeroView {
                     monster.getName() + " recoils in confusion and pain.");
         }
         ;
+    }
+    public void viewSuperAbility(Hero hero, Room currentRoom) {
+        System.out.println(hero.getName() + " Super ability has been used ");
+        switch (hero.getCharacterClass()) {
+            case "Warrior":
+                System.out.println(currentRoom.getMonster().getName() + "Is poisoned and has no power and no speed");
+                break;
+            case "Thief":
+                System.out.println(currentRoom.getMonster().getName() + " is frosted now by your super power ability he has no speed and has no chance to hit you ! take him down ");
+                break;
+            case "Mage":
+                System.out.println("You burned the " + currentRoom.getMonster().getName() + " by your super power ability ");
+                break;
+        }
+    }
+
+    public void viewAbility(Hero hero, Room currentRoom) {
+        System.out.println(hero.getName() + " ability has been used");
+        switch (hero.getCharacterClass()) {
+            case "Warrior":
+                System.out.println("Your became too fast ! now your chance to hit the enemy is very high .. ");
+                System.out.println("Your speed now : " + hero.getSpeed());
+                System.out.println("Be careful Warrior you don't have the same ability outside this room ! ");
+                break;
+            case "Thief":
+                System.out.println("You have just disappeared and escaped from the " + currentRoom.getMonster().getName() + " by your ability");
+                break;
+            case "Mage":
+                System.out.println("The " + currentRoom.getMonster().getName() + " has been possessed now by your ability and has no power to damage you ! finish him ");
+                break;
+        }
+
+    }
+    public void printAbilityCounter() {
+        System.out.println("you can not use your ability more than 3 times ");
+        System.out.println("You have used your ability for : " + model.getAbilityCounter() + " time");
     }
 
     /**
