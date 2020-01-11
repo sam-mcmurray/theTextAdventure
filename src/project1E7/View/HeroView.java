@@ -88,49 +88,61 @@ public class HeroView {
 
                 case ("Spiderling"):{
 
-                    System.out.printf("%n" +
+                    System.out.printf(
                             "Your body is pierced all over by the Spiderling. You drop your %s and feel the life drifting our of your body. %n" +
                             "The Spiderling begins to ingest you into its mouth as you begin to wonder just how awful your player must be to die to a thing that shoots rope out of its ass ", hero.getWeapon());
                 }
 
                 case ("Bat"):{
 
-                    System.out.printf("%n" +
+                    System.out.printf(
                             "The screeching winged monstrosity sinks its fangs into you violently. You are losing a lot of blood.%n" +
                             "You try feebly to use your %s. You think how could this happen? How terrible must my player be to die to a glorified rat.%n", hero.getWeapon());
+                    break;
                 }
 
                 case("Skeleton"):{
 
-                    System.out.printf("%n" +
+                    System.out.printf(
                             "The mummified Skeleton penetrates your intestines with its blunt jagged sword. He leans in and whispers %n" +
                             "'Just let it happen'. Its rotten stench is the last thing you sense before you drop your %s", hero.getWeapon());
+                    break;
                 }
 
                 case("Owlbear"):{
 
-                    System.out.printf("%n" +
+                    System.out.printf(
                             "The Owlbear sinks its massive claws into your body. You helplessly attempt to use your %s but " +
                             "You begin to realize that there is no way out this time. The Owlbear roars furiously as he flings you against the wall ripping your arm off.%n" +
                             "During your last moments alive, you can't help but think to yourself, this guy really needs a snickers.", hero.getWeapon());
+                    break;
                 }
 
                 case("Slime"):{
 
-                    System.out.printf("%n" +
+                    System.out.printf(
                             "The disgusting glob of acidic matter leaps onto you, completely swallowing you. It burns!.%n" +
-                            "You briefly attempt to use your %s, but you cannot feel your arm anymore. The pain is too great to even describe.%n" +
+                            "You briefly attempt to use your %s, but you cannot feel your arm anymore. The pain is unimaginable.%n" +
                             "During your last moments, you can only think of how much you could really use a Sprite cranberry.", hero.getWeapon());
+                    break;
                 }
 
                 case("The Boss"): {
 
-                    System.out.printf("%n" +
+                    System.out.printf(
                             "The mysterious being begins casting a spell. Lightning strikes you seemingly from nowhere.%n" +
                             "You try to raise your weapon, but you can't!. Your whole body has been paralyzed!%n" +
                             "You fall on the cold cave floor and take comfort in the fact that you made it this far. ");
+                    break;
                 }
 
+            }
+
+            System.out.println();
+            try {
+                defeat();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -262,7 +274,7 @@ public class HeroView {
      * @throws InterruptedException
      */
 
-    public void defeat() throws InterruptedException {
+    public static void defeat() throws InterruptedException {
         String defeatTxt = "YOU DIED";
         Scanner input = new Scanner(System.in);
 
