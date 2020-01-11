@@ -75,13 +75,63 @@ public class HeroView {
      *
      * @param hero
      */
-    public void printStatus(Hero hero) {
+    public void printStatus(Hero hero, Room currentRoom) {
         if (model.isAlive()) {
             System.out.println(model.getName() + " Health: " + model.getHealth());
             System.out.println(model.getName() + " Endurance: " + model.getEndurance());
             System.out.println(model.getName() + " Speed : " + model.getSpeed());
         } else {
-            System.out.println("You have been defeated...");
+
+            String monsterName = currentRoom.getMonster().getName();
+
+            switch (monsterName) {
+
+                case ("Spiderling"):{
+
+                    System.out.printf("%n" +
+                            "Your body is pierced all over by the Spiderling. You drop your %s and feel the life drifting our of your body. %n" +
+                            "The Spiderling begins to ingest you into its mouth as you begin to wonder just how awful your player must be to die to a thing that shoots rope out of its ass ", hero.getWeapon());
+                }
+
+                case ("Bat"):{
+
+                    System.out.printf("%n" +
+                            "The screeching winged monstrosity sinks its fangs into you violently. You are losing a lot of blood.%n" +
+                            "You try feebly to use your %s. You think how could this happen? How terrible must my player be to die to a glorified rat.%n", hero.getWeapon());
+                }
+
+                case("Skeleton"):{
+
+                    System.out.printf("%n" +
+                            "The mummified Skeleton penetrates your intestines with its blunt jagged sword. He leans in and whispers %n" +
+                            "'Just let it happen'. Its rotten stench is the last thing you sense before you drop your %s", hero.getWeapon());
+                }
+
+                case("Owlbear"):{
+
+                    System.out.printf("%n" +
+                            "The Owlbear sinks its massive claws into your body. You helplessly attempt to use your %s but " +
+                            "You begin to realize that there is no way out this time. The Owlbear roars furiously as he flings you against the wall ripping your arm off.%n" +
+                            "During your last moments alive, you can't help but think to yourself, this guy really needs a snickers.", hero.getWeapon());
+                }
+
+                case("Slime"):{
+
+                    System.out.printf("%n" +
+                            "The disgusting glob of acidic matter leaps onto you, completely swallowing you. It burns!.%n" +
+                            "You briefly attempt to use your %s, but you cannot feel your arm anymore. The pain is too great to even describe.%n" +
+                            "During your last moments, you can only think of how much you could really use a Sprite cranberry.", hero.getWeapon());
+                }
+
+                case("The Boss"): {
+
+                    System.out.printf("%n" +
+                            "The mysterious being begins casting a spell. Lightning strikes you seemingly from nowhere.%n" +
+                            "You try to raise your weapon, but you can't!. Your whole body has been paralyzed!%n" +
+                            "You fall on the cold cave floor and take comfort in the fact that you made it this far. ");
+                }
+
+            }
         }
     }
 
@@ -212,7 +262,7 @@ public class HeroView {
      * @throws InterruptedException
      */
 
-    public String defeat() throws InterruptedException {
+    public void defeat() throws InterruptedException {
         String defeatTxt = "YOU DIED";
         Scanner input = new Scanner(System.in);
 
@@ -253,22 +303,6 @@ public class HeroView {
                 "           $.d$$$*                           *  J$$$e*\n" +
                 "            \"\"\"\"\"                              \"$$$\"");
         System.out.println();
-        String choice = "null";
-
-        while (!choice.equals("yes")) {
-            System.out.println("Continue? (yes/no)");
-            choice = input.nextLine();
-
-            if (choice.equals("yes")) {
-                System.out.println("Loading last save...");
-            } else if (choice.equals("no")) {
-                // list current score and high scores
-                break;
-            } else {
-                System.out.println("Unrecognized Command, try again");
-            }
-        }
-        return choice;
     }
 
     /**
@@ -385,60 +419,6 @@ public class HeroView {
                     "how you move the current controls are W for North or up on the map, S is for South or down on the map, A is for West or left on the map, %n" +
                     "and D is for East or Right on the map. You start with 5 lives but it is possible to find items such as Hearts to increase those lives %n" +
                     "and Health Potions to increase your health. The other item is coffee which increases your the Thiefs speed. %n ");
-
-        }
-    }
-
-    public void deathMenu(Room currentRoom, Hero theHero) {
-
-        String monsterName = currentRoom.getMonster().getName();
-
-        switch (monsterName) {
-
-            case ("Spiderling"):{
-
-                System.out.printf("%n" +
-                        "Your body is pierced all over by the Spiderling. You drop your %s and feel the life drifting our of your body. %n" +
-                        "The Spiderling begins to ingest you into its mouth as you begin to wonder just how awful your player must be to die to a thing that shoots rope out of its ass ", theHero.getWeapon());
-            }
-
-            case ("Bat"):{
-
-                System.out.printf("%n" +
-                        "The screeching winged monstrosity sinks its fangs into you violently. You are losing a lot of blood.%n" +
-                        "You try feebly to use your %s. You think how could this happen? How terrible must my player be to die to a glorified rat.%n", theHero.getWeapon());
-            }
-
-            case("Skeleton"):{
-
-                System.out.printf("%n" +
-                        "The mummified Skeleton penetrates your intestines with its blunt jagged sword. He leans in and whispers %n" +
-                        "'Just let it happen'. Its rotten stench is the last thing you sense before you drop your %s", theHero.getWeapon());
-            }
-
-            case("Owlbear"):{
-
-                System.out.printf("%n" +
-                        "The Owlbear sinks its massive claws into your body. You helplessly attempt to use your %s but " +
-                        "You begin to realize that there is no way out this time. The Owlbear roars furiously as he flings you against the wall ripping your arm off.%n" +
-                        "During your last moments alive, you can't help but think to yourself, this guy really needs a snickers.", theHero.getWeapon());
-            }
-
-            case("Slime"):{
-
-                System.out.printf("%n" +
-                        "The disgusting glob of acidic matter leaps onto you, completely swallowing you. It burns!.%n" +
-                        "You briefly attempt to use your %s, but you cannot feel your arm anymore. The pain is too great to even describe.%n" +
-                        "During your last moments, you can only think of how much you could really use a Sprite cranberry.", theHero.getWeapon());
-            }
-
-            case("The Boss"): {
-
-                System.out.printf("%n" +
-                        "The mysterious being begins casting a spell. Lightning strikes you seemingly from nowhere.%n" +
-                        "You try to raise your weapon, but you can't!. Your whole body has been paralyzed!%n" +
-                        "You fall on the cold cave floor and take comfort in the fact that you made it this far. ");
-            }
 
         }
     }
