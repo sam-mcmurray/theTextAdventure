@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Username: Luke, HighScore: 10000
+=======
+Username: Alex, HighScore: 54000
+>>>>>>> dfb4eed463d946896ff4f7a3be3b2d86fd84a522

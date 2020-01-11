@@ -20,7 +20,7 @@ public class theTextAdventure {
      static ArrayList<User> users = new ArrayList<>();
 
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 
         User userModel = new User(null, 0);
         UserView userView = new UserView(userModel);
