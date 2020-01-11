@@ -8,13 +8,17 @@ public class Game {
     private Controls jsonControls;
     private User jsonUser;
     private Room jsonCurrentRoom;
+    private int jsonI;
+    private int jsonJ;
 
-    public Game(Hero jsonHero, Room[][] jsonMap, Controls jsonControls, User jsonUser, Room jsonCurrentRoom) {
+    public Game(Hero jsonHero, Room[][] jsonMap, Controls jsonControls, User jsonUser, Room jsonCurrentRoom,int jsonI,int jsonJ) {
         this.jsonHero = jsonHero;
         this.jsonMap = jsonMap;
         this.jsonControls = jsonControls;
         this.jsonUser = jsonUser;
         this.jsonCurrentRoom = jsonCurrentRoom;
+        this.jsonI = jsonI;
+        this.jsonJ = jsonJ;
     }
 
     public Hero getJsonHero() {
@@ -57,5 +61,19 @@ public class Game {
         this.jsonCurrentRoom = jsonCurrentRoom;
     }
 
+    public int getJsonI() {
+        return jsonI;
+    }
 
+    public void setJsonI(int jsonI) {
+        this.jsonI = jsonI;
+    }
+
+    public int getJsonJ() {
+        return jsonJ;
+    }
+
+    public void setJsonJ(int jsonJ) {
+        this.jsonJ = jsonJ;
+    }
 }

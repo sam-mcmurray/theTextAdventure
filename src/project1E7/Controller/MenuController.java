@@ -150,7 +150,7 @@ public class MenuController {
                     heroController.turnCounter();
                     break;
                 case "6":
-                    subMenu(controlsController,controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
+                    subMenu(controlsController,controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController);
                     break;
                 default:
                     System.out.println("Please enter a proper value.");
@@ -291,7 +291,7 @@ public class MenuController {
                     heroController.turnCounter();
                     break;
                 case "6":
-                    subMenu(controlsController,controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
+                    subMenu(controlsController,controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController);
                         break;
                 default:
                     System.out.println("Please enter a proper value.");
@@ -453,7 +453,7 @@ public class MenuController {
      * @param user
      */
     public void subMenu(ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room,
-                        Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls){
+                        Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls, HeroController heroController){
 
         boolean run = true;
 
@@ -484,8 +484,10 @@ public class MenuController {
                     break;
 
                 case "5":
-                    Game game = new Game(theHero, room, controls, user, currentRoom);
-                    Save save = new Save(theHero,room, controls, user, currentRoom);
+                    Save save = new Save(theHero,room, controls, user, heroController.currentRoom(currentRoom, room));
+                    heroController.getI(currentRoom, room, save);
+                    heroController.getJ(currentRoom, room, save);
+                    Game game = new Game(theHero, room, controls, user, currentRoom,save.getI(),save.getJ());
                     SaveView saveView = new SaveView(save);
                     SaveController saveController = new SaveController(save, saveView);
                     saveController.saveGame(game);

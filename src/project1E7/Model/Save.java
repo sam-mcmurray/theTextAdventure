@@ -12,6 +12,8 @@ public class Save {
     Controls jsonControls;
     User jsonUser;
     Room jsonCurrentRoom;
+    int i;
+    int j;
 
 
     public Save(Hero jsonHero, Room[][] jsonMap, Controls jsonControls, User jsonUser, Room jsonCurrentRoom) {
@@ -66,4 +68,19 @@ public class Save {
 
     public String getJsonHeroUserName() {return jsonUser.getUserName();}
 
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
+    }
+
+    public int getJ() {
+        return j;
+    }
+
+    public void setJ(int j) {
+        this.j = j;
+    }
 }

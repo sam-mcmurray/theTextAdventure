@@ -1,5 +1,6 @@
 package project1E7.View;
 
+import project1E7.Controller.RoomController;
 import project1E7.Model.Room;
 
 public class MapView {
@@ -13,7 +14,7 @@ public class MapView {
 
         for (int i = 0; i < room.length; i++) {
             for (int i1 = 0; i1 < 3; i1++) {
-                for (int j = 0; j < room[i].length; j++) {
+                for (int j = 0; j < room.length; j++) {
                     if (!room[i][j].getBeenSeen()) {
                         if (i1 == 0) {
                             System.out.print("UN     -");

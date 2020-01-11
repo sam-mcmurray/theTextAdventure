@@ -30,7 +30,6 @@ public class RoomView {
 
         for (int i = 0; i < room.length; i++) {
             for (int j = 0; j < room.length; j++) {
-                if (!(currentRoom == room[0][3])) {
                     if (currentRoom == room[i][j]) {
                         j = (j - 1);
                         if (room[i][j].getDescription().equalsIgnoreCase("wall")) {
@@ -42,7 +41,7 @@ public class RoomView {
                         }
                         j = (j + 1);
                         j = (j + 1);
-                        if (room[i][j].getDescription().equals("wall")) {
+                        if (room[i][j].getDescription().equalsIgnoreCase("wall")) {
                             System.out.println("You have a wall to the East.");
                         } else if (room[i][j].getDoor() == null) {
                             System.out.println("There is an unlocked door to the East.");
@@ -51,7 +50,7 @@ public class RoomView {
                         }
                         j = (j - 1);
                         i = (i + 1);
-                        if (room[i][j].getDescription().equals("wall")) {
+                        if (room[i][j].getDescription().equalsIgnoreCase("wall")) {
                             System.out.println("You have a wall to the South.");
                         } else if (room[i][j].getDoor() == null) {
                             System.out.println("There is an unlocked door to the South.");
@@ -60,7 +59,7 @@ public class RoomView {
                         }
                         i = (i - 1);
                         i = (i - 1);
-                        if (room[i][j].getDescription().equals("wall")) {
+                        if (room[i][j].getDescription().equalsIgnoreCase("wall")) {
                             System.out.println("You have a wall to the North.");
                         } else if (room[i][j].getDoor() == null) {
                             System.out.println("There is an unlocked door to the North.");
@@ -73,4 +72,3 @@ public class RoomView {
             }
         }
     }
-}
