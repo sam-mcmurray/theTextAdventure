@@ -52,11 +52,12 @@ public class MenuController {
                     if (monsterModel.isAlive() && theHero.isAlive()) {
                         if (monsterController.attack(heroController)) {
                             monsterView.monsterHitFlavorText(monsterModel);
-                            heroView.printStatus(theHero, currentRoom);
+                            heroView.printStatus(theHero,currentRoom);
                             run = theHero.isAlive();
                         } else {
                             monsterView.monsterMissFlavorText(monsterModel);
-                            heroView.printStatus(theHero, currentRoom);
+                            heroView.printStatus(theHero,currentRoom);
+                            run = theHero.isAlive();
                         }
                     }
                     run = true;
@@ -75,11 +76,11 @@ public class MenuController {
                             if (monsterController.attack(heroController)) {
                                 monsterView.monsterHitFlavorText(monsterModel);
                                 monsterView.printStatus(monsterModel);
-                                heroView.printStatus(theHero, currentRoom);
+                                heroView.printStatus(theHero,currentRoom);
                             } else {
                                 monsterView.monsterMissFlavorText(monsterModel);
                                 monsterView.printStatus(monsterModel);
-                                heroView.printStatus(theHero, currentRoom);
+                                heroView.printStatus(theHero,currentRoom);
                             }
                         }
                     }
