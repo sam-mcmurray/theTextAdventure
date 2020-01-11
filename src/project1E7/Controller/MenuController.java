@@ -57,6 +57,7 @@ public class MenuController {
                         } else {
                             monsterView.monsterMissFlavorText(monsterModel);
                             heroView.printStatus(theHero,currentRoom);
+                            run = theHero.isAlive();
                         }
                     }
                     run = true;
