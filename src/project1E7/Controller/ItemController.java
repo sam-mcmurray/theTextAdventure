@@ -106,63 +106,61 @@ public class ItemController {
     /**
      * encounter an item i kept the menu here because i didnt know how to break it up exactly
      *
-     * @param item
+     * @param roomController
      * @param heroController
      * @param keyRing
      * @return
      */
 
-    public boolean encounterItem(Item item, HeroController heroController, ArrayList<Key> keyRing, ArrayList<Item> backPack,
+    public boolean encounterItem(RoomController roomController, HeroController heroController, ArrayList<Key> keyRing, ArrayList<Item> backPack,
                                  MenuController menuController, ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room,
                                  Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls) {
 
         boolean run = true;
         String chooseItem = "0";
         do {
-            view.viewItem(item);
-            if (checkIfTreasure(item)) {
-                Treasure treasure = (Treasure) item;
+            model = roomController.findItem();
+            view.viewItem(model);
+            if (checkIfTreasure(model)) {
+                Treasure treasure = (Treasure) model;
                 checkTreasureValue(treasure);
 
                 heroController.addTreasure(treasure);
                 run = false;
                 return run;
-            } else if (checkIfKey(item)) {
-                Key key = (Key) item;
+            } else if (checkIfKey(model)) {
+                Key key = (Key) model;
                 KeyView keyView = new KeyView(key);
                 KeyController keyController = new KeyController(key, keyView);
                 keyView.foundKey();
                 keyRing = heroController.addKey(keyRing, key);
                 run = false;
                 return run;
-            } else if (checkIfWeapon(item)) {
-                Weapon weapon = (Weapon) item;
+            } else if (checkIfWeapon(model)) {
+                Weapon weapon = (Weapon) model;
                 weapon.setName(weaponName(theHero));
                 theHero.setStrength(weapon.getStrength() + theHero.getStrength());
                 theHero.setWeapon(weapon.getName());
                 System.out.println("You have found a(n) " + weapon.getName() + "! \nFrom now on all your attacks will do more damage!");
                 run = false;
                 return run;
-            } else if (item.getName().equals("endItem")) {
-                run = false;
-                return run;
-            } else if (checkIfUsable(item)) {
-                view.chooseWhatToDoWithItem(item);
+            } else if (checkIfUsable(model)) {
+                view.chooseWhatToDoWithItem(model);
                 chooseItem = input.nextLine();
                 switch (chooseItem) {
                     case "1":
-                        heroController.useItemExternal(item);
+                        heroController.useItemExternal(model);
                         heroController.turnCounter();
                         run = false;
                         return run;
                     case "2":
                         if (backPack.size() < 2) {
-                            heroController.saveItem(item, backPack);
+                            heroController.saveItem(model, backPack);
                             heroController.turnCounter();
                         } else {
                             heroController.dropItem(backPack);
                             if (backPack.size() < 2) {
-                                heroController.saveItem(item, backPack);
+                                heroController.saveItem(model, backPack);
                                 heroController.printItem(backPack);
                             } else System.out.println("Oops!! You missed the Item in this room ");
                         }
@@ -170,7 +168,7 @@ public class ItemController {
                         return run;
                     case "3":
                         menuController.subMenu(controlsController, controlsView, mapView, room,
-                                theHero, heroView, currentRoom, user, controls);
+                                theHero, heroView, currentRoom, user, controls, heroController);
                         break;
                     default:
                         System.out.println("Please enter a proper value.");

@@ -29,6 +29,7 @@ public class MenuController {
                                       ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom ,ArrayList<Item> backPack) {
 
         boolean run = true;
+        int tempSpeed = theHero.getSpeed();
         String encounterChoice = "0";
         do {
 
@@ -84,12 +85,72 @@ public class MenuController {
                     }
                     break;
                 case "3":
+                    if (theHero.getAbilityCounter() <= 2) {
+                        switch (theHero.getCharacterClass()) {
+                            case "Warrior":
+                                heroController.useWarriorAbility(currentRoom);
+                                heroView.viewAbility(theHero, currentRoom);
+                                heroController.abilityCounter();
+                                heroController.turnCounter();
+                                break;
+                            case "Thief":
+                                heroController.useThiefAbility(room, currentRoom);
+                                heroView.viewAbility(theHero, currentRoom);
+                                heroController.abilityCounter();
+                                heroController.turnCounter();
+                                run = false;
+                                break;
+                            case "Mage":
+                                heroController.useMageAbility(currentRoom);
+                                heroView.viewAbility(theHero, currentRoom);
+                                heroController.abilityCounter();
+                                heroController.turnCounter();
+                                break;
+                        }
+                    } else System.out.println("you don't have any power to use an ability");
+                    break;
+                case "4":
+                    if (theHero.getSuperAbilityCounter() < 1) {
+                        switch (theHero.getCharacterClass()) {
+                            case "Warrior":
+                                if (theHero.getHealth() <= 30) {
+                                    heroController.useWarriorSuperAbility(currentRoom);
+                                    heroView.viewSuperAbility(theHero, currentRoom);
+                                    heroController.superAbilityCounter();
+                                    heroController.turnCounter();
+                                } else
+                                    System.out.println("You can not use your super ability , your health should be pretty low to be able to use your super power !");
+                                break;
+                            case "Thief":
+                                if (theHero.getHealth() <= 30) {
+                                    heroController.useThiefSuperAbility(currentRoom);
+                                    heroView.viewSuperAbility(theHero, currentRoom);
+                                    heroController.superAbilityCounter();
+                                    heroController.turnCounter();
+                                    run = false;
+                                } else
+                                    System.out.println("You can not use your super ability , your health should be pretty low to be able to use your super power !");
+
+                                break;
+                            case "Mage":
+                                if (theHero.getHealth() <= 30) {
+                                    heroController.useMageSuperAbility(currentRoom);
+                                    heroView.viewSuperAbility(theHero, currentRoom);
+                                    heroController.superAbilityCounter();
+                                    heroController.turnCounter();
+                                } else
+                                    System.out.println("You can not use your super ability , your health should be pretty low to be able to use your super power !");
+                                break;
+                        }
+                    } else System.out.println("You have already used your super ability");
+                    break;
+                case "5":
                     heroController.printItem(backPack);
                     heroController.useItem(backPack);
                     heroController.turnCounter();
                     break;
-                case "4":
-                    subMenu(controlsController,controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
+                case "6":
+                    subMenu(controlsController,controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController);
                     break;
                 default:
                     System.out.println("Please enter a proper value.");
@@ -98,6 +159,9 @@ public class MenuController {
             }
 
         } while (run && (monsterModel.isAlive() && theHero.isAlive()));
+        if (theHero.getCharacterClass().equals("Warrior")) {
+            theHero.setSpeed(tempSpeed);
+        }
         return run;
     }
 
@@ -115,6 +179,7 @@ public class MenuController {
                                          MonsterView monsterView, MonsterController monsterController, MapView mapView, Controls controls,
                                          ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom,ArrayList<Item> backPack) {
         String encounterChoice = "0";
+        int tempSpeed = theHero.getSpeed();
         boolean run = true;
         monsterView.encounter(monsterModel);
         do {
@@ -161,12 +226,72 @@ public class MenuController {
                         run = true;
                     break;
                 case "3":
+                    if (theHero.getAbilityCounter() <= 2) {
+                        switch (theHero.getCharacterClass()) {
+                            case "Warrior":
+                                heroController.useWarriorAbility(currentRoom);
+                                heroView.viewAbility(theHero, currentRoom);
+                                heroController.abilityCounter();
+                                heroController.turnCounter();
+                                break;
+                            case "Thief":
+                                heroController.useThiefAbility(room, currentRoom);
+                                heroView.viewAbility(theHero, currentRoom);
+                                heroController.abilityCounter();
+                                heroController.turnCounter();
+                                run = false;
+                                break;
+                            case "Mage":
+                                heroController.useMageAbility(currentRoom);
+                                heroView.viewAbility(theHero, currentRoom);
+                                heroController.abilityCounter();
+                                heroController.turnCounter();
+                                break;
+                        }
+                    } else System.out.println("you don't have any power to use an ability");
+                    break;
+                case "4":
+                    if (theHero.getSuperAbilityCounter() < 1) {
+                        switch (theHero.getCharacterClass()) {
+                            case "Warrior":
+                                if (theHero.getHealth() <= 30) {
+                                    heroController.useWarriorSuperAbility(currentRoom);
+                                    heroView.viewSuperAbility(theHero, currentRoom);
+                                    heroController.superAbilityCounter();
+                                    heroController.turnCounter();
+                                } else
+                                    System.out.println("You can not use your super ability , your health should be pretty low to be able to use your super power !");
+                                break;
+                            case "Thief":
+                                if (theHero.getHealth() <= 30) {
+                                    heroController.useThiefSuperAbility(currentRoom);
+                                    heroView.viewSuperAbility(theHero, currentRoom);
+                                    heroController.superAbilityCounter();
+                                    heroController.turnCounter();
+                                    run = false;
+                                } else
+                                    System.out.println("You can not use your super ability , your health should be pretty low to be able to use your super power !");
+
+                                break;
+                            case "Mage":
+                                if (theHero.getHealth() <= 30) {
+                                    heroController.useMageSuperAbility(currentRoom);
+                                    heroView.viewSuperAbility(theHero, currentRoom);
+                                    heroController.superAbilityCounter();
+                                    heroController.turnCounter();
+                                } else
+                                    System.out.println("You can not use your super ability , your health should be pretty low to be able to use your super power !");
+                                break;
+                        }
+                    } else System.out.println("You have already used your super ability");
+                    break;
+                case "5":
                     heroController.printItem(backPack);
                     heroController.useItem(backPack);
                     heroController.turnCounter();
                     break;
-                case "4":
-                    subMenu(controlsController,controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
+                case "6":
+                    subMenu(controlsController,controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController);
                         break;
                 default:
                     System.out.println("Please enter a proper value.");
@@ -174,6 +299,9 @@ public class MenuController {
                     break;
             }
         } while (run && (monsterModel.isAlive() && theHero.isAlive()));
+        if (theHero.getCharacterClass().equals("Warrior")) {
+            theHero.setSpeed(tempSpeed);
+        }
         return run;
     }
 
@@ -325,7 +453,7 @@ public class MenuController {
      * @param user
      */
     public void subMenu(ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room,
-                        Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls){
+                        Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls, HeroController heroController){
 
         boolean run = true;
 
@@ -356,8 +484,10 @@ public class MenuController {
                     break;
 
                 case "5":
-                    Game game = new Game(theHero, room, controls, user, currentRoom);
-                    Save save = new Save(theHero,room, controls, user, currentRoom);
+                    Save save = new Save(theHero,room, controls, user, heroController.currentRoom(currentRoom, room));
+                    heroController.getI(currentRoom, room, save);
+                    heroController.getJ(currentRoom, room, save);
+                    Game game = new Game(theHero, room, controls, user, currentRoom,save.getI(),save.getJ());
                     SaveView saveView = new SaveView(save);
                     SaveController saveController = new SaveController(save, saveView);
                     saveController.saveGame(game);

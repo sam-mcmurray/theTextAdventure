@@ -16,9 +16,10 @@ public class MenuView {
         System.out.println("What is your next move?");
         System.out.println("1)Fight ");
         System.out.println("2)Flee");
-        System.out.println("3)Use Item");
-        System.out.println("4)Sub Menu");
-
+        System.out.println("3)Use ability ");
+        System.out.println("4)Use super ability ");
+        System.out.println("5)Use Item");
+        System.out.println("6)Sub Menu");
     }
 
     /**
@@ -58,6 +59,7 @@ public class MenuView {
                 "8- Quit game %n ");
 
     }
+
     public void instructionsStartMenu() {
         System.out.printf("\t Welcome to our labyrinth adventure game! The goal of the game is collect treasure and make it to the exit.%n" +
                 "You will select either a Mage, Warrior or a Thief each having unique abilities. The Mage can transport to a random room in the game.%n " +
