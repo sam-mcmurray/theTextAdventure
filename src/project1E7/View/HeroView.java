@@ -324,4 +324,55 @@ public class HeroView {
 
         }
     }
+
+    public void deathMenu(Room currentRoom, Hero theHero) {
+
+        String monsterName = currentRoom.getMonster().getName();
+
+        switch (monsterName) {
+
+            case ("Spiderling"):{
+
+                System.out.printf("%n" +
+                        "Your body is pierced all over by the Spiderling. You drop your %s and feel the life drifting our of your body. %n" +
+                        "The Spiderling begins to ingest you into its mouth as you begin to wonder just how awful your player must be to die to a thing that shoots rope out of its ass ", theHero.getWeapon());
+            }
+
+            case ("Bat"):{
+
+                System.out.printf("%n" +
+                        "The screeching winged monstrosity sinks its fangs into you violently. You are losing a lot of blood.%n" +
+                        "You try feebly to use your %s. You think how could this happen? How terrible must my player be to die to a glorified rat.%n", theHero.getWeapon());
+            }
+
+            case("Skeleton"):{
+
+                System.out.printf("%n" +
+                        "The mummified Skeleton penetrates your intestines with its blunt jagged sword. He leans in and whispers %n" +
+                        "'Just let it happen'. Its rotten stench is the last thing you sense before you drop your %s", theHero.getWeapon());
+            }
+
+            case("Owlbear"):{
+
+                System.out.printf("%n" +
+                        "The Owlbear sinks its massive claws into your body. You helplessly attempt to use your %s but " +
+                        "You begin to realize that there is no way out this time. The Owlbear roars furiously as he flings you against the wall ripping your arm off.%n" +
+                        "During your last moments alive, you can't help but think to yourself, this guy really needs a snickers.", theHero.getWeapon());
+            }
+
+            case("Slime"):{
+
+                System.out.printf("%n" +
+                        "The disgusting glob of acidic matter leaps onto you, completely swallowing you. It burns!.%n" +
+                        "You briefly attempt to use your %s, but you cannot feel your arm anymore. The pain is too great to even describe.%n" +
+                        "During your last moments, you can only think of how much you could really use a Sprite cranberry.", theHero.getWeapon());
+            }
+
+            case("The Boss"):{
+
+                System.out.printf("%n" +
+                        "");
+            }
+        }
+    }
 }
