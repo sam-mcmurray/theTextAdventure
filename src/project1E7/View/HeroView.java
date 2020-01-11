@@ -75,13 +75,75 @@ public class HeroView {
      *
      * @param hero
      */
-    public void printStatus(Hero hero) {
+    public void printStatus(Hero hero, Room currentRoom) {
         if (model.isAlive()) {
             System.out.println(model.getName() + " Health: " + model.getHealth());
             System.out.println(model.getName() + " Endurance: " + model.getEndurance());
             System.out.println(model.getName() + " Speed : " + model.getSpeed());
         } else {
-            System.out.println("You have been defeated...");
+
+            String monsterName = currentRoom.getMonster().getName();
+
+            switch (monsterName) {
+
+                case ("Spiderling"):{
+
+                    System.out.printf(
+                            "Your body is pierced all over by the Spiderling. You drop your %s and feel the life drifting our of your body. %n" +
+                            "The Spiderling begins to ingest you into its mouth as you begin to wonder just how awful your player must be to die to a thing that shoots rope out of its ass ", hero.getWeapon());
+                }
+
+                case ("Bat"):{
+
+                    System.out.printf(
+                            "The screeching winged monstrosity sinks its fangs into you violently. You are losing a lot of blood.%n" +
+                            "You try feebly to use your %s. You think how could this happen? How terrible must my player be to die to a glorified rat.%n", hero.getWeapon());
+                    break;
+                }
+
+                case("Skeleton"):{
+
+                    System.out.printf(
+                            "The mummified Skeleton penetrates your intestines with its blunt jagged sword. He leans in and whispers %n" +
+                            "'Just let it happen'. Its rotten stench is the last thing you sense before you drop your %s", hero.getWeapon());
+                    break;
+                }
+
+                case("Owlbear"):{
+
+                    System.out.printf(
+                            "The Owlbear sinks its massive claws into your body. You helplessly attempt to use your %s but " +
+                            "You begin to realize that there is no way out this time. The Owlbear roars furiously as he flings you against the wall ripping your arm off.%n" +
+                            "During your last moments alive, you can't help but think to yourself, this guy really needs a snickers.", hero.getWeapon());
+                    break;
+                }
+
+                case("Slime"):{
+
+                    System.out.printf(
+                            "The disgusting glob of acidic matter leaps onto you, completely swallowing you. It burns!.%n" +
+                            "You briefly attempt to use your %s, but you cannot feel your arm anymore. The pain is unimaginable.%n" +
+                            "During your last moments, you can only think of how much you could really use a Sprite cranberry.", hero.getWeapon());
+                    break;
+                }
+
+                case("The Boss"): {
+
+                    System.out.printf(
+                            "The mysterious being begins casting a spell. Lightning strikes you seemingly from nowhere.%n" +
+                            "You try to raise your weapon, but you can't!. Your whole body has been paralyzed!%n" +
+                            "You fall on the cold cave floor and take comfort in the fact that you made it this far. ");
+                    break;
+                }
+
+            }
+
+            System.out.println();
+            try {
+                defeat();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -221,53 +283,32 @@ public class HeroView {
             Thread.sleep(500);
         }
         System.out.println();
-        System.out.println("                     .ed\"\"\"\" \"\"\"$$$$be.\n" +
-                "                   -\"           ^\"\"**$$$e.\n" +
-                "                 .\"                   '$$$c\n" +
-                "                /                      \"4$$b\n" +
-                "               d  3                      $$$$\n" +
-                "               $  *                   .$$$$$$\n" +
-                "              .$  ^c           $$$$$e$$$$$$$$.\n" +
-                "              d$L  4.         4$$$$$$$$$$$$$$b\n" +
-                "              $$$$b ^ceeeee.  4$$ECL.F*$$$$$$$\n" +
-                "  e$\"\"=.      $$$$P d$$$$F $ $$$$$$$$$- $$$$$$\n" +
-                " z$$b. ^c     3$$$F \"$$$$b   $\"$$$$$$$  $$$$*\"      .=\"\"$c\n" +
-                "4$$$$L        $$P\"  \"$$b   .$ $$$$$...e$$        .=  e$$$.\n" +
-                "^*$$$$$c  %..   *c    ..    $$ 3$$$$$$$$$$eF     zP  d$$$$$\n" +
-                "  \"**$$$ec   \"   %ce\"\"    $$$  $$$$$$$$$$*    .r\" =$$$$P\"\"\n" +
-                "        \"*$b.  \"c  *$e.    *** d$$$$$\"L$$    .d\"  e$$***\"\n" +
-                "          ^*$$c ^$c $$$      4J$$$$$% $$$ .e*\".eeP\"\n" +
-                "             \"$$$$$$\"'$=e....$*$$**$cz$$\" \"..d$*\"\n" +
-                "               \"*$$$  *=%4.$ L L$ P3$$$F $$$P\"\n" +
-                "                  \"$   \"%*ebJLzb$e$$$$$b $P\"\n" +
-                "                    %..      4$$$$$$$$$$ \"\n" +
-                "                     $$$e   z$$$$$$$$$$%\n" +
-                "                      \"*$c  \"$$$$$$$P\"\n" +
-                "                       .\"\"\"*$$$$$$$$bc\n" +
-                "                    .-\"    .$***$$$\"\"\"*e.\n" +
-                "                 .-\"    .e$\"     \"*$c  ^*b.\n" +
-                "          .=*\"\"\"\"    .e$*\"          \"*bc  \"*$e..\n" +
-                "        .$\"        .z*\"               ^*$e.   \"*****e.\n" +
-                "        $$ee$c   .d\"                     \"*$.        3.\n" +
-                "        ^*$E\")$..$\"                         *   .ee==d%\n" +
-                "           $.d$$$*                           *  J$$$e*\n" +
-                "            \"\"\"\"\"                              \"$$$\"");
+        System.out.println("                           ,--.\n" +
+                "                          {    }\n" +
+                "                          K,   }\n" +
+                "                         /  `Y`\n" +
+                "                    _   /   /\n" +
+                "                   {_'-K.__/\n" +
+                "                     `/-.__L._\n" +
+                "                     /  ' /`\\_}\n" +
+                "                    /  ' /     -ART BY ZEUS-\n" +
+                "            ____   /  ' /\n" +
+                "     ,-'~~~~    ~~/  ' /_\n" +
+                "   ,'             ``~~~%%',\n" +
+                "  (                     %  Y\n" +
+                " {                      %% I\n" +
+                "{      -                 %  `.\n" +
+                "|       ',                %  )\n" +
+                "|        |   ,..__      __. Y\n" +
+                "|    .,_./  Y ' / ^Y   J   )|\n" +
+                "\\           |' /   |   |   ||\n" +
+                " \\          L_/    . _ (_,.'(\n" +
+                "  \\,   ,      ^^\"\"' / |      )\n" +
+                "    \\_  \\          /,L]     /\n" +
+                "      '-_`-,       ` `   ./`\n" +
+                "         `-(_            )\n" +
+                "             ^^\\..___,.--`\n");
         System.out.println();
-        String choice = "null";
-
-        while (!choice.equals("yes")) {
-            System.out.println("Continue? (yes/no)");
-            choice = input.nextLine();
-
-            if (choice.equals("yes")) {
-                System.out.println("Loading last save...");
-            } else if (choice.equals("no")) {
-                // list current score and high scores
-                break;
-            } else {
-                System.out.println("Unrecognized Command, try again");
-            }
-        }
     }
 
     /**

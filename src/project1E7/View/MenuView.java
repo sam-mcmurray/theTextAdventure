@@ -1,6 +1,8 @@
 package project1E7.View;
 
+import project1E7.Model.Hero;
 import project1E7.Model.Menu;
+import project1E7.Model.Room;
 
 public class MenuView {
     Menu model;
