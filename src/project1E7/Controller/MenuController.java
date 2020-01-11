@@ -187,14 +187,17 @@ public class MenuController {
             if (monsterController.attack(heroController) && monsterModel.isAlive()) {
                 monsterView.monsterHitFlavorText(monsterModel);
                 heroView.printStatus(theHero,currentRoom);
-                view.encounterMenu();
-                encounterChoice = input.nextLine();
-
+                if(theHero.isAlive()) {
+                    view.encounterMenu();
+                    encounterChoice = input.nextLine();
+                }
             } else {
                 monsterView.monsterMissFlavorText(monsterModel);
                 heroView.printStatus(theHero,currentRoom);
-                view.encounterMenu();
-                encounterChoice = input.nextLine();
+                if(theHero.isAlive()) {
+                    view.encounterMenu();
+                    encounterChoice = input.nextLine();
+                }
             }
 
             switch (encounterChoice) {
