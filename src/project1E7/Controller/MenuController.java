@@ -11,22 +11,23 @@ public class MenuController {
     MenuView view;
     Menu model;
     Scanner input = new Scanner(System.in);
+
     public MenuController(MenuView view) {
     }
+
     public MenuController(MenuView view, Menu model) {
         this.view = view;
         this.model = model;
     }
 
     /**
-     *
      * @param room
      * @param currentRoom
      * @return
      */
     public boolean encounterHeroFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
                                       MonsterView monsterView, MonsterController monsterController, MapView mapView, Controls controls,
-                                      ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom ,ArrayList<Item> backPack) {
+                                      ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom, ArrayList<Item> backPack) {
 
         boolean run = true;
         int tempSpeed = theHero.getSpeed();
@@ -50,7 +51,7 @@ public class MenuController {
                         }
                     }
                     if (monsterModel.isAlive() && theHero.isAlive()) {
-                        if (monsterController.attack(heroController)) {
+                        if (monsterController.attack(heroController, theHero)) {
                             monsterView.monsterHitFlavorText(monsterModel);
                             heroView.printStatus(theHero);
                             run = theHero.isAlive();
@@ -72,7 +73,7 @@ public class MenuController {
                         run = true;
 
                         if (monsterModel.isAlive() && theHero.isAlive()) {
-                            if (monsterController.attack(heroController)) {
+                            if (monsterController.attack(heroController, theHero)) {
                                 monsterView.monsterHitFlavorText(monsterModel);
                                 monsterView.printStatus(monsterModel);
                                 heroView.printStatus(theHero);
@@ -94,17 +95,25 @@ public class MenuController {
                                 heroController.turnCounter();
                                 break;
                             case "Thief":
-                                heroController.useThiefAbility(room, currentRoom);
+                                if (!(currentRoom == room[1][3])) {
+                                    heroController.useThiefAbility(room, currentRoom);
                                 heroView.viewAbility(theHero, currentRoom);
                                 heroController.abilityCounter();
                                 heroController.turnCounter();
                                 run = false;
+                                } else {
+                                    System.out.println("The Boss was too powerful and resisted your ability!");
+                                }
                                 break;
                             case "Mage":
-                                heroController.useMageAbility(currentRoom);
+                                if (!(currentRoom == room[1][3])) {
+                                    heroController.useMageAbility(currentRoom);
                                 heroView.viewAbility(theHero, currentRoom);
                                 heroController.abilityCounter();
                                 heroController.turnCounter();
+                                } else {
+                                    System.out.println("The Boss was too powerful and resisted your ability!");
+                                }
                                 break;
                         }
                     } else System.out.println("you don't have any power to use an ability");
@@ -114,32 +123,43 @@ public class MenuController {
                         switch (theHero.getCharacterClass()) {
                             case "Warrior":
                                 if (theHero.getHealth() <= 30) {
-                                    heroController.useWarriorSuperAbility(currentRoom);
-                                    heroView.viewSuperAbility(theHero, currentRoom);
-                                    heroController.superAbilityCounter();
-                                    heroController.turnCounter();
+                                    if (!(currentRoom == room[1][3])) {
+                                        heroController.useWarriorSuperAbility(currentRoom);
+                                        heroView.viewSuperAbility(theHero, currentRoom);
+                                        heroController.superAbilityCounter();
+                                        heroController.turnCounter();
+                                    } else {
+                                        System.out.println("The Boss was too powerful and resisted your ability!");
+                                    }
                                 } else
-                                    System.out.println("You can not use your super ability , your health should be pretty low to be able to use your super power !");
+                                    System.out.println("You can not use your super ability, your health must 30 or lower to use it!!");
                                 break;
                             case "Thief":
                                 if (theHero.getHealth() <= 30) {
-                                    heroController.useThiefSuperAbility(currentRoom);
-                                    heroView.viewSuperAbility(theHero, currentRoom);
-                                    heroController.superAbilityCounter();
-                                    heroController.turnCounter();
+                                    if (!(currentRoom == room[1][3])) {
+                                        heroController.useThiefSuperAbility(currentRoom);
+                                        heroView.viewSuperAbility(theHero, currentRoom);
+                                        heroController.superAbilityCounter();
+                                        heroController.turnCounter();
+                                    } else {
+                                        System.out.println("The Boss was too powerful and resisted your ability!");
+                                    }
                                     run = false;
                                 } else
-                                    System.out.println("You can not use your super ability , your health should be pretty low to be able to use your super power !");
-
+                                    System.out.println("You can not use your super ability, your health must 30 or lower to use it!");
                                 break;
                             case "Mage":
                                 if (theHero.getHealth() <= 30) {
-                                    heroController.useMageSuperAbility(currentRoom);
-                                    heroView.viewSuperAbility(theHero, currentRoom);
-                                    heroController.superAbilityCounter();
-                                    heroController.turnCounter();
+                                    if (!(currentRoom == room[1][3])) {
+                                        heroController.useMageSuperAbility(currentRoom);
+                                        heroView.viewSuperAbility(theHero, currentRoom);
+                                        heroController.superAbilityCounter();
+                                        heroController.turnCounter();
+                                    } else {
+                                        System.out.println("The Boss was too powerful and resisted your ability!");
+                                    }
                                 } else
-                                    System.out.println("You can not use your super ability , your health should be pretty low to be able to use your super power !");
+                                    System.out.println("You can not use your super ability, your health must 30 or lower to use it!");
                                 break;
                         }
                     } else System.out.println("You have already used your super ability");
@@ -150,7 +170,7 @@ public class MenuController {
                     heroController.turnCounter();
                     break;
                 case "6":
-                    subMenu(controlsController,controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController);
+                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController);
                     break;
                 default:
                     System.out.println("Please enter a proper value.");
@@ -158,7 +178,8 @@ public class MenuController {
                     break;
             }
 
-        } while (run && (monsterModel.isAlive() && theHero.isAlive()));
+        }
+        while (run && (monsterModel.isAlive() && theHero.isAlive()));
         if (theHero.getCharacterClass().equals("Warrior")) {
             theHero.setSpeed(tempSpeed);
         }
@@ -167,6 +188,7 @@ public class MenuController {
 
     /**
      * encounter with monster monster goes first
+     *
      * @param theHero
      * @param heroView
      * @param heroController
@@ -177,14 +199,14 @@ public class MenuController {
      */
     public boolean encounterMonsterFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
                                          MonsterView monsterView, MonsterController monsterController, MapView mapView, Controls controls,
-                                         ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom,ArrayList<Item> backPack) {
+                                         ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom, ArrayList<Item> backPack) {
         String encounterChoice = "0";
         int tempSpeed = theHero.getSpeed();
         boolean run = true;
         monsterView.encounter(monsterModel);
         do {
 
-            if (monsterController.attack(heroController) && monsterModel.isAlive()) {
+            if (monsterController.attack(heroController, theHero) && monsterModel.isAlive()) {
                 monsterView.monsterHitFlavorText(monsterModel);
                 heroView.printStatus(theHero);
                 view.encounterMenu();
@@ -211,7 +233,7 @@ public class MenuController {
                             monsterView.printStatus(monsterModel);
                             heroController.turnCounter();
                         }
-                        }
+                    }
                     run = true;
                     break;
                 case "2":
@@ -222,8 +244,8 @@ public class MenuController {
                         return run;
                     } else
                         heroView.fleeFail();
-                        heroController.turnCounter();
-                        run = true;
+                    heroController.turnCounter();
+                    run = true;
                     break;
                 case "3":
                     if (theHero.getAbilityCounter() <= 2) {
@@ -235,17 +257,25 @@ public class MenuController {
                                 heroController.turnCounter();
                                 break;
                             case "Thief":
-                                heroController.useThiefAbility(room, currentRoom);
+                                if (!(currentRoom == room[1][3])) {
+                                    heroController.useThiefAbility(room, currentRoom);
                                 heroView.viewAbility(theHero, currentRoom);
                                 heroController.abilityCounter();
                                 heroController.turnCounter();
                                 run = false;
+                                } else {
+                                    System.out.println("The Boss was too powerful and resisted your ability!");
+                                }
                                 break;
                             case "Mage":
-                                heroController.useMageAbility(currentRoom);
+                                if (!(currentRoom == room[1][3])) {
+                                    heroController.useMageAbility(currentRoom);
                                 heroView.viewAbility(theHero, currentRoom);
                                 heroController.abilityCounter();
                                 heroController.turnCounter();
+                                } else {
+                                    System.out.println("The Boss was too powerful and resisted your ability!");
+                                }
                                 break;
                         }
                     } else System.out.println("you don't have any power to use an ability");
@@ -255,32 +285,43 @@ public class MenuController {
                         switch (theHero.getCharacterClass()) {
                             case "Warrior":
                                 if (theHero.getHealth() <= 30) {
-                                    heroController.useWarriorSuperAbility(currentRoom);
-                                    heroView.viewSuperAbility(theHero, currentRoom);
-                                    heroController.superAbilityCounter();
-                                    heroController.turnCounter();
+                                    if (!(currentRoom == room[1][3])) {
+                                        heroController.useWarriorSuperAbility(currentRoom);
+                                        heroView.viewSuperAbility(theHero, currentRoom);
+                                        heroController.superAbilityCounter();
+                                        heroController.turnCounter();
+                                    } else {
+                                        System.out.println("The Boss was too powerful and resisted your ability!");
+                                    }
                                 } else
-                                    System.out.println("You can not use your super ability , your health should be pretty low to be able to use your super power !");
+                                    System.out.println("You can not use your super ability, your health must 30 or lower to use it!");
                                 break;
                             case "Thief":
                                 if (theHero.getHealth() <= 30) {
-                                    heroController.useThiefSuperAbility(currentRoom);
-                                    heroView.viewSuperAbility(theHero, currentRoom);
-                                    heroController.superAbilityCounter();
-                                    heroController.turnCounter();
-                                    run = false;
+                                    if (!(currentRoom == room[1][3])) {
+                                        heroController.useThiefSuperAbility(currentRoom);
+                                        heroView.viewSuperAbility(theHero, currentRoom);
+                                        heroController.superAbilityCounter();
+                                        heroController.turnCounter();
+                                        run = false;
+                                    } else {
+                                        System.out.println("The Boss was too powerful and resisted your ability!");
+                                    }
                                 } else
-                                    System.out.println("You can not use your super ability , your health should be pretty low to be able to use your super power !");
-
+                                    System.out.println("You can not use your super ability, your health must 30 or lower to use it!");
                                 break;
                             case "Mage":
                                 if (theHero.getHealth() <= 30) {
-                                    heroController.useMageSuperAbility(currentRoom);
-                                    heroView.viewSuperAbility(theHero, currentRoom);
-                                    heroController.superAbilityCounter();
-                                    heroController.turnCounter();
+                                    if (!(currentRoom == room[1][3])) {
+                                        heroController.useMageSuperAbility(currentRoom);
+                                        heroView.viewSuperAbility(theHero, currentRoom);
+                                        heroController.superAbilityCounter();
+                                        heroController.turnCounter();
+                                    } else {
+                                        System.out.println("The Boss was too powerful and resisted your ability!");
+                                    }
                                 } else
-                                    System.out.println("You can not use your super ability , your health should be pretty low to be able to use your super power !");
+                                    System.out.println("You can not use your super ability, your health must 30 or lower to use it!");
                                 break;
                         }
                     } else System.out.println("You have already used your super ability");
@@ -291,8 +332,8 @@ public class MenuController {
                     heroController.turnCounter();
                     break;
                 case "6":
-                    subMenu(controlsController,controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController);
-                        break;
+                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController);
+                    break;
                 default:
                     System.out.println("Please enter a proper value.");
                     run = true;
@@ -307,11 +348,12 @@ public class MenuController {
 
     /**
      * select hero menu
+     *
      * @return
      */
 
     public Hero selectHero() {
-        Hero warrior = new Hero(120, 70, 30, "The Warrior...", "Warrior", 100,"Warrior", "Long Sword");
+        Hero warrior = new Hero(120, 70, 30, "The Warrior...", "Warrior", 100, "Warrior", "Long Sword");
         HeroView heroViewWarrior = new HeroView(warrior);
         heroViewWarrior.printStats();
 
@@ -327,7 +369,7 @@ public class MenuController {
 
         while (selected) {
 
-           view.chooseHeroMenu();
+            view.chooseHeroMenu();
 
             String userInput = "0";
             userInput = input.nextLine();
@@ -368,6 +410,7 @@ public class MenuController {
 
     /**
      * start menu
+     *
      * @return
      */
     public String startMenu() {
@@ -442,6 +485,7 @@ public class MenuController {
 
     /**
      * sub menu
+     *
      * @param controlsController
      * @param controlsView
      * @param mapView
@@ -453,7 +497,7 @@ public class MenuController {
      * @param user
      */
     public void subMenu(ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room,
-                        Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls, HeroController heroController){
+                        Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls, HeroController heroController) {
 
         boolean run = true;
 
@@ -484,10 +528,10 @@ public class MenuController {
                     break;
 
                 case "5":
-                    Save save = new Save(theHero,room, controls, user, heroController.currentRoom(currentRoom, room));
+                    Save save = new Save(theHero, room, controls, user, heroController.currentRoom(currentRoom, room));
                     heroController.getI(currentRoom, room, save);
                     heroController.getJ(currentRoom, room, save);
-                    Game game = new Game(theHero, room, controls, user, currentRoom,save.getI(),save.getJ());
+                    Game game = new Game(theHero, room, controls, user, currentRoom, save.getI(), save.getJ());
                     SaveView saveView = new SaveView(save);
                     SaveController saveController = new SaveController(save, saveView);
                     saveController.saveGame(game);
@@ -515,7 +559,7 @@ public class MenuController {
                         System.exit(0);
                     } else
 
-                    break;
+                        break;
                 default:
                     System.out.println("Please enter a proper value");
             }

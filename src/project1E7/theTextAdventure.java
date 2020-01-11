@@ -7,8 +7,6 @@ import project1E7.View.*;
 
 import java.io.*;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static java.lang.Character.isUpperCase;
 
@@ -45,7 +43,7 @@ public class theTextAdventure {
                 Hero theHero = (menuController.selectHero());
                 Controls control = new Controls("w", "s", "d", "a");
                 Room[][] room = new Room[10][10];
-                mapController.createWorld(room, theHero);
+                mapController.createWorld(room);
                 HeroView heroView = new HeroView(theHero);
                 HeroController heroController = new HeroController(theHero, heroView);
                 heroView.printStats();

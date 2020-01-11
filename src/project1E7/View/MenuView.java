@@ -62,14 +62,12 @@ public class MenuView {
 
     public void instructionsStartMenu() {
         System.out.printf("\t Welcome to our labyrinth adventure game! The goal of the game is collect treasure and make it to the exit.%n" +
-                "You will select either a Mage, Warrior or a Thief each having unique abilities. The Mage can transport to a random room in the game.%n " +
-                "The Warrior can land all his hits while he is in the room. The Thief has the ability to be invisible for the duration of   %n" +
-                "staying in the room. These abilities are limited and you can't use them every turn. Some doors are locked and require a unique key other doors %n" +
-                "are open every room has a chance to contain monsters, items, or keys. The monsters vary in difficulty but the boss is the most difficult %n" +
+                "You can select either a Mage, Warrior or a Thief, each of them having unique stats, abilities, and super abilities which are extremely %n" +
+                "powerful and can only be used when below 30 health and only once. Most doors are unlocked and contain random items, monsters and loot. %n" +
                 "The menu controls are simple enter the number of your corresponding decision, these mechanics are not changeable but you can change %n" +
                 "how you move the current controls are W for North or up on the map, S is for South or down on the map, A is for West or left on the map, %n" +
-                "and D is for East or Right on the map. You start with 3 lives but it is possible to find items such as Hearts to increase those lives %n" +
-                "and Health Potions to increase your health. The other item is coffee which increases your speed. %n ");
+                "and D is for East or Right on the map. Press enter after each input!. You start with 1 life but it is possible to find items to increase %n" +
+                "your total, and Health Potions to restore your health. Other powerful items can also be found which give lasting effects!%n ");
     }
 
 }

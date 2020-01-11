@@ -150,16 +150,16 @@ public class HeroView {
         ;
     }
     public void viewSuperAbility(Hero hero, Room currentRoom) {
-        System.out.println(hero.getName() + " Super ability has been used ");
+        System.out.println(hero.getName() + " super ability has been used ");
         switch (hero.getCharacterClass()) {
             case "Warrior":
-                System.out.println(currentRoom.getMonster().getName() + "Is poisoned and has no power and no speed");
+                System.out.println(currentRoom.getMonster().getName() + " was hit with your great cleave and took extreme damage");
                 break;
             case "Thief":
-                System.out.println(currentRoom.getMonster().getName() + " is frosted now by your super power ability he has no speed and has no chance to hit you ! take him down ");
+                System.out.println(currentRoom.getMonster().getName() + " has been poisoned by your super ability and has been paralyzed");
                 break;
             case "Mage":
-                System.out.println("You burned the " + currentRoom.getMonster().getName() + " by your super power ability ");
+                System.out.println(currentRoom.getMonster().getName() + " was completely incinerated with your super ability!");
                 break;
         }
     }
@@ -168,15 +168,15 @@ public class HeroView {
         System.out.println(hero.getName() + " ability has been used");
         switch (hero.getCharacterClass()) {
             case "Warrior":
-                System.out.println("Your became too fast ! now your chance to hit the enemy is very high .. ");
-                System.out.println("Your speed now : " + hero.getSpeed());
-                System.out.println("Be careful Warrior you don't have the same ability outside this room ! ");
+                System.out.println("You bellow out your warrior call and bolster your speed and health");
+                System.out.println("Current Speed: " + hero.getSpeed());
+                System.out.println("Current Health: " + hero.getHealth());
                 break;
             case "Thief":
-                System.out.println("You have just disappeared and escaped from the " + currentRoom.getMonster().getName() + " by your ability");
+                System.out.println("You turned invisible and escaped from the " + currentRoom.getMonster().getName());
                 break;
             case "Mage":
-                System.out.println("The " + currentRoom.getMonster().getName() + " has been possessed now by your ability and has no power to damage you ! finish him ");
+                System.out.println("The " + currentRoom.getMonster().getName() + " has been possessed and now refuses to attack back!");
                 break;
         }
 
@@ -356,34 +356,31 @@ public class HeroView {
     public void gameInstructions() {
         if (model.getName().equalsIgnoreCase("Warrior")) {
             System.out.printf("\t Welcome to our labyrinth adventure game! The goal of the game is collect treasure and make it to the exit.%n" +
-                    "You will have selected Warrior the Thief has a unique ability to land 100 percent of blows within a single room. This %n " +
-                    "unique ability can only be activated 2 times in a single game so you will need resist the urge to use it unless you need to. %n" +
-                    "the map contains many doors and some of them have a possibility to be locked but you need to find the unique key for that door each room %n" +
-                    "is generated randomly but has a chance to contain monsters, items, or keys. The monsters vary in difficulty but the boss is the most difficult %n" +
-                    "The menu controls are simple enter the number of your corresponding decision, these mechanics are not changeable but you can change %n" +
-                    "how you move the current controls are W for North or up on the map, S is for South or down on the map, A is for West or left on the map, %n" +
-                    "and D is for East or Right on the map. You start with 5 lives but it is possible to find items such as Hearts to increase those lives %n" +
-                    "and Health Potions to increase your health. The other item is coffee which increases your the Warriors speed. %n ");
+                    "You have selected the Warrior. The warrior is an aggressive tank. The deal medium damage and have high health. They also have a low %n" +
+                    "speed stat. The Warrior's normal ability is a war cry which doubles speed temporarily and restores 20 health. Their super ability instantly %n" +
+                    "does double your strength as damage to the enemy. Only the super can be used on the Boss. Most doors are unlocked and contain random items, %n" +
+                    "monsters and loot. The menu controls are simple enter the number of your corresponding decision, these mechanics are not changeable but you can %n" +
+                    "change how you move the current controls are W for North or up on the map, S is for South or down on the map, A is for West or left on the map, %n" +
+                    "and D is for East or Right on the map. Press enter after each input!. You start with 1 life but it is possible to find items to increase %n" +
+                    "your total, and Health Potions to restore your health. Other powerful items can also be found which give lasting effects!%n ");
         } else if (model.getName().equalsIgnoreCase("Mage")) {
             System.out.printf("\t Welcome to our labyrinth adventure game! The goal of the game is collect treasure and make it to the exit.%n" +
-                    "You will have selected Mage the Mage has a unique ability to randomly transport into a non locked room within the map. This %n " +
-                    "unique ability can only be activated 2 times in a single game so you will need resist the urge to use it unless you need to. %n" +
-                    "the map contains many doors and some of them have a possibility to be locked but you need to find the unique key for that door each room %n" +
-                    "is generated randomly but has a chance to contain monsters, items, or keys. The monsters vary in difficulty but the boss is the most difficult %n" +
+                    "You have selected the Mage. The Mage is a bit of a glass cannon. They cause high damage but have low health. They also have a medium %n" +
+                    "speed stat. The Mage's normal ability is to posses an enemy causing them to deal not attack you. Their super ability is to instantly incinerate %n" +
+                    "a single enemy. Both of these abilities can't be used on the Boss. Most doors are unlocked and contain random items, monsters and loot. %n" +
                     "The menu controls are simple enter the number of your corresponding decision, these mechanics are not changeable but you can change %n" +
                     "how you move the current controls are W for North or up on the map, S is for South or down on the map, A is for West or left on the map, %n" +
-                    "and D is for East or Right on the map. You start with 5 lives but it is possible to find items such as Hearts to increase those lives %n" +
-                    "and Health Potions to increase your health. The other item is coffee which increases your the Mages speed. %n ");
+                    "and D is for East or Right on the map. Press enter after each input!. You start with 1 life but it is possible to find items to increase %n" +
+                    "your total, and Health Potions to restore your health. Other powerful items can also be found which give lasting effects!%n ");
         } else {
             System.out.printf("\t Welcome to our labyrinth adventure game! The goal of the game is collect treasure and make it to the exit.%n" +
-                    "You will have selected Thief the Thief has a unique ability to be invisible for the duration of a single room and deactivates once left. This %n " +
-                    "unique ability can only be activated 2 times in a single game so you will need resist the urge to use it unless you need to. %n" +
-                    "the map contains many doors and some of them have a possibility to be locked but you need to find the unique key for that door each room %n" +
-                    "is generated randomly but has a chance to contain monsters, items, or keys. The monsters vary in difficulty but the boss is the most difficult %n" +
+                    "You have selected the Thief. The thief is reliant on his speed. They deal low damage and have medium health. They also have a very high %n" +
+                    "speed stat. The Thief's normal ability is . Their super ability is to instantly incinerate %n" +
+                    "a single enemy. Both of these abilities cant be used on the Boss. Most doors are unlocked and contain random items, monsters and loot. %n" +
                     "The menu controls are simple enter the number of your corresponding decision, these mechanics are not changeable but you can change %n" +
                     "how you move the current controls are W for North or up on the map, S is for South or down on the map, A is for West or left on the map, %n" +
-                    "and D is for East or Right on the map. You start with 5 lives but it is possible to find items such as Hearts to increase those lives %n" +
-                    "and Health Potions to increase your health. The other item is coffee which increases your the Thiefs speed. %n ");
+                    "and D is for East or Right on the map. Press enter after each input!. You start with 1 life but it is possible to find items to increase %n" +
+                    "your total, and Health Potions to restore your health. Other powerful items can also be found which give lasting effects!%n ");
 
         }
     }
