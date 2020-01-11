@@ -339,55 +339,85 @@ public class HeroController {
             model.setCurrentTreasure(treasure.getAmount() + model.getCurrentTreasure());
         }
     }
+    /*
+    Use Warrior ability
+    */
 
     public void useWarriorAbility(Room currentRoom) {
         int temp = model.getSpeed();
         model.setSpeed(temp * 3);
     }
 
+    /*
+    Use Warrior super ability
+    */
     public void useWarriorSuperAbility(Room currentRoom) {
         currentRoom.getMonster().setSpeed(0);
         currentRoom.getMonster().setStrength(0);
     }
 
+    /*
+       Use Thief super ability
+       */
     public void useThiefSuperAbility(Room currentRoom) {
         currentRoom.getMonster().setSpeed(0);
     }
 
-    public Room useThiefAbility(Room[][] room, Room currentRoom) {
-        flee(model);
+    /*
+   Use Thief ability
+   */
+    public void useThiefAbility(Room[][] room, Room currentRoom) {
         Random rand = new Random();
-        int randomRoom = rand.nextInt(10);
-        int randomRoom1 = rand.nextInt(10);
+        int random = rand.nextInt(10);
+        int random1 = rand.nextInt(10);
+        Room randomRoom = room[random][random1];
         for (int i = 0; i < room.length; i++) {
             for (int j = 0; j < room.length; j++) {
                 if (room[i][j] == currentRoom) {
-                    currentRoom = room[randomRoom][randomRoom1];
+                    if (!randomRoom.isHasMonster() &&
+                            randomRoom.getFound() &&
+                            !randomRoom.getIslocked() &&
+                            !randomRoom.getDescription().equalsIgnoreCase("wall") &&randomRoom!=currentRoom)
+                        currentRoom = randomRoom;
                 }
-
             }
 
         }
-        return currentRoom;
     }
 
-
+    /**
+     * Use Mage ability
+     **/
     public void useMageAbility(Room currentRoom) {
         currentRoom.getMonster().setStrength(0);
     }
 
+    /**
+     * Use Mage super ability
+     **/
     public void useMageSuperAbility(Room currentRoom) {
         currentRoom.getMonster().setAlive(false);
     }
+
+    /**
+     * Ability times counter
+     **/
 
     public void abilityCounter() {
         model.setAbilityCounter(model.getAbilityCounter() + 1);
         view.printAbilityCounter();
     }
 
+    /**
+     * Super ability times counter
+     **/
     public void superAbilityCounter() {
         model.setSuperAbilityCounter(model.getSuperAbilityCounter() + 1);
     }
+
+    /**
+     * Use an item from backpack
+     **/
 
     public void useItem(ArrayList<Item> backPack) {
         int choice1;
@@ -395,7 +425,7 @@ public class HeroController {
             System.out.println("You do not have any item to use");
         } else {
             try {
-                System.out.println("Choose an item to use ..");
+                System.out.println("Choose a number of the item you want to use");
                 choice1 = input.nextInt();
                 input.nextLine();
                 useItemExternal(backPack.get(choice1 - 1));
@@ -409,12 +439,20 @@ public class HeroController {
         }
     }
 
+    /**
+     * Adding an item to the backpack
+     **/
+
     public void saveItem(Item item, ArrayList<Item> backPack) {
         String choice;
         int choice1;
         backPack.add(item);
         System.out.println(item.getName() + " Has been added to your satchel");
     }
+
+    /**
+     * Using an item if the backpack is full
+     **/
 
     public void dropItem(ArrayList<Item> backPack) {
         String choice;
@@ -427,12 +465,12 @@ public class HeroController {
                 printItem(backPack);
                 choice1 = input.nextInt();
                 input.nextLine();
-                System.out.println(backPack.get(choice1 - 1).getName() + " Has been removed");
+                System.out.println(backPack.get(choice1 - 1).getName() + " Has been used ");
                 useItemExternal(backPack.get(choice1 - 1));
                 backPack.remove(choice1 - 1);
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("There is no item to remove");
+            System.out.println("There is no item to use");
         }
     }
 
@@ -500,7 +538,7 @@ public class HeroController {
         return previousRoom;
     }
 
-    public void getI(Room currentRoom, Room[][] room,Save save) {
+    public void getI(Room currentRoom, Room[][] room, Save save) {
 
         for (int i = 0; i < room.length; i++) {
             for (int j = 0; j < room.length; j++) {
