@@ -5,11 +5,8 @@ import project1E7.Model.Hero;
 import project1E7.Model.Item;
 import project1E7.Model.Monster;
 
-import project1E7.theTextAdventure;
-import project1E7.*;
-
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 
 public class HeroView {
@@ -77,7 +74,7 @@ public class HeroView {
         if (model.isAlive()) {
             System.out.println(model.getName() + " Health: " + model.getHealth());
             System.out.println(model.getName() + " Endurance: " + model.getEndurance());
-            System.out.println("Speed : "+model.getSpeed());
+            System.out.println("Speed : " + model.getSpeed());
         } else {
             System.out.println("You have been defeated...");
         }
@@ -166,7 +163,70 @@ public class HeroView {
                     "You launch three of them right at " + monster.getName() + "only to see them harmlessly bounce off of it as the ninja stars clatter on the stone ground.\n" +
                     "Damn, you the clerk who sold them to you swore they were real.  Your attack misses!");
         }
+    }
 
+    /**
+     * death menu
+     * @return
+     * @throws InterruptedException
+     */
+
+    public static void defeat() throws InterruptedException {
+        String defeatTxt = "YOU DIED";
+        Scanner input = new Scanner(System.in);
+
+        for (int i = 0; i < defeatTxt.length(); i++) {
+            System.out.print(defeatTxt.charAt(i));
+            Thread.sleep(500);
+        }
+        System.out.println();
+        System.out.println("                     .ed\"\"\"\" \"\"\"$$$$be.\n" +
+                "                   -\"           ^\"\"**$$$e.\n" +
+                "                 .\"                   '$$$c\n" +
+                "                /                      \"4$$b\n" +
+                "               d  3                      $$$$\n" +
+                "               $  *                   .$$$$$$\n" +
+                "              .$  ^c           $$$$$e$$$$$$$$.\n" +
+                "              d$L  4.         4$$$$$$$$$$$$$$b\n" +
+                "              $$$$b ^ceeeee.  4$$ECL.F*$$$$$$$\n" +
+                "  e$\"\"=.      $$$$P d$$$$F $ $$$$$$$$$- $$$$$$\n" +
+                " z$$b. ^c     3$$$F \"$$$$b   $\"$$$$$$$  $$$$*\"      .=\"\"$c\n" +
+                "4$$$$L        $$P\"  \"$$b   .$ $$$$$...e$$        .=  e$$$.\n" +
+                "^*$$$$$c  %..   *c    ..    $$ 3$$$$$$$$$$eF     zP  d$$$$$\n" +
+                "  \"**$$$ec   \"   %ce\"\"    $$$  $$$$$$$$$$*    .r\" =$$$$P\"\"\n" +
+                "        \"*$b.  \"c  *$e.    *** d$$$$$\"L$$    .d\"  e$$***\"\n" +
+                "          ^*$$c ^$c $$$      4J$$$$$% $$$ .e*\".eeP\"\n" +
+                "             \"$$$$$$\"'$=e....$*$$**$cz$$\" \"..d$*\"\n" +
+                "               \"*$$$  *=%4.$ L L$ P3$$$F $$$P\"\n" +
+                "                  \"$   \"%*ebJLzb$e$$$$$b $P\"\n" +
+                "                    %..      4$$$$$$$$$$ \"\n" +
+                "                     $$$e   z$$$$$$$$$$%\n" +
+                "                      \"*$c  \"$$$$$$$P\"\n" +
+                "                       .\"\"\"*$$$$$$$$bc\n" +
+                "                    .-\"    .$***$$$\"\"\"*e.\n" +
+                "                 .-\"    .e$\"     \"*$c  ^*b.\n" +
+                "          .=*\"\"\"\"    .e$*\"          \"*bc  \"*$e..\n" +
+                "        .$\"        .z*\"               ^*$e.   \"*****e.\n" +
+                "        $$ee$c   .d\"                     \"*$.        3.\n" +
+                "        ^*$E\")$..$\"                         *   .ee==d%\n" +
+                "           $.d$$$*                           *  J$$$e*\n" +
+                "            \"\"\"\"\"                              \"$$$\"");
+        System.out.println();
+        String choice = "null";
+
+        while (!choice.equals("yes")) {
+            System.out.println("Continue? (yes/no)");
+            choice = input.nextLine();
+
+            if (choice.equals("yes")) {
+                System.out.println("Loading last save...");
+            } else if (choice.equals("no")) {
+                // list current score and high scores
+                break;
+            } else {
+                System.out.println("Unrecognized Command, try again");
+            }
+        }
     }
 
     /**
@@ -228,7 +288,7 @@ public class HeroView {
                     "*                                                 \\     \\      \\   \\__      \\    *\n" +
                     "*                                                  \\     \\_     \\     \\      \\   *\n" +
                     "*                                                   |      \\     \\     \\      \\  *\n" +
-                    "*                                                    \\ms          |            \\ *\n" +
+                    "*                                                    \\            |            \\ *\n" +
                     " ********************************************************************************");
         }
     }
