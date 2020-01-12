@@ -20,7 +20,7 @@ public class GameManager {
      * @param control
      * @param user
      */
-    public void game(Hero theHero, Room[][] room, Room currentRoom, Controls control, User user) {
+    public void game(Hero theHero, Room[][] room, Room currentRoom, Controls control, User user, Room previousRoom) {
         Random rand = new Random();
         Scanner input = new Scanner(System.in);
         UserView userView = new UserView(user);
@@ -37,7 +37,6 @@ public class GameManager {
         Hero hero = theHero;
         HeroView heroView = new HeroView(hero);
         HeroController heroController = new HeroController(hero, heroView);
-        Room previousRoom = currentRoom;
         do {
             boolean flee = false;
             boolean run = true;
@@ -59,7 +58,7 @@ public class GameManager {
                     if (heroController.attackFirst(monsterController)) {
 
                         if (menuController.encounterHeroFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController, mapView,
-                                control, controlsController, controlsView, user, room, currentRoom, backPack)) {
+                                control, controlsController, controlsView, user, room, currentRoom, backPack,previousRoom)) {
                             flee = false;
                         } else {
                             flee = true;
@@ -68,7 +67,7 @@ public class GameManager {
                     } else {
 
                         if (menuController.encounterMonsterFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController, mapView,
-                                control, controlsController, controlsView, user, room, currentRoom, backPack)) {
+                                control, controlsController, controlsView, user, room, currentRoom, backPack,previousRoom)) {
                             flee = false;
 
                         } else {

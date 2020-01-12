@@ -27,7 +27,8 @@ public class MenuController {
      */
     public boolean encounterHeroFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
                                       MonsterView monsterView, MonsterController monsterController, MapView mapView, Controls controls,
-                                      ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom, ArrayList<Item> backPack) {
+                                      ControlsController controlsController, ControlsView controlsView, User user, Room[][] room,
+                                      Room currentRoom, ArrayList<Item> backPack, Room previousRoom) {
 
         boolean run = true;
         int tempSpeed = theHero.getSpeed();
@@ -171,7 +172,7 @@ public class MenuController {
                     heroController.turnCounter();
                     break;
                 case "6":
-                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController);
+                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController,previousRoom);
                     break;
                 default:
                     System.out.println("Please enter a proper value.");
@@ -203,7 +204,8 @@ public class MenuController {
      */
     public boolean encounterMonsterFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
                                          MonsterView monsterView, MonsterController monsterController, MapView mapView, Controls controls,
-                                         ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom, ArrayList<Item> backPack) {
+                                         ControlsController controlsController, ControlsView controlsView, User user, Room[][] room,
+                                         Room currentRoom, ArrayList<Item> backPack, Room previousRoom) {
         String encounterChoice = "0";
         int tempSpeed = theHero.getSpeed();
         int tempStrength = theHero.getStrength();
@@ -339,7 +341,7 @@ public class MenuController {
                     heroController.turnCounter();
                     break;
                 case "6":
-                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController);
+                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController,previousRoom);
                     break;
                 default:
                     System.out.println("Please enter a proper value.");
@@ -507,7 +509,7 @@ public class MenuController {
      * @param user
      */
     public void subMenu(ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room,
-                        Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls, HeroController heroController) {
+                        Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls, HeroController heroController, Room previousRoom) {
 
         boolean run = true;
 
@@ -539,9 +541,11 @@ public class MenuController {
 
                 case "5":
                     Save save = new Save(theHero, room, controls, user, heroController.currentRoom(currentRoom, room));
-                    heroController.getI(currentRoom, room, save);
-                    heroController.getJ(currentRoom, room, save);
-                    Game game = new Game(theHero, room, controls, user, currentRoom, save.getI(), save.getJ());
+                    heroController.getICurrent(currentRoom, room, save);
+                    heroController.getJCurrent(currentRoom, room, save);
+                    heroController.getIPrevious(previousRoom, room, save);
+                    heroController.getJPrevious(previousRoom, room, save);
+                    Game game = new Game(theHero, room, controls, user, currentRoom, save.getCurrentI(), save.getCurrentJ(),save.getPreviousI(),save.getPreviousJ());
                     SaveView saveView = new SaveView(save);
                     SaveController saveController = new SaveController(save, saveView);
                     saveController.saveGame(game);
