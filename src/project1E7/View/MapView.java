@@ -12,6 +12,7 @@ public class MapView {
      */
     public void mapPrinter(Room[][] room) {
 
+        System.out.printf("\u001B[94m");
         for (int i = 0; i < room.length; i++) {
             for (int i1 = 0; i1 < 3; i1++) {
                 for (int j = 0; j < room.length; j++) {
@@ -61,5 +62,6 @@ public class MapView {
                 System.out.println("");
             }
         }
+        System.out.print("\u001B[0m");
     }
 }

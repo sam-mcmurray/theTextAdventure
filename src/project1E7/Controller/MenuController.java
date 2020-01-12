@@ -31,6 +31,7 @@ public class MenuController {
 
         boolean run = true;
         int tempSpeed = theHero.getSpeed();
+        int tempStrength = theHero.getStrength();
         String encounterChoice = "0";
         do {
 
@@ -53,11 +54,11 @@ public class MenuController {
                     if (monsterModel.isAlive() && theHero.isAlive()) {
                         if (monsterController.attack(heroController, theHero)) {
                             monsterView.monsterHitFlavorText(monsterModel);
-                            heroView.printStatus(theHero,currentRoom);
+                            heroView.printStatus(theHero, currentRoom);
                             run = theHero.isAlive();
                         } else {
                             monsterView.monsterMissFlavorText(monsterModel);
-                            heroView.printStatus(theHero,currentRoom);
+                            heroView.printStatus(theHero, currentRoom);
                             run = theHero.isAlive();
                         }
                     }
@@ -77,11 +78,11 @@ public class MenuController {
                             if (monsterController.attack(heroController, theHero)) {
                                 monsterView.monsterHitFlavorText(monsterModel);
                                 monsterView.printStatus(monsterModel);
-                                heroView.printStatus(theHero,currentRoom);
+                                heroView.printStatus(theHero, currentRoom);
                             } else {
                                 monsterView.monsterMissFlavorText(monsterModel);
                                 monsterView.printStatus(monsterModel);
-                                heroView.printStatus(theHero,currentRoom);
+                                heroView.printStatus(theHero, currentRoom);
                             }
                         }
                     }
@@ -97,11 +98,10 @@ public class MenuController {
                                 break;
                             case "Thief":
                                 if (!(currentRoom == room[1][3])) {
-                                    heroController.useThiefAbility(room, currentRoom);
-                                heroView.viewAbility(theHero, currentRoom);
-                                heroController.abilityCounter();
-                                heroController.turnCounter();
-                                run = false;
+                                    heroController.useThiefAbility(theHero, currentRoom);
+                                    heroView.viewAbility(theHero, currentRoom);
+                                    heroController.abilityCounter();
+                                    heroController.turnCounter();
                                 } else {
                                     System.out.println("The Boss was too powerful and resisted your ability!");
                                 }
@@ -109,9 +109,9 @@ public class MenuController {
                             case "Mage":
                                 if (!(currentRoom == room[1][3])) {
                                     heroController.useMageAbility(currentRoom);
-                                heroView.viewAbility(theHero, currentRoom);
-                                heroController.abilityCounter();
-                                heroController.turnCounter();
+                                    heroView.viewAbility(theHero, currentRoom);
+                                    heroController.abilityCounter();
+                                    heroController.turnCounter();
                                 } else {
                                     System.out.println("The Boss was too powerful and resisted your ability!");
                                 }
@@ -184,6 +184,9 @@ public class MenuController {
         if (theHero.getCharacterClass().equals("Warrior")) {
             theHero.setSpeed(tempSpeed);
         }
+        if (theHero.getCharacterClass().equalsIgnoreCase("Thief")) {
+            theHero.setStrength(tempStrength);
+        }
         return run;
     }
 
@@ -203,21 +206,22 @@ public class MenuController {
                                          ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom, ArrayList<Item> backPack) {
         String encounterChoice = "0";
         int tempSpeed = theHero.getSpeed();
+        int tempStrength = theHero.getStrength();
         boolean run = true;
         monsterView.encounter(monsterModel);
         do {
 
             if (monsterController.attack(heroController, theHero) && monsterModel.isAlive()) {
                 monsterView.monsterHitFlavorText(monsterModel);
-                heroView.printStatus(theHero,currentRoom);
-                if(theHero.isAlive()) {
+                heroView.printStatus(theHero, currentRoom);
+                if (theHero.isAlive()) {
                     view.encounterMenu();
                     encounterChoice = input.nextLine();
                 }
             } else {
                 monsterView.monsterMissFlavorText(monsterModel);
-                heroView.printStatus(theHero,currentRoom);
-                if(theHero.isAlive()) {
+                heroView.printStatus(theHero, currentRoom);
+                if (theHero.isAlive()) {
                     view.encounterMenu();
                     encounterChoice = input.nextLine();
                 }
@@ -262,11 +266,10 @@ public class MenuController {
                                 break;
                             case "Thief":
                                 if (!(currentRoom == room[1][3])) {
-                                    heroController.useThiefAbility(room, currentRoom);
-                                heroView.viewAbility(theHero, currentRoom);
-                                heroController.abilityCounter();
-                                heroController.turnCounter();
-                                run = false;
+                                    heroController.useThiefAbility(theHero, currentRoom);
+                                    heroView.viewAbility(theHero, currentRoom);
+                                    heroController.abilityCounter();
+                                    heroController.turnCounter();
                                 } else {
                                     System.out.println("The Boss was too powerful and resisted your ability!");
                                 }
@@ -274,9 +277,9 @@ public class MenuController {
                             case "Mage":
                                 if (!(currentRoom == room[1][3])) {
                                     heroController.useMageAbility(currentRoom);
-                                heroView.viewAbility(theHero, currentRoom);
-                                heroController.abilityCounter();
-                                heroController.turnCounter();
+                                    heroView.viewAbility(theHero, currentRoom);
+                                    heroController.abilityCounter();
+                                    heroController.turnCounter();
                                 } else {
                                     System.out.println("The Boss was too powerful and resisted your ability!");
                                 }
@@ -346,6 +349,9 @@ public class MenuController {
         } while (run && (monsterModel.isAlive() && theHero.isAlive()));
         if (theHero.getCharacterClass().equals("Warrior")) {
             theHero.setSpeed(tempSpeed);
+        }
+        if (theHero.getCharacterClass().equalsIgnoreCase("Thief")) {
+            theHero.setStrength(tempStrength);
         }
         return run;
     }
