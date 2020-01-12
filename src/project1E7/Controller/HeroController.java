@@ -52,8 +52,10 @@ public class HeroController {
 
         Random rand = new Random();
 
-        int chanceToHit = rand.nextInt(3);
-        if (chanceToHit == 0) {
+        int chanceToHit = rand.nextInt(120);
+
+        int speed = monster.model.getSpeed();
+        if (chanceToHit <= speed) {
             return false;
         } else {
 
@@ -323,13 +325,13 @@ public class HeroController {
                 }
             } else if (model.getCharacterClass().equals("Mage")) {
                 if (model.getHealth() >= 40) {
-                    model.setHealth(100);
+                    model.setHealth(80);
                 } else {
                     model.setHealth(healthPotion.getAddHealth() + model.getHealth());
                 }
             } else {
                 if (model.getHealth() >= 20) {
-                    model.setHealth(80);
+                    model.setHealth(100);
                 } else {
                     model.setHealth(healthPotion.getAddHealth() + model.getHealth());
                 }
@@ -345,21 +347,23 @@ public class HeroController {
 
     public void useWarriorAbility(Room currentRoom) {
         int temp = model.getSpeed();
-        model.setSpeed(temp * 3);
+        model.setHealth((model.getHealth() + 20));
+        model.setSpeed(temp * 2);
     }
 
     /*
     Use Warrior super ability
     */
     public void useWarriorSuperAbility(Room currentRoom) {
-        currentRoom.getMonster().setSpeed(0);
-        currentRoom.getMonster().setStrength(0);
+        int damage = model.getStrength();
+        currentRoom.getMonster().setHealth((currentRoom.getMonster().getHealth() - (damage * 2)));
     }
 
     /*
        Use Thief super ability
        */
     public void useThiefSuperAbility(Room currentRoom) {
+
         currentRoom.getMonster().setSpeed(0);
     }
 
@@ -381,7 +385,6 @@ public class HeroController {
                         currentRoom = randomRoom;
                 }
             }
-
         }
     }
 
@@ -521,7 +524,13 @@ public class HeroController {
 
     public void heroAlive() {
         model.setAlive(true);
-        model.setHealth(100);
+        if (model.getCharacterClass().equals("Warrior")) {
+            model.setHealth(120);
+        } else if (model.getCharacterClass().equals("Mage")) {
+            model.setHealth(80);
+        } else {
+            model.setHealth(100);
+        }
     }
 
     public Room previousRoom(Room previousRoom, Room[][] room, Room currentRoom) {
@@ -533,7 +542,6 @@ public class HeroController {
                     return room[i][j];
                 }
             }
-
         }
         return previousRoom;
     }
@@ -546,10 +554,8 @@ public class HeroController {
                     save.setI(i);
 
                 }
-
             }
         }
-
     }
 
     public void getJ(Room currentRoom, Room[][] room, Save save) {
@@ -560,11 +566,8 @@ public class HeroController {
                     save.setJ(j);
 
                 }
-
             }
-
         }
-
     }
 
     public Room currentRoom(Room currentRoom, Room[][] room) {
@@ -575,7 +578,6 @@ public class HeroController {
 
                 }
             }
-
         }
         return currentRoom;
     }

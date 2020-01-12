@@ -52,7 +52,8 @@ public class MonsterView {
             if (model.getName().equalsIgnoreCase("The Boss")) {
                 System.out.println("What you imagined would be a horrible monster leading this dungeon almost looks \n" +
                         "like you, if you had been trapped in here for a couple hundred years and \n" +
-                        "grown mad due the cursed treasure in this place. ");
+                        "grown mad due the cursed treasure in this place. It's time to prepare for \n" +
+                        "your final fight!");
             } else if (model.getName().equalsIgnoreCase("Owlbear")) {
                 System.out.println("Too late! The bones and feathers strewn across the room should have been your first \n" +
                         "warning. The second being a shrieking growl barreling towards you from a large cavern in the \n" +
@@ -83,7 +84,10 @@ public class MonsterView {
             }
         } else {
             if (model.getName().equalsIgnoreCase("The Boss")) {
-                System.out.println("");
+                System.out.println("What you imagined would be a horrible monster leading this dungeon almost looks \n" +
+                        "like you, if you had been trapped in here for a couple hundred years and \n" +
+                        "grown mad due the cursed treasure in this place. It's time to prepare for \n" +
+                        "your final fight!");
             } else if (model.getName().equalsIgnoreCase("Owlbear")) {
                 System.out.println("Clearly there was some kind of battle in this room, recently too. Inside there are \n" +
                         "many dead creatures ranging from bats, spiderlings, and even a couple of slimes. In the center \n" +
@@ -137,35 +141,40 @@ public class MonsterView {
         int rGen = rand.nextInt(5);
         String rBodyPart = "ERROR";
 
-        switch (rGen) {
-            case 0:
-                rBodyPart = "head";
-                break;
-            case 1:
-                rBodyPart = "back";
-                break;
-            case 2:
-                rBodyPart = "arm";
-                break;
-            case 3:
-                rBodyPart = "leg";
-                break;
-            case 4:
-                rBodyPart = "chest";
-                break;
-        }
-        if (model.getName().equalsIgnoreCase("The Boss")) {
-            System.out.println("The fallen dungeoneer uses a spell and hits your " + rBodyPart + "!");
-        } else if (model.getName().equalsIgnoreCase("Owlbear")) {
-            System.out.println("The owlbear uses its sharp beak to bite your " + rBodyPart + "!");
-        } else if (model.getName().equalsIgnoreCase("Skeleton")) {
-            System.out.println("The skeletons rusty sword strikes your " + rBodyPart + "!");
-        } else if (model.getName().equalsIgnoreCase("Bat")) {
-            System.out.println("The bats claws draws marks across your " + rBodyPart + "!");
-        } else if (model.getName().equalsIgnoreCase("Slime")) {
-            System.out.println("The slime lurches forward and burns your " + rBodyPart + "!");
+        if (model.getStrength() == 0) {
+            System.out.println(monster.getName() + " is too weak to attack!");
         } else {
-            System.out.println("The spiderlings fangs stab into your " + rBodyPart + "!");
+
+            switch (rGen) {
+                case 0:
+                    rBodyPart = "head";
+                    break;
+                case 1:
+                    rBodyPart = "back";
+                    break;
+                case 2:
+                    rBodyPart = "arm";
+                    break;
+                case 3:
+                    rBodyPart = "leg";
+                    break;
+                case 4:
+                    rBodyPart = "chest";
+                    break;
+            }
+            if (model.getName().equalsIgnoreCase("The Boss")) {
+                System.out.println("The fallen dungeoneer uses a spell and hits your " + rBodyPart + "!");
+            } else if (model.getName().equalsIgnoreCase("Owlbear")) {
+                System.out.println("The owlbear uses its sharp beak to bite your " + rBodyPart + "!");
+            } else if (model.getName().equalsIgnoreCase("Skeleton")) {
+                System.out.println("The skeletons rusty sword strikes your " + rBodyPart + "!");
+            } else if (model.getName().equalsIgnoreCase("Bat")) {
+                System.out.println("The bats claws draws marks across your " + rBodyPart + "!");
+            } else if (model.getName().equalsIgnoreCase("Slime")) {
+                System.out.println("The slime lurches forward and burns your " + rBodyPart + "!");
+            } else {
+                System.out.println("The spiderlings fangs stab into your " + rBodyPart + "!");
+            }
         }
     }
 
@@ -179,36 +188,40 @@ public class MonsterView {
         int rGen = rand.nextInt(5);
         String rBodyPart = "ERROR";
 
-        switch (rGen) {
-            case 0:
-                rBodyPart = "head";
-                break;
-            case 1:
-                rBodyPart = "back";
-                break;
-            case 2:
-                rBodyPart = "arm";
-                break;
-            case 3:
-                rBodyPart = "leg";
-                break;
-            case 4:
-                rBodyPart = "chest";
-                break;
-        }
-        if (model.getName().equalsIgnoreCase("The Boss")) {
-            System.out.println("The fallen dungeoneer tries to use a spell to hit your " + rBodyPart + " but misses!");
-        } else if (model.getName().equalsIgnoreCase("Owlbear")) {
-            System.out.println("The owlbear tries to use its sharp beak to bite your " + rBodyPart + " but misses!");
-        } else if (model.getName().equalsIgnoreCase("Skeleton")) {
-            System.out.println("The skeletons tries to use its rusty sword to strike your " + rBodyPart + " but misses!");
-        } else if (model.getName().equalsIgnoreCase("Bat")) {
-            System.out.println("The bat tries to use its claws to scratch your " + rBodyPart + " but misses!");
-        } else if (model.getName().equalsIgnoreCase("Slime")) {
-            System.out.println("The slime tries to lurch forward to burn your " + rBodyPart + " but misses!");
+        if (model.getStrength() == 0) {
+            System.out.println(monster.getName() + " is too weak to attack!");
         } else {
-            System.out.println("The spiderlings tries to use its fangs to stab into your !" + rBodyPart + " but misses!");
+
+            switch (rGen) {
+                case 0:
+                    rBodyPart = "head";
+                    break;
+                case 1:
+                    rBodyPart = "back";
+                    break;
+                case 2:
+                    rBodyPart = "arm";
+                    break;
+                case 3:
+                    rBodyPart = "leg";
+                    break;
+                case 4:
+                    rBodyPart = "chest";
+                    break;
+            }
+            if (model.getName().equalsIgnoreCase("The Boss")) {
+                System.out.println("The fallen dungeoneer tries to use a spell to hit your " + rBodyPart + " but misses!");
+            } else if (model.getName().equalsIgnoreCase("Owlbear")) {
+                System.out.println("The owlbear tries to use its sharp beak to bite your " + rBodyPart + " but misses!");
+            } else if (model.getName().equalsIgnoreCase("Skeleton")) {
+                System.out.println("The skeletons tries to use its rusty sword to strike your " + rBodyPart + " but misses!");
+            } else if (model.getName().equalsIgnoreCase("Bat")) {
+                System.out.println("The bat tries to use its claws to scratch your " + rBodyPart + " but misses!");
+            } else if (model.getName().equalsIgnoreCase("Slime")) {
+                System.out.println("The slime tries to lurch forward to burn your " + rBodyPart + " but misses!");
+            } else {
+                System.out.println("The spiderlings tries to use its fangs to stab into your !" + rBodyPart + " but misses!");
+            }
         }
     }
-
 }

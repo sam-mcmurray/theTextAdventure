@@ -1,5 +1,6 @@
 package project1E7.Controller;
 
+import project1E7.Model.Hero;
 import project1E7.Model.Monster;
 import project1E7.View.MonsterView;
 
@@ -32,14 +33,14 @@ public class MonsterController {
      * @param hero
      * @return
      */
-    public boolean attack(HeroController hero) {
+    public boolean attack(HeroController hero, Hero theHero) {
 
         int damageDone;
         Random rand = new Random();
 
-        int chanceToHit = rand.nextInt(2);
+        int chanceToHit = rand.nextInt(120);
 
-        if (chanceToHit == 0) {
+        if (chanceToHit <= theHero.getSpeed()) {
             return false;
         } else {
 
