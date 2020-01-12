@@ -227,7 +227,7 @@ public class HeroView {
                 System.out.println("Current Health: " + hero.getHealth());
                 break;
             case "Thief":
-                System.out.println("You turned invisible and escaped from the " + currentRoom.getMonster().getName());
+                System.out.println("You have gained 30 more pwoer on your strength it much easier to finish the " + currentRoom.getMonster().getName() + "now , Just do it ! ");
                 break;
             case "Mage":
                 System.out.println("The " + currentRoom.getMonster().getName() + " has been possessed and now refuses to attack back!");
