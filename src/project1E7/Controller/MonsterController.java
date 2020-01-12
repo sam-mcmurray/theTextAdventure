@@ -56,21 +56,33 @@ public class MonsterController {
 
         if (model.getName().equals("Spiderling")) {
             model.setHealth(40);
+            model.setStrength(6);
+            model.setSpeed(90);
             model.setAlive(true);
         } else if (model.getName().equals("Bat")) {
             model.setHealth(70);
+            model.setStrength(8);
+            model.setSpeed(70);
             model.setAlive(true);
         } else if (model.getName().equals("Skeleton")) {
             model.setHealth(80);
+            model.setStrength(12);
+            model.setSpeed(50);
             model.setAlive(true);
         } else if (model.getName().equals("Slime")) {
             model.setHealth(90);
+            model.setStrength(15);
+            model.setSpeed(30);
             model.setAlive(true);
         } else if (model.getName().equals("Owlbear")) {
             model.setHealth(130);
+            model.setStrength(20);
+            model.setSpeed(60);
             model.setAlive(true);
         } else {
             model.setHealth(180);
+            model.setStrength(30);
+            model.setSpeed(70);
             model.setAlive(true);
         }
     }

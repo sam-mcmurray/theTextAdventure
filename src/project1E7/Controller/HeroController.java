@@ -368,7 +368,11 @@ public class HeroController {
        */
     public void useThiefSuperAbility(Room currentRoom) {
         currentRoom.getMonster().setSpeed(0);
-        currentRoom.getMonster().setStrength((currentRoom.getMonster().getStrength() - 20));
+        if (currentRoom.getMonster().getStrength() <= 20) {
+            currentRoom.getMonster().setStrength(0);
+        } else {
+            currentRoom.getMonster().setStrength((currentRoom.getMonster().getStrength() - 20));
+        }
     }
 
     /*
@@ -396,7 +400,11 @@ public class HeroController {
      * Use Mage ability
      **/
     public void useMageAbility(Room currentRoom) {
-        currentRoom.getMonster().setStrength((currentRoom.getMonster().getStrength() - 10));
+        if (currentRoom.getMonster().getStrength() <= 10) {
+            currentRoom.getMonster().setStrength(0);
+        } else {
+            currentRoom.getMonster().setStrength((currentRoom.getMonster().getStrength() - 10));
+        }
     }
 
     /**

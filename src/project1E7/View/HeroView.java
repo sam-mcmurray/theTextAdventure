@@ -159,7 +159,7 @@ public class HeroView {
         String characterClass = model.getCharacterClass();
         System.out.println("Your head aches as you awake from your fall.  You look up to see where you fell from and try to remember exactly what happened. rappelling down the ruins\n" +
                 "was going well until you felt your rope go slack. Exploring decrepit ruins of ancient civilizations is dangerous work but it certainly pays well if you can find\n" +
-                "some treasure. Looking at the scattering of your adventuring items beside you, you start start to gather your things; a backpack capable of holding an assortment \n" +
+                "some treasure. Looking at the scattering of your adventuring items beside you, you start to gather your things; a backpack capable of holding an assortment \n" +
                 "items, a keychain for keeping any keys you find handy, and of course the most important tool in your arsenal: your " + getWeapon() + ". As start to gather what is\n" +
                 "left of your rope, you look at the end of it and realize it didn't snap, rather, it was a clean cut. You are not alone! Something wants to keep you here and you won't be\n" +
                 "able to climb back the way you came. ahead of you are three doors. One to your North, East, and West. It looks like you'll have to find another way out. It sounds as if\n" +
@@ -210,10 +210,10 @@ public class HeroView {
                 System.out.println(currentRoom.getMonster().getName() + " was hit with your great cleave and took extreme damage");
                 break;
             case "Thief":
-                System.out.println(currentRoom.getMonster().getName() + " has been poisoned by your super ability and has been paralyzed");
+                System.out.println(currentRoom.getMonster().getName() + " has been paralyzed by your poison and can't move. Their attacks are much weaker!");
                 break;
             case "Mage":
-                System.out.println(currentRoom.getMonster().getName() + " was completely incinerated with your super ability!");
+                System.out.println(currentRoom.getMonster().getName() + " was completely incinerated with a powerful magic blast!");
                 break;
         }
     }
@@ -222,15 +222,15 @@ public class HeroView {
         System.out.println(hero.getName() + " ability has been used");
         switch (hero.getCharacterClass()) {
             case "Warrior":
-                System.out.println("You bellow out your warrior call and bolster your speed and health");
+                System.out.println("You bellow out your war call which bolsters your speed temporarily and  your health permanently health");
                 System.out.println("Current Speed: " + hero.getSpeed());
                 System.out.println("Current Health: " + hero.getHealth());
                 break;
             case "Thief":
-                System.out.println("You turned invisible and escaped from the " + currentRoom.getMonster().getName());
+                System.out.println("Using your trixy poisons you added to your dagger you now do 30 damage extra damage this room!");
                 break;
             case "Mage":
-                System.out.println("The " + currentRoom.getMonster().getName() + " has been possessed and now refuses to attack back!");
+                System.out.println("The " + currentRoom.getMonster().getName() + " has been partially possessed and now does 10 less damage to you!");
                 break;
         }
 
@@ -335,7 +335,7 @@ public class HeroView {
                     "____/______/______/______/__\"=._o--._   ;o|o;     _._;o;____/______/______/____\n" +
                     "/______/______/______/______/____\"=._o._; | ;_.--\"o.--\"_/______/______/______/_\n" +
                     "____/______/______/______/______/_____\"=.o|o_.--\"\"___/______/______/______/____\n" +
-                    "/______/______/______/______/______/______/______/______/______/______/[TomekK]\n" +
+                    "/______/______/______/______/______/______/______/______/______/______/______/_\n" +
                     "*******************************************************************************");
         } else {
             System.out.println("With " + bossName + " slain, you caste away all your wealth realize that the real treasure from this journey isn't the gems and precious \n" +
@@ -408,12 +408,12 @@ public class HeroView {
         } else {
             System.out.printf("\t Welcome to our labyrinth adventure game! The goal of the game is collect treasure and make it to the exit.%n" +
                     "You have selected the Thief. The thief is reliant on his speed. They deal low damage and have medium health. They also have a very high %n" +
-                    "speed stat. The Thief's normal ability is . Their super ability is to instantly incinerate %n" +
-                    "a single enemy. Both of these abilities cant be used on the Boss. Most doors are unlocked and contain random items, monsters and loot. %n" +
-                    "The menu controls are simple enter the number of your corresponding decision, these mechanics are not changeable but you can change %n" +
-                    "how you move the current controls are W for North or up on the map, S is for South or down on the map, A is for West or left on the map, %n" +
-                    "and D is for East or Right on the map. Press enter after each input!. You start with 1 life but it is possible to find items to increase %n" +
-                    "your total, and Health Potions to restore your health. Other powerful items can also be found which give lasting effects!%n ");
+                    "speed stat. The Thief's normal ability adds 30 damage to all their attacks to their current room. Their super ability poisons the enemy %n" +
+                    "causing them to deal 20 less damage and their speed stat 0. Both of these abilities cant be used on the Boss. Most doors are unlocked and %n" +
+                    "contain random items, monsters and loot. The menu controls are simple enter the number of your corresponding decision, these mechanics are " +
+                    "not changeable but you can change how you move the current controls are W for North or up on the map, S is for South or down on the map, %n" +
+                    "A is for West or left on the map, and D is for East or Right on the map. Press enter after each input!. You start with 1 life but it is possible %n" +
+                    "to find items to increase your total, and Health Potions to restore your health. Other powerful items can also be found which give lasting effects!%n ");
 
         }
     }
