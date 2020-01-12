@@ -135,7 +135,7 @@ public class GameManager {
         //if(user.getHighScore() > loadController.loadHighestScore())
 
         //heroView.theEndGame(100,"Trogdar" ,theHero.getCurrentTreasure());
-        heroView.theEndGame(loadController.loadHighestScore(),loadController.loadHighestScorer() ,theHero.getCurrentTreasure());
+        if (currentRoom == room[0][3]) {heroView.theEndGame(loadController.loadHighestScore(),loadController.loadHighestScorer() ,theHero.getCurrentTreasure());}
         if(user.getHighScore() > loadController.loadHighestScore())
 
         {
