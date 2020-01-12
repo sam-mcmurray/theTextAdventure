@@ -135,14 +135,6 @@ public class HeroView {
                             "You fall on the cold cave floor and take comfort in the fact that you made it this far. ");
                     break;
                 }
-
-            }
-
-            System.out.println();
-            try {
-                defeat();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -274,7 +266,7 @@ public class HeroView {
      * @throws InterruptedException
      */
 
-    public static void defeat() throws InterruptedException {
+    public void defeat() throws InterruptedException {
         String defeatTxt = "YOU DIED";
         Scanner input = new Scanner(System.in);
 

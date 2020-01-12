@@ -22,7 +22,7 @@ public class Hero extends Character {
         this.endurance = endurance;
         this.characterClass = characterClass;
         this.weapon = weapon;
-        lives = 3;
+        lives = 1;
         currentTreasure = 0;
         alive = true;
         turnCounter = 0;
