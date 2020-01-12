@@ -145,7 +145,6 @@ public class MenuController {
                                     } else {
                                         System.out.println("The Boss was too powerful and resisted your ability!");
                                     }
-                                    run = false;
                                 } else
                                     System.out.println("You can not use your super ability, your health must 30 or lower to use it!");
                                 break;
@@ -310,7 +309,6 @@ public class MenuController {
                                         heroView.viewSuperAbility(theHero, currentRoom);
                                         heroController.superAbilityCounter();
                                         heroController.turnCounter();
-                                        run = false;
                                     } else {
                                         System.out.println("The Boss was too powerful and resisted your ability!");
                                     }
