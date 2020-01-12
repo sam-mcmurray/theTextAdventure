@@ -374,22 +374,8 @@ public class HeroController {
     /*
    Use Thief ability
    */
-    public void useThiefAbility(Room[][] room, Room currentRoom) {
-        Random rand = new Random();
-        int random = rand.nextInt(10);
-        int random1 = rand.nextInt(10);
-        Room randomRoom = room[random][random1];
-        for (int i = 0; i < room.length; i++) {
-            for (int j = 0; j < room.length; j++) {
-                if (room[i][j] == currentRoom) {
-                    if (!randomRoom.isHasMonster() &&
-                            randomRoom.getFound() &&
-                            !randomRoom.getIslocked() &&
-                            !randomRoom.getDescription().equalsIgnoreCase("wall") && randomRoom != currentRoom)
-                        currentRoom = randomRoom;
-                }
-            }
-        }
+    public void useThiefAbility(Hero hero, Room currentRoom) {
+        hero.setStrength(hero.getStrength() + 30);
     }
 
     /**
