@@ -77,9 +77,9 @@ public class HeroView {
      */
     public void printStatus(Hero hero, Room currentRoom) {
         if (model.isAlive()) {
-            System.out.println(model.getName() + " Health: " + model.getHealth());
-            System.out.println(model.getName() + " Endurance: " + model.getEndurance());
-            System.out.println(model.getName() + " Speed : " + model.getSpeed());
+            System.out.println("\033[32m"+model.getName() + "Health: " + model.getHealth());
+            System.out.println(model.getName() + "Endurance: " + model.getEndurance());
+            System.out.println(model.getName() + "Speed : " + model.getSpeed()+"\u001B[0m");
         } else {
 
             String monsterName = currentRoom.getMonster().getName();

@@ -119,6 +119,7 @@ public class ItemController {
         boolean run = true;
         String chooseItem = "0";
         do {
+            System.out.print("\u001B[0m");
             model = roomController.findItem();
             view.viewItem(model);
             if (checkIfTreasure(model)) {
