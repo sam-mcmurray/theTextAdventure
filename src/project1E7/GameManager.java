@@ -3,11 +3,7 @@ package project1E7;
 import project1E7.Controller.*;
 import project1E7.Model.*;
 import project1E7.View.*;
-
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
