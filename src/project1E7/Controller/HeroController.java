@@ -99,7 +99,7 @@ public class HeroController {
 
                         System.out.println("Choose your direction ");
                         direction = input.nextLine();
-                        if (direction.equalsIgnoreCase(controls.moveLeft)) {
+                        if (direction.equalsIgnoreCase(controls.moveLeft) || direction.equalsIgnoreCase("West")) {
                             j = j - 1;
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
@@ -139,7 +139,7 @@ public class HeroController {
                                 run = false;
                                 return currentRoom;
                             }
-                        } else if (direction.equalsIgnoreCase(controls.moveRight)) {
+                        } else if (direction.equalsIgnoreCase(controls.moveRight) || direction.equalsIgnoreCase("east")) {
                             j = j + 1;
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
@@ -179,7 +179,7 @@ public class HeroController {
                                 run = false;
                                 return currentRoom;
                             }
-                        } else if (direction.equalsIgnoreCase(controls.moveDown)) {
+                        } else if (direction.equalsIgnoreCase(controls.moveDown) || direction.equalsIgnoreCase("south")) {
                             i = i + 1;
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");
@@ -219,7 +219,7 @@ public class HeroController {
                                 run = false;
                                 return currentRoom;
                             }
-                        } else if (direction.equalsIgnoreCase(controls.moveUp)) {
+                        } else if (direction.equalsIgnoreCase(controls.moveUp) || direction.equalsIgnoreCase("north")) {
                             i = i - 1;
                             if (room[i][j].getDescription().equals("wall")) {
                                 System.out.println("You can not go that way there is no door.");

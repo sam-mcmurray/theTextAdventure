@@ -3,11 +3,7 @@ package project1E7;
 import project1E7.Controller.*;
 import project1E7.Model.*;
 import project1E7.View.*;
-
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -112,6 +108,7 @@ public class GameManager {
             } else if (!theHero.isAlive()) {
                 if (hero.getLives() > 1) {
                     try {
+                        System.out.println();
                         heroView.defeat();
                         heroController.loseLife();
                         currentRoom = heroController.previousRoom(previousRoom, room, currentRoom);
@@ -143,6 +140,7 @@ public class GameManager {
 
         if (hero.isAlive() == false) {
             try {
+                System.out.println();
                 heroView.defeat();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
