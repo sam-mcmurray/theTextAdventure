@@ -356,15 +356,19 @@ public class HeroController {
     */
     public void useWarriorSuperAbility(Room currentRoom) {
         int damage = model.getStrength();
-        currentRoom.getMonster().setHealth((currentRoom.getMonster().getHealth() - (damage * 2)));
+        if (currentRoom.getMonster().getHealth() <= (2 * damage)) {
+            currentRoom.getMonster().setAlive(false);
+        } else {
+            currentRoom.getMonster().setHealth((currentRoom.getMonster().getHealth() - (damage * 2)));
+        }
     }
 
     /*
        Use Thief super ability
        */
     public void useThiefSuperAbility(Room currentRoom) {
-
         currentRoom.getMonster().setSpeed(0);
+        currentRoom.getMonster().setStrength((currentRoom.getMonster().getStrength() - 20));
     }
 
     /*
@@ -381,7 +385,7 @@ public class HeroController {
                     if (!randomRoom.isHasMonster() &&
                             randomRoom.getFound() &&
                             !randomRoom.getIslocked() &&
-                            !randomRoom.getDescription().equalsIgnoreCase("wall") &&randomRoom!=currentRoom)
+                            !randomRoom.getDescription().equalsIgnoreCase("wall") && randomRoom != currentRoom)
                         currentRoom = randomRoom;
                 }
             }
@@ -392,7 +396,7 @@ public class HeroController {
      * Use Mage ability
      **/
     public void useMageAbility(Room currentRoom) {
-        currentRoom.getMonster().setStrength(0);
+        currentRoom.getMonster().setStrength((currentRoom.getMonster().getStrength() - 10));
     }
 
     /**
