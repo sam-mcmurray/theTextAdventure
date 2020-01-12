@@ -36,6 +36,7 @@ public class theTextAdventure {
 
         boolean game = true;
         while (game == true) {
+            System.out.print("\u001B[0m");
             String choice = menuController.startMenu();
             if (choice.equals("1")) {
                 
