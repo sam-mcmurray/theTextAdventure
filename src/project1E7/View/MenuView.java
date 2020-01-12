@@ -69,7 +69,7 @@ public class MenuView {
                 "The menu controls are simple enter the number of your corresponding decision, these mechanics are not changeable but you can change %n" +
                 "how you move the current controls are W for North or up on the map, S is for South or down on the map, A is for West or left on the map, %n" +
                 "and D is for East or Right on the map. Press enter after each input!. You start with 1 life but it is possible to find items to increase %n" +
-                "your total, and Health Potions to restore your health. Other powerful items can also be found which give lasting effects!%n ");
+                "your total, and Health Potions to restore your health. Other powerful items can also be found which give lasting effects!%n");
     }
 
 }

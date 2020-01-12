@@ -80,7 +80,7 @@ public class LoadController {
                 highScorePrint = inputS.next();
                 int highScore = Integer.parseInt(highScorePrint);
                 model.setHighScore(highScore);
-                System.out.println("UserName: " + model.getUserName() + "HighScore: " + model.getHighScore());
+                System.out.println("UserName: " + model.getUserName() + " \nHighScore: " + model.getHighScore());
                 inputS.close();
 
     } catch (FileNotFoundException e) {
