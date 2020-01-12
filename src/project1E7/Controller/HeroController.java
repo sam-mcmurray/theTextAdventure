@@ -375,6 +375,7 @@ public class HeroController {
    Use Thief ability
    */
     public void useThiefAbility(Room[][] room, Room currentRoom) {
+
         Random rand = new Random();
         int random = rand.nextInt(10);
         int random1 = rand.nextInt(10);
