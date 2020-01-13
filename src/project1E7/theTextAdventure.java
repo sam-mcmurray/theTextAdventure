@@ -49,7 +49,8 @@ public class theTextAdventure {
                 HeroController heroController = new HeroController(theHero, heroView);
                 heroView.printStats();
                 heroView.heroStory();
-                gameManager.game(theHero,room, room[8][5], control,user);
+
+                gameManager.game(theHero,room, room[8][5], control,user, room[8][5]);
 
 
             } else if (choice.equals("2")) {

@@ -20,7 +20,7 @@ public class GameManager {
      * @param control
      * @param user
      */
-    public void game(Hero theHero, Room[][] room, Room currentRoom, Controls control, User user) {
+    public void game(Hero theHero, Room[][] room, Room currentRoom, Controls control, User user, Room previousRoom) {
         Random rand = new Random();
         Scanner input = new Scanner(System.in);
         UserView userView = new UserView(user);
@@ -37,7 +37,6 @@ public class GameManager {
         Hero hero = theHero;
         HeroView heroView = new HeroView(hero);
         HeroController heroController = new HeroController(hero, heroView);
-        Room previousRoom = currentRoom;
         do {
             boolean flee = false;
             boolean run = true;
@@ -59,7 +58,7 @@ public class GameManager {
                     if (heroController.attackFirst(monsterController)) {
 
                         if (menuController.encounterHeroFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController, mapView,
-                                control, controlsController, controlsView, user, room, currentRoom, backPack)) {
+                                control, controlsController, controlsView, user, room, currentRoom, backPack,previousRoom)) {
                             flee = false;
                         } else {
                             flee = true;
@@ -68,7 +67,7 @@ public class GameManager {
                     } else {
 
                         if (menuController.encounterMonsterFirst(theHero, heroView, heroController, monsterModel, monsterView, monsterController, mapView,
-                                control, controlsController, controlsView, user, room, currentRoom, backPack)) {
+                                control, controlsController, controlsView, user, room, currentRoom, backPack,previousRoom)) {
                             flee = false;
 
                         } else {
@@ -84,7 +83,7 @@ public class GameManager {
                         ItemView itemView = new ItemView(item);
                         ItemController itemController = new ItemController(item, itemView);
                         run = itemController.encounterItem(roomController, heroController, keyRing, backPack, menuController, controlsController
-                                , controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
+                                , controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, previousRoom);
                         heroController.addEndurance();
 
                     } else if (roomController.roomHasItem() == false) {
@@ -94,7 +93,7 @@ public class GameManager {
                         ItemController itemController = new ItemController(item, itemView);
                         run = false;
                         itemController.encounterItem(roomController, heroController, keyRing, backPack, menuController, controlsController,
-                                controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
+                                controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, previousRoom);
                         heroController.addEndurance();
 
                     }

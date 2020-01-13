@@ -12,8 +12,10 @@ public class Save {
     Controls jsonControls;
     User jsonUser;
     Room jsonCurrentRoom;
-    int i;
-    int j;
+    int currentI;
+    int currentJ;
+    int previousI;
+    int previousJ;
 
 
     public Save(Hero jsonHero, Room[][] jsonMap, Controls jsonControls, User jsonUser, Room jsonCurrentRoom) {
@@ -68,19 +70,35 @@ public class Save {
 
     public String getJsonHeroUserName() {return jsonUser.getUserName();}
 
-    public int getI() {
-        return i;
+    public int getCurrentI() {
+        return currentI;
     }
 
-    public void setI(int i) {
-        this.i = i;
+    public void setCurrentI(int currentI) {
+        this.currentI = currentI;
     }
 
-    public int getJ() {
-        return j;
+    public int getCurrentJ() {
+        return currentJ;
     }
 
-    public void setJ(int j) {
-        this.j = j;
+    public void setCurrentJ(int currentJ) {
+        this.currentJ = currentJ;
+    }
+
+    public int getPreviousI() {
+        return previousI;
+    }
+
+    public void setPreviousI(int previousI) {
+        this.previousI = previousI;
+    }
+
+    public int getPreviousJ() {
+        return previousJ;
+    }
+
+    public void setPreviousJ(int previousJ) {
+        this.previousJ = previousJ;
     }
 }
