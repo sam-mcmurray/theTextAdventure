@@ -40,7 +40,7 @@ public class HeroView {
         tableDescrip[3] = "Endurance: ";
 
         System.out.println("Name: " + model.getName());
-        System.out.println("Character Description: " + model.getDescription());
+        System.out.println(model.getDescription());
 
         for (int i = 0; i < stats.length; i++) {
             System.out.print(tableDescrip[i]);

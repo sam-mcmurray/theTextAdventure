@@ -342,7 +342,9 @@ public class MenuController {
                     subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController);
                     break;
                 default:
-                    System.out.println("Please enter a proper value.");
+                    if (theHero.isAlive()) {
+                        System.out.println("Please enter a proper value.");
+                    }
                     run = true;
                     break;
             }
@@ -363,15 +365,18 @@ public class MenuController {
      */
 
     public Hero selectHero() {
-        Hero warrior = new Hero(120, 70, 30, "The Warrior...", "Warrior", 100, "Warrior", "Long Sword");
+        Hero warrior = new Hero(120, 70, 40, "Normal Ability: War Cry: Doubles speed for current room and boosts health by 20 points.\n" +
+                "Super Ability: Great Cleave: Deal double your attack damage. Cannot miss.", "Warrior", 100, "Warrior", "Long Sword");
         HeroView heroViewWarrior = new HeroView(warrior);
         heroViewWarrior.printStats();
 
-        Hero mage = new Hero(80, 80, 50, "The Mage...", "Mage", 100, "Mage", "Magic Scepter");
+        Hero mage = new Hero(80, 80, 50, "Normal Ability: Partial Possession: Reduce enemy attack damage by 10 for current room.\n" +
+                "Super Ability: Magic Missile: Instantly destroy the enemy.", "Mage", 100, "Mage", "Magic Scepter");
         HeroView heroViewMage = new HeroView(mage);
         heroViewMage.printStats();
 
-        Hero thief = new Hero(100, 60, 80, "The Thief...", "Thief", 100, "Thief", "Curved Dagger");
+        Hero thief = new Hero(100, 60, 80, "Normal Ability: Poisoned Blade: Adds 30 damage to your dagger for the current room.\n" +
+                "Super Ability: Neuropoison: Reduce targets speed to 0 and casue them to deal 15 less damage to you.", "Thief", 100, "Thief", "Curved Dagger");
         HeroView heroViewThief = new HeroView(thief);
         heroViewThief.printStats();
 
