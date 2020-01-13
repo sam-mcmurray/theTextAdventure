@@ -192,14 +192,16 @@ public class HeroView {
      */
     public void hitMonsterFlavorText(Monster monster) {
         if (model.getName().equalsIgnoreCase("warrior")) {
-            System.out.println("Swinging your longsword in a long sweeping hit starting from top right of your head and ending downwards to the bottom left, your blade makes contact with " + monster.getName() + ".\n" +
-                    monster.getName() + " shrieks in pain and anger.");
+            System.out.println("Swinging your longsword in a long sweeping hit starting from top right of your \n" +
+                    "head and ending downwards to the bottom left, your blade makes contact with " + monster.getName() + ". \n" +
+                    "" +monster.getName() + " shrieks in pain and anger.");
         } else if (model.getName().equalsIgnoreCase("mage")) {
-            System.out.println("Using your staff and an intense focus, you conjure an ever growing fireball at the crystal focal of your staff until you finally launch it.\n" +
-                    monster.getName() + " burns horribly dealing substantial damage");
+            System.out.println("Using your staff and an intense focus, you conjure an ever growing fireball at the \n" +
+                    "crystal focal of your staff until you finally launch it. " + monster.getName() + " burns \n" +
+                    "horribly dealing substantial damage");
         } else {
-            System.out.println("Your dagger is a whirlwind of flashing steel as you stab at " + monster.getName() + " with lightning speed and an unnatural precision.\n" +
-                    monster.getName() + " recoils in confusion and pain.");
+            System.out.println("Your dagger is a whirlwind of flashing steel as you stab at " + monster.getName() + " with \n" +
+                    "lightning speed and an unnatural precision." + monster.getName() + " recoils in confusion and pain.");
         }
         ;
     }
