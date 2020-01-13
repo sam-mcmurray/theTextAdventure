@@ -39,7 +39,8 @@ public class LoadController {
             HeroController heroController = new HeroController(game.getJsonHero(), heroView);
 
             GameManager gameManager = new GameManager();
-            gameManager.game(game.getJsonHero(), game.getJsonMap(), game.getJsonMap()[game.getJsonI()][game.getJsonJ()], game.getJsonControls(), game.getJsonUser());
+            gameManager.game(game.getJsonHero(), game.getJsonMap(), game.getJsonMap()[game.getJsonI()][game.getJsonJ()],
+                    game.getJsonControls(), game.getJsonUser(),game.getJsonMap()[game.getI()][game.getJ()]);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -80,7 +81,7 @@ public class LoadController {
                 highScorePrint = inputS.next();
                 int highScore = Integer.parseInt(highScorePrint);
                 model.setHighScore(highScore);
-                System.out.println("UserName: " + model.getUserName() + "HighScore: " + model.getHighScore());
+                System.out.println("UserName: " + model.getUserName() + " \nHighScore: " + model.getHighScore());
                 inputS.close();
 
     } catch (FileNotFoundException e) {

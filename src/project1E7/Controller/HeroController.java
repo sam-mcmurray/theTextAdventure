@@ -544,24 +544,48 @@ public class HeroController {
         return previousRoom;
     }
 
-    public void getI(Room currentRoom, Room[][] room, Save save) {
+    public void getICurrent(Room currentRoom, Room[][] room, Save save) {
 
         for (int i = 0; i < room.length; i++) {
             for (int j = 0; j < room.length; j++) {
                 if (currentRoom == room[i][j]) {
-                    save.setI(i);
+                    save.setCurrentI(i);
 
                 }
             }
         }
     }
 
-    public void getJ(Room currentRoom, Room[][] room, Save save) {
+    public void getJCurrent(Room currentRoom, Room[][] room, Save save) {
 
         for (int i = 0; i < room.length; i++) {
             for (int j = 0; j < room.length; j++) {
                 if (currentRoom == room[i][j]) {
-                    save.setJ(j);
+                    save.setCurrentJ(j);
+
+                }
+            }
+        }
+    }
+
+    public void getIPrevious(Room previousRoom, Room[][] room, Save save) {
+
+        for (int i = 0; i < room.length; i++) {
+            for (int j = 0; j < room.length; j++) {
+                if (previousRoom == room[i][j]) {
+                    save.setPreviousI(i);
+
+                }
+            }
+        }
+    }
+
+    public void getJPrevious(Room previousRoom, Room[][] room, Save save) {
+
+        for (int i = 0; i < room.length; i++) {
+            for (int j = 0; j < room.length; j++) {
+                if (previousRoom== room[i][j]) {
+                    save.setPreviousJ(j);
 
                 }
             }

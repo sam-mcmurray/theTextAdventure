@@ -27,7 +27,8 @@ public class MenuController {
      */
     public boolean encounterHeroFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
                                       MonsterView monsterView, MonsterController monsterController, MapView mapView, Controls controls,
-                                      ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom, ArrayList<Item> backPack) {
+                                      ControlsController controlsController, ControlsView controlsView, User user, Room[][] room,
+                                      Room currentRoom, ArrayList<Item> backPack, Room previousRoom) {
 
         boolean run = true;
         int tempSpeed = theHero.getSpeed();
@@ -170,7 +171,7 @@ public class MenuController {
                     heroController.turnCounter();
                     break;
                 case "6":
-                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController);
+                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController,previousRoom);
                     break;
                 default:
                     System.out.println("Please enter a proper value.");
@@ -202,7 +203,8 @@ public class MenuController {
      */
     public boolean encounterMonsterFirst(Hero theHero, HeroView heroView, HeroController heroController, Monster monsterModel,
                                          MonsterView monsterView, MonsterController monsterController, MapView mapView, Controls controls,
-                                         ControlsController controlsController, ControlsView controlsView, User user, Room[][] room, Room currentRoom, ArrayList<Item> backPack) {
+                                         ControlsController controlsController, ControlsView controlsView, User user, Room[][] room,
+                                         Room currentRoom, ArrayList<Item> backPack, Room previousRoom) {
         String encounterChoice = "0";
         int tempSpeed = theHero.getSpeed();
         int tempStrength = theHero.getStrength();
@@ -337,10 +339,12 @@ public class MenuController {
                     heroController.turnCounter();
                     break;
                 case "6":
-                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController);
+                    subMenu(controlsController, controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, heroController,previousRoom);
                     break;
                 default:
-                    System.out.println("Please enter a proper value.");
+                    if (theHero.isAlive()) {
+                        System.out.println("Please enter a proper value.");
+                    }
                     run = true;
                     break;
             }
@@ -361,15 +365,18 @@ public class MenuController {
      */
 
     public Hero selectHero() {
-        Hero warrior = new Hero(120, 70, 30, "The Warrior...", "Warrior", 100, "Warrior", "Long Sword");
+        Hero warrior = new Hero(120, 70, 40, "Normal Ability: War Cry: Doubles speed for current room and boosts health by 20 points.\n" +
+                "Super Ability: Great Cleave: Deal double your attack damage. Cannot miss.", "Warrior", 100, "Warrior", "Long Sword");
         HeroView heroViewWarrior = new HeroView(warrior);
         heroViewWarrior.printStats();
 
-        Hero mage = new Hero(80, 80, 50, "The Mage...", "Mage", 100, "Mage", "Magic Scepter");
+        Hero mage = new Hero(80, 80, 50, "Normal Ability: Partial Possession: Reduce enemy attack damage by 10 for current room.\n" +
+                "Super Ability: Magic Missile: Instantly destroy the enemy.", "Mage", 100, "Mage", "Magic Scepter");
         HeroView heroViewMage = new HeroView(mage);
         heroViewMage.printStats();
 
-        Hero thief = new Hero(100, 60, 80, "The Thief...", "Thief", 100, "Thief", "Curved Dagger");
+        Hero thief = new Hero(100, 60, 80, "Normal Ability: Poisoned Blade: Adds 30 damage to your dagger for the current room.\n" +
+                "Super Ability: Neuropoison: Reduce targets speed to 0 and casue them to deal 15 less damage to you.", "Thief", 100, "Thief", "Curved Dagger");
         HeroView heroViewThief = new HeroView(thief);
         heroViewThief.printStats();
 
@@ -505,7 +512,7 @@ public class MenuController {
      * @param user
      */
     public void subMenu(ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room,
-                        Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls, HeroController heroController) {
+                        Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls, HeroController heroController, Room previousRoom) {
 
         boolean run = true;
 
@@ -537,9 +544,11 @@ public class MenuController {
 
                 case "5":
                     Save save = new Save(theHero, room, controls, user, heroController.currentRoom(currentRoom, room));
-                    heroController.getI(currentRoom, room, save);
-                    heroController.getJ(currentRoom, room, save);
-                    Game game = new Game(theHero, room, controls, user, currentRoom, save.getI(), save.getJ());
+                    heroController.getICurrent(currentRoom, room, save);
+                    heroController.getJCurrent(currentRoom, room, save);
+                    heroController.getIPrevious(previousRoom, room, save);
+                    heroController.getJPrevious(previousRoom, room, save);
+                    Game game = new Game(theHero, room, controls, user, currentRoom, save.getCurrentI(), save.getCurrentJ(),save.getPreviousI(),save.getPreviousJ());
                     SaveView saveView = new SaveView(save);
                     SaveController saveController = new SaveController(save, saveView);
                     saveController.saveGame(game);

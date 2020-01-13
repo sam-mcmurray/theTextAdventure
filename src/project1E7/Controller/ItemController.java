@@ -114,7 +114,7 @@ public class ItemController {
 
     public boolean encounterItem(RoomController roomController, HeroController heroController, ArrayList<Key> keyRing, ArrayList<Item> backPack,
                                  MenuController menuController, ControlsController controlsController, ControlsView controlsView, MapView mapView, Room[][] room,
-                                 Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls) {
+                                 Hero theHero, HeroView heroView, Room currentRoom, User user, Controls controls, Room previousRoom) {
 
         boolean run = true;
         String chooseItem = "0";
@@ -169,7 +169,7 @@ public class ItemController {
                         return run;
                     case "3":
                         menuController.subMenu(controlsController, controlsView, mapView, room,
-                                theHero, heroView, currentRoom, user, controls, heroController);
+                                theHero, heroView, currentRoom, user, controls, heroController, previousRoom);
                         break;
                     default:
                         System.out.println("Please enter a proper value.");

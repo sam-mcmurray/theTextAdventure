@@ -150,7 +150,7 @@ public class MapController {
                     room[i][j] = roomModel;
 
                 } else if (i == 3 && j == 6) {
-                    Room roomModel = new Room(" Once again you find yourself face to face with another stone pillar, this time however its \n" +
+                    Room roomModel = new Room("Once again you find yourself face to face with another stone pillar, this time however its \n" +
                             "crumbling. This time you decide not to play its games. With all your might you push the all your might \n" +
                             "and the pillar tips and crashes down. When the dust clears you see a small creature that was crushed \n" +
                             "by the rubble. inside his open chest is a still beating heart.", false, heart, stoneDoor, true, false, false, true);
