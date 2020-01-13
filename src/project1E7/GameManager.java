@@ -83,7 +83,7 @@ public class GameManager {
                         ItemView itemView = new ItemView(item);
                         ItemController itemController = new ItemController(item, itemView);
                         run = itemController.encounterItem(roomController, heroController, keyRing, backPack, menuController, controlsController
-                                , controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
+                                , controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, previousRoom);
                         heroController.addEndurance();
 
                     } else if (roomController.roomHasItem() == false) {
@@ -93,7 +93,7 @@ public class GameManager {
                         ItemController itemController = new ItemController(item, itemView);
                         run = false;
                         itemController.encounterItem(roomController, heroController, keyRing, backPack, menuController, controlsController,
-                                controlsView, mapView, room, theHero, heroView, currentRoom, user, controls);
+                                controlsView, mapView, room, theHero, heroView, currentRoom, user, controls, previousRoom);
                         heroController.addEndurance();
 
                     }
